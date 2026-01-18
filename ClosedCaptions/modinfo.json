@@ -1,0 +1,14 @@
+{
+    "$schema": "https://moddbcdn.vintagestory.at/schema/modinfo.latest.json",
+    "type": "Code",
+    "modid": "closedcaptions",
+    "name": "ClosedCaptions",
+    "authors": [
+        "apocriva"
+    ],
+    "description": "To be added",
+    "version": "0.0.1",
+    "dependencies": {
+        "game": "1.21.0"
+    }
+}
