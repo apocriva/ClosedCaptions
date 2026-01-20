@@ -8,6 +8,7 @@ using ClosedCaptions.Extensions;
 using Vintagestory.Client.NoObf;
 using System;
 using System.Linq;
+using Vintagestory.API.Config;
 
 namespace ClosedCaptions.GUI;
 
@@ -58,25 +59,29 @@ public class ClosedCaptionsOverlay : HudElement
 		var activeSounds = capi.GetActiveSounds();
 		if (activeSounds != null && player != null)
 		{
+			var orderedSounds = activeSounds
+				.Where(sound => !sound.IsPaused && sound.IsPlaying && sound.Params.Volume >= VOLUME_THRESHOLD)
+				.OrderBy(sound =>
+				{
+					if (sound.Params.Position == null)
+						return 0f;
+
+					var relativePosition = sound.Params.Position - player.Entity.Pos.XYZFloat;
+					if (sound.Params.RelativePosition)
+						relativePosition = sound.Params.Position;
+					return relativePosition.Length();
+				});
+
+			if (!orderedSounds.Any())
+				return;
+			
 			var guiComposer = capi.Gui.CreateCompo("closedCaptions", dialogBounds)
 				.AddGameOverlay(bgBounds, bgColor)
 				.BeginChildElements();
 
 			double currentY = 0;
 
-			ElementBounds bounds = ElementBounds.FixedOffseted(EnumDialogArea.LeftTop, 0, currentY, 600, LINE_HEIGHT);
-			guiComposer.AddStaticText("Active Sounds:", _font, bounds);
-			currentY += LINE_HEIGHT;
-
-			var orderedSounds = activeSounds
-				.Where(sound => !sound.IsPaused && sound.IsPlaying && sound.Params.Volume >= VOLUME_THRESHOLD)
-				.OrderBy(sound =>
-				{
-					var relativePosition = sound.Params.Position - player.Entity.Pos.XYZFloat;
-					if (sound.Params.RelativePosition)
-						relativePosition = sound.Params.Position;
-					return relativePosition.Length();
-				});
+			ElementBounds bounds;
 
 			foreach (var sound in orderedSounds)
 			{
@@ -86,7 +91,7 @@ public class ClosedCaptionsOverlay : HudElement
 					continue;
 
 				bounds = ElementBounds.FixedOffseted(EnumDialogArea.LeftTop, 0, currentY, 300, LINE_HEIGHT);
-				guiComposer.AddStaticText(sound.Params.Location, _font, bounds);
+				guiComposer.AddStaticText(GetSoundLabel(sound), _font, bounds);
 				bounds = ElementBounds.FixedOffseted(EnumDialogArea.LeftTop, 300, currentY, 100, LINE_HEIGHT);
 				guiComposer.AddStaticText(sound.Params.SoundType.ToString(), _font, bounds);
 
@@ -104,5 +109,16 @@ public class ClosedCaptionsOverlay : HudElement
 			guiComposer.zDepth = 149f;
 			SingleComposer = guiComposer.Compose();
 		}
+	}
+
+	private string GetSoundLabel(ILoadedSound sound)
+	{
+		if (sound == null)
+			return string.Empty;
+
+		if (sound.Params.Location.ToString().Contains("effect/rockslide", StringComparison.CurrentCultureIgnoreCase))
+			return Lang.Get("closedcaptions:rockslide");
+
+		return sound.Params.Location;
 	}
 }
