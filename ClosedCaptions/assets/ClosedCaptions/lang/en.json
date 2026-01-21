@@ -1,3 +1,35 @@
 {
-	"closedcaptions:rockslide": "Landslide"
+	"closedcaptions:drifter-hurt": "[Drifter grunting]",
+	"closedcaptions:drifter-death": "[Drifter dying]",
+	"closedcaptions:drifter": "[Drifter groaning]",
+	"closedcaptions:bowtorn-hurt": "[Bowtorn grunting]",
+	"closedcaptions:bowtorn-death": "[Bowtorn dying]",
+	"closedcaptions:bowtorn-draw": "[Bowtorn screeching]",
+	"closedcaptions:bowtorn-reload": "[Bowtorn reloading]",
+	"closedcaptions:bowtorn": "[Bowtorn groaning]",
+
+	"closedcaptions:rockslide": "[Landslide]",
+
+	"closedcaptions:walk-cloth": "[Footsteps on cloth]",
+	"closedcaptions:walk-grass": "[Footsteps on grass]",
+	"closedcaptions:walk-gravel": "[Footsteps on gravel]",
+	"closedcaptions:walk-sand": "[Footsteps on sand]",
+	"closedcaptions:walk-sludge": "[Footsteps on sludge]",
+	"closedcaptions:walk-stone": "[Footsteps on stone]",
+	"closedcaptions:walk-wood": "[Footsteps on wood]",
+	"closedcaptions:walk": "[Footsteps]",
+
+	"closedcaptions:voice-accordion": "[Accordion voice murmuring]",
+	"closedcaptions:voice-altoflute": "[Flute voice murmuring]",
+	"closedcaptions:voice-clarinet": "[Clarinet voice murmuring]",
+	"closedcaptions:voice-dukduk": "[Dukduk voice murmuring]",
+	"closedcaptions:voice-harmonica": "[Harmonica voice murmuring]",
+	"closedcaptions:voice-harp": "[Harp voice murmuring]",
+	"closedcaptions:voice-harpsichord": "[Harpsichord voice murmuring]",
+	"closedcaptions:voice-oboe": "[Oboe voice murmuring]",
+	"closedcaptions:voice-ocarina": "[Ocarina voice murmuring]",
+	"closedcaptions:voice-sax": "[Saxaphone voice murmuring]",
+	"closedcaptions:voice-trumpet": "[Trumpet voice murmuring]",
+	"closedcaptions:voice-tuba": "[Tuba voice murmuring]",
+	"closedcaptions:voice": "[Voice murmuring]"
 }
