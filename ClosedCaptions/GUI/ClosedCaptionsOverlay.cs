@@ -18,7 +18,8 @@ public class ClosedCaptionsOverlay : HudElement
 	public override bool ShouldReceiveMouseEvents() => false;
 
 	private static readonly float VolumeThreshold = 0.05f;
-	private static readonly double LineHeight = 26;
+	private static readonly float FontSize = 20f;
+	private static readonly double LineHeight = 24;
 
 	private readonly CairoFont _font;
 	private readonly Vec4f _fontColor = new(0.91f, 0.87f, 0.81f, 1f);
@@ -42,8 +43,8 @@ public class ClosedCaptionsOverlay : HudElement
 		return new CairoFont()
 			.WithColor(new double[] { _fontColor.R, _fontColor.G, _fontColor.B, _fontColor.A })
 			.WithFont(GuiStyle.StandardFontName)
-			.WithOrientation(EnumTextOrientation.Left)
-			.WithFontSize(20f)
+			.WithOrientation(EnumTextOrientation.Center)
+			.WithFontSize(FontSize)
 			.WithWeight(Cairo.FontWeight.Normal)
 			.WithStroke(new double[] { 0, 0, 0, 0.5 }, 2);
 	}
@@ -86,6 +87,7 @@ public class ClosedCaptionsOverlay : HudElement
 
 			ElementBounds bounds;
 
+			int captionIndex = 0;
 			foreach (var sound in orderedSounds)
 			{
 				if (!sound.IsPlaying ||
@@ -94,8 +96,15 @@ public class ClosedCaptionsOverlay : HudElement
 					sound.Params.Location == null)
 					continue;
 
-				bounds = ElementBounds.FixedOffseted(EnumDialogArea.LeftTop, 0, currentY, 600, LineHeight);
-				guiComposer.AddStaticText(_soundLabelMap.FindCaptionForSound(sound.Params.Location), _font, bounds);
+				var captionText = _soundLabelMap.FindCaptionForSound(sound.Params.Location);
+				if (string.IsNullOrEmpty(captionText))
+					captionText = "[...]";
+				captionText = string.Format("{0} <font size=\"10\" opacity=\"0.5\"><i>{1}</i></font>",
+					captionText,
+					sound.Params.Location
+					);
+				bounds = ElementBounds.Fixed(EnumDialogArea.LeftTop, 0, currentY, 600, LineHeight);
+				guiComposer.AddRichtext(captionText, _font, bounds);
 				//bounds = ElementBounds.FixedOffseted(EnumDialogArea.LeftTop, 300, currentY, 100, LineHeight);
 				//guiComposer.AddStaticText(sound.Params.SoundType.ToString(), _font, bounds);
 
@@ -106,11 +115,10 @@ public class ClosedCaptionsOverlay : HudElement
 				//guiComposer.AddStaticText(MathF.Floor(relativePosition.Length()).ToString(), _font, bounds);
 
 				currentY += LineHeight;
+				captionIndex++;
 			}
 
 			guiComposer.EndChildElements();
-
-			guiComposer.zDepth = 149f;
 			SingleComposer = guiComposer.Compose();
 		}
 	}

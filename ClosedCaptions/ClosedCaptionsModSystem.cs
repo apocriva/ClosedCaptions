@@ -8,10 +8,10 @@ namespace ClosedCaptions;
 
 public class ClosedCaptionsModSystem : ModSystem
 {
-	private static ClosedCaptionsOverlay _overlay;
-	private static SoundLabelMap _soundLabelMap;
+	private ClosedCaptionsOverlay _overlay;
+	private SoundLabelMap _soundLabelMap;
 
-	private static ICoreClientAPI _capi;
+	private ICoreClientAPI _capi;
 
 	private long _gameTickListenerId;
 
@@ -22,7 +22,6 @@ public class ClosedCaptionsModSystem : ModSystem
 
 		InitSoundLabelMap();
 		_overlay = new(_capi, _soundLabelMap);
-
 		_overlay.TryOpen(withFocus: false);
 		_gameTickListenerId = _capi.Event.RegisterGameTickListener(OnTick, 500);
 	}

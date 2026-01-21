@@ -15,7 +15,7 @@ public class SoundLabelMap
 		_mappings.Add(matchFunc);
 	}
 
-	public string FindCaptionForSound(string assetName)
+	public string? FindCaptionForSound(string assetName)
 	{
 		foreach (var mapping in _mappings)
 		{
@@ -24,6 +24,6 @@ public class SoundLabelMap
 			if (!string.IsNullOrEmpty(match))
 				return Lang.Get(match);
 		}
-		return assetName;
+		return null;
 	}
 }
