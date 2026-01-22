@@ -1,4 +1,8 @@
 {
+	"closedcaptions:block": "[Block noises]",
+
+	"closedcaptions:creature": "[Creature noises]",
+
 	"closedcaptions:drifter-hurt": "[Drifter grunting]",
 	"closedcaptions:drifter-death": "[Drifter dying]",
 	"closedcaptions:drifter": "[Drifter groaning]",
@@ -18,6 +22,13 @@
 	"closedcaptions:walk-stone": "[Footsteps on stone]",
 	"closedcaptions:walk-wood": "[Footsteps on wood]",
 	"closedcaptions:walk": "[Footsteps]",
+
+	"closedcaptions:wearable-brigandine": "[Brigandine armor rustling]",
+	"closedcaptions:wearable-chain": "[Chain armor jangling]",
+	"closedcaptions:wearable-leather": "[Leather armor rustling]",
+	"closedcaptions:wearable-plate": "[Plate armor clanking]",
+	"closedcaptions:wearable-scale": "[Scale armor jangling]",
+	"closedcaptions:wearable": "[Armor rustling]",
 
 	"closedcaptions:voice-accordion": "[Accordion voice murmuring]",
 	"closedcaptions:voice-altoflute": "[Flute voice murmuring]",

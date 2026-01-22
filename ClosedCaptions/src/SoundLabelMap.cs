@@ -26,4 +26,9 @@ public class SoundLabelMap
 		}
 		return null;
 	}
+
+	public void Dispose()
+	{
+		_mappings.Clear();
+	}
 }
