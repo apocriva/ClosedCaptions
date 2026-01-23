@@ -45,14 +45,14 @@ public class ClosedCaptionsOverlay : HudElement
 			var captionKey = "caption" + caption.ID.ToString();
 			var element = SingleComposer.GetRichtext(captionKey);
 
-			if (element == null)
-			{
-				capi.Logger.Log(EnumLogType.Warning,
-					string.Format("Can't find caption element for {0} ({1})",
-					captionKey,
-					caption.LoadedSound.Params.Location));
-				continue;
-			}
+			// if (element == null)
+			// {
+			// 	capi.Logger.Log(EnumLogType.Warning,
+			// 		string.Format("Can't find caption element for {0} ({1})",
+			// 		captionKey,
+			// 		caption.LoadedSound.Params.Location));
+			// 	continue;
+			// }
 
 			var label = BuildCaptionLabel(caption);
 			element.SetNewText(label, _font);
@@ -83,12 +83,30 @@ public class ClosedCaptionsOverlay : HudElement
 		relativePosition.Normalize();
 
 		var dot = relativePosition.Dot(forward);
+		string leftArrow = "";
+		string rightArrow = "";
+		if (dot >= 0.5 && dot < 0.9)
+		{
+			leftArrow = "&lt;";
+		}
+		else if (dot <= -0.5 && dot > -0.9)
+		{
+			rightArrow = "&gt;";
+		}
+		else if (dot >= 0.9 || dot >= 0.9)
+		{
+			leftArrow = "v";
+			rightArrow = "v";
+		}
 
-		var label = string.Format("{2} {0} {3} <font size=\"10\" opacity=\"0.5\"><i>{1}</i></font>",
+		var label = string.Format("{1} {0} {2} <font size=\"10\"><i>{3} {4:F2} {5:F0} {6}</i></font>",
 			caption.Text,
-			caption.LoadedSound.Params.Location,
-			dot > 0.5 ? "&lt;" : "",
-			dot < -0.5 ? "&gt;" : ""
+			leftArrow,
+			rightArrow,
+			caption.LoadedSound.Params.SoundType,
+			caption.LoadedSound.PlaybackPosition,
+			caption.LoadedSound.Params.Volume,
+			caption.LoadedSound.Params.Location
 			);
 
 		return label;

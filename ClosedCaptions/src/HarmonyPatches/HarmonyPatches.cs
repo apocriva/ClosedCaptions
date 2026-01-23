@@ -2,6 +2,7 @@ using HarmonyLib;
 using Vintagestory;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
+using Vintagestory.Client;
 using Vintagestory.Client.NoObf;
 
 namespace ClosedCaptions.HarmonyPatches;
@@ -9,10 +10,17 @@ namespace ClosedCaptions.HarmonyPatches;
 [HarmonyPatchCategory("closedcaptions")]
 public static class HarmonyPatches
 {
+	// [HarmonyPostfix()]
+	// [HarmonyPatch(typeof(ClientMain), "StartPlaying", typeof(ILoadedSound), typeof(AssetLocation))]
+	// public static void OnStartPlaying(ClientMain __instance, ILoadedSound loadedSound, AssetLocation location)
+	// {
+	// 	CaptionManager.SoundStarted(loadedSound, location);
+	// }
+
 	[HarmonyPostfix()]
-	[HarmonyPatch(typeof(ClientMain), "StartPlaying", typeof(ILoadedSound), typeof(AssetLocation))]
-	public static void OnStartPlaying(ClientMain __instance, ILoadedSound loadedSound, AssetLocation location)
+	[HarmonyPatch(typeof(LoadedSoundNative), "Start")]
+	public static void OnLoadedSoundStarted(ILoadedSound __instance)
 	{
-		CaptionManager.SoundStarted(loadedSound, location);
+		CaptionManager.SoundStarted(__instance, __instance.Params.Location);
 	}
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using ClosedCaptions.GUI;
@@ -25,6 +26,8 @@ public class CaptionManager
 	private long _nextCaptionId = 1;
 	private readonly List<Caption> _captions = [];
 
+	private bool _needsRefresh = false;
+
 	public CaptionManager(ICoreClientAPI capi)
 	{
 		_instance = this;
@@ -49,15 +52,17 @@ public class CaptionManager
 			text = "[" + location.GetName() + "?]";
 
 		_instance._captions.Add(new Caption(_instance._nextCaptionId++, loadedSound, time, text));
-
-		_instance._overlay.Refresh();
+		_instance._needsRefresh = true;
 	}
 
 	public static IOrderedEnumerable<Caption> GetSortedCaptions()
 	{
 		var player = _capi.World.Player;
 		var ordered = _instance._captions
-			.Where(caption => !caption.LoadedSound.IsPaused && caption.LoadedSound.IsPlaying)
+			.Where(caption =>
+				!caption.LoadedSound.IsPaused &&
+				caption.LoadedSound.IsPlaying &&
+				caption.LoadedSound.Params?.Volume > 0.3f)
 			.OrderBy(caption =>
 			{
 				var sound = caption.LoadedSound;
@@ -81,7 +86,7 @@ public class CaptionManager
 
 	public void Tick()
 	{
-		bool refresh = false;
+		bool refresh = _needsRefresh;
 		for (int i = _captions.Count - 1; i >= 0; --i)
 		{
 			var loadedSound = _captions[i].LoadedSound;
@@ -111,6 +116,28 @@ public class CaptionManager
 	{
 		if (loadedSound.Params.Location.ToString().Contains("menubutton"))
 			return true;
+
+		// Filter sounds that are very similar and close to sounds that are already playing.
+		foreach (var caption in _captions)
+		{
+			if (caption.LoadedSound == loadedSound)
+				return true;
+			if (caption.LoadedSound.Params.Location != loadedSound.Params.Location)
+				continue;
+
+			// Close enough in time?
+			if (_capi.World.ElapsedMilliseconds - caption.StartTime > 250)
+				continue;
+			
+			// Close enough in space?
+			var distance = (loadedSound.Params.Position - caption.LoadedSound.Params.Position).Length();
+			if (distance > 5f)
+				continue;
+
+			// Treat as duplicate!
+			return true;
+		}
+
 		return false;
 	}
 
