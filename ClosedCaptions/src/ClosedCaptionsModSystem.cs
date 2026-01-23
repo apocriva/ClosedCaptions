@@ -28,7 +28,7 @@ public class ClosedCaptionsModSystem : ModSystem
 		}
 
 		_manager = new(_capi);
-		_gameTickListenerId = _capi.Event.RegisterGameTickListener(OnTick, 250);
+		_gameTickListenerId = _capi.Event.RegisterGameTickListener(OnTick, 60);
 	}
 
 	public override void Dispose()

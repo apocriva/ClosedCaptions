@@ -5,17 +5,109 @@ using ClosedCaptions.GUI;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
+using Vintagestory.API.MathTools;
 
 namespace ClosedCaptions;
 
 public class CaptionManager
 {
-	public class Caption(long id, ILoadedSound loadedSound, long startTime, string text)
+	public static readonly long MinimumDisplayDuration = 200;
+	public static readonly long FadeOutDuration = 500;
+
+	public class Caption
 	{
-		public readonly long ID = id;
-		public readonly ILoadedSound LoadedSound = loadedSound;
-		public readonly long StartTime = startTime;
-		public readonly string Text = text;
+		public readonly long ID;
+		public readonly SoundParams Params;
+		public readonly string Text;
+		public readonly long StartTime;
+		public long FadeOutStartTime;
+
+		public ILoadedSound? LoadedSound { get; private set; }
+
+		// Params.Position can be null, why?
+		public Vec3f Position
+		{
+			get
+			{
+				if (Params.Position != null)
+					return Params.Position;
+
+				return Vec3f.Zero;
+			}
+		}
+
+		public Caption(long id, ILoadedSound loadedSound, long startTime, string text)
+		{
+			ID = id;
+			LoadedSound = loadedSound;
+			StartTime = startTime;
+			Text = text;
+			FadeOutStartTime = 0;
+
+			var p = LoadedSound.Params;
+			Params = new()
+			{
+				Location = p.Location,
+				Position = p.Position,
+				RelativePosition = p.RelativePosition,
+				ShouldLoop = p.ShouldLoop,
+				DisposeOnFinish = p.DisposeOnFinish,
+				Pitch = p.Pitch,
+				LowPassFilter = p.LowPassFilter,
+				ReferenceDistance = p.ReferenceDistance,
+				Range = p.Range,
+				SoundType = p.SoundType,
+				Volume = p.Volume
+			};
+		}
+
+		public bool IsDisposeFlagged
+		{
+			get
+			{
+				return LoadedSound == null;
+			}
+		}
+
+		public bool IsLoadedSoundDisposed
+		{
+			get
+			{
+				return LoadedSound != null &&
+					LoadedSound.IsDisposed;
+			}
+		}
+
+		public bool IsPlaying
+		{
+			get
+			{
+				return LoadedSound != null &&
+					LoadedSound.IsPlaying;
+			}
+		}
+
+		public bool IsPaused
+		{
+			get
+			{
+				return LoadedSound != null &&
+					LoadedSound.IsPaused;
+			}
+		}
+
+		public bool IsFading
+		{
+			get
+			{
+				return FadeOutStartTime > 0;
+			}
+		}
+
+		public void FlagAsDisposed()
+		{
+			LoadedSound = null;
+		}
 	}
 
 	private static CaptionManager _instance;
@@ -46,7 +138,7 @@ public class CaptionManager
 		if (_instance.IsFiltered(loadedSound))
 			return;
 
-		var time = _capi.World.ElapsedMilliseconds;
+		var time = _capi.InWorldEllapsedMilliseconds;
 		var text = _instance._soundLabelMap.FindCaptionForSound(location);
 		if (string.IsNullOrEmpty(text))
 			text = "[" + location.GetName() + "?]";
@@ -58,20 +150,22 @@ public class CaptionManager
 	public static IOrderedEnumerable<Caption> GetSortedCaptions()
 	{
 		var player = _capi.World.Player;
+		// This has an error for a sound that is reverbing
 		var ordered = _instance._captions
 			.Where(caption =>
-				!caption.LoadedSound.IsPaused &&
-				caption.LoadedSound.IsPlaying &&
-				caption.LoadedSound.Params?.Volume > 0.3f)
+				(!caption.IsLoadedSoundDisposed &&
+				!caption.IsPaused &&
+				caption.IsPlaying &&
+				caption.Params.Volume > 0.3f) ||
+				caption.IsFading)
 			.OrderBy(caption =>
 			{
-				var sound = caption.LoadedSound;
-				if (sound.Params.Position == null)
+				if (caption.Params.Position == null)
 					return 0f;
 				
-				var relativePosition = sound.Params.Position - player.Entity.Pos.XYZFloat;
-				if (sound.Params.RelativePosition)
-					relativePosition = sound.Params.Position;
+				var relativePosition = caption.Params.Position - player.Entity.Pos.XYZFloat;
+				if (caption.Params.RelativePosition)
+					relativePosition = caption.Params.Position;
 
 				return -relativePosition.Length();
 			});
@@ -89,14 +183,25 @@ public class CaptionManager
 		bool refresh = _needsRefresh;
 		for (int i = _captions.Count - 1; i >= 0; --i)
 		{
-			var loadedSound = _captions[i].LoadedSound;
-			if (loadedSound.IsDisposed &&
-				_capi.World.ElapsedMilliseconds - _captions[i].StartTime > 1000)
+			var caption = _captions[i];
+			if (caption.IsLoadedSoundDisposed &&
+				!caption.IsDisposeFlagged)
 			{
-				var location = loadedSound.Params?.Location;
-				//_capi.Logger.Log(EnumLogType.Debug, string.Format("Sound disposed: {0}", location));
-				_captions.RemoveAt(i);
-				refresh = true;
+				// System says sound is disposed, so we need to let go
+				caption.FlagAsDisposed();
+
+				// Want the caption to show up for at least long enough to read
+				caption.FadeOutStartTime = _capi.InWorldEllapsedMilliseconds;
+				if (caption.FadeOutStartTime < caption.StartTime + MinimumDisplayDuration)
+					caption.FadeOutStartTime = caption.StartTime + MinimumDisplayDuration;
+			}
+			else if (caption.IsFading)
+			{
+				if (_capi.InWorldEllapsedMilliseconds - caption.FadeOutStartTime > FadeOutDuration)
+				{
+					_captions.RemoveAt(i);
+					refresh = true;
+				}
 			}
 		}
 
@@ -104,6 +209,8 @@ public class CaptionManager
 			_overlay.Refresh();
 		else
 			_overlay.Tick();
+
+		_needsRefresh = false;
 	}
 
 	public void Dispose()
@@ -122,15 +229,15 @@ public class CaptionManager
 		{
 			if (caption.LoadedSound == loadedSound)
 				return true;
-			if (caption.LoadedSound.Params.Location != loadedSound.Params.Location)
+			if (caption.Params.Location != loadedSound.Params.Location)
 				continue;
 
 			// Close enough in time?
-			if (_capi.World.ElapsedMilliseconds - caption.StartTime > 250)
+			if (_capi.InWorldEllapsedMilliseconds - caption.StartTime > 250)
 				continue;
 			
 			// Close enough in space?
-			var distance = (loadedSound.Params.Position - caption.LoadedSound.Params.Position).Length();
+			var distance = (loadedSound.Params.Position - caption.Params.Position).Length();
 			if (distance > 5f)
 				continue;
 

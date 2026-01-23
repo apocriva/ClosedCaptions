@@ -26,6 +26,14 @@ public class ClosedCaptionsOverlay : HudElement
 
 	private readonly SoundLabelMap _soundLabelMap;
 
+	private class CaptionLabel(CaptionManager.Caption caption, GuiElementRichtext richtext)
+	{
+		public CaptionManager.Caption Caption = caption;
+		public GuiElementRichtext Richtext = richtext;
+	}
+
+	private List<CaptionLabel> _captionlabels = [];
+
 	public ClosedCaptionsOverlay(ICoreClientAPI capi, SoundLabelMap soundLabelMap) : base(capi)
 	{
 		_font = InitFont();
@@ -40,22 +48,10 @@ public class ClosedCaptionsOverlay : HudElement
 
 	public void Tick()
 	{
-		foreach (var caption in CaptionManager.GetCaptions())
+		foreach (var captionLabel in _captionlabels)
 		{
-			var captionKey = "caption" + caption.ID.ToString();
-			var element = SingleComposer.GetRichtext(captionKey);
-
-			// if (element == null)
-			// {
-			// 	capi.Logger.Log(EnumLogType.Warning,
-			// 		string.Format("Can't find caption element for {0} ({1})",
-			// 		captionKey,
-			// 		caption.LoadedSound.Params.Location));
-			// 	continue;
-			// }
-
-			var label = BuildCaptionLabel(caption);
-			element.SetNewText(label, _font);
+			var label = BuildCaptionLabel(captionLabel.Caption);
+			captionLabel.Richtext.SetNewText(label, _font);
 		}
 	}
 
@@ -72,15 +68,15 @@ public class ClosedCaptionsOverlay : HudElement
 
 	private string BuildCaptionLabel(CaptionManager.Caption caption)
 	{
-		var sound = caption.LoadedSound;
 		var player = capi.World.Player;
-		var relativePosition = sound.Params.Position - player.Entity.Pos.XYZFloat;
-		if (sound.Params.RelativePosition)
-			relativePosition = sound.Params.Position;
+		var relativePosition = caption.Position - player.Entity.Pos.XYZFloat;
+		if (caption.Params.RelativePosition)
+			relativePosition = caption.Position;
+		relativePosition.Y = 0f;
+		relativePosition.Normalize();
 		
 		// Left or right?
 		Vec3d forward = new(Math.Cos(-player.CameraYaw), 0, Math.Sin(-player.CameraYaw));
-		relativePosition.Normalize();
 
 		var dot = relativePosition.Dot(forward);
 		string leftArrow = "";
@@ -99,14 +95,22 @@ public class ClosedCaptionsOverlay : HudElement
 			rightArrow = "v";
 		}
 
-		var label = string.Format("{1} {0} {2} <font size=\"10\"><i>{3} {4:F2} {5:F0} {6}</i></font>",
+		// Is the caption fading?
+		float opacity = 1f;
+		if (caption.FadeOutStartTime > 0)
+		{
+			opacity = 1f - (float)(capi.InWorldEllapsedMilliseconds - caption.FadeOutStartTime) / CaptionManager.FadeOutDuration;
+			opacity = MathF.Max(0f, MathF.Min(opacity, 1f));
+		}
+
+		var label = string.Format("<font opacity=\"{1}\">{2} {0} {3}</font> <font size=\"10\"><i>{4} {5:F0} {6}</i></font>",
 			caption.Text,
+			opacity,
 			leftArrow,
 			rightArrow,
-			caption.LoadedSound.Params.SoundType,
-			caption.LoadedSound.PlaybackPosition,
-			caption.LoadedSound.Params.Volume,
-			caption.LoadedSound.Params.Location
+			caption.Params.SoundType,
+			caption.Params.Volume,
+			caption.Params.Location
 			);
 
 		return label;
@@ -132,6 +136,7 @@ public class ClosedCaptionsOverlay : HudElement
 			.AddGameOverlay(bgBounds, bgColor)
 			.BeginChildElements();
 
+		_captionlabels.Clear();
 		double currentY = 0;
 		foreach (var caption in captions)
 		{
@@ -140,6 +145,9 @@ public class ClosedCaptionsOverlay : HudElement
 			var text = BuildCaptionLabel(caption);
 			var captionKey = "caption" + caption.ID.ToString();
 			SingleComposer.AddRichtext(text, _font, bounds, captionKey);
+
+			var richtext = SingleComposer.GetRichtext(captionKey);
+			_captionlabels.Add(new(caption, richtext));
 
 			currentY += LineHeight;
 		}
