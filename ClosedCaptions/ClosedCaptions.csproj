@@ -1,51 +1,56 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <OutputPath>bin\$(Configuration)\Mods\mod</OutputPath>
-    <Nullable>enable</Nullable>
+	<TargetFramework>net8.0</TargetFramework>
+	<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+	<OutputPath>bin\$(Configuration)\Mods\mod</OutputPath>
+	<Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="VintagestoryAPI">
-      <HintPath>$(VINTAGE_STORY)/VintagestoryAPI.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="0Harmony">
-      <HintPath>$(VINTAGE_STORY)/Lib/0Harmony.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="VintagestoryLib">
-      <HintPath>$(VINTAGE_STORY)/VintagestoryLib.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="cairo-sharp">
-      <HintPath>$(VINTAGE_STORY)/Lib/cairo-sharp.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>$(VINTAGE_STORY)/Lib/Newtonsoft.Json.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
+	<Reference Include="VintagestoryAPI">
+	  <HintPath>$(VINTAGE_STORY)/VintagestoryAPI.dll</HintPath>
+	  <Private>false</Private>
+	</Reference>
+	<Reference Include="0Harmony">
+	  <HintPath>$(VINTAGE_STORY)/Lib/0Harmony.dll</HintPath>
+	  <Private>false</Private>
+	</Reference>
+	<Reference Include="VintagestoryLib">
+	  <HintPath>$(VINTAGE_STORY)/VintagestoryLib.dll</HintPath>
+	  <Private>false</Private>
+	</Reference>
+	<Reference Include="cairo-sharp">
+	  <HintPath>$(VINTAGE_STORY)/Lib/cairo-sharp.dll</HintPath>
+	  <Private>false</Private>
+	</Reference>
+	<Reference Include="Newtonsoft.Json">
+	  <HintPath>$(VINTAGE_STORY)/Lib/Newtonsoft.Json.dll</HintPath>
+	  <Private>false</Private>
+	</Reference>
+	<Reference Include="configlib">
+	  <HintPath>..\..\configlib.dll</HintPath>
+	  <Private>false</Private>
+	</Reference>
+	<PackageReference Include="VSImGui" version="0.0.6" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="assets\**">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+	<Content Include="assets\**">
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="modinfo.json">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+	<Content Include="modinfo.json">
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="modicon.png" Condition="Exists('modicon.png')">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+	<Content Include="modicon.png" Condition="Exists('modicon.png')">
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
   </ItemGroup>
 
 </Project>

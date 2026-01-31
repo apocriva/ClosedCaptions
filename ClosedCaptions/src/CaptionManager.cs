@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ClosedCaptions.Config;
 using ClosedCaptions.GUI;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
@@ -77,7 +78,7 @@ public class CaptionManager
 	private static ICoreClientAPI _capi;
 
 	private ClosedCaptionsOverlay _overlay;
-	private ClosedCaptionsConfig _config;
+	private MatchConfig _matchConfig;
 	private long _nextCaptionId = 1;
 	private readonly List<Caption> _captions = [];
 
@@ -88,16 +89,17 @@ public class CaptionManager
 		_instance = this;
 		_capi = capi;
 
-        try
-        {
-            _config = capi.Assets.Get(new AssetLocation("closedcaptions", "config/closedcaptions.json")).ToObject<ClosedCaptionsConfig>();
-        }
+		try
+		{
+			_matchConfig = capi.Assets.Get(new AssetLocation("closedcaptions", MatchConfig.Filename)).ToObject<MatchConfig>();
+		}
 		catch (Exception e)
 		{
-            throw e;
-        }
+			capi.Logger.Error($"Error loading {MatchConfig.Filename}: {e}");
+			throw e;
+		}
 
-        _overlay = new(capi, _config);
+		_overlay = new(capi, _matchConfig);
 	}
 
 	public static void SoundStarted(ILoadedSound loadedSound, AssetLocation location)
@@ -108,7 +110,7 @@ public class CaptionManager
 			return;
 
 		var time = _capi.InWorldEllapsedMilliseconds;
-		var text = _instance._config.FindCaptionForSound(location);
+		var text = _instance._matchConfig.FindCaptionForSound(location);
 		if (string.IsNullOrEmpty(text))
 			text = "[" + location.GetName() + "?]";
 
@@ -193,16 +195,34 @@ public class CaptionManager
 		if (assetName.Contains("menubutton"))
 			return true;
 
-		// Filter out sounds 
-		foreach (var caption in _captions)
+		// Check user filters.
+		if (ClosedCaptionsModSystem.UserConfig.FilterWalk)
+		{
+			if (assetName.Contains("walk") ||
+				assetName.Contains("wearable"))
+			{
+                return true;
+            }
+		}
+
+		if (ClosedCaptionsModSystem.UserConfig.FilterSelf)
+		{
+			if (loadedSound.Params.RelativePosition)
+			{
+                return true;
+            }
+		}
+
+        // Filter out sounds that are similar to one that's playing and close in space.
+        foreach (var caption in _captions)
 		{
 			// This literal sound is already playing, get outta here!
 			if (caption.LoadedSound == loadedSound)
 				return true;
 
-            // Filter sounds that are very similar and close to sounds that are already playing.
-            var position = loadedSound.Params.Position ?? Vec3f.Zero;
-            var distance = (position - caption.Params.Position).Length();
+			// Filter sounds that are very similar and close to sounds that are already playing.
+			var position = loadedSound.Params.Position ?? _capi.World.Player.Entity.Pos.XYZ.ToVec3f();
+			var distance = (position - caption.Params.Position).Length();
 			if (caption.Params.Location == loadedSound.Params.Location &&
 				_capi.InWorldEllapsedMilliseconds - caption.StartTime > 250 &&
 				distance < 5f)

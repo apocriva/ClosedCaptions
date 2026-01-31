@@ -2,21 +2,23 @@ using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.API.Util;
 
-namespace ClosedCaptions;
+namespace ClosedCaptions.Config;
 
-public class ClosedCaptionsConfig
+public class MatchConfig
 {
-	public class MatchGroup
+    public static readonly string Filename = "config/matchconfig.json";
+
+    public class MatchGroup
 	{
 		public string Group;
 		public string DefaultKey;
-		public Mapping[] Mappings;
+        public Mapping[] Mappings;
 	}
 
 	public class Mapping
 	{
 		public string Match;
-		public string CaptionKey;
+        public string CaptionKey;
 	}
 
 	public MatchGroup[] SoundMap;

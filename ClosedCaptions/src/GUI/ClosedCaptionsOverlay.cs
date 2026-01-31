@@ -9,6 +9,8 @@ using Vintagestory.Client.NoObf;
 using System;
 using System.Linq;
 using Vintagestory.API.Config;
+using ClosedCaptions.Config;
+using Microsoft.VisualBasic;
 
 namespace ClosedCaptions.GUI;
 
@@ -24,9 +26,9 @@ public class ClosedCaptionsOverlay : HudElement
 	private readonly CairoFont _font;
 	private readonly Vec4f _fontColor = new(0.91f, 0.87f, 0.81f, 1f);
 
-    private readonly ClosedCaptionsConfig _config;
+    private readonly MatchConfig _matchConfig;
 
-    private class CaptionLabel(CaptionManager.Caption caption, GuiElementRichtext richtext)
+	private class CaptionLabel(CaptionManager.Caption caption, GuiElementRichtext richtext)
 	{
 		public CaptionManager.Caption Caption = caption;
 		public GuiElementRichtext Richtext = richtext;
@@ -34,11 +36,11 @@ public class ClosedCaptionsOverlay : HudElement
 
 	private readonly List<CaptionLabel> _captionlabels = [];
 
-	public ClosedCaptionsOverlay(ICoreClientAPI capi, ClosedCaptionsConfig config) : base(capi)
+	public ClosedCaptionsOverlay(ICoreClientAPI capi, MatchConfig matchConfig) : base(capi)
 	{
 		_font = InitFont();
-        _config = config;
-        BuildDialog();
+        _matchConfig = matchConfig;
+		BuildDialog();
 	}
 
 	public void Refresh()
@@ -161,8 +163,16 @@ public class ClosedCaptionsOverlay : HudElement
 		}
 
 		SingleComposer.EndChildElements();
-		SingleComposer.Compose();
 
-		TryOpen();
+        try
+        {
+            SingleComposer.Compose();
+        }
+		catch (Exception e)
+		{
+            capi.Logger.Error($"Caption exception, no captions? {e}");
+        }
+
+        TryOpen();
 	}
 }

@@ -1,4 +1,8 @@
 {
+	"closedcaptions:config": "Closed Captions",
+	"closedcaptions:config-filter-self": "Filter self sounds",
+	"closedcaptions:config-filter-walk": "Filter walk sounds",
+
 	"closedcaptions:block": "[Block noises]",
 	"closedcaptions:block-dirt": "[Dirt crunching]",
 
