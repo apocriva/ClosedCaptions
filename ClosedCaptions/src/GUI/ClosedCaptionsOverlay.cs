@@ -24,9 +24,9 @@ public class ClosedCaptionsOverlay : HudElement
 	private readonly CairoFont _font;
 	private readonly Vec4f _fontColor = new(0.91f, 0.87f, 0.81f, 1f);
 
-	private readonly SoundLabelMap _soundLabelMap;
+    private readonly ClosedCaptionsConfig _config;
 
-	private class CaptionLabel(CaptionManager.Caption caption, GuiElementRichtext richtext)
+    private class CaptionLabel(CaptionManager.Caption caption, GuiElementRichtext richtext)
 	{
 		public CaptionManager.Caption Caption = caption;
 		public GuiElementRichtext Richtext = richtext;
@@ -34,11 +34,11 @@ public class ClosedCaptionsOverlay : HudElement
 
 	private readonly List<CaptionLabel> _captionlabels = [];
 
-	public ClosedCaptionsOverlay(ICoreClientAPI capi, SoundLabelMap soundLabelMap) : base(capi)
+	public ClosedCaptionsOverlay(ICoreClientAPI capi, ClosedCaptionsConfig config) : base(capi)
 	{
 		_font = InitFont();
-		_soundLabelMap = soundLabelMap;
-		BuildDialog();
+        _config = config;
+        BuildDialog();
 	}
 
 	public void Refresh()
@@ -77,38 +77,38 @@ public class ClosedCaptionsOverlay : HudElement
 		
 		// Left or right?
 		Vec3f forward = new(MathF.Sin(player.CameraYaw), 0f, MathF.Cos(player.CameraYaw));
-        var dot = relativePosition.Dot(forward);
-        var angle = MathF.Acos(dot) * 180f / MathF.PI;
-        var det = relativePosition.X * forward.Z - relativePosition.Z * forward.X;
+		var dot = relativePosition.Dot(forward);
+		var angle = MathF.Acos(dot) * 180f / MathF.PI;
+		var det = relativePosition.X * forward.Z - relativePosition.Z * forward.X;
 		if (det < 0)
-            angle = -angle;
+			angle = -angle;
 
-        string leftArrow = "";
+		string leftArrow = "";
 		string rightArrow = "";
-        if (!caption.Params.RelativePosition)
-        {
-            if (angle >= 150f || angle <= -150f)
-            {
-                leftArrow = "v";
-                rightArrow = "v";
-            }
-            else if (angle >= 45f)
-            {
-                leftArrow = "&lt;";
-            }
-            else if (angle <= -45f)
-            {
-                rightArrow = "&gt;";
-            }
-        }
+		if (!caption.Params.RelativePosition)
+		{
+			if (angle >= 150f || angle <= -150f)
+			{
+				leftArrow = "v";
+				rightArrow = "v";
+			}
+			else if (angle >= 45f)
+			{
+				leftArrow = "&lt;";
+			}
+			else if (angle <= -45f)
+			{
+				rightArrow = "&gt;";
+			}
+		}
 
-        // Is the caption fading?
-        float opacity = 1f;
+		// Is the caption fading?
+		float opacity = 1f;
 		if (caption.FadeOutStartTime > 0)
 		{
 			var percent = 1f - (float)(capi.InWorldEllapsedMilliseconds - caption.FadeOutStartTime) / CaptionManager.FadeOutDuration;
-            opacity *= percent;
-            opacity = MathF.Max(0f, MathF.Min(opacity, 1f));
+			opacity *= percent;
+			opacity = MathF.Max(0f, MathF.Min(opacity, 1f));
 		}
 
 		var label = string.Format("<font opacity=\"{1}\">{2} {0} {3}</font> <font size=\"10\"><i>{4} {5:F0} {6}</i></font>",

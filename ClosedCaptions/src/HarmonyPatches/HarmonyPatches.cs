@@ -1,3 +1,4 @@
+using System;
 using HarmonyLib;
 using Vintagestory;
 using Vintagestory.API.Client;
@@ -10,13 +11,6 @@ namespace ClosedCaptions.HarmonyPatches;
 [HarmonyPatchCategory("closedcaptions")]
 public static class HarmonyPatches
 {
-	// [HarmonyPostfix()]
-	// [HarmonyPatch(typeof(ClientMain), "StartPlaying", typeof(ILoadedSound), typeof(AssetLocation))]
-	// public static void OnStartPlaying(ClientMain __instance, ILoadedSound loadedSound, AssetLocation location)
-	// {
-	// 	CaptionManager.SoundStarted(loadedSound, location);
-	// }
-
 	[HarmonyPostfix()]
 	[HarmonyPatch(typeof(LoadedSoundNative), "Start")]
 	public static void OnLoadedSoundStarted(ILoadedSound __instance)

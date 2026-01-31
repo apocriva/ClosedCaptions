@@ -1,4 +1,5 @@
-﻿using ClosedCaptions.GUI;
+﻿using System;
+using ClosedCaptions.GUI;
 using HarmonyLib;
 using Vintagestory;
 using Vintagestory.API.Client;

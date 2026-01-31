@@ -1,0 +1,104 @@
+{
+	"soundMap": [
+		{
+			"group": "sounds/block*",
+			"defaultKey": "closedcaptions:block",
+			"mappings":[]
+		},
+		{
+			"group": "sounds/creature*",
+			"defaultKey": "closedcaptions:creature",
+			"mappings":[
+			]
+		},
+		{
+			"group": "sounds/creature/bear*",
+			"defaultKey": "closedcaptions:creature-bear-growl",
+			"mappings":[
+				{ "match": "sounds/creature/bear/aggro*", "captionKey": "closedcaptions:creature-bear-growl" },
+				{ "match": "sounds/creature/bear/attack*", "captionKey": "closedcaptions:creature-bear-growl" },
+				{ "match": "sounds/creature/bear/flee*", "captionKey": "closedcaptions:creature-bear-groan" },
+				{ "match": "sounds/creature/bear/growl*", "captionKey": "closedcaptions:creature-bear-growl" },
+				{ "match": "sounds/creature/bear/hurt*", "captionKey": "closedcaptions:creature-bear-groan" }
+			]
+		},
+		{
+			"group": "sounds/effect*",
+			"defaultKey": "closedcaptions:effect",
+			"mappings":[]
+		},
+		{
+			"group": "sounds/environment*",
+			"defaultKey": "closedcaptions:environment",
+			"mappings":[]
+		},
+		{
+			"group": "sounds/held*",
+			"defaultKey": "closedcaptions:held",
+			"mappings":[]
+		},
+		{
+			"group": "sounds/instrument*",
+			"defaultKey": "closedcaptions:instrument",
+			"mappings":[]
+		},
+		{
+			"group": "sounds/player*",
+			"defaultKey": "closedcaptions:player",
+			"mappings":[]
+		},
+		{
+			"group": "sounds/tool*",
+			"defaultKey": "closedcaptions:tool",
+			"mappings":[]
+		},
+		{
+			"group": "sounds/voice*",
+			"defaultKey": "closedcaptions:voice",
+			"mappings":[
+				{ "match": "sounds/voice/accordion*", "captionKey": "closedcaptions:voice-accordion" },
+				{ "match": "sounds/voice/altoflute*", "captionKey": "closedcaptions:voice-altoflute" },
+				{ "match": "sounds/voice/clarinet*", "captionKey": "closedcaptions:voice-clarinet" },
+				{ "match": "sounds/voice/duduk*", "captionKey": "closedcaptions:voice-duduk" },
+				{ "match": "sounds/voice/harmonica*", "captionKey": "closedcaptions:voice-harmonica" },
+				{ "match": "sounds/voice/harp*", "captionKey": "closedcaptions:voice-harp" },
+				{ "match": "sounds/voice/harpsichord*", "captionKey": "closedcaptions:voice-harpsichord" },
+				{ "match": "sounds/voice/oboe*", "captionKey": "closedcaptions:voice-oboe" },
+				{ "match": "sounds/voice/ocarina*", "captionKey": "closedcaptions:voice-ocarina" },
+				{ "match": "sounds/voice/sax*", "captionKey": "closedcaptions:voice-sax" },
+				{ "match": "sounds/voice/trumpet*", "captionKey": "closedcaptions:voice-trumpet" },
+				{ "match": "sounds/voice/tuba*", "captionKey": "closedcaptions:voice-tuba" }
+			]
+		},
+		{
+			"group": "sounds/walk*",
+			"defaultKey": "closedcaptions:walk",
+			"mappings":[
+				{ "match": "sounds/walk/inside/leafy*", "captionKey": "closedcaptions:walk-leafy" },
+				{ "match": "sounds/walk/cloth*", "captionKey": "closedcaptions:walk-cloth" },
+				{ "match": "sounds/walk/deepsnow*", "captionKey": "closedcaptions:walk-deepsnow" },
+				{ "match": "sounds/walk/glass*", "captionKey": "closedcaptions:walk-glass" },
+				{ "match": "sounds/walk/grass*", "captionKey": "closedcaptions:walk-grass" },
+				{ "match": "sounds/walk/gravel*", "captionKey": "closedcaptions:walk-gravel" },
+				{ "match": "sounds/walk/ice*", "captionKey": "closedcaptions:walk-ice" },
+				{ "match": "sounds/walk/lava*", "captionKey": "closedcaptions:walk-lava" },
+				{ "match": "sounds/walk/sand*", "captionKey": "closedcaptions:walk-sand" },
+				{ "match": "sounds/walk/sludge*", "captionKey": "closedcaptions:walk-sludge" },
+				{ "match": "sounds/walk/snow*", "captionKey": "closedcaptions:walk-snow" },
+				{ "match": "sounds/walk/stone*", "captionKey": "closedcaptions:walk-stone" },
+				{ "match": "sounds/walk/water*", "captionKey": "closedcaptions:walk-water" },
+				{ "match": "sounds/walk/wood*", "captionKey": "closedcaptions:walk-wood" }
+			]
+		},
+		{
+			"group": "sounds/wearable*",
+			"defaultKey": "closedcaptions:wearable",
+			"mappings":[]
+		},
+		{
+			"group": "sounds/weather*",
+			"defaultKey": "closedcaptions:weather",
+			"mappings":[]
+		}
+	]
+}

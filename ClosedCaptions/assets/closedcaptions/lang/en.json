@@ -1,7 +1,11 @@
 {
 	"closedcaptions:block": "[Block noises]",
+	"closedcaptions:block-dirt": "[Dirt crunching]",
 
 	"closedcaptions:creature": "[Creature noises]",
+
+	"closedcaptions:creature-bear-growl": "[Bear growling]",
+	"closedcaptions:creature-bear-groan": "[Bear groaning]",
 
 	"closedcaptions:drifter-hurt": "[Drifter grunting]",
 	"closedcaptions:drifter-death": "[Drifter dying]",
@@ -14,6 +18,7 @@
 
 	"closedcaptions:rockslide": "[<i>Landslide</i>]",
 
+	"closedcaptions:walk-leafy": "[Leaves rustling]",
 	"closedcaptions:walk-cloth": "[Footsteps on cloth]",
 	"closedcaptions:walk-grass": "[Footsteps on grass]",
 	"closedcaptions:walk-gravel": "[Footsteps on gravel]",

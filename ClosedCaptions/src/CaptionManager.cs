@@ -48,7 +48,7 @@ public class CaptionManager
 			Params = new()
 			{
 				Location = p.Location,
-				Position = p.Position,
+				Position = p.Position ?? Vec3f.Zero,
 				RelativePosition = p.RelativePosition,
 				ShouldLoop = p.ShouldLoop,
 				DisposeOnFinish = p.DisposeOnFinish,
@@ -61,48 +61,11 @@ public class CaptionManager
 			};
 		}
 
-		public bool IsDisposeFlagged
-		{
-			get
-			{
-				return LoadedSound == null;
-			}
-		}
-
-		public bool IsLoadedSoundDisposed
-		{
-			get
-			{
-				return LoadedSound != null &&
-					LoadedSound.IsDisposed;
-			}
-		}
-
-		public bool IsPlaying
-		{
-			get
-			{
-				return LoadedSound != null &&
-					LoadedSound.IsPlaying;
-			}
-		}
-
-		public bool IsPaused
-		{
-			get
-			{
-				return LoadedSound != null &&
-					LoadedSound.IsPaused;
-			}
-		}
-
-		public bool IsFading
-		{
-			get
-			{
-				return FadeOutStartTime > 0;
-			}
-		}
+		public bool IsDisposeFlagged => LoadedSound == null;
+		public bool IsLoadedSoundDisposed => LoadedSound != null && LoadedSound.IsDisposed;
+		public bool IsPlaying => LoadedSound != null && LoadedSound.IsPlaying;
+		public bool IsPaused => LoadedSound != null && LoadedSound.IsPaused;
+		public bool IsFading => FadeOutStartTime > 0;
 
 		public void FlagAsDisposed()
 		{
@@ -114,7 +77,7 @@ public class CaptionManager
 	private static ICoreClientAPI _capi;
 
 	private ClosedCaptionsOverlay _overlay;
-	private SoundLabelMap _soundLabelMap;
+	private ClosedCaptionsConfig _config;
 	private long _nextCaptionId = 1;
 	private readonly List<Caption> _captions = [];
 
@@ -125,10 +88,16 @@ public class CaptionManager
 		_instance = this;
 		_capi = capi;
 
-		_soundLabelMap = new();
-		InitSoundLabelMap();
+        try
+        {
+            _config = capi.Assets.Get(new AssetLocation("closedcaptions", "config/closedcaptions.json")).ToObject<ClosedCaptionsConfig>();
+        }
+		catch (Exception e)
+		{
+            throw e;
+        }
 
-		_overlay = new(capi, _soundLabelMap);
+        _overlay = new(capi, _config);
 	}
 
 	public static void SoundStarted(ILoadedSound loadedSound, AssetLocation location)
@@ -139,7 +108,7 @@ public class CaptionManager
 			return;
 
 		var time = _capi.InWorldEllapsedMilliseconds;
-		var text = _instance._soundLabelMap.FindCaptionForSound(location);
+		var text = _instance._config.FindCaptionForSound(location);
 		if (string.IsNullOrEmpty(text))
 			text = "[" + location.GetName() + "?]";
 
@@ -216,180 +185,30 @@ public class CaptionManager
 	public void Dispose()
 	{
 		_captions.Clear();
-		_soundLabelMap.Dispose();
 	}
 
 	private bool IsFiltered(ILoadedSound loadedSound)
 	{
-		if (loadedSound.Params.Location.ToString().Contains("menubutton"))
+		var assetName = loadedSound.Params.Location.ToString();
+		if (assetName.Contains("menubutton"))
 			return true;
 
-		// Filter sounds that are very similar and close to sounds that are already playing.
+		// Filter out sounds 
 		foreach (var caption in _captions)
 		{
+			// This literal sound is already playing, get outta here!
 			if (caption.LoadedSound == loadedSound)
 				return true;
-			if (caption.Params.Location != loadedSound.Params.Location)
-				continue;
 
-			// Close enough in time?
-			if (_capi.InWorldEllapsedMilliseconds - caption.StartTime > 250)
-				continue;
-			
-			// Close enough in space?
-			var distance = (loadedSound.Params.Position - caption.Params.Position).Length();
-			if (distance > 5f)
-				continue;
-
-			// Treat as duplicate!
-			return true;
+            // Filter sounds that are very similar and close to sounds that are already playing.
+            var position = loadedSound.Params.Position ?? Vec3f.Zero;
+            var distance = (position - caption.Params.Position).Length();
+			if (caption.Params.Location == loadedSound.Params.Location &&
+				_capi.InWorldEllapsedMilliseconds - caption.StartTime > 250 &&
+				distance < 5f)
+				return true;
 		}
 
 		return false;
-	}
-
-	private void InitSoundLabelMap()
-	{
-		_soundLabelMap = new();
-
-		_soundLabelMap.AddMapping(MatchBlock);
-		_soundLabelMap.AddMapping(MatchCreature);
-		_soundLabelMap.AddMapping(MatchRockslide);
-		_soundLabelMap.AddMapping(MatchWalk);
-		_soundLabelMap.AddMapping(MatchWearable);
-		_soundLabelMap.AddMapping(MatchVoice);
-	}
-
-	private static string? MatchBlock(string assetName)
-	{
-		if (!assetName.Contains("block"))
-			return  null;
-		
-		return Lang.Get("closedcaptions:block");
-	}
-
-	private static string? MatchCreature(string assetName)
-	{
-		if (!assetName.Contains("creature"))
-			return  null;
-		
-		string? ret = null;
-		if ((ret = MatchDrifter(assetName)) != null)
-			return ret;
-		else if ((ret = MatchBowtorn(assetName)) != null)
-			return ret;
-		
-		return Lang.Get("closedcaptions:creature");
-	}
-
-	private static string? MatchRockslide(string assetName)
-	{
-		if (!assetName.Contains("effect/rockslide"))
-			return null;
-
-		return Lang.Get("closedcaptions:rockslide");
-	}
-
-	private static string? MatchDrifter(string assetName)
-	{
-		if (!assetName.Contains("drifter"))
-			return null;
-		
-		if (assetName.Contains("hurt"))
-			return Lang.Get("closedcaptions:drifter-hurt");
-		else if (assetName.Contains("death"))
-			return Lang.Get("closedcaptions:drifter-death");
-		
-		return Lang.Get("closedcaptions:drifter");
-	}
-
-	private static string? MatchBowtorn(string assetName)
-	{
-		if (!assetName.Contains("bowtorn"))
-			return null;
-		
-		if (assetName.Contains("hurt"))
-			return Lang.Get("closedcaptions:bowtorn-hurt");
-		else if (assetName.Contains("death"))
-			return Lang.Get("closedcaptions:bowtorn-death");
-		else if (assetName.Contains("draw"))
-			return Lang.Get("closedcaptions:bowtorn-draw");
-		else if (assetName.Contains("reload"))
-			return Lang.Get("closedcaptions:bowtorn-reload");
-		
-		return Lang.Get("closedcaptions:bowtorn");
-	}
-
-	private static string? MatchWalk(string assetName)
-	{
-		if (!assetName.Contains("walk"))
-			return null;
-
-		if (assetName.Contains("cloth"))
-			return Lang.Get("closedcaptions:walk-cloth");
-		else if (assetName.Contains("grass"))
-			return Lang.Get("closedcaptions:walk-grass");
-		else if (assetName.Contains("gravel"))
-			return Lang.Get("closedcaptions:walk-gravel");
-		else if (assetName.Contains("sand"))
-			return Lang.Get("closedcaptions:walk-sand");
-		else if (assetName.Contains("sludge"))
-			return Lang.Get("closedcaptions:walk-sludge");
-		else if (assetName.Contains("stone"))
-			return Lang.Get("closedcaptions:walk-stone");
-
-		return Lang.Get("closedcaptions:walk");
-	}
-
-	private static string? MatchWearable(string assetName)
-	{
-		if (!assetName.Contains("wearable"))
-			return null;
-
-		if (assetName.Contains("brigandine"))
-			return Lang.Get("closedcaptions:wearable-brigandine");
-		else if (assetName.Contains("chain"))
-			return Lang.Get("closedcaptions:wearable-chain");
-		else if (assetName.Contains("leather"))
-			return Lang.Get("closedcaptions:wearable-leather");
-		else if (assetName.Contains("plate"))
-			return Lang.Get("closedcaptions:wearable-plate");
-		else if (assetName.Contains("scale"))
-			return Lang.Get("closedcaptions:wearable-scale");
-
-		return Lang.Get("closedcaptions:wearable");
-	}
-
-	private static string? MatchVoice(string assetName)
-	{
-		if (!assetName.Contains("voice"))
-			return null;
-
-		if (assetName.Contains("accordion"))
-			return Lang.Get("closedcaptions:voice-accordion");
-		else if (assetName.Contains("altoflute"))
-			return Lang.Get("closedcaptions:voice-altoflute");
-		else if (assetName.Contains("clarinet"))
-			return Lang.Get("closedcaptions:voice-clarinet");
-		else if (assetName.Contains("dukduk"))
-			return Lang.Get("closedcaptions:voice-dukduk");
-		else if (assetName.Contains("altoharmonica"))
-			return Lang.Get("closedcaptions:voice-harmonica");
-		else if (assetName.Contains("harp"))
-			return Lang.Get("closedcaptions:voice-harp");
-		else if (assetName.Contains("harpsichord"))
-			return Lang.Get("closedcaptions:voice-harpsichord");
-		else if (assetName.Contains("oboe"))
-			return Lang.Get("closedcaptions:voice-oboe");
-		else if (assetName.Contains("ocarina"))
-			return Lang.Get("closedcaptions:voice-ocarina");
-		else if (assetName.Contains("sax"))
-			return Lang.Get("closedcaptions:voice-sax");
-		else if (assetName.Contains("trumpet"))
-			return Lang.Get("closedcaptions:voice-trumpet");
-		else if (assetName.Contains("tuba"))
-			return Lang.Get("closedcaptions:voice-tuba");
-
-		return Lang.Get("closedcaptions:voice");
 	}
 }
