@@ -9,25 +9,76 @@
 
 	"closedcaptions:unknown-sound": "[Noises]",
 
+	// Blocks
 	"closedcaptions:block": "[Block noises]",
 	"closedcaptions:block-dirt": "[Dirt crunching]",
 
+	// Creatures
 	"closedcaptions:creature": "[Creature noises]",
+	"closedcaptions:creature-animal-eat": "[Animal eating noises]",
+	"closedcaptions:creature-beehive": "[Gentle buzzing]",
+	"closedcaptions:creature-beemob": "[Aggressive buzzing]",
+	"closedcaptions:creature-beesting": "[<i>Sting!</i>]",
+	"closedcaptions:creature-cicada": "[Insect buzzing]",
+	"closedcaptions:creature-coqui": "[Coqui!]",
+	"closedcaptions:creature-grasshopper": "[Insect chirping]",
+	"closedcaptions:creature-hare-hurt": "[Tiny grunt]",
+	"closedcaptions:creature-hare-idle": "[Tiny grunting]",
+	"closedcaptions:creature-strawdummy-hit": "[Dummy rattling]",
+
+	"closedcaptions:creature-eidolon": "[Eidolon noises]",
+	"closedcaptions:creature-erel": "[Erel noises]",
 
 	"closedcaptions:creature-bear-growl": "[Bear growling]",
 	"closedcaptions:creature-bear-groan": "[Bear groaning]",
 
-	"closedcaptions:drifter-hurt": "[Drifter grunting]",
-	"closedcaptions:drifter-death": "[Drifter dying]",
-	"closedcaptions:drifter": "[Drifter groaning]",
-	"closedcaptions:bowtorn-hurt": "[Bowtorn grunting]",
-	"closedcaptions:bowtorn-death": "[Bowtorn dying]",
-	"closedcaptions:bowtorn-draw": "[Bowtorn screeching]",
-	"closedcaptions:bowtorn-reload": "[Bowtorn reloading]",
-	"closedcaptions:bowtorn": "[Bowtorn groaning]",
+	"closedcaptions:creature-bowtorn": "[Bowtorn noises]",
+	"closedcaptions:creature-bowtorn-death": "[Unnatural screeching]",
+	"closedcaptions:creature-bowtorn-draw": "[Unnatural shrieking]",
+	"closedcaptions:creature-bowtorn-hurt": "[Unnatural grunt]",
+	"closedcaptions:creature-bowtorn-idle": "[Unnatural groaning]",
+	"closedcaptions:creature-bowtorn-release": "[Unnatural twang]",
+	"closedcaptions:creature-bowtorn-reload": "[Unnatural grinding]",
+
+	"closedcaptions:creature-chicken": "[Clucking]",
+	"closedcaptions:creature-chicken-chick": "[Tiny peeping]",
+	"closedcaptions:creature-chicken-hen-flee": "[Frightened clucking]",
+	"closedcaptions:creature-chicken-hen-idle": "[Soft clucking]",
+	"closedcaptions:creature-chicken-hen-lay": "[Broody clucking]",
+	"closedcaptions:creature-chicken-hurt": "[Pained clucking]",
+	"closedcaptions:creature-chicken-rooster-alarm": "[Alarmed crowing]",
+	"closedcaptions:creature-chicken-rooster-call": "[Crowing]",
+
+	"closedcaptions:creature-fox": "[Barking]",
+	"closedcaptions:creature-fox-attack": "[Barking]",
+	"closedcaptions:creature-fox-die": "[Pained bark]",
+	"closedcaptions:creature-fox-growl": "[Small growling]",
+	"closedcaptions:creature-fox-hurt": "[Pained squeal]",
+	"closedcaptions:creature-fox-yip": "[Small howling]",
+
+	"closedcaptions:creature-goat": "[Goat noises]",
+
+	"closedcaptions:creature-hooved": "[Hooved animal noises]",
+	"closedcaptions:creature-hooved-gallop": "[Galloping]",
+	"closedcaptions:creature-hooved-trot": "[Trotting]",
+
+	"closedcaptions:creature-hyena": "[Hyena noises]",
+
+	"closedcaptions:creature-locust": "[Locust noises]",
+
+	"closedcaptions:creature-pig": "[Pig noises]",
+
+	"closedcaptions:creature-raccoon": "[Raccoon noises]",
+
+	"closedcaptions:creature-sheep": "[Sheep noises]",
+
+	"closedcaptions:creature-shiver": "[Shiver noises]",
+
+	"closedcaptions:creature-wolf": "[Wolf noises]",
 
 	"closedcaptions:rockslide": "[<i>Landslide</i>]",
 
+	// Walk
 	"closedcaptions:walk-leafy": "[Leaves rustling]",
 	"closedcaptions:walk-cloth": "[Footsteps on cloth]",
 	"closedcaptions:walk-grass": "[Footsteps on grass]",
@@ -38,6 +89,7 @@
 	"closedcaptions:walk-wood": "[Footsteps on wood]",
 	"closedcaptions:walk": "[Footsteps]",
 
+	// Wearable
 	"closedcaptions:wearable-brigandine": "[Brigandine armor rustling]",
 	"closedcaptions:wearable-chain": "[Chain armor jangling]",
 	"closedcaptions:wearable-leather": "[Leather armor rustling]",
@@ -45,6 +97,7 @@
 	"closedcaptions:wearable-scale": "[Scale armor jangling]",
 	"closedcaptions:wearable": "[Armor rustling]",
 
+	// Voice
 	"closedcaptions:voice-accordion": "[Accordion voice murmuring]",
 	"closedcaptions:voice-altoflute": "[Flute voice murmuring]",
 	"closedcaptions:voice-clarinet": "[Clarinet voice murmuring]",

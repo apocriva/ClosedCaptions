@@ -91,17 +91,121 @@
 			"group": "sounds/creature*",
 			"defaultKey": "closedcaptions:creature",
 			"mappings": [
+				{ "match": "sounds/creature/eidolon*", "captionKey": "closedcaptions:creature-eidolon" },
+				{ "match": "sounds/creature/erel*", "captionKey": "closedcaptions:creature-erel" },
+				{ "match": "sounds/creature/animal-eat*", "captionKey": "closedcaptions:creature-animal-eat" },
+				{ "match": "sounds/creature/beehive.ogg", "captionKey": "closedcaptions:creature-beehive" },
+				{ "match": "sounds/creature/beemob.ogg", "captionKey": "closedcaptions:creature-beemob" },
+				{ "match": "sounds/creature/beesting.ogg", "captionKey": "closedcaptions:creature-beesting" },
+				{ "match": "sounds/creature/cicada*", "captionKey": "closedcaptions:creature-cicada" },
+				{ "match": "sounds/creature/coqui.ogg", "captionKey": "closedcaptions:creature-coqui" },
+				{ "match": "sounds/creature/grasshopper.ogg", "captionKey": "closedcaptions:creature-grasshopper" },
+				{ "match": "sounds/creature/hare-hurt.ogg", "captionKey": "closedcaptions:creature-hare-hurt" },
+				{ "match": "sounds/creature/hare-idle.ogg", "captionKey": "closedcaptions:creature-hare-idle" },
+				{ "match": "sounds/creature/strawdummy-hit.ogg", "captionKey": "closedcaptions:creature-strawdummy-hit" },
 			]
 		},
 		{
 			"group": "sounds/creature/bear*",
 			"defaultKey": "closedcaptions:creature-bear-growl",
 			"mappings": [
-				{ "match": "sounds/creature/bear/aggro*", "captionKey": "closedcaptions:creature-bear-growl" },
-				{ "match": "sounds/creature/bear/attack*", "captionKey": "closedcaptions:creature-bear-growl" },
-				{ "match": "sounds/creature/bear/flee*", "captionKey": "closedcaptions:creature-bear-groan" },
+				{ "match": "sounds/creature/bear/aggro.ogg", "captionKey": "closedcaptions:creature-bear-growl" },
+				{ "match": "sounds/creature/bear/attack.ogg", "captionKey": "closedcaptions:creature-bear-growl" },
+				{ "match": "sounds/creature/bear/flee.ogg", "captionKey": "closedcaptions:creature-bear-groan" },
 				{ "match": "sounds/creature/bear/growl*", "captionKey": "closedcaptions:creature-bear-growl" },
-				{ "match": "sounds/creature/bear/hurt*", "captionKey": "closedcaptions:creature-bear-groan" }
+				{ "match": "sounds/creature/bear/hurt.ogg", "captionKey": "closedcaptions:creature-bear-groan" }
+			]
+		},
+		{
+			"group": "sounds/creature/bowtorn*",
+			"defaultKey": "closedcaptions:creature-bowtorn",
+			"mappings": [
+				{ "match": "sounds/creature/bowtorn/death.ogg", "captionKey": "closedcaptions:creature-bowtorn-death" },
+				{ "match": "sounds/creature/bowtorn/draw.ogg", "captionKey": "closedcaptions:creature-bowtorn-draw" },
+				{ "match": "sounds/creature/bowtorn/hurt.ogg", "captionKey": "closedcaptions:creature-bowtorn-hurt" },
+				{ "match": "sounds/creature/bowtorn/idle.ogg", "captionKey": "closedcaptions:creature-bowtorn-idle" },
+				{ "match": "sounds/creature/bowtorn/release.ogg", "captionKey": "closedcaptions:creature-bowtorn-release" },
+				{ "match": "sounds/creature/bowtorn/reload.ogg", "captionKey": "closedcaptions:creature-bowtorn-reload" },
+			]
+		},
+		{
+			"group": "sounds/creature/chicken*",
+			"defaultKey": "closedcaptions:creature-chicken",
+			"mappings": [
+				{ "match": "sounds/creature/chicken/chick*", "captionKey": "closedcaptions:creature-chicken-chick" },
+				{ "match": "sounds/creature/chicken/hen-flee.ogg", "captionKey": "closedcaptions:creature-chicken-hen-flee" },
+				{ "match": "sounds/creature/chicken/hen-idle*", "captionKey": "closedcaptions:creature-chicken-hen-idle" },
+				{ "match": "sounds/creature/chicken/hen-lay*", "captionKey": "closedcaptions:creature-chicken-hen-lay" },
+				{ "match": "sounds/creature/chicken/hen-hurt.ogg", "captionKey": "closedcaptions:creature-chicken-hurt" },
+				{ "match": "sounds/creature/chicken/rooster-alarm*", "captionKey": "closedcaptions:creature-chicken-rooster-alarm" },
+				{ "match": "sounds/creature/chicken/rooster-call.ogg", "captionKey": "closedcaptions:creature-chicken-rooster_call" },
+			]
+		},
+		{
+			"group": "sounds/creature/fox*",
+			"defaultKey": "closedcaptions:creature-fox",
+			"mappings": [
+				{ "match": "sounds/creature/fox/attack.ogg", "captionKey": "closedcaptions:creature-fox-attack" },
+				{ "match": "sounds/creature/fox/die.ogg", "captionKey": "closedcaptions:creature-fox-die" },
+				{ "match": "sounds/creature/fox/growl.ogg", "captionKey": "closedcaptions:creature-fox-growl" },
+				{ "match": "sounds/creature/fox/hurt.ogg", "captionKey": "closedcaptions:creature-fox-hurt" },
+				{ "match": "sounds/creature/fox/yip.ogg", "captionKey": "closedcaptions:creature-fox-yip" },
+			]
+		},
+		{
+			"group": "sounds/creature/goat*",
+			"defaultKey": "closedcaptions:creature-goat",
+			"mappings": [
+			]
+		},
+		{
+			"group": "sounds/creature/hooved*",
+			"defaultKey": "closedcaptions:creature-hooved",
+			"mappings": [
+				{ "match": "sounds/creature/hooved/gallop.ogg", "captionKey": "closedcaptions:creature-hooved-gallop" },
+				{ "match": "sounds/creature/hooved/trot.ogg", "captionKey": "closedcaptions:creature-hooved-trot" },
+			]
+		},
+		{
+			"group": "sounds/creature/hyena*",
+			"defaultKey": "closedcaptions:creature-hyena",
+			"mappings": [
+			]
+		},
+		{
+			"group": "sounds/creature/locust*",
+			"defaultKey": "closedcaptions:creature-locust",
+			"mappings": [
+			]
+		},
+		{
+			"group": "sounds/creature/pig*",
+			"defaultKey": "closedcaptions:creature-pig",
+			"mappings": [
+			]
+		},
+		{
+			"group": "sounds/creature/raccoon*",
+			"defaultKey": "closedcaptions:creature-raccoon",
+			"mappings": [
+			]
+		},
+		{
+			"group": "sounds/creature/sheep*",
+			"defaultKey": "closedcaptions:creature-sheep",
+			"mappings": [
+			]
+		},
+		{
+			"group": "sounds/creature/shiver*",
+			"defaultKey": "closedcaptions:creature-shiver",
+			"mappings": [
+			]
+		},
+		{
+			"group": "sounds/creature/wolf*",
+			"defaultKey": "closedcaptions:creature-wolf",
+			"mappings": [
 			]
 		},
 		{
@@ -127,7 +231,26 @@
 		{
 			"group": "sounds/player*",
 			"defaultKey": "closedcaptions:player",
-			"mappings": []
+			"mappings": [
+				{ "match": "sounds/player/build.ogg", "captionKey": "closedcaptions:player-build" },
+				{ "match": "sounds/player/buildhigh.ogg", "captionKey": "closedcaptions:player-build" },
+				{ "match": "sounds/player/clayform.ogg", "captionKey": "closedcaptions:player-clayform" },
+				{ "match": "sounds/player/clayformhi.ogg", "captionKey": "closedcaptions:player-clayform" },
+				{ "match": "sounds/player/collect*.ogg", "captionKey": "closedcaptions:player-collect" },
+				{ "match": "sounds/player/death*", "captionKey": "closedcaptions:player-death" },
+				{ "match": "sounds/player/destruct.ogg", "captionKey": "closedcaptions:player-destruct" },
+				{ "match": "sounds/player/drink*", "captionKey": "closedcaptions:player-drink" },
+				{ "match": "sounds/player/eat_crunchy.ogg", "captionKey": "closedcaptions:player-eat-crunchy" },
+				{ "match": "sounds/player/eat.ogg", "captionKey": "closedcaptions:player-eat" },
+				{ "match": "sounds/player/hurt*", "captionKey": "closedcaptions:player-hurt" },
+				{ "match": "sounds/player/jump.ogg", "captionKey": "closedcaptions:player-jump" },
+				{ "match": "sounds/player/knap*", "captionKey": "closedcaptions:player-knap" },
+				{ "match": "sounds/player/projectilehit.ogg", "captionKey": "closedcaptions:player-projectilehit" },
+				{ "match": "sounds/player/quickthrow.ogg", "captionKey": "closedcaptions:player-quickthrow" },
+				{ "match": "sounds/player/slap.ogg", "captionKey": "closedcaptions:player-slap" },
+				{ "match": "sounds/player/swim.ogg", "captionKey": "closedcaptions:player-swim" },
+				{ "match": "sounds/player/throw.ogg", "captionKey": "closedcaptions:player-throw" },
+			]
 		},
 		{
 			"group": "sounds/tool*",
