@@ -20,7 +20,7 @@ public class CaptionManager
 		public long StartTime;
 		public long FadeOutStartTime;
 
-		public ILoadedSound? LoadedSound { get; private set; }
+		public ILoadedSound? LoadedSound { get; set; }
 
 		// Params.Position can be null, why?
 		public Vec3f Position
@@ -115,6 +115,8 @@ public class CaptionManager
 		{
 			// Update with a new timestamp.
 			duplicate.StartTime = _capi.ElapsedMilliseconds;
+			duplicate.FadeOutStartTime = 0;
+			duplicate.LoadedSound = loadedSound;
 			_instance._needsRefresh = true;
 			return;
 		}
