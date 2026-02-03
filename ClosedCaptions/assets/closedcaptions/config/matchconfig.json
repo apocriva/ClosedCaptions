@@ -142,6 +142,17 @@
 			]
 		},
 		{
+			"group": "sounds/creature/drifter*",
+			"defaultKey": "closedcaptions:creature-drifter",
+			"mappings": [
+				{ "match": "sounds/creature/drifter-aggro*", "captionKey": "closedcaptions:creature-drifter-aggro" },
+				{ "match": "sounds/creature/drifter-death.ogg", "captionKey": "closedcaptions:creature-drifter-death" },
+				{ "match": "sounds/creature/drifter-hit.ogg", "captionKey": "closedcaptions:creature-drifter-hit" },
+				{ "match": "sounds/creature/drifter-hurt.ogg", "captionKey": "closedcaptions:creature-drifter-hurt" },
+				{ "match": "sounds/creature/drifter-idle*", "captionKey": "closedcaptions:creature-drifter-idle" },
+			]
+		},
+		{
 			"group": "sounds/creature/fox*",
 			"defaultKey": "closedcaptions:creature-fox",
 			"mappings": [
@@ -200,18 +211,34 @@
 			"group": "sounds/creature/shiver*",
 			"defaultKey": "closedcaptions:creature-shiver",
 			"mappings": [
+				{ "match": "sounds/creature/shiver/aggro.ogg", "captionKey": "closedcaptions:creature-shiver-aggro" },
+				{ "match": "sounds/creature/shiver/death.ogg", "captionKey": "closedcaptions:creature-shiver-death" },
+				{ "match": "sounds/creature/shiver/hurt.ogg", "captionKey": "closedcaptions:creature-shiver-hurt" },
+				{ "match": "sounds/creature/shiver/idle*", "captionKey": "closedcaptions:creature-shiver-idle" },
+				{ "match": "sounds/creature/shiver/shock.ogg", "captionKey": "closedcaptions:creature-shiver-shock" },
+				{ "match": "sounds/creature/shiver/thump*", "captionKey": "closedcaptions:creature-shiver-thump" },
 			]
 		},
 		{
 			"group": "sounds/creature/wolf*",
 			"defaultKey": "closedcaptions:creature-wolf",
 			"mappings": [
+				{ "match": "sounds/creature/wolf/attack.ogg", "captionKey": "closedcaptions:creature-wolf-attack" },
+				{ "match": "sounds/creature/wolf/growl.ogg", "captionKey": "closedcaptions:creature-wolf-growl" },
+				{ "match": "sounds/creature/wolf/howl*", "captionKey": "closedcaptions:creature-wolf-howl" },
+				{ "match": "sounds/creature/wolf/hurt.ogg", "captionKey": "closedcaptions:creature-wolf-hurt" },
+				{ "match": "sounds/creature/wolf/pup-bark.ogg", "captionKey": "closedcaptions:creature-wolf-pup-bark" },
+				{ "match": "sounds/creature/wolf/pup-flop.ogg", "captionKey": "closedcaptions:creature-wolf-pup-flop" },
+				{ "match": "sounds/creature/wolf/pop-howl*", "captionKey": "closedcaptions:creature-wolf-pup-howl" },
+				{ "match": "sounds/creature/wolf/pup-hurt.ogg", "captionKey": "closedcaptions:creature-wolf-pup-hurt" },
 			]
 		},
 		{
 			"group": "sounds/effect*",
 			"defaultKey": "closedcaptions:effect",
-			"mappings": []
+			"mappings": [
+				{ "match": "sounds/effect/rockslide.ogg", "captionKey": "closedcaptions:effect-rockslide" },
+			]
 		},
 		{
 			"group": "sounds/environment*",

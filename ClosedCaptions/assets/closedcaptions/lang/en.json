@@ -49,6 +49,13 @@
 	"closedcaptions:creature-chicken-rooster-alarm": "[Alarmed crowing]",
 	"closedcaptions:creature-chicken-rooster-call": "[Crowing]",
 
+	"closedcaptions:creature-drifter": "[Drifter noises]",
+	"closedcaptions:creature-drifter-aggro": "[Inhuman groan]",
+	"closedcaptions:creature-drifter-death": "[Inhuman gasp]",
+	"closedcaptions:creature-drifter-hit": "[Thump]",
+	"closedcaptions:creature-drifter-hurt": "[Inhuman grunt]",
+	"closedcaptions:creature-drifter-idle": "[Inhuman groaning]",
+
 	"closedcaptions:creature-fox": "[Barking]",
 	"closedcaptions:creature-fox-attack": "[Barking]",
 	"closedcaptions:creature-fox-die": "[Pained bark]",
@@ -73,10 +80,25 @@
 	"closedcaptions:creature-sheep": "[Sheep noises]",
 
 	"closedcaptions:creature-shiver": "[Shiver noises]",
+	"closedcaptions:creature-shiver-aggro": "[Horrific rattling]",
+	"closedcaptions:creature-shiver-death": "[Horrific shrieking]",
+	"closedcaptions:creature-shiver-hurt": "[Horrific thump]",
+	"closedcaptions:creature-shiver-idle": "[Horrific clicking]",
+	"closedcaptions:creature-shiver-shock": "[Horrific snarling]",
+	"closedcaptions:creature-shiver-thump": "[Horrific thump]",
 
 	"closedcaptions:creature-wolf": "[Wolf noises]",
+	"closedcaptions:creature-wolf-attack": "[Snarling bark]",
+	"closedcaptions:creature-wolf-growl": "[Deep growling]",
+	"closedcaptions:creature-wolf-howl": "[Howling]",
+	"closedcaptions:creature-wolf-hurt": "[Pained bark]",
+	"closedcaptions:creature-wolf-pup-bark": "[Tiny barking]",
+	"closedcaptions:creature-wolf-pup-flop": "[Tiny whining]",
+	"closedcaptions:creature-wolf-pup-howl": "[Tiny howling]",
+	"closedcaptions:creature-wolf-pup-hurt": "[Tiny pained yelp]",
 
-	"closedcaptions:rockslide": "[<i>Landslide</i>]",
+	// Effect
+	"closedcaptions:effect-rockslide": "[<i>Landslide</i>]",
 
 	// Walk
 	"closedcaptions:walk-leafy": "[Leaves rustling]",
