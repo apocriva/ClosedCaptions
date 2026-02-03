@@ -30,8 +30,12 @@
 	"closedcaptions:creature-eidolon": "[Eidolon noises]",
 	"closedcaptions:creature-erel": "[Erel noises]",
 
-	"closedcaptions:creature-bear-growl": "[Bear growling]",
-	"closedcaptions:creature-bear-groan": "[Bear groaning]",
+	"closedcaptions:creature-bear": "[Bear noises]",
+	"closedcaptions:creature-bear-aggro": "[Rumbling grunt]",
+	"closedcaptions:creature-bear-attack": "[Deep roar]",
+	"closedcaptions:creature-bear-flee": "[Deep groaning]",
+	"closedcaptions:creature-bear-growl": "[Rumbling growl]",
+	"closedcaptions:creature-bear-hurt": "[Deep groan]",
 
 	"closedcaptions:creature-bowtorn": "[Bowtorn noises]",
 	"closedcaptions:creature-bowtorn-death": "[Unnatural screeching]",

@@ -107,13 +107,13 @@
 		},
 		{
 			"group": "sounds/creature/bear*",
-			"defaultKey": "closedcaptions:creature-bear-growl",
+			"defaultKey": "closedcaptions:creature-bear",
 			"mappings": [
-				{ "match": "sounds/creature/bear/aggro.ogg", "captionKey": "closedcaptions:creature-bear-growl" },
-				{ "match": "sounds/creature/bear/attack.ogg", "captionKey": "closedcaptions:creature-bear-growl" },
-				{ "match": "sounds/creature/bear/flee.ogg", "captionKey": "closedcaptions:creature-bear-groan" },
+				{ "match": "sounds/creature/bear/aggro.ogg", "captionKey": "closedcaptions:creature-bear-aggro" },
+				{ "match": "sounds/creature/bear/attack.ogg", "captionKey": "closedcaptions:creature-bear-attack" },
+				{ "match": "sounds/creature/bear/flee.ogg", "captionKey": "closedcaptions:creature-bear-flee" },
 				{ "match": "sounds/creature/bear/growl*", "captionKey": "closedcaptions:creature-bear-growl" },
-				{ "match": "sounds/creature/bear/hurt.ogg", "captionKey": "closedcaptions:creature-bear-groan" }
+				{ "match": "sounds/creature/bear/hurt.ogg", "captionKey": "closedcaptions:creature-bear-hurt" }
 			]
 		},
 		{
