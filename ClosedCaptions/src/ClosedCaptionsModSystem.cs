@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using ClosedCaptions.Config;
 using ClosedCaptions.GUI;
 using ConfigLib;
@@ -23,6 +24,8 @@ public class ClosedCaptionsModSystem : ModSystem
 	private CaptionManager _manager;
 	private long _gameTickListenerId;
 
+	private CancellationTokenSource _cancelSource;
+
 	public override void StartPre(ICoreAPI api)
 	{
 		base.StartPre(api);
@@ -42,22 +45,30 @@ public class ClosedCaptionsModSystem : ModSystem
 		}
 
 		_manager = new(_capi);
-		_gameTickListenerId = _capi.Event.RegisterGameTickListener(OnTick, 60);
 
 		if (api.ModLoader.IsModEnabled("configlib"))
 		{
 			var configlib = api.ModLoader.GetModSystem<ConfigLibModSystem>();
 			configlib.RegisterCustomConfig(Lang.Get("closedcaptions:config"), (id, buttons) => EditConfig(id, buttons, api));
 		}
+
+		//_gameTickListenerId = _capi.Event.RegisterGameTickListener(OnTick, 60);
+		_cancelSource = new CancellationTokenSource();
+		new Thread(() =>
+		{
+			while (true)
+			{
+				Thread.Sleep(60);
+				if (_cancelSource.IsCancellationRequested)
+					return;
+				_capi.Event.EnqueueMainThreadTask(_manager.Tick, "closedcaptiontick");
+			}
+		}).Start();
 	}
 
 	public override void Dispose()
 	{
-		if (_gameTickListenerId != 0)
-		{
-			_capi.Event.UnregisterGameTickListener(_gameTickListenerId);
-			_gameTickListenerId = 0;
-		}
+		_cancelSource.Cancel();
 
 		_manager?.Dispose();
 		patcher?.UnpatchAll(patcher.Id);
@@ -89,6 +100,11 @@ public class ClosedCaptionsModSystem : ModSystem
 		config.FilterSelf = OnCheckBox("filter-self", config.FilterSelf);
 		config.FilterWalk = OnCheckBox("filter-walk", config.FilterWalk);
 
+		config.MinimumDisplayDuration = OnInputInt("minimum-display-duration", (int)config.MinimumDisplayDuration);
+		config.FadeOutDuration = OnInputInt("fade-out-duration", (int)config.FadeOutDuration);
+
+		config.DebugMode = OnCheckBox("debug-mode", config.DebugMode);
+
 		_manager.ForceRefresh();
 	}
 
@@ -96,6 +112,13 @@ public class ClosedCaptionsModSystem : ModSystem
 	{
 		bool newValue = value;
 		ImGui.Checkbox(Lang.Get("closedcaptions:config-" + option), ref newValue);
+		return newValue;
+	}
+
+	private int OnInputInt(string option, int value)
+	{
+		int newValue = value;
+		ImGui.InputInt(Lang.Get("closedcaptions:config-" + option), ref newValue);
 		return newValue;
 	}
 }

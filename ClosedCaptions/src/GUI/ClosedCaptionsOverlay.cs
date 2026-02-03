@@ -75,13 +75,14 @@ public class ClosedCaptionsOverlay : HudElement
 		if (caption.Params.RelativePosition)
 			relativePosition = caption.Position;
 		relativePosition.Y = 0f;
-		relativePosition.Normalize();
+		var relativeDirection = relativePosition.Clone();
+		relativeDirection.Normalize();
 		
 		// Left or right?
 		Vec3f forward = new(MathF.Sin(player.CameraYaw), 0f, MathF.Cos(player.CameraYaw));
-		var dot = relativePosition.Dot(forward);
+		var dot = relativeDirection.Dot(forward);
 		var angle = MathF.Acos(dot) * 180f / MathF.PI;
-		var det = relativePosition.X * forward.Z - relativePosition.Z * forward.X;
+		var det = relativeDirection.X * forward.Z - relativeDirection.Z * forward.X;
 		if (det < 0)
 			angle = -angle;
 
@@ -108,17 +109,27 @@ public class ClosedCaptionsOverlay : HudElement
 		float opacity = 1f;
 		if (caption.FadeOutStartTime > 0)
 		{
-			var percent = 1f - (float)(capi.InWorldEllapsedMilliseconds - caption.FadeOutStartTime) / CaptionManager.FadeOutDuration;
+			var percent = 1f - (float)(capi.ElapsedMilliseconds - caption.FadeOutStartTime) / ClosedCaptionsModSystem.UserConfig.FadeOutDuration;
 			opacity *= percent;
 			opacity = MathF.Max(0f, MathF.Min(opacity, 1f));
 		}
 
-		string debugInfo =
-			$"<font size=\"10\" color=\"#999933\">{caption.Params.Location.Path[..caption.Params.Location.Path.LastIndexOf('/')]}/</font>" +
-			$"<font size=\"10\" color=\"#ffff33\" weight=\"bold\">{caption.Params.Location.GetName()}</font>" +
-			$"<font size=\"10\" color=\"#33ffff\"> type:{caption.Params.SoundType}</font>" +
-			$"<font size=\"10\" color=\"#cccccc\"> relpos:</font><font size=\"10\" color=\"{(caption.Params.RelativePosition ? "#66ff66" : "#ff6666")}\">{caption.Params.RelativePosition}</font>";
-			//$"<font size=\"10\" color=\"#3333ff\"> vol:{(int)(caption.Params.Volume * 100):D}%</font>";
+		string debugInfo = string.Empty;
+		if (ClosedCaptionsModSystem.UserConfig.DebugMode)
+		{
+			debugInfo =
+				$"<font size=\"10\" color=\"#999933\">{caption.Params.Location.Path[..caption.Params.Location.Path.LastIndexOf('/')]}/</font>" +
+				$"<font size=\"10\" color=\"#ffff33\" weight=\"bold\">{caption.Params.Location.GetName()}</font>" +
+				$"<font size=\"10\" color=\"#33ffff\"> type:{caption.Params.SoundType}</font>" +
+				//$"<font size=\"10\" color=\"#3333ff\"> vol:{(int)(caption.Params.Volume * 100):D}%</font>" +
+				(!caption.Params.RelativePosition ?
+					$"<font size=\"10\" color=\"#33ff33\"> rel!</font>" +
+					$"<font size=\"10\" color=\"#ffffff\"> distance:{relativePosition.Length():F0}</font>"
+					// $"<font size=\"10\" color=\"#33ff33\"> forward:({forward.X:F1}, {forward.Z:F1})</font>" +
+					// $"<font size=\"10\" color=\"#3399ff\"> rel:({relativePosition.X:F1}, {relativePosition.Z:F1})</font>" +
+					// $"<font size=\"10\" color=\"#33ff33\"> angle:{angle}°</font>"
+					: "");
+		}
 
 		var label = string.Format("<font opacity=\"{1}\">{2} {0} {3}</font>{4}",
 			caption.Text,

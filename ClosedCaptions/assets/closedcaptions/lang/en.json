@@ -3,6 +3,9 @@
 	"closedcaptions:config-filter-weather": "Filter weather sounds",
 	"closedcaptions:config-filter-self": "Filter self sounds",
 	"closedcaptions:config-filter-walk": "Filter walk sounds",
+	"closedcaptions:config-minimum-display-duration": "Minimum display duration",
+	"closedcaptions:config-fade-out-time": "Fade out time",
+	"closedcaptions:config-debug-mode": "Enable debug mode",
 
 	"closedcaptions:block": "[Block noises]",
 	"closedcaptions:block-dirt": "[Dirt crunching]",

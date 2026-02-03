@@ -12,9 +12,6 @@ namespace ClosedCaptions;
 
 public class CaptionManager
 {
-	public static readonly long MinimumDisplayDuration = 200;
-	public static readonly long FadeOutDuration = 500;
-
 	public class Caption
 	{
 		public readonly long ID;
@@ -109,7 +106,7 @@ public class CaptionManager
 		if (_instance.IsFiltered(loadedSound))
 			return;
 
-		var time = _capi.InWorldEllapsedMilliseconds;
+		var time = _capi.ElapsedMilliseconds;
 		var text = _instance._matchConfig.FindCaptionForSound(location);
 		if (string.IsNullOrEmpty(text))
 			text = "[" + location.GetName() + "?]";
@@ -167,13 +164,13 @@ public class CaptionManager
 				caption.FlagAsDisposed();
 
 				// Want the caption to show up for at least long enough to read
-				caption.FadeOutStartTime = _capi.InWorldEllapsedMilliseconds;
-				if (caption.FadeOutStartTime < caption.StartTime + MinimumDisplayDuration)
-					caption.FadeOutStartTime = caption.StartTime + MinimumDisplayDuration;
+				caption.FadeOutStartTime = _capi.ElapsedMilliseconds;
+				if (caption.FadeOutStartTime < caption.StartTime + ClosedCaptionsModSystem.UserConfig.MinimumDisplayDuration)
+					caption.FadeOutStartTime = caption.StartTime + ClosedCaptionsModSystem.UserConfig.MinimumDisplayDuration;
 			}
 			else if (caption.IsFading)
 			{
-				if (_capi.InWorldEllapsedMilliseconds - caption.FadeOutStartTime > FadeOutDuration)
+				if (_capi.ElapsedMilliseconds - caption.FadeOutStartTime > ClosedCaptionsModSystem.UserConfig.FadeOutDuration)
 				{
 					_captions.RemoveAt(i);
 					refresh = true;
@@ -235,7 +232,7 @@ public class CaptionManager
 			var position = loadedSound.Params.Position ?? _capi.World.Player.Entity.Pos.XYZ.ToVec3f();
 			var distance = (position - caption.Params.Position).Length();
 			if (caption.Params.Location == loadedSound.Params.Location &&
-				_capi.InWorldEllapsedMilliseconds - caption.StartTime > 250 &&
+				_capi.ElapsedMilliseconds - caption.StartTime > 250 &&
 				distance < 5f)
 				return true;
 		}
