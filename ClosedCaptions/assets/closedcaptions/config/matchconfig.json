@@ -10,6 +10,16 @@
 			"group": "sounds/*",
 			"defaultKey": "closedcaptions:unknown-sound",
 			"mappings": [
+				{ "match": "sounds/arrow-impact.ogg", "captionKey": "closedcaptions:misc-arrow-impact" },
+				{ "match": "sounds/bow-draw.ogg", "captionKey": "closedcaptions:misc-bow-draw" },
+				{ "match": "sounds/bow-release.ogg", "captionKey": "closedcaptions:misc-bow-release" },
+				{ "match": "sounds/pourmetal.ogg", "captionKey": "closedcaptions:misc-pourmetal" },
+				{ "match": "sounds/raft-idle.ogg", "captionKey": "closedcaptions:misc-raft-idle" },
+				{ "match": "sounds/raft-moving.ogg", "captionKey": "closedcaptions:misc-raft-moving" },
+				{ "match": "sounds/sizzle.ogg", "captionKey": "closedcaptions:misc-sizzle" },
+				{ "match": "sounds/thud.ogg", "captionKey": "closedcaptions:misc-thud" },
+				{ "match": "sounds/torch-ignite.ogg", "captionKey": "closedcaptions:misc-torch-ignite" },
+				{ "match": "sounds/tutorialstepsuccess.ogg", "captionKey": "closedcaptions:misc-tutorialstepsuccess" },
 			]
 		},
 		{
@@ -302,6 +312,7 @@
 				{ "match": "sounds/environment/underwater.ogg", "captionKey": "closedcaptions:environment-underwater" },
 				{ "match": "sounds/environment/waterfall.ogg", "captionKey": "closedcaptions:environment-waterfall" },
 				{ "match": "sounds/environment/waterwaves.ogg", "captionKey": "closedcaptions:environment-waterwaves" },
+				{ "match": "sounds/environment/wind.ogg", "captionKey": "closedcaptions:environment-wind" },
 			]
 		},
 		{
@@ -370,7 +381,14 @@
 		{
 			"group": "sounds/tool*",
 			"defaultKey": "closedcaptions:tool",
-			"mappings": []
+			"mappings": [
+				{ "match": "sounds/tool/breakreinforced.ogg", "captionKey": "closedcaptions:tool-breakreinforced" },
+				{ "match": "sounds/tool/padlock.ogg", "captionKey": "closedcaptions:tool-padlock" },
+				{ "match": "sounds/tool/reinforce.ogg", "captionKey": "closedcaptions:tool-reinforce" },
+				{ "match": "sounds/tool/scythe*", "captionKey": "closedcaptions:tool-scythe" },
+				{ "match": "sounds/tool/slash.ogg", "captionKey": "closedcaptions:tool-slash" },
+				{ "match": "sounds/tool/sling*", "captionKey": "closedcaptions:tool-sling" },
+			]
 		},
 		{
 			"group": "sounds/voice*",
@@ -387,7 +405,7 @@
 				{ "match": "sounds/voice/ocarina*", "captionKey": "closedcaptions:voice-ocarina" },
 				{ "match": "sounds/voice/sax*", "captionKey": "closedcaptions:voice-sax" },
 				{ "match": "sounds/voice/trumpet*", "captionKey": "closedcaptions:voice-trumpet" },
-				{ "match": "sounds/voice/tuba*", "captionKey": "closedcaptions:voice-tuba" }
+				{ "match": "sounds/voice/tuba*", "captionKey": "closedcaptions:voice-tuba" },
 			]
 		},
 		{
@@ -407,18 +425,37 @@
 				{ "match": "sounds/walk/snow*", "captionKey": "closedcaptions:walk-snow" },
 				{ "match": "sounds/walk/stone*", "captionKey": "closedcaptions:walk-stone" },
 				{ "match": "sounds/walk/water*", "captionKey": "closedcaptions:walk-water" },
-				{ "match": "sounds/walk/wood*", "captionKey": "closedcaptions:walk-wood" }
+				{ "match": "sounds/walk/wood*", "captionKey": "closedcaptions:walk-wood" },
 			]
 		},
 		{
 			"group": "sounds/wearable*",
 			"defaultKey": "closedcaptions:wearable",
-			"mappings": []
+			"mappings": [
+				{ "match": "sounds/wearable/brigandine*", "captionKey": "closedcaptions:wearable-brigandine" },
+				{ "match": "sounds/wearable/chain*", "captionKey": "closedcaptions:wearable-chain" },
+				{ "match": "sounds/wearable/leather*", "captionKey": "closedcaptions:wearable-leather" },
+				{ "match": "sounds/wearable/plate*", "captionKey": "closedcaptions:wearable-plate" },
+				{ "match": "sounds/wearable/scale*", "captionKey": "closedcaptions:wearable-scale" },
+			]
 		},
 		{
 			"group": "sounds/weather*",
 			"defaultKey": "closedcaptions:weather",
-			"mappings": []
+			"mappings": [
+				{ "match": "sounds/weather/tracks/hail.ogg", "captionKey": "closedcaptions:weather-hail" },
+				{ "match": "sounds/weather/tracks/lowtremble.ogg", "captionKey": "closedcaptions:weather-lowtremble" },
+				{ "match": "sounds/weather/tracks/rain-leafless.ogg", "captionKey": "closedcaptions:weather-rain-leafless" },
+				{ "match": "sounds/weather/tracks/rain-leafy.ogg", "captionKey": "closedcaptions:weather-rain-leafy" },
+				{ "match": "sounds/weather/tracks/verylowtremble.ogg", "captionKey": "closedcaptions:weather-verylowtremble" },
+				{ "match": "sounds/weather/lightning-distant.ogg", "captionKey": "closedcaptions:weather-lightning-distant" },
+				{ "match": "sounds/weather/lightning-near.ogg", "captionKey": "closedcaptions:weather-lightning-near" },
+				{ "match": "sounds/weather/lightning-nodistance.ogg", "captionKey": "closedcaptions:weather-lightning-nodistance" },
+				{ "match": "sounds/weather/lightning-verynear.ogg", "captionKey": "closedcaptions:weather-lightning-verynear" },
+				{ "match": "sounds/weather/lowgrumble.ogg", "captionKey": "closedcaptions:weather-lowgrumble" },
+				{ "match": "sounds/weather/wind-leafless.ogg", "captionKey": "closedcaptions:weather-wind-leafless" },
+				{ "match": "sounds/weather/wind-leafy.ogg", "captionKey": "closedcaptions:weather-wind-leafy" },
+			]
 		}
 	]
 }

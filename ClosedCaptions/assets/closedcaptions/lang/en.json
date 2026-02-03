@@ -10,6 +10,19 @@
 
 	"closedcaptions:unknown-sound": "[Noises]",
 
+	// Misc
+	"closedcaptions:misc-arrow-impact": "[Thwap!]",
+	"closedcaptions:misc-bow-draw": "[Bowstring creaking]",
+	"closedcaptions:misc-bow-release": "[Fwip!]",
+	"closedcaptions:misc-molten-metal": "[Viscous bubbling]",
+	"closedcaptions:misc-pourmetal": "[Viscous pouring and bubbling]",
+	"closedcaptions:misc-raft-idle": "[Gentle lapping]",
+	"closedcaptions:misc-raft-moving": "[Water rushing]",
+	"closedcaptions:misc-sizzle": "[Sizzle!]",
+	"closedcaptions:misc-thud": "[Thud!]",
+	"closedcaptions:misc-torch-ignite": "[Torch igniting]",
+	"closedcaptions:misc-tutorialsuccess": "[Happy ding!]",
+
 	// Blocks
 	"closedcaptions:block": "[Block noises]",
 	"closedcaptions:block-dirt": "[Dirt crunching]",
@@ -164,6 +177,7 @@
 	"closedcaptions:environment-underwater": "[Muffled sloshing]",
 	"closedcaptions:environment-waterfall": "[Water roaring and flowing]",
 	"closedcaptions:environment-waterwaves": "[Waves lapping]",
+	"closedcaptions:environment-wind": "[Wind blowing]",
 
 	// Held
 	"closedcaptions:held-bookclose": "[Book thumping]",
@@ -214,26 +228,15 @@
 	"closedcaptions:player-throw": "[Woosh]",
 	"closedcaptions:player-wetclothsqueeze": "[Wet squelching]",
 
-	// Walk
-	"closedcaptions:walk-leafy": "[Leaves rustling]",
-	"closedcaptions:walk-cloth": "[Footsteps on cloth]",
-	"closedcaptions:walk-grass": "[Footsteps on grass]",
-	"closedcaptions:walk-gravel": "[Footsteps on gravel]",
-	"closedcaptions:walk-sand": "[Footsteps on sand]",
-	"closedcaptions:walk-sludge": "[Footsteps on sludge]",
-	"closedcaptions:walk-stone": "[Footsteps on stone]",
-	"closedcaptions:walk-wood": "[Footsteps on wood]",
-	"closedcaptions:walk": "[Footsteps]",
-
-	// Wearable
-	"closedcaptions:wearable-brigandine": "[Brigandine armor rustling]",
-	"closedcaptions:wearable-chain": "[Chain armor jangling]",
-	"closedcaptions:wearable-leather": "[Leather armor rustling]",
-	"closedcaptions:wearable-plate": "[Plate armor clanking]",
-	"closedcaptions:wearable-scale": "[Scale armor jangling]",
-	"closedcaptions:wearable": "[Armor rustling]",
+	// Tool
+	"closedcaptions:tool-breakreinforced": "[Clunk]",
+	"closedcaptions:tool-padlock": "[Metallic click]",
+	"closedcaptions:tool-reinforce": "[Metallic clang]",
+	"closedcaptions:tool-scythe": "[Slashing woosh]",
+	"closedcaptions:tool-sling": "[Twang!]",
 
 	// Voice
+	"closedcaptions:voice": "[Voice murmuring]",
 	"closedcaptions:voice-accordion": "[Accordion voice murmuring]",
 	"closedcaptions:voice-altoflute": "[Flute voice murmuring]",
 	"closedcaptions:voice-clarinet": "[Clarinet voice murmuring]",
@@ -246,5 +249,37 @@
 	"closedcaptions:voice-sax": "[Saxaphone voice murmuring]",
 	"closedcaptions:voice-trumpet": "[Trumpet voice murmuring]",
 	"closedcaptions:voice-tuba": "[Tuba voice murmuring]",
-	"closedcaptions:voice": "[Voice murmuring]"
+
+	// Walk
+	"closedcaptions:walk": "[Footsteps]",
+	"closedcaptions:walk-leafy": "[Leaves rustling]",
+	"closedcaptions:walk-cloth": "[Footsteps on cloth]",
+	"closedcaptions:walk-grass": "[Footsteps on grass]",
+	"closedcaptions:walk-gravel": "[Footsteps on gravel]",
+	"closedcaptions:walk-sand": "[Footsteps on sand]",
+	"closedcaptions:walk-sludge": "[Footsteps on sludge]",
+	"closedcaptions:walk-stone": "[Footsteps on stone]",
+	"closedcaptions:walk-wood": "[Footsteps on wood]",
+
+	// Wearable
+	"closedcaptions:wearable": "[Armor rustling]",
+	"closedcaptions:wearable-brigandine": "[Brigandine armor rustling]",
+	"closedcaptions:wearable-chain": "[Chain armor jangling]",
+	"closedcaptions:wearable-leather": "[Leather armor rustling]",
+	"closedcaptions:wearable-plate": "[Plate armor clanking]",
+	"closedcaptions:wearable-scale": "[Scale armor jangling]",
+
+	// Weather
+	"closedcaptions:weather-hail": "[Hail roaring]",
+	"closedcaptions:weather-lowtremble": "[Low rumbling]",
+	"closedcaptions:weather-rain-leafless": "[Rain falling]",
+	"closedcaptions:weather-rain-leafy": "[Muted rain falling]",
+	"closedcaptions:weather-verylowtremble": "[Deep rumbling]",
+	"closedcaptions:weather-lightning-distant": "[Distant thunder rumbling]",
+	"closedcaptions:weather-lightning-near": "[Thunder cracking and rumbling]",
+	"closedcaptions:weather-lightning-verynear": "[Lightning cracking and reverberating]",
+	"closedcaptions:weather-lightning-nodistance": "[<i>LIGHTNING CRACKING</i>]",
+	"closedcaptions:weather-lowgrumble": "[Low grumbling]",
+	"closedcaptions:weather-wind-leafless": "[Wind howling]",
+	"closedcaptions:weather-wind-leafy": "[Wind rustling through leaves]",
 }
