@@ -289,17 +289,43 @@
 		{
 			"group": "sounds/environment*",
 			"defaultKey": "closedcaptions:environment",
-			"mappings": []
+			"mappings": [
+				{ "match": "sounds/environment/creek.ogg", "captionKey": "closedcaptions:environment-creek" },
+				{ "match": "sounds/environment/drip*", "captionKey": "closedcaptions:environment-drip" },
+				{ "match": "sounds/environment/fire.ogg", "captionKey": "closedcaptions:environment-fire" },
+				{ "match": "sounds/environment/fireplace.ogg", "captionKey": "closedcaptions:environment-firepit" },
+				{ "match": "sounds/environment/largesplash*", "captionKey": "closedcaptions:environment-splash-large" },
+				{ "match": "sounds/environment/lava.ogg", "captionKey": "closedcaptions:environment-lava" },
+				{ "match": "sounds/environment/mediumsplash.ogg", "captionKey": "closedcaptions:environment-splash-medium" },
+				{ "match": "sounds/environment/rainwindow.ogg", "captionKey": "closedcaptions:environment-rainwindow" },
+				{ "match": "sounds/environment/smallsplash.ogg", "captionKey": "closedcaptions:environment-splash-small" },
+				{ "match": "sounds/environment/underwater.ogg", "captionKey": "closedcaptions:environment-underwater" },
+				{ "match": "sounds/environment/waterfall.ogg", "captionKey": "closedcaptions:environment-waterfall" },
+				{ "match": "sounds/environment/waterwaves.ogg", "captionKey": "closedcaptions:environment-waterwaves" },
+			]
 		},
 		{
 			"group": "sounds/held*",
 			"defaultKey": "closedcaptions:held",
-			"mappings":[]
+			"mappings":[
+				{ "match": "sounds/held/bookclose*", "captionKey": "closedcaptions:held-boockclose" },
+				{ "match": "sounds/held/bookturn*", "captionKey": "closedcaptions:held-bookturn" },
+				{ "match": "sounds/held/shieldblock-metal-heavy.ogg", "captionKey": "closedcaptions:held-shieldblock-metal-heavy" },
+				{ "match": "sounds/held/shieldblock-metal-light.ogg", "captionKey": "closedcaptions:held-shieldblock-metal-light" },
+				{ "match": "sounds/held/shieldblock-wood-heavy.ogg", "captionKey": "closedcaptions:held-shieldblock-wood-heavy" },
+				{ "match": "sounds/held/shieldblock-wood-light.ogg", "captionKey": "closedcaptions:held-shieldblock-wood-light" },
+				{ "match": "sounds/held/torch-attack.ogg", "captionKey": "closedcaptions:held-torch-attack" },
+				{ "match": "sounds/held/torch-equip.ogg", "captionKey": "closedcaptions:held-torch-equip" },
+				{ "match": "sounds/held/torch-idle.ogg", "captionKey": "closedcaptions:held-torch-idle" },
+				{ "match": "sounds/held/torch-unequip.ogg", "captionKey": "closedcaptions:held-torch-unequip" },
+			]
 		},
 		{
 			"group": "sounds/instrument*",
 			"defaultKey": "closedcaptions:instrument",
-			"mappings": []
+			"mappings": [
+				{ "match": "sounds/instrument/elkcall.ogg", "captionKey": "closedcaptions:instrument-elkcall" },
+			]
 		},
 		{
 			"group": "sounds/player*",
@@ -307,22 +333,38 @@
 			"mappings": [
 				{ "match": "sounds/player/build.ogg", "captionKey": "closedcaptions:player-build" },
 				{ "match": "sounds/player/buildhigh.ogg", "captionKey": "closedcaptions:player-build" },
+				{ "match": "sounds/player/chalkdraw*", "captionKey": "closedcaptions:player-chalkdraw" },
 				{ "match": "sounds/player/clayform.ogg", "captionKey": "closedcaptions:player-clayform" },
 				{ "match": "sounds/player/clayformhi.ogg", "captionKey": "closedcaptions:player-clayform" },
+				{ "match": "sounds/player/clothrepair.ogg", "captionKey": "closedcaptions:player-clothrepair" },
+				{ "match": "sounds/player/coin*", "captionKey": "closedcaptions:player-coin" },
 				{ "match": "sounds/player/collect*.ogg", "captionKey": "closedcaptions:player-collect" },
 				{ "match": "sounds/player/death*", "captionKey": "closedcaptions:player-death" },
 				{ "match": "sounds/player/destruct.ogg", "captionKey": "closedcaptions:player-destruct" },
 				{ "match": "sounds/player/drink*", "captionKey": "closedcaptions:player-drink" },
 				{ "match": "sounds/player/eat_crunchy.ogg", "captionKey": "closedcaptions:player-eat-crunchy" },
 				{ "match": "sounds/player/eat.ogg", "captionKey": "closedcaptions:player-eat" },
+				{ "match": "sounds/player/gluerepair*", "captionKey": "closedcaptions:player-gluerepair" },
+				{ "match": "sounds/player/hackingspearhit.ogg", "captionKey": "closedcaptions:player-hackingspearhit" },
+				{ "match": "sounds/player/handdrill.ogg", "captionKey": "closedcaptions:player-handdrill" },
 				{ "match": "sounds/player/hurt*", "captionKey": "closedcaptions:player-hurt" },
 				{ "match": "sounds/player/jump.ogg", "captionKey": "closedcaptions:player-jump" },
 				{ "match": "sounds/player/knap*", "captionKey": "closedcaptions:player-knap" },
+				{ "match": "sounds/player/messycraft.ogg", "captionKey": "closedcaptions:player-messycraft" },
+				{ "match": "sounds/player/panning.ogg", "captionKey": "closedcaptions:player-panning" },
+				{ "match": "sounds/player/poultice-applied", "captionKey": "closedcaptions:player-poultice-applied" },
+				{ "match": "sounds/player/poultice.ogg", "captionKey": "closedcaptions:player-poultice" },
 				{ "match": "sounds/player/projectilehit.ogg", "captionKey": "closedcaptions:player-projectilehit" },
 				{ "match": "sounds/player/quickthrow.ogg", "captionKey": "closedcaptions:player-quickthrow" },
+				{ "match": "sounds/player/scrape.ogg", "captionKey": "closedcaptions:player-scrape" },
+				{ "match": "sounds/player/seal.ogg", "captionKey": "closedcaptions:player-seal" },
 				{ "match": "sounds/player/slap.ogg", "captionKey": "closedcaptions:player-slap" },
+				{ "match": "sounds/player/squeezehoneycomb.ogg", "captionKey": "closedcaptions:player-squeezehoneycomb" },
+				{ "match": "sounds/player/stab.ogg", "captionKey": "closedcaptions:player-stab" },
+				{ "match": "sounds/player/strike*", "captionKey": "closedcaptions:player-strike" },
 				{ "match": "sounds/player/swim.ogg", "captionKey": "closedcaptions:player-swim" },
 				{ "match": "sounds/player/throw.ogg", "captionKey": "closedcaptions:player-throw" },
+				{ "match": "sounds/player/wetclothsqueeze.ogg", "captionKey": "closedcaptions:player-wetclothsqueeze" },
 			]
 		},
 		{
