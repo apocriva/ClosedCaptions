@@ -52,7 +52,7 @@ public class ClosedCaptionsOverlay : HudElement
 	{
 		foreach (var captionLabel in _captionlabels)
 		{
-			var label = BuildCaptionLabel(captionLabel.Caption);
+			var label = BuildCaptionLabel(captionLabel.Caption, false);
 			captionLabel.Richtext.SetNewText(label, _font);
 		}
 	}
@@ -68,7 +68,7 @@ public class ClosedCaptionsOverlay : HudElement
 			.WithStroke([0, 0, 0, 0.5], 2);
 	}
 
-	private string BuildCaptionLabel(CaptionManager.Caption caption)
+	private string? BuildCaptionLabel(CaptionManager.Caption caption, bool force)
 	{
 		var player = capi.World.Player;
 		var relativePosition = caption.Position - player.Entity.Pos.XYZFloat;
@@ -113,14 +113,19 @@ public class ClosedCaptionsOverlay : HudElement
 			opacity = MathF.Max(0f, MathF.Min(opacity, 1f));
 		}
 
-		var label = string.Format("<font opacity=\"{1}\">{2} {0} {3}</font> <font size=\"10\"><i>{4} {5:F0} {6}</i></font>",
+		string debugInfo =
+			$"<font size=\"10\" color=\"#999933\">{caption.Params.Location.Path[..caption.Params.Location.Path.LastIndexOf('/')]}/</font>" +
+			$"<font size=\"10\" color=\"#ffff33\" weight=\"bold\">{caption.Params.Location.GetName()}</font>" +
+			$"<font size=\"10\" color=\"#33ffff\"> type:{caption.Params.SoundType}</font>" +
+			$"<font size=\"10\" color=\"#cccccc\"> relpos:</font><font size=\"10\" color=\"{(caption.Params.RelativePosition ? "#66ff66" : "#ff6666")}\">{caption.Params.RelativePosition}</font>";
+			//$"<font size=\"10\" color=\"#3333ff\"> vol:{(int)(caption.Params.Volume * 100):D}%</font>";
+
+		var label = string.Format("<font opacity=\"{1}\">{2} {0} {3}</font>{4}",
 			caption.Text,
 			opacity,
 			leftArrow,
 			rightArrow,
-			caption.Params.SoundType,
-			caption.Params.Volume,
-			caption.Params.Location
+			debugInfo
 			);
 
 		return label;
@@ -152,7 +157,7 @@ public class ClosedCaptionsOverlay : HudElement
 		{
 			ElementBounds bounds = ElementBounds.Fixed(EnumDialogArea.LeftTop, 0, currentY, 600, LineHeight);
 			
-			var text = BuildCaptionLabel(caption);
+			var text = BuildCaptionLabel(caption, true);
 			var captionKey = "caption" + caption.ID.ToString();
 			SingleComposer.AddRichtext(text, _font, bounds, captionKey);
 

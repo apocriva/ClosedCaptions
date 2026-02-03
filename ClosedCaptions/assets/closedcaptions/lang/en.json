@@ -1,5 +1,6 @@
 {
 	"closedcaptions:config": "Closed Captions",
+	"closedcaptions:config-filter-weather": "Filter weather sounds",
 	"closedcaptions:config-filter-self": "Filter self sounds",
 	"closedcaptions:config-filter-walk": "Filter walk sounds",
 

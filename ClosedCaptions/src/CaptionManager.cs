@@ -149,6 +149,11 @@ public class CaptionManager
 		return _instance._captions.AsReadOnly();
 	}
 
+	public void ForceRefresh()
+	{
+		_needsRefresh = true;
+	}
+
 	public void Tick()
 	{
 		bool refresh = _needsRefresh;
@@ -196,6 +201,12 @@ public class CaptionManager
 			return true;
 
 		// Check user filters.
+		if (ClosedCaptionsModSystem.UserConfig.FilterWeather)
+		{
+			if (loadedSound.Params.SoundType == EnumSoundType.Weather)
+				return true;
+		}
+
 		if (ClosedCaptionsModSystem.UserConfig.FilterWalk)
 		{
 			if (assetName.Contains("walk") ||

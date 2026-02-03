@@ -23,12 +23,12 @@ public class ClosedCaptionsModSystem : ModSystem
 	private CaptionManager _manager;
 	private long _gameTickListenerId;
 
-    public override void StartPre(ICoreAPI api)
-    {
-        base.StartPre(api);
+	public override void StartPre(ICoreAPI api)
+	{
+		base.StartPre(api);
 
-        UserConfig = api.LoadModConfig<UserConfig>(UserConfig.Filename);
-    }
+		UserConfig = api.LoadModConfig<UserConfig>(UserConfig.Filename);
+	}
 
 	public override void StartClientSide(ICoreClientAPI api)
 	{
@@ -85,9 +85,12 @@ public class ClosedCaptionsModSystem : ModSystem
 
 	private void BuildSettings(UserConfig config, string id)
 	{
-        config.FilterSelf = OnCheckBox("filter-self", config.FilterSelf);
-        config.FilterWalk = OnCheckBox("filter-walk", config.FilterWalk);
-    }
+		config.FilterWeather = OnCheckBox("filter-weather", config.FilterWeather);
+		config.FilterSelf = OnCheckBox("filter-self", config.FilterSelf);
+		config.FilterWalk = OnCheckBox("filter-walk", config.FilterWalk);
+
+		_manager.ForceRefresh();
+	}
 
 	private bool OnCheckBox(string option, bool value)
 	{
