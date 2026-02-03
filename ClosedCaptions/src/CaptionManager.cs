@@ -17,7 +17,7 @@ public class CaptionManager
 		public readonly long ID;
 		public readonly SoundParams Params;
 		public readonly string Text;
-		public readonly long StartTime;
+		public long StartTime;
 		public long FadeOutStartTime;
 
 		public ILoadedSound? LoadedSound { get; private set; }
@@ -106,12 +106,23 @@ public class CaptionManager
 		if (_instance.IsFiltered(loadedSound))
 			return;
 
-		var time = _capi.ElapsedMilliseconds;
 		var text = _instance._matchConfig.FindCaptionForSound(location);
+		if (text == null)
+			return;
+
+		var duplicate = _instance.FindDuplicate(loadedSound, text);
+		if (duplicate != null)
+		{
+			// Update with a new timestamp.
+			duplicate.StartTime = _capi.ElapsedMilliseconds;
+			_instance._needsRefresh = true;
+			return;
+		}
+
 		if (string.IsNullOrEmpty(text))
 			text = "[" + location.GetName() + "?]";
 
-		_instance._captions.Add(new Caption(_instance._nextCaptionId++, loadedSound, time, text));
+		_instance._captions.Add(new Caption(_instance._nextCaptionId++, loadedSound, _capi.ElapsedMilliseconds, text));
 		_instance._needsRefresh = true;
 	}
 
@@ -191,11 +202,29 @@ public class CaptionManager
 		_captions.Clear();
 	}
 
+	private Caption? FindDuplicate(ILoadedSound newSound, string newText)
+	{
+        // Filter out sounds that are similar to one that's playing and close in space.
+        foreach (var caption in _captions)
+		{
+			// This literal sound is already playing, get outta here!
+			if (caption.LoadedSound == newSound)
+				return caption;
+
+			// Filter sounds that are very similar and close to sounds that are already playing.
+			var position = newSound.Params.Position ?? _capi.World.Player.Entity.Pos.XYZ.ToVec3f();
+			var distance = (position - caption.Params.Position).Length();
+			if (caption.Text == newText &&
+				_capi.ElapsedMilliseconds - caption.StartTime < 1000 &&
+				distance < 5f)
+				return caption;
+		}
+		return null;
+	}
+
 	private bool IsFiltered(ILoadedSound loadedSound)
 	{
 		var assetName = loadedSound.Params.Location.ToString();
-		if (assetName.Contains("menubutton"))
-			return true;
 
 		// Check user filters.
 		if (ClosedCaptionsModSystem.UserConfig.FilterWeather)
@@ -219,22 +248,6 @@ public class CaptionManager
 			{
                 return true;
             }
-		}
-
-        // Filter out sounds that are similar to one that's playing and close in space.
-        foreach (var caption in _captions)
-		{
-			// This literal sound is already playing, get outta here!
-			if (caption.LoadedSound == loadedSound)
-				return true;
-
-			// Filter sounds that are very similar and close to sounds that are already playing.
-			var position = loadedSound.Params.Position ?? _capi.World.Player.Entity.Pos.XYZ.ToVec3f();
-			var distance = (position - caption.Params.Position).Length();
-			if (caption.Params.Location == loadedSound.Params.Location &&
-				_capi.ElapsedMilliseconds - caption.StartTime > 250 &&
-				distance < 5f)
-				return true;
 		}
 
 		return false;

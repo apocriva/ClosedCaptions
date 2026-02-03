@@ -21,11 +21,19 @@ public class MatchConfig
         public string CaptionKey;
 	}
 
+	public string[] Ignore;
 	public MatchGroup[] SoundMap;
 
 	public string? FindCaptionForSound(AssetLocation location)
 	{
 		string? ret = null;
+
+		// Check if this is an outright ignored sound.
+		foreach (var ignore in Ignore)
+		{
+			if (WildcardUtil.Match(new AssetLocation(ignore), location))
+				return null;
+		}
 
 		// Iterate the mappings in reverse, to prioritize more recently-added
 		// entries. This way if new entries are added by a mod, they will always
@@ -46,7 +54,7 @@ public class MatchConfig
 				// It did not have a better match. Store the group's default
 				// key for now in case for some reason there's another match
 				// group that has a better match.
-				ret = Lang.Get(matchGroup.DefaultKey);
+				ret ??= Lang.Get(matchGroup.DefaultKey);
 			}
 		}
 

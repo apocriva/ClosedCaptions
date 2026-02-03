@@ -88,7 +88,8 @@ public class ClosedCaptionsOverlay : HudElement
 
 		string leftArrow = "";
 		string rightArrow = "";
-		if (!caption.Params.RelativePosition)
+		if (!caption.Params.RelativePosition &&
+			relativePosition.Length() > 1)
 		{
 			if (angle >= 150f || angle <= -150f)
 			{

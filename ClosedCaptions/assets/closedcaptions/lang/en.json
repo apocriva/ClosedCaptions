@@ -7,6 +7,8 @@
 	"closedcaptions:config-fade-out-time": "Fade out time",
 	"closedcaptions:config-debug-mode": "Enable debug mode",
 
+	"closedcaptions:unknown-sound": "[Noises]",
+
 	"closedcaptions:block": "[Block noises]",
 	"closedcaptions:block-dirt": "[Dirt crunching]",
 
