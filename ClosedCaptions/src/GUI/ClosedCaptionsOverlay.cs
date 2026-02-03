@@ -115,6 +115,14 @@ public class ClosedCaptionsOverlay : HudElement
 			opacity = MathF.Max(0f, MathF.Min(opacity, 1f));
 		}
 
+		string iconText = string.Empty;
+		if (ClosedCaptionsModSystem.UserConfig.ShowIcons &&
+			!string.IsNullOrEmpty(caption.IconType) &&
+			!string.IsNullOrEmpty(caption.IconCode))
+		{
+			iconText = $"<itemstack floattype=\"inline\" type=\"{caption.IconType}\" code=\"{caption.IconCode}\"/>";
+		}
+
 		string debugInfo = string.Empty;
 		if (ClosedCaptionsModSystem.UserConfig.DebugMode)
 		{
@@ -132,13 +140,7 @@ public class ClosedCaptionsOverlay : HudElement
 					: "");
 		}
 
-		var label = string.Format("<font opacity=\"{1}\">{2} {0} {3}</font>{4}",
-			caption.Text,
-			opacity,
-			leftArrow,
-			rightArrow,
-			debugInfo
-			);
+		var label = $"<font opacity=\"{opacity}\">{leftArrow} {iconText}{caption.Text} {rightArrow}</font>{debugInfo}";
 
 		return label;
 	}

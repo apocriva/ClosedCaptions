@@ -132,13 +132,13 @@
 			"group": "sounds/creature/chicken*",
 			"defaultKey": "closedcaptions:creature-chicken",
 			"mappings": [
-				{ "match": "sounds/creature/chicken/chick*", "captionKey": "closedcaptions:creature-chicken-chick" },
-				{ "match": "sounds/creature/chicken/hen-flee.ogg", "captionKey": "closedcaptions:creature-chicken-hen-flee" },
-				{ "match": "sounds/creature/chicken/hen-idle*", "captionKey": "closedcaptions:creature-chicken-hen-idle" },
-				{ "match": "sounds/creature/chicken/hen-lay*", "captionKey": "closedcaptions:creature-chicken-hen-lay" },
-				{ "match": "sounds/creature/chicken/hen-hurt.ogg", "captionKey": "closedcaptions:creature-chicken-hurt" },
-				{ "match": "sounds/creature/chicken/rooster-alarm*", "captionKey": "closedcaptions:creature-chicken-rooster-alarm" },
-				{ "match": "sounds/creature/chicken/rooster-call.ogg", "captionKey": "closedcaptions:creature-chicken-rooster_call" },
+				{ "match": "sounds/creature/chicken/chick*", "captionKey": "closedcaptions:creature-chicken-chick", "iconType": "item", "iconCode": "creature-chicken-baby" },
+				{ "match": "sounds/creature/chicken/hen-flee.ogg", "captionKey": "closedcaptions:creature-chicken-hen-flee", "iconType": "item", "iconCode": "creature-chicken-hen" },
+				{ "match": "sounds/creature/chicken/hen-idle*", "captionKey": "closedcaptions:creature-chicken-hen-idle", "iconType": "item", "iconCode": "creature-chicken-hen" },
+				{ "match": "sounds/creature/chicken/hen-lay*", "captionKey": "closedcaptions:creature-chicken-hen-lay", "iconType": "item", "iconCode": "creature-chicken-hen" },
+				{ "match": "sounds/creature/chicken/hen-hurt.ogg", "captionKey": "closedcaptions:creature-chicken-hurt", "iconType": "item", "iconCode": "creature-chicken-hen" },
+				{ "match": "sounds/creature/chicken/rooster-alarm*", "captionKey": "closedcaptions:creature-chicken-rooster-alarm", "iconType": "item", "iconCode": "creature-chicken-rooster" },
+				{ "match": "sounds/creature/chicken/rooster-call.ogg", "captionKey": "closedcaptions:creature-chicken-rooster_call", "iconType": "item", "iconCode": "creature-chicken-rooster" },
 			]
 		},
 		{

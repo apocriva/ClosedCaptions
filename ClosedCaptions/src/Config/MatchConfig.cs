@@ -19,14 +19,18 @@ public class MatchConfig
 	{
 		public string Match;
         public string CaptionKey;
+		public string IconType;
+		public string IconCode;
 	}
 
 	public string[] Ignore;
 	public MatchGroup[] SoundMap;
 
-	public string? FindCaptionForSound(AssetLocation location)
+	public string? FindCaptionForSound(AssetLocation location, ref string iconType, ref string iconCode)
 	{
 		string? ret = null;
+		iconType = null;
+		iconCode = null;
 
 		// Check if this is an outright ignored sound.
 		foreach (var ignore in Ignore)
@@ -48,7 +52,13 @@ public class MatchConfig
 				{
 					var mapping = matchGroup.Mappings[j];
 					if (WildcardUtil.Match(new AssetLocation(mapping.Match), location))
+					{
+						if (!string.IsNullOrEmpty(mapping.IconType))
+							iconType = mapping.IconType;
+						if (!string.IsNullOrEmpty(mapping.IconCode))
+							iconCode = mapping.IconCode;
 						return Lang.Get(mapping.CaptionKey);
+					}
 				}
 
 				// It did not have a better match. Store the group's default

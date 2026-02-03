@@ -22,7 +22,6 @@ public class ClosedCaptionsModSystem : ModSystem
 	private ICoreClientAPI _capi;
 
 	private CaptionManager _manager;
-	private long _gameTickListenerId;
 
 	private CancellationTokenSource _cancelSource;
 
@@ -52,7 +51,6 @@ public class ClosedCaptionsModSystem : ModSystem
 			configlib.RegisterCustomConfig(Lang.Get("closedcaptions:config"), (id, buttons) => EditConfig(id, buttons, api));
 		}
 
-		//_gameTickListenerId = _capi.Event.RegisterGameTickListener(OnTick, 60);
 		_cancelSource = new CancellationTokenSource();
 		new Thread(() =>
 		{
@@ -72,11 +70,6 @@ public class ClosedCaptionsModSystem : ModSystem
 
 		_manager?.Dispose();
 		patcher?.UnpatchAll(patcher.Id);
-	}
-
-	private void OnTick(float dt)
-	{
-		_manager.Tick();
 	}
 
 	private void EditConfig(string id, ControlButtons buttons, ICoreAPI api)
@@ -100,6 +93,7 @@ public class ClosedCaptionsModSystem : ModSystem
 		config.FilterSelf = OnCheckBox("filter-self", config.FilterSelf);
 		config.FilterWalk = OnCheckBox("filter-walk", config.FilterWalk);
 
+		config.ShowIcons = OnCheckBox("show-icons", config.ShowIcons);
 		config.MinimumDisplayDuration = OnInputInt("minimum-display-duration", (int)config.MinimumDisplayDuration);
 		config.FadeOutDuration = OnInputInt("fade-out-duration", (int)config.FadeOutDuration);
 

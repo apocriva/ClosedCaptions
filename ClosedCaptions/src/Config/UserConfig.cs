@@ -8,6 +8,7 @@ public class UserConfig
 	public bool FilterSelf { get; set; } = false;
     public bool FilterWalk { get; set; } = false;
 
+	public bool ShowIcons { get; set; } = true;
 	public long MinimumDisplayDuration { get; set; } = 200;
 	public long FadeOutDuration { get; set; } = 500;
 

@@ -19,6 +19,8 @@ public class CaptionManager
 		public readonly string Text;
 		public long StartTime;
 		public long FadeOutStartTime;
+		public readonly string? IconType;
+		public readonly string? IconCode;
 
 		public ILoadedSound? LoadedSound { get; set; }
 
@@ -34,13 +36,15 @@ public class CaptionManager
 			}
 		}
 
-		public Caption(long id, ILoadedSound loadedSound, long startTime, string text)
+		public Caption(long id, ILoadedSound loadedSound, long startTime, string text, string? iconType = null, string? iconCode = null)
 		{
 			ID = id;
 			LoadedSound = loadedSound;
 			StartTime = startTime;
 			Text = text;
 			FadeOutStartTime = 0;
+			IconType = iconType;
+			IconCode = iconCode;
 
 			var p = LoadedSound.Params;
 			Params = new()
@@ -106,7 +110,9 @@ public class CaptionManager
 		if (_instance.IsFiltered(loadedSound))
 			return;
 
-		var text = _instance._matchConfig.FindCaptionForSound(location);
+		string? iconType = null;
+		string? iconCode = null;
+		var text = _instance._matchConfig.FindCaptionForSound(location, ref iconType, ref iconCode);
 		if (text == null)
 			return;
 
@@ -124,7 +130,14 @@ public class CaptionManager
 		if (string.IsNullOrEmpty(text))
 			text = "[" + location.GetName() + "?]";
 
-		_instance._captions.Add(new Caption(_instance._nextCaptionId++, loadedSound, _capi.ElapsedMilliseconds, text));
+		_instance._captions.Add(new Caption(
+			_instance._nextCaptionId++,
+			loadedSound,
+			_capi.ElapsedMilliseconds,
+			text,
+			iconType,
+			iconCode
+			));
 		_instance._needsRefresh = true;
 	}
 
