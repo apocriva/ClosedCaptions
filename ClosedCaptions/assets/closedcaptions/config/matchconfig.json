@@ -5,6 +5,7 @@
 		"sounds/stone_switch.ogg",
 		"sounds/tick.ogg",
 		"sounds/toggleswitch.ogg",
+		"sounds/creature/hooved/elk/bellowafter.ogg",
 	],
 	"soundMap": [
 		{
@@ -178,12 +179,34 @@
 			"group": "sounds/creature/goat*",
 			"defaultKey": "closedcaptions:creature-goat",
 			"mappings": [
+				{ "match": "sounds/creature/goat/large/adult-attack*", "tags": "animal,combat,danger", "captionKey": "closedcaptions:creature-goat-large-adult-attack" },
+				{ "match": "sounds/creature/goat/large/adult-death*", "tags": "animal,combat", "captionKey": "closedcaptions:creature-goat-large-adult-death" },
+				{ "match": "sounds/creature/goat/large/adult-hurt*", "tags": "animal,combat", "captionKey": "closedcaptions:creature-goat-large-adult-hurt" },
+				{ "match": "sounds/creature/goat/large/adult-idle*", "tags": "animal", "captionKey": "closedcaptions:creature-goat-large-adult-idle" },
+				{ "match": "sounds/creature/goat/bleat*", "tags": "animal", "captionKey": "closedcaptions:creature-goat-bleat" },
+				{ "match": "sounds/creature/goat/bleatweird.ogg", "tags": "animal", "captionKey": "closedcaptions:creature-goat-bleat" },
+				{ "match": "sounds/creature/goat/death*", "tags": "animal,combat", "captionKey": "closedcaptions:creature-goat-death" },
+				{ "match": "sounds/creature/goat/goatkidbleat*", "tags": "animal", "captionKey": "closedcaptions:creature-goat-kid-bleat" },
+				{ "match": "sounds/creature/goat/goatkidhurt*", "tags": "animal", "captionKey": "closedcaptions:creature-goat-kid-hurt" },
+				{ "match": "sounds/creature/goat/hurt*", "tags": "animal", "captionKey": "closedcaptions:creature-goat-hurt" },
 			]
 		},
 		{
 			"group": "sounds/creature/hooved*",
 			"defaultKey": "closedcaptions:creature-hooved",
 			"mappings": [
+				{ "match": "sounds/creature/hooved/generic/call*", "tags": "animal", "captionKey": "closedcaptions:creature-hooved-generic-call" },
+				{ "match": "sounds/creature/hooved/generic/sniff.ogg", "tags": "animal", "captionKey": "closedcaptions:creature-hooved-generic-sniff" },
+				{ "match": "sounds/creature/hooved/large/elk/bellow*", "tags": "animal", "captionKey": "closedcaptions:creature-hooved-elk-bellow" },
+				{ "match": "sounds/creature/hooved/large/elk/bugle*", "tags": "animal", "captionKey": "closedcaptions:creature-hooved-elk-bugle" },
+				{ "match": "sounds/creature/hooved/large/redstag/bellow*", "tags": "animal", "captionKey": "closedcaptions:creature-hooved-redstag-bellow" },
+				{ "match": "sounds/creature/hooved/large/redstag/roar*", "tags": "animal", "captionKey": "closedcaptions:creature-hooved-redstag-roar" },
+				{ "match": "sounds/creature/hooved/medium/buck-bellow*", "tags": "animal", "captionKey": "closedcaptions:creature-hooved-buck-bellow" },
+				{ "match": "sounds/creature/hooved/medium/deer-call*", "tags": "animal", "captionKey": "closedcaptions:creature-hooved-deer-call" },
+				{ "match": "sounds/creature/hooved/small/fawn/fawn*", "tags": "animal", "captionKey": "closedcaptions:creature-hooved-fawn" },
+				{ "match": "sounds/creature/hooved/small/strange/mew*", "tags": "animal", "captionKey": "closedcaptions:creature-hooved-strange-mew" },
+				{ "match": "sounds/creature/hooved/callsmall*", "tags": "animal", "captionKey": "closedcaptions:creature-hooved-small-call" },
+				{ "match": "sounds/creature/hooved/smallscream*", "tags": "animal", "captionKey": "closedcaptions:creature-hooved-small-scream" },
 				{ "match": "sounds/creature/hooved/gallop.ogg", "tags": "animal", "captionKey": "closedcaptions:creature-hooved-gallop" },
 				{ "match": "sounds/creature/hooved/trot.ogg", "tags": "animal", "captionKey": "closedcaptions:creature-hooved-trot" },
 			]
@@ -192,30 +215,55 @@
 			"group": "sounds/creature/hyena*",
 			"defaultKey": "closedcaptions:creature-hyena",
 			"mappings": [
+				{ "match": "sounds/creature/hyena/attack.ogg", "tags": "animal,combat,danger", "captionKey": "closedcaptions:creature-hyena-attack" },
+				{ "match": "sounds/creature/hyena/death.ogg", "tags": "animal,combat", "captionKey": "closedcaptions:creature-hyena-death" },
+				{ "match": "sounds/creature/hyena/growl.ogg", "tags": "animal,danger", "captionKey": "closedcaptions:creature-hyena-growl" },
+				{ "match": "sounds/creature/hyena/hurt.ogg", "tags": "animal,combat", "captionKey": "closedcaptions:creature-hyena-hurt" },
+				{ "match": "sounds/creature/hyena/laugh.ogg", "tags": "animal,danger", "captionKey": "closedcaptions:creature-hyena-laugh" },
 			]
 		},
 		{
 			"group": "sounds/creature/locust*",
 			"defaultKey": "closedcaptions:creature-locust",
 			"mappings": [
+				{ "match": "sounds/creature/locust/death.ogg", "tags": "combat,enemy", "captionKey": "closedcaptions:creature-locust-attack" },
+				{ "match": "sounds/creature/locust/hurt.ogg", "tags": "combat,enemy", "captionKey": "closedcaptions:creature-locust-hurt" },
+				{ "match": "sounds/creature/locust/idle.ogg", "tags": "danger,enemy", "captionKey": "closedcaptions:creature-locust-idle" },
+				{ "match": "sounds/creature/locust/saw.ogg", "tags": "combat,danger,enemy", "captionKey": "closedcaptions:creature-locust-saw" },
 			]
 		},
 		{
 			"group": "sounds/creature/pig*",
 			"defaultKey": "closedcaptions:creature-pig",
 			"mappings": [
+				{ "match": "sounds/creature/pig/attack.ogg", "tags": "animal,combat,danger", "captionKey": "closedcaptions:creature-pig-attack" },
+				{ "match": "sounds/creature/pig/hurt.ogg", "tags": "animal,combat", "captionKey": "closedcaptions:creature-pig-hurt" },
+				{ "match": "sounds/creature/pig/idle.ogg", "tags": "animal", "captionKey": "closedcaptions:creature-pig-idle" },
+				{ "match": "sounds/creature/pig/piglet-hurt.ogg", "tags": "animal,combat", "captionKey": "closedcaptions:creature-piglet-hurt" },
+				{ "match": "sounds/creature/pig/piglet-idle.ogg", "tags": "animal", "captionKey": "closedcaptions:creature-piglet-idle" },
 			]
 		},
 		{
 			"group": "sounds/creature/raccoon*",
 			"defaultKey": "closedcaptions:creature-raccoon",
 			"mappings": [
+				{ "match": "sounds/creature/raccoon/aggro.ogg", "tags": "animal,combat,danger", "captionKey": "closedcaptions:creature-raccoon-aggro" },
+				{ "match": "sounds/creature/raccoon/death.ogg", "tags": "animal,combat", "captionKey": "closedcaptions:creature-raccoon-death" },
+				{ "match": "sounds/creature/raccoon/hurt.ogg", "tags": "animal,combat", "captionKey": "closedcaptions:creature-raccoon-hurt" },
+				{ "match": "sounds/creature/raccoon/idle.ogg", "tags": "animal", "captionKey": "closedcaptions:creature-raccoon-idle" },
+				{ "match": "sounds/creature/raccoon/pup-death.ogg", "tags": "animal,combat", "captionKey": "closedcaptions:creature-raccoon-pup-death" },
+				{ "match": "sounds/creature/raccoon/pup-hurt.ogg", "tags": "animal,combat", "captionKey": "closedcaptions:creature-raccoon-pup-hurt" },
+				{ "match": "sounds/creature/raccoon/pup-idle.ogg", "tags": "animal", "captionKey": "closedcaptions:creature-raccoon-pup-idle" },
 			]
 		},
 		{
 			"group": "sounds/creature/sheep*",
 			"defaultKey": "closedcaptions:creature-sheep",
 			"mappings": [
+				{ "match": "sounds/creature/sheep/hurt*", "tags": "animal,combat", "captionKey": "closedcaptions:creature-sheep-hurt" },
+				{ "match": "sounds/creature/sheep/idle.ogg", "tags": "animal", "captionKey": "closedcaptions:creature-sheep-idle" },
+				{ "match": "sounds/creature/sheep/lamb-hurt*", "tags": "animal,combat", "captionKey": "closedcaptions:creature-sheep-lamb-hurt" },
+				{ "match": "sounds/creature/sheep/milking.ogg", "tags": "animal,interaction", "captionKey": "closedcaptions:creature-sheep-milking" },
 			]
 		},
 		{
