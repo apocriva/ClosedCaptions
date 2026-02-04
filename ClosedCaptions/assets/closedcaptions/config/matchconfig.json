@@ -320,7 +320,7 @@
 				{ "match": "sounds/effect/planetary_gears.ogg", "tags":"ambience,environment", "captionKey": "closedcaptions:effect-planetarygears" },
 				{ "match": "sounds/effect/portal.ogg", "tags":"ambience,environment", "captionKey": "closedcaptions:effect-portal" },
 				{ "match": "sounds/effect/receptionbell.ogg", "tags":"ambience,environment,interaction", "captionKey": "closedcaptions:effect-receptionbell" },
-				{ "match": "sounds/effect/rift.ogg", "tags":"ambience,environment,temporal", "tags": "danger", "captionKey": "closedcaptions:effect-rift" },
+				{ "match": "sounds/effect/rift.ogg", "tags":"ambience,danger,environment,temporal", "captionKey": "closedcaptions:effect-rift" },
 				{ "match": "sounds/effect/rockslide.ogg", "tags":"ambience,danger,environment", "captionKey": "closedcaptions:effect-rockslide" },
 				{ "match": "sounds/effect/ropestretch.ogg", "tags":"interaction,tool", "captionKey": "closedcaptions:effect-ropestretch" },
 				{ "match": "sounds/effect/smallexplosion.ogg", "tags":"danger,environment,tool", "captionKey": "closedcaptions:effect-explosion-small" },

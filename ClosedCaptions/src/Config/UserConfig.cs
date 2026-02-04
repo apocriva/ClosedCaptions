@@ -6,23 +6,23 @@ public class UserConfig
 
 	public bool ShowAmbience { get; set; } = true;
 	public bool ShowAnimal { get; set; } = true;
-	public bool ShowBlock { get; set; } = true;
+	public bool ShowBlock { get; set; } = false;
 	public bool ShowCombat { get; set; } = true;
 	public bool ShowDanger { get; set; } = true;
 	public bool ShowEnemy { get; set; } = true;
-	public bool ShowEnvironment { get; set; } = true;
-	public bool ShowInteraction { get; set; } = true;
+	public bool ShowEnvironment { get; set; } = false;
+	public bool ShowInteraction { get; set; } = false;
 	public bool ShowTemporal { get; set; } = true;
 	public bool ShowTool { get; set; } = true;
 	public bool ShowVoice { get; set; } = true;
-	public bool ShowWalk { get; set; } = true;
-	public bool ShowWearable { get; set; } = true;
+	public bool ShowWalk { get; set; } = false;
+	public bool ShowWearable { get; set; } = false;
 	public bool ShowWeather { get; set; } = true;
 
 	public bool IncludeUntagged { get; set; } = false;
 
 	// public bool ShowIcons { get; set; } = true;
-	public long MinimumDisplayDuration { get; set; } = 200;
+	public long MinimumDisplayDuration { get; set; } = 1000;
 	public long FadeOutDuration { get; set; } = 500;
 	public int AttenuationRange { get; set; } = 16;
 	public float MinimumAttenuationOpacity { get; set; } = 0.3f;
