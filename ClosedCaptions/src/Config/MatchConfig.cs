@@ -1,3 +1,7 @@
+using System;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.API.Util;
@@ -19,16 +23,49 @@ public class MatchConfig
 	{
 		public string Match;
         public string CaptionKey;
+		[JsonConverter(typeof(TagsConverter))]
+		public CaptionManager.Tags Tags;
 		public string IconType;
 		public string IconCode;
+
+		private class TagsConverter : JsonConverter
+		{
+			public override bool CanConvert(Type objectType)
+			{
+				return objectType == typeof(CaptionManager.Tags);
+			}
+
+			public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
+			{
+				if (string.IsNullOrEmpty((string?)reader.Value))
+					return CaptionManager.Tags.None;
+
+				try
+				{
+					var ret = Enum.Parse<CaptionManager.Tags>((string)reader.Value, true);
+					return ret;
+				}
+				catch
+				{
+					return CaptionManager.Tags.None;
+				}
+			}
+
+			public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+			{
+			}
+		}
 	}
 
 	public string[] Ignore;
 	public MatchGroup[] SoundMap;
 
-	public string? FindCaptionForSound(AssetLocation location, ref string iconType, ref string iconCode)
+	public ICoreClientAPI? Api { get; set; }
+
+	public string? FindCaptionForSound(AssetLocation location, ref CaptionManager.Tags tags, ref string iconType, ref string iconCode)
 	{
 		string? ret = null;
+		tags = CaptionManager.Tags.None;
 		iconType = null;
 		iconCode = null;
 
@@ -53,6 +90,7 @@ public class MatchConfig
 					var mapping = matchGroup.Mappings[j];
 					if (WildcardUtil.Match(new AssetLocation(mapping.Match), location))
 					{
+						tags = mapping.Tags;
 						if (!string.IsNullOrEmpty(mapping.IconType))
 							iconType = mapping.IconType;
 						if (!string.IsNullOrEmpty(mapping.IconCode))

@@ -90,9 +90,27 @@ public class ClosedCaptionsModSystem : ModSystem
 	private void BuildSettings(UserConfig config, string id)
 	{
 		var modified = false;
-		config.FilterWeather = OnCheckBox("filter-weather", config.FilterWeather, ref modified);
-		config.FilterSelf = OnCheckBox("filter-self", config.FilterSelf, ref modified);
-		config.FilterWalk = OnCheckBox("filter-walk", config.FilterWalk, ref modified);
+
+		if (ImGui.CollapsingHeader(Lang.Get("closedcaptions:config-filters-header")))
+		{
+			ImGui.Indent();
+			ImGui.TextWrapped(Lang.Get("closedcaptions:config-filters-description"));
+			config.ShowAmbience = OnCheckBox("show-ambience", config.ShowAmbience, ref modified);
+			config.ShowAnimal = OnCheckBox("show-animal", config.ShowAnimal, ref modified);
+			config.ShowBlock = OnCheckBox("show-block", config.ShowBlock, ref modified);
+			config.ShowCombat = OnCheckBox("show-combat", config.ShowCombat, ref modified);
+			config.ShowDanger = OnCheckBox("show-danger", config.ShowDanger, ref modified);
+			config.ShowEnemy = OnCheckBox("show-enemy", config.ShowEnemy, ref modified);
+			config.ShowEnvironment = OnCheckBox("show-environment", config.ShowEnvironment, ref modified);
+			config.ShowInteraction = OnCheckBox("show-interaction", config.ShowInteraction, ref modified);
+			config.ShowTemporal = OnCheckBox("show-temporal", config.ShowTemporal, ref modified);
+			config.ShowTool = OnCheckBox("show-tool", config.ShowTool, ref modified);
+			config.ShowVoice = OnCheckBox("show-voice", config.ShowVoice, ref modified);
+			config.ShowWalk = OnCheckBox("show-walk", config.ShowWalk, ref modified);
+			config.ShowWearable = OnCheckBox("show-wearable", config.ShowWearable, ref modified);
+			config.ShowWeather = OnCheckBox("show-animal", config.ShowWeather, ref modified);
+			ImGui.Unindent();
+		}
 
 		config.ShowIcons = OnCheckBox("show-icons", config.ShowIcons, ref modified);
 		config.MinimumDisplayDuration = OnInputInt("minimum-display-duration", (int)config.MinimumDisplayDuration, ref modified);
@@ -112,6 +130,13 @@ public class ClosedCaptionsModSystem : ModSystem
 	{
 		bool newValue = value;
 		ImGui.Checkbox(Lang.Get("closedcaptions:config-" + option), ref newValue);
+		if (ImGui.IsItemHovered(ImGuiHoveredFlags.ForTooltip))
+		{
+			ImGui.BeginTooltip();
+			ImGui.PushTextWrapPos(ImGui.GetFontSize() * 35f);
+			ImGui.TextUnformatted(Lang.Get($"closedcaptions:config-{option}-tooltip"));
+			ImGui.EndTooltip();
+		}
 		modified |= newValue != value;
 		return newValue;
 	}
@@ -120,6 +145,13 @@ public class ClosedCaptionsModSystem : ModSystem
 	{
 		int newValue = value;
 		ImGui.InputInt(Lang.Get("closedcaptions:config-" + option), ref newValue);
+		if (ImGui.IsItemHovered(ImGuiHoveredFlags.ForTooltip))
+		{
+			ImGui.BeginTooltip();
+			ImGui.PushTextWrapPos(ImGui.GetFontSize() * 35f);
+			ImGui.TextUnformatted(Lang.Get($"closedcaptions:config-{option}-tooltip"));
+			ImGui.EndTooltip();
+		}
 		modified |= newValue != value;
 		return newValue;
 	}

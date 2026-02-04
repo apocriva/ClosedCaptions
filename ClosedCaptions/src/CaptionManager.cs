@@ -13,6 +13,26 @@ namespace ClosedCaptions;
 
 public class CaptionManager
 {
+	[Flags]
+	public enum Tags
+	{
+		None		= 0,
+		Ambience	= 1 << 0,
+		Animal		= 1 << 1,
+		Block		= 1 << 2,
+		Combat		= 1 << 3,
+		Danger		= 1 << 4,
+		Enemy		= 1 << 5,
+		Environment	= 1 << 6,
+		Interaction = 1 << 7,
+		Temporal	= 1 << 8,
+		Tool		= 1 << 9,
+		Voice		= 1 << 10,
+		Walk		= 1 << 11,
+		Wearable	= 1 << 12,
+		Weather		= 1 << 13,
+	}
+
 	public class Caption
 	{
 		public readonly long ID;
@@ -20,6 +40,7 @@ public class CaptionManager
 		public readonly string Text;
 		public long StartTime;
 		public long FadeOutStartTime;
+		public readonly Tags Tags;
 		public readonly string? IconType;
 		public readonly string? IconCode;
 
@@ -37,13 +58,14 @@ public class CaptionManager
 			}
 		}
 
-		public Caption(long id, ILoadedSound loadedSound, long startTime, string text, string? iconType = null, string? iconCode = null)
+		public Caption(long id, ILoadedSound loadedSound, long startTime, string text, Tags tags, string? iconType = null, string? iconCode = null)
 		{
 			ID = id;
 			LoadedSound = loadedSound;
 			StartTime = startTime;
 			Text = text;
 			FadeOutStartTime = 0;
+			Tags = tags;
 			IconType = iconType;
 			IconCode = iconCode;
 
@@ -94,6 +116,7 @@ public class CaptionManager
 		try
 		{
 			_matchConfig = capi.Assets.Get(new AssetLocation("closedcaptions", MatchConfig.Filename)).ToObject<MatchConfig>();
+			_matchConfig.Api = capi;
 		}
 		catch (Exception e)
 		{
@@ -108,13 +131,14 @@ public class CaptionManager
 	{
 		//_capi.Logger.Log(EnumLogType.Debug, string.Format("StartPlaying: {0}", location));
 
-		if (_instance.IsFiltered(loadedSound))
-			return;
-
+		Tags tags = Tags.None;
 		string? iconType = null;
 		string? iconCode = null;
-		var text = _instance._matchConfig.FindCaptionForSound(location, ref iconType, ref iconCode);
+		var text = _instance._matchConfig.FindCaptionForSound(location, ref tags, ref iconType, ref iconCode);
 		if (text == null)
+			return;
+
+		if (_instance.IsFiltered(loadedSound, tags))
 			return;
 
 		var duplicate = _instance.FindDuplicate(loadedSound, text);
@@ -136,6 +160,7 @@ public class CaptionManager
 			loadedSound,
 			_capi.ElapsedMilliseconds,
 			text,
+			tags,
 			iconType,
 			iconCode
 			));
@@ -249,18 +274,30 @@ public class CaptionManager
 		return null;
 	}
 
-	private bool IsFiltered(ILoadedSound loadedSound)
+	private bool IsFiltered(ILoadedSound loadedSound, Tags soundTags)
 	{
 		var assetName = loadedSound.Params.Location.ToString();
 
+		// If any one of these passes, do not filter. This supercedes cases such as, for example
+		// a nearby lightning strike being filtered due to ShowWeather, but should be shown because
+		// it is tagged as Danger. We still want to let the case fall through if ShowDanger is unchecked
+		// but ShowWeather is checked.
+		if (soundTags != Tags.None)
+		{
+			if ((soundTags & Tags.Danger) != 0 && ClosedCaptionsModSystem.UserConfig.ShowDanger ||
+				(soundTags & Tags.Animal) != 0 && ClosedCaptionsModSystem.UserConfig.ShowAnimal ||
+				(soundTags & Tags.Enemy) != 0 && ClosedCaptionsModSystem.UserConfig.ShowEnemy)
+				return false;
+		}
+
 		// Check user filters.
-		if (ClosedCaptionsModSystem.UserConfig.FilterWeather)
+		if (!ClosedCaptionsModSystem.UserConfig.ShowWeather)
 		{
 			if (loadedSound.Params.SoundType == EnumSoundType.Weather)
 				return true;
 		}
 
-		if (ClosedCaptionsModSystem.UserConfig.FilterWalk)
+		if (!ClosedCaptionsModSystem.UserConfig.ShowWalk)
 		{
 			if (assetName.Contains("walk") ||
 				assetName.Contains("wearable"))
@@ -269,13 +306,9 @@ public class CaptionManager
             }
 		}
 
-		if (ClosedCaptionsModSystem.UserConfig.FilterSelf)
-		{
-			if (loadedSound.Params.RelativePosition)
-			{
-                return true;
-            }
-		}
+		// It is a tagged sound and should not be shown.
+		if (soundTags != Tags.None)
+			return true;
 
 		return false;
 	}
