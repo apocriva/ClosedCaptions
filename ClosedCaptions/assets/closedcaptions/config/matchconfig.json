@@ -2,8 +2,9 @@
 	"ignore": [
 		"sounds/camerasnap.ogg",
 		"sounds/menubutton*",
+		"sounds/stone_switch.ogg",
 		"sounds/tick.ogg",
-		"sounds/tutorialstepsuccess.ogg",
+		"sounds/toggleswitch.ogg",
 	],
 	"soundMap": [
 		{
