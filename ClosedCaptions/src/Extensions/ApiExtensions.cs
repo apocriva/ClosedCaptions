@@ -6,14 +6,9 @@ namespace ClosedCaptions.Extensions;
 
 public static class ApiExtensions
 {
-	public static ClientMain AsClientMain(this ICoreClientAPI api)
-	{
-		return (ClientMain)api.World;
-	}
-
 	public static Queue<ILoadedSound> GetActiveSounds(this ICoreClientAPI api)
 	{
-		var clientMain = api.AsClientMain();
+		var clientMain = (ClientMain)api.World;
 		
 		// 146
 		var activeSoundsField = clientMain.GetType().GetField("ActiveSounds",

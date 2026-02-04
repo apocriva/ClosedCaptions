@@ -6,6 +6,10 @@
 	"closedcaptions:config-show-icons": "Show icons",
 	"closedcaptions:config-minimum-display-duration": "Minimum display duration",
 	"closedcaptions:config-fade-out-time": "Fade out time",
+	"closedcaptions:config-attenuation-range": "Attenuation range",
+	"closedcaptions:config-min-attenuation-opacity": "Minimum attenuation opacity",
+	"closedcaptions:config-grouping-range": "Grouping range (in blocks)",
+	"closedcaptions:config-grouping-max-time": "Grouping max time separation (in ms)",
 	"closedcaptions:config-debug-mode": "Enable debug mode",
 
 	"closedcaptions:unknown-sound": "[Noises]",
@@ -341,10 +345,10 @@
 	"closedcaptions:wearable-scale": "[Scale armor jangling]",
 
 	// Weather
-	"closedcaptions:weather-hail": "[Hail roaring]",
+	"closedcaptions:weather-hail": "[Hail falling]",
 	"closedcaptions:weather-lowtremble": "[Low rumbling]",
 	"closedcaptions:weather-rain-leafless": "[Rain falling]",
-	"closedcaptions:weather-rain-leafy": "[Muted rain falling]",
+	"closedcaptions:weather-rain-leafy": "[Leaves rustling in rain]",
 	"closedcaptions:weather-verylowtremble": "[Deep rumbling]",
 	"closedcaptions:weather-lightning-distant": "[Distant thunder rumbling]",
 	"closedcaptions:weather-lightning-near": "[Thunder cracking and rumbling]",

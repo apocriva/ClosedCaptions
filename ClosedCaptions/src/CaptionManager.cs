@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ClosedCaptions.Config;
+using ClosedCaptions.Extensions;
 using ClosedCaptions.GUI;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
@@ -150,9 +151,9 @@ public class CaptionManager
 				(!caption.IsLoadedSoundDisposed &&
 				!caption.IsPaused &&
 				caption.IsPlaying &&
-				caption.Params.Volume > 0.3f &&
+				caption.Params.Volume > 0.1f &&
 				(!caption.Params.RelativePosition &&
-				(caption.Params.Position - player.Entity.Pos.XYZFloat).Length() < caption.Params.Range * 2 ||
+				(caption.Params.Position - player.Entity.Pos.XYZFloat).Length() < caption.Params.Range ||
 				caption.Params.RelativePosition)) ||
 				caption.IsFading)
 			.OrderBy(caption =>
@@ -177,6 +178,14 @@ public class CaptionManager
 
 	public void ForceRefresh()
 	{
+		// Rebuild caption list.
+		_captions.Clear();
+
+		foreach (var loadedSound in _capi.GetActiveSounds())
+		{
+			SoundStarted(loadedSound, loadedSound.Params.Location);
+		}
+
 		_needsRefresh = true;
 	}
 
@@ -233,8 +242,8 @@ public class CaptionManager
 			var position = newSound.Params.Position ?? _capi.World.Player.Entity.Pos.XYZ.ToVec3f();
 			var distance = (position - caption.Params.Position).Length();
 			if (caption.Text == newText &&
-				_capi.ElapsedMilliseconds - caption.StartTime < 1000 &&
-				distance < 5f)
+				_capi.ElapsedMilliseconds - caption.StartTime < ClosedCaptionsModSystem.UserConfig.GroupingMaxTime &&
+				distance < ClosedCaptionsModSystem.UserConfig.GroupingRange)
 				return caption;
 		}
 		return null;
