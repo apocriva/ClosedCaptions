@@ -2,6 +2,8 @@
 	"closedcaptions:config": "Closed Captions",
 	"closedcaptions:config-filters-header": "Filters",
 	"closedcaptions:config-filters-description": "Some sounds fall into multiple categories (for example, all bear sounds are Animal, but some are Dangerous as well). These captions will display if any of their relevant filters are checked.",
+	"closedcaptions:config-check-all": "Check all",
+	"closedcaptions:config-uncheck-all": "Uncheck all",
 	"closedcaptions:config-show-animal": "Show animal sounds",
 	"closedcaptions:config-show-animal-tooltip": "All animal sounds.",
 	"closedcaptions:config-show-ambience": "Show ambience sounds",

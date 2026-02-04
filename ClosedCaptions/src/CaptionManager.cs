@@ -284,9 +284,20 @@ public class CaptionManager
 		// but ShowWeather is checked.
 		if (soundTags != Tags.None)
 		{
-			if ((soundTags & Tags.Danger) != 0 && ClosedCaptionsModSystem.UserConfig.ShowDanger ||
+			if ((soundTags & Tags.Ambience) != 0 && ClosedCaptionsModSystem.UserConfig.ShowAmbience ||
 				(soundTags & Tags.Animal) != 0 && ClosedCaptionsModSystem.UserConfig.ShowAnimal ||
-				(soundTags & Tags.Enemy) != 0 && ClosedCaptionsModSystem.UserConfig.ShowEnemy)
+				(soundTags & Tags.Block) != 0 && ClosedCaptionsModSystem.UserConfig.ShowBlock ||
+				(soundTags & Tags.Combat) != 0 && ClosedCaptionsModSystem.UserConfig.ShowCombat ||
+				(soundTags & Tags.Danger) != 0 && ClosedCaptionsModSystem.UserConfig.ShowDanger ||
+				(soundTags & Tags.Enemy) != 0 && ClosedCaptionsModSystem.UserConfig.ShowEnemy ||
+				(soundTags & Tags.Environment) != 0 && ClosedCaptionsModSystem.UserConfig.ShowEnvironment ||
+				(soundTags & Tags.Interaction) != 0 && ClosedCaptionsModSystem.UserConfig.ShowInteraction ||
+				(soundTags & Tags.Temporal) != 0 && ClosedCaptionsModSystem.UserConfig.ShowTemporal ||
+				(soundTags & Tags.Tool) != 0 && ClosedCaptionsModSystem.UserConfig.ShowTool ||
+				(soundTags & Tags.Voice) != 0 && ClosedCaptionsModSystem.UserConfig.ShowVoice ||
+				(soundTags & Tags.Walk) != 0 && ClosedCaptionsModSystem.UserConfig.ShowWalk ||
+				(soundTags & Tags.Wearable) != 0 && ClosedCaptionsModSystem.UserConfig.ShowWearable ||
+				(soundTags & Tags.Weather) != 0 && ClosedCaptionsModSystem.UserConfig.ShowWeather)
 				return false;
 		}
 

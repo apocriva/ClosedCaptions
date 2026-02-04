@@ -95,6 +95,42 @@ public class ClosedCaptionsModSystem : ModSystem
 		{
 			ImGui.Indent();
 			ImGui.TextWrapped(Lang.Get("closedcaptions:config-filters-description"));
+			if (ImGui.Button(Lang.Get("closedcaptions:config-check-all")))
+			{
+				modified = true;
+				config.ShowAmbience = true;
+				config.ShowAnimal = true;
+				config.ShowBlock = true;
+				config.ShowCombat = true;
+				config.ShowDanger = true;
+				config.ShowEnemy = true;
+				config.ShowEnvironment = true;
+				config.ShowInteraction = true;
+				config.ShowTemporal = true;
+				config.ShowTool = true;
+				config.ShowVoice = true;
+				config.ShowWalk = true;
+				config.ShowWearable = true;
+				config.ShowWeather = true;
+			}
+			if (ImGui.Button(Lang.Get("closedcaptions:config-uncheck-all")))
+			{
+				modified = true;
+				config.ShowAmbience = false;
+				config.ShowAnimal = false;
+				config.ShowBlock = false;
+				config.ShowCombat = false;
+				config.ShowDanger = false;
+				config.ShowEnemy = false;
+				config.ShowEnvironment = false;
+				config.ShowInteraction = false;
+				config.ShowTemporal = false;
+				config.ShowTool = false;
+				config.ShowVoice = false;
+				config.ShowWalk = false;
+				config.ShowWearable = false;
+				config.ShowWeather = false;
+			}
 			config.ShowAmbience = OnCheckBox("show-ambience", config.ShowAmbience, ref modified);
 			config.ShowAnimal = OnCheckBox("show-animal", config.ShowAnimal, ref modified);
 			config.ShowBlock = OnCheckBox("show-block", config.ShowBlock, ref modified);
@@ -108,11 +144,11 @@ public class ClosedCaptionsModSystem : ModSystem
 			config.ShowVoice = OnCheckBox("show-voice", config.ShowVoice, ref modified);
 			config.ShowWalk = OnCheckBox("show-walk", config.ShowWalk, ref modified);
 			config.ShowWearable = OnCheckBox("show-wearable", config.ShowWearable, ref modified);
-			config.ShowWeather = OnCheckBox("show-animal", config.ShowWeather, ref modified);
+			config.ShowWeather = OnCheckBox("show-weather", config.ShowWeather, ref modified);
 			ImGui.Unindent();
 		}
 
-		config.ShowIcons = OnCheckBox("show-icons", config.ShowIcons, ref modified);
+		// config.ShowIcons = OnCheckBox("show-icons", config.ShowIcons, ref modified);
 		config.MinimumDisplayDuration = OnInputInt("minimum-display-duration", (int)config.MinimumDisplayDuration, ref modified);
 		config.FadeOutDuration = OnInputInt("fade-out-duration", (int)config.FadeOutDuration, ref modified);
 		config.AttenuationRange = OnInputInt("attenuation-range", config.AttenuationRange, ref modified);

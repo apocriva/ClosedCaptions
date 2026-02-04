@@ -21,7 +21,7 @@ public class UserConfig
 
 	public bool IncludeUntagged { get; set; } = false;
 
-	public bool ShowIcons { get; set; } = true;
+	// public bool ShowIcons { get; set; } = true;
 	public long MinimumDisplayDuration { get; set; } = 200;
 	public long FadeOutDuration { get; set; } = 500;
 	public int AttenuationRange { get; set; } = 16;

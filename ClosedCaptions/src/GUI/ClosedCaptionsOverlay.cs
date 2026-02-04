@@ -124,13 +124,13 @@ public class ClosedCaptionsOverlay : HudElement
 			opacity *= percent;
 		}
 
-		string iconText = string.Empty;
-		if (ClosedCaptionsModSystem.UserConfig.ShowIcons &&
-			!string.IsNullOrEmpty(caption.IconType) &&
-			!string.IsNullOrEmpty(caption.IconCode))
-		{
-			iconText = $"<itemstack floattype=\"inline\" type=\"{caption.IconType}\" code=\"{caption.IconCode}\"/>";
-		}
+		// string iconText = string.Empty;
+		// if (ClosedCaptionsModSystem.UserConfig.ShowIcons &&
+		// 	!string.IsNullOrEmpty(caption.IconType) &&
+		// 	!string.IsNullOrEmpty(caption.IconCode))
+		// {
+		// 	iconText = $"<itemstack floattype=\"inline\" type=\"{caption.IconType}\" code=\"{caption.IconCode}\"/>";
+		// }
 
 		string debugInfo = string.Empty;
 		if (ClosedCaptionsModSystem.UserConfig.DebugMode)
@@ -150,13 +150,15 @@ public class ClosedCaptionsOverlay : HudElement
 					: "");
 		}
 
-		var label = $"<font opacity=\"{opacity}\">{leftArrow} {iconText}{caption.Text} {rightArrow}</font>{debugInfo}";
+		var label = $"<font opacity=\"{opacity}\">{leftArrow} {caption.Text} {rightArrow}</font>{debugInfo}";
+		//capi.Logger.Debug("[ClosedCaptions]: " + label);
 
 		return label;
 	}
 
 	private void BuildDialog()
 	{
+		_captionlabels.Clear();
 		var captions = CaptionManager.GetSortedCaptions();
 		if (!captions.Any())
 		{
@@ -175,7 +177,6 @@ public class ClosedCaptionsOverlay : HudElement
 			.AddGameOverlay(bgBounds, bgColor)
 			.BeginChildElements();
 
-		_captionlabels.Clear();
 		double currentY = 0;
 		foreach (var caption in captions)
 		{
