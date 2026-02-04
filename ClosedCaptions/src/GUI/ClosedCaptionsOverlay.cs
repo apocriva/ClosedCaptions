@@ -106,13 +106,22 @@ public class ClosedCaptionsOverlay : HudElement
 			}
 		}
 
-		// Is the caption fading?
 		float opacity = 1f;
+		// Modulate opacity by sound distance.
+		var distance = relativePosition.Length();
+		if (distance > caption.Params.Range)
+		{
+			var span = caption.Params.Range;
+			var percent = (distance - caption.Params.Range / 2) / span * 0.5f;
+			percent = MathF.Max(0f, MathF.Min(percent, 0.5f));
+			opacity *= 1f - percent;
+		}
+		// Modulate opacity if the caption is fading out.
 		if (caption.FadeOutStartTime > 0)
 		{
 			var percent = 1f - (float)(capi.ElapsedMilliseconds - caption.FadeOutStartTime) / ClosedCaptionsModSystem.UserConfig.FadeOutDuration;
+			percent = MathF.Max(0f, MathF.Min(percent, 1f));
 			opacity *= percent;
-			opacity = MathF.Max(0f, MathF.Min(opacity, 1f));
 		}
 
 		string iconText = string.Empty;
@@ -133,7 +142,8 @@ public class ClosedCaptionsOverlay : HudElement
 				//$"<font size=\"10\" color=\"#3333ff\"> vol:{(int)(caption.Params.Volume * 100):D}%</font>" +
 				(!caption.Params.RelativePosition ?
 					$"<font size=\"10\" color=\"#33ff33\"> rel!</font>" +
-					$"<font size=\"10\" color=\"#ffffff\"> distance:{relativePosition.Length():F0}</font>"
+					$"<font size=\"10\" color=\"#ffffff\"> distance:{relativePosition.Length():F0}</font>" +
+					$"<font size=\"10\" color=\"#ffffff\"> range:{caption.Params.Range}</font>"
 					// $"<font size=\"10\" color=\"#33ff33\"> forward:({forward.X:F1}, {forward.Z:F1})</font>" +
 					// $"<font size=\"10\" color=\"#3399ff\"> rel:({relativePosition.X:F1}, {relativePosition.Z:F1})</font>" +
 					// $"<font size=\"10\" color=\"#33ff33\"> angle:{angle}°</font>"
@@ -159,7 +169,7 @@ public class ClosedCaptionsOverlay : HudElement
 			.WithAlignment(EnumDialogArea.CenterBottom)
 			.WithFixedOffset(0, -200);
 		ElementBounds bgBounds = ElementBounds.Fill.WithSizing(ElementSizing.FitToChildren);
-		var bgColor = new double[] { 0.0, 0.0, 0.0, 0.2 };
+		var bgColor = new double[] { 0.0, 0.0, 0.0, 0.3 };
 
 		SingleComposer = capi.Gui.CreateCompo("closedCaptions", dialogBounds)
 			.AddGameOverlay(bgBounds, bgColor)

@@ -66,7 +66,7 @@ public class ClosedCaptionsModSystem : ModSystem
 
 	public override void Dispose()
 	{
-		_cancelSource.Cancel();
+		_cancelSource?.Cancel();
 
 		_manager?.Dispose();
 		patcher?.UnpatchAll(patcher.Id);

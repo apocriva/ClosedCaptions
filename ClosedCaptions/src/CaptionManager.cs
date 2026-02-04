@@ -150,7 +150,10 @@ public class CaptionManager
 				(!caption.IsLoadedSoundDisposed &&
 				!caption.IsPaused &&
 				caption.IsPlaying &&
-				caption.Params.Volume > 0.3f) ||
+				caption.Params.Volume > 0.3f &&
+				(!caption.Params.RelativePosition &&
+				(caption.Params.Position - player.Entity.Pos.XYZFloat).Length() < caption.Params.Range * 2 ||
+				caption.Params.RelativePosition)) ||
 				caption.IsFading)
 			.OrderBy(caption =>
 			{
