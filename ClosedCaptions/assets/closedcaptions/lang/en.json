@@ -140,7 +140,7 @@
 	"closedcaptions:block-water": "[Water splashing]",
 	"closedcaptions:block-waterwheel": "[Water sloshing and wheel grinding]",
 	"closedcaptions:block-wood-tool": "[Chop!]",
-	"closedcaptions:block-woodcreak": "[Creaking]",
+	"closedcaptions:block-wood-creak": "[Wood creaking]",
 
 	// Creatures
 	"closedcaptions:creature": "[Creature noises]",
