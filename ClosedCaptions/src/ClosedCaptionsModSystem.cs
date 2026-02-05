@@ -29,7 +29,7 @@ public class ClosedCaptionsModSystem : ModSystem
 	{
 		base.StartPre(api);
 
-		UserConfig = api.LoadModConfig<UserConfig>(UserConfig.Filename);
+		UserConfig = api.LoadModConfig<UserConfig>(UserConfig.Filename) ?? new UserConfig();
 	}
 
 	public override void StartClientSide(ICoreClientAPI api)
