@@ -18,12 +18,12 @@ public class ClosedCaptionsModSystem : ModSystem
 {
 	public static UserConfig UserConfig = new();
 
-	private Harmony patcher;
-	private ICoreClientAPI _capi;
+	private Harmony? patcher;
+	private ICoreClientAPI? _capi;
 
-	private CaptionManager _manager;
+	private CaptionManager? _manager;
 
-	private CancellationTokenSource _cancelSource;
+	private CancellationTokenSource _cancelSource = new();
 
 	public override void StartPre(ICoreAPI api)
 	{
@@ -48,7 +48,7 @@ public class ClosedCaptionsModSystem : ModSystem
 		if (api.ModLoader.IsModEnabled("configlib"))
 		{
 			var configlib = api.ModLoader.GetModSystem<ConfigLibModSystem>();
-			configlib.RegisterCustomConfig(Lang.Get("closedcaptions:config"), (id, buttons) => EditConfig(id, buttons, api));
+			configlib.RegisterCustomConfig(Lang.Get("closedcaptions:config"), (id, buttons) => EditConfig(buttons, api));
 		}
 
 		_cancelSource = new CancellationTokenSource();
@@ -72,7 +72,7 @@ public class ClosedCaptionsModSystem : ModSystem
 		patcher?.UnpatchAll(patcher.Id);
 	}
 
-	private void EditConfig(string id, ControlButtons buttons, ICoreAPI api)
+	private void EditConfig(ControlButtons buttons, ICoreAPI api)
 	{
 		if (buttons.Save)
 			api.StoreModConfig(UserConfig, UserConfig.Filename);
@@ -83,11 +83,11 @@ public class ClosedCaptionsModSystem : ModSystem
 
 		if (UserConfig != null)
 		{
-			BuildSettings(UserConfig, id);
+			BuildSettings(UserConfig);
 		}
 	}
 
-	private void BuildSettings(UserConfig config, string id)
+	private void BuildSettings(UserConfig config)
 	{
 		var modified = false;
 
@@ -163,7 +163,7 @@ public class ClosedCaptionsModSystem : ModSystem
 		config.DebugMode = OnCheckBox("debug-mode", config.DebugMode, ref modified);
 
 		if (modified)
-			_manager.ForceRefresh();
+			_manager?.ForceRefresh();
 	}
 
 	private bool OnCheckBox(string option, bool value, ref bool modified)

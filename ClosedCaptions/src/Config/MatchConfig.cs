@@ -14,21 +14,21 @@ public class MatchConfig
 
     public class MatchGroup
 	{
-		public string Group;
-		public string DefaultKey;
-        public Mapping[] Mappings;
+		public string Group = "";
+		public string DefaultKey = "";
+        public Mapping[] Mappings = [];
 	}
 
 	public class Mapping
 	{
-		public string Match;
-        public string CaptionKey;
+		public string Match = "";
+        public string CaptionKey = "";
 		[JsonConverter(typeof(FlagsConverter))]
-		public CaptionManager.Tags Tags;
+		public CaptionManager.Tags Tags = CaptionManager.Tags.None;
 		[JsonConverter(typeof(FlagsConverter))]
-		public CaptionManager.Flags Flags;
-		public string IconType;
-		public string IconCode;
+		public CaptionManager.Flags Flags = CaptionManager.Flags.None;
+		public string IconType = "";
+		public string IconCode = "";
 
 		private class FlagsConverter : JsonConverter
 		{
@@ -59,8 +59,8 @@ public class MatchConfig
 		}
 	}
 
-	public string[] Ignore;
-	public MatchGroup[] SoundMap;
+	public string[] Ignore = [];
+	public MatchGroup[] SoundMap = [];
 
 	public ICoreClientAPI? Api { get; set; }
 
@@ -75,8 +75,8 @@ public class MatchConfig
 		text = null;
 		tags = CaptionManager.Tags.None;
 		flags = CaptionManager.Flags.None;
-		iconType = null;
-		iconCode = null;
+		iconType = "";
+		iconCode = "";
 
 		// Check if this is an outright ignored sound.
 		foreach (var ignore in Ignore)

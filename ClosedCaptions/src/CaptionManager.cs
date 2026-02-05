@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using ClosedCaptions.Config;
 using ClosedCaptions.Extensions;
@@ -114,11 +115,30 @@ public class CaptionManager
 		}
 	}
 
-	private static CaptionManager _instance;
-	private static ICoreClientAPI _capi;
+	private static CaptionManager? _instance;
+	private static CaptionManager Instance
+	{
+		get
+		{
+			if (_instance == null)
+				throw new NullReferenceException();
+			return _instance;
+		}
+	}
 
-	private ClosedCaptionsOverlay _overlay;
-	private MatchConfig _matchConfig;
+	private static ICoreClientAPI? _capi;
+	private static ICoreClientAPI API
+	{
+		get
+		{
+			if (_capi == null)
+				throw new NullReferenceException();
+			return _capi;
+		}
+	}
+
+	private readonly ClosedCaptionsOverlay _overlay;
+	private readonly MatchConfig _matchConfig;
 	private long _nextCaptionId = 1;
 	private readonly List<Caption> _captions = [];
 
@@ -150,23 +170,26 @@ public class CaptionManager
 		string? text = null;
 		Tags tags = Tags.None;
 		Flags flags = Flags.None;
-		string? iconType = null;
-		string? iconCode = null;
+		string iconType = "";
+		string iconCode = "";
 
-		if (!_instance._matchConfig.FindCaptionForSound(location, ref text, ref tags, ref flags, ref iconType, ref iconCode))
+		if (!Instance._matchConfig.FindCaptionForSound(location, ref text, ref tags, ref flags, ref iconType, ref iconCode))
 		{
-			if (text == null || !ClosedCaptionsModSystem.UserConfig.ShowUnknown)
+			if (!ClosedCaptionsModSystem.UserConfig.ShowUnknown)
 				return;
 		}
 
-		if (_instance.IsFiltered(loadedSound, tags))
+		if (text == null)
 			return;
 
-		var duplicate = _instance.FindDuplicate(loadedSound, text);
+		if (Instance.IsFiltered(loadedSound, tags))
+			return;
+
+		var duplicate = Instance.FindDuplicate(loadedSound, text);
 		if (duplicate != null)
 		{
 			// Update with a new timestamp.
-			duplicate.StartTime = _capi.ElapsedMilliseconds;
+			duplicate.StartTime = API.ElapsedMilliseconds;
 			duplicate.FadeOutStartTime = 0;
 			duplicate.LoadedSound = loadedSound;
 
@@ -175,7 +198,7 @@ public class CaptionManager
 				duplicate.Position = Vec3f.Zero;
 			else
 			{
-				var playerPos = _capi.World.Player.Entity.Pos.XYZ.ToVec3f();
+				var playerPos = API.World.Player.Entity.Pos.XYZ.ToVec3f();
 				var newDistance = (loadedSound.Params.Position - playerPos).Length();
 				var oldDistance = (duplicate.Position - playerPos).Length();
 
@@ -183,30 +206,30 @@ public class CaptionManager
 					duplicate.Position = loadedSound.Params.Position;
 			}
 
-			_instance._needsRefresh = true;
+			Instance._needsRefresh = true;
 			return;
 		}
 
-		_instance._captions.Add(new Caption(
-			_instance._nextCaptionId++,
+		Instance._captions.Add(new Caption(
+			Instance._nextCaptionId++,
 			loadedSound,
-			_capi.ElapsedMilliseconds,
+			API.ElapsedMilliseconds,
 			text,
 			tags,
 			flags,
 			iconType,
 			iconCode
 			));
-		_instance._needsRefresh = true;
+		Instance._needsRefresh = true;
 	}
 
 	public static IOrderedEnumerable<Caption> GetSortedCaptions()
 	{
-		var player = _capi.World.Player;
+		var player = API.World.Player;
 		// This has an error for a sound that is reverbing
 		// Also an error where sounds that are far enough away that they haven't displayed
 		// are still being displayed when they stop. This whole thing needs to be refactored!
-		var ordered = _instance._captions
+		var ordered = Instance._captions
 			// .Where(caption =>
 			// 	(!caption.IsLoadedSoundDisposed &&
 			// 	!caption.IsPaused &&
@@ -257,7 +280,7 @@ public class CaptionManager
 
 	public static IEnumerable<Caption> GetCaptions()
 	{
-		return _instance._captions.AsReadOnly();
+		return Instance._captions.AsReadOnly();
 	}
 
 	public void ForceRefresh()
@@ -265,7 +288,7 @@ public class CaptionManager
 		// Rebuild caption list.
 		_captions.Clear();
 
-		foreach (var loadedSound in _capi.GetActiveSounds())
+		foreach (var loadedSound in API.GetActiveSounds())
 		{
 			SoundStarted(loadedSound, loadedSound.Params.Location);
 		}
@@ -286,13 +309,13 @@ public class CaptionManager
 				caption.FlagAsDisposed();
 
 				// Want the caption to show up for at least long enough to read
-				caption.FadeOutStartTime = _capi.ElapsedMilliseconds;
+				caption.FadeOutStartTime = API.ElapsedMilliseconds;
 				if (caption.FadeOutStartTime < caption.StartTime + ClosedCaptionsModSystem.UserConfig.MinimumDisplayDuration)
 					caption.FadeOutStartTime = caption.StartTime + ClosedCaptionsModSystem.UserConfig.MinimumDisplayDuration;
 			}
 			else if (caption.IsFading)
 			{
-				if (_capi.ElapsedMilliseconds - caption.FadeOutStartTime > ClosedCaptionsModSystem.UserConfig.FadeOutDuration)
+				if (API.ElapsedMilliseconds - caption.FadeOutStartTime > ClosedCaptionsModSystem.UserConfig.FadeOutDuration)
 				{
 					_captions.RemoveAt(i);
 					refresh = true;
@@ -330,9 +353,9 @@ public class CaptionManager
 					return caption;
 
 				// Filter sounds that are very similar and close to sounds that are already playing.
-				var position = newSound.Params.Position ?? _capi.World.Player.Entity.Pos.XYZ.ToVec3f();
+				var position = newSound.Params.Position ?? API.World.Player.Entity.Pos.XYZ.ToVec3f();
 				var distance = (position - caption.Params.Position).Length();
-				if (_capi.ElapsedMilliseconds - caption.StartTime < ClosedCaptionsModSystem.UserConfig.GroupingMaxTime &&
+				if (API.ElapsedMilliseconds - caption.StartTime < ClosedCaptionsModSystem.UserConfig.GroupingMaxTime &&
 					distance < ClosedCaptionsModSystem.UserConfig.GroupingRange)
 					return caption;
 			}
