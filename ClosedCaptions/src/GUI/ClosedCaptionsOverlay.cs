@@ -16,7 +16,7 @@ namespace ClosedCaptions.GUI;
 
 public class ClosedCaptionsOverlay : HudElement
 {
-	public override double DrawOrder => 0.6;
+	public override double DrawOrder => -0.5;
 	public override bool ShouldReceiveMouseEvents() => false;
 
 	private static readonly float FontSize = 20f;
@@ -194,7 +194,7 @@ public class ClosedCaptionsOverlay : HudElement
 
 		SingleComposer.EndChildElements();
 
-        try
+		try
         {
             SingleComposer.Compose();
         }
