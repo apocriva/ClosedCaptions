@@ -147,13 +147,17 @@ public class CaptionManager
 	{
 		//_capi.Logger.Log(EnumLogType.Debug, string.Format("StartPlaying: {0}", location));
 
+		string? text = null;
 		Tags tags = Tags.None;
 		Flags flags = Flags.None;
 		string? iconType = null;
 		string? iconCode = null;
-		var text = _instance._matchConfig.FindCaptionForSound(location, ref tags, ref flags, ref iconType, ref iconCode);
-		if (text == null)
-			return;
+
+		if (!_instance._matchConfig.FindCaptionForSound(location, ref text, ref tags, ref flags, ref iconType, ref iconCode))
+		{
+			if (text == null || !ClosedCaptionsModSystem.UserConfig.ShowUnknown)
+				return;
+		}
 
 		if (_instance.IsFiltered(loadedSound, tags))
 			return;
@@ -182,9 +186,6 @@ public class CaptionManager
 			_instance._needsRefresh = true;
 			return;
 		}
-
-		if (string.IsNullOrEmpty(text))
-			text = "[" + location.GetName() + "?]";
 
 		_instance._captions.Add(new Caption(
 			_instance._nextCaptionId++,
@@ -234,8 +235,7 @@ public class CaptionManager
 
 				if (caption.IsPlaying &&
 					!caption.IsPaused &&
-					distance < caption.Params.Range &&
-					caption.Params.Volume > float.Epsilon)
+					distance < caption.Params.Range)
 					return true;
 
 				return false;
@@ -286,7 +286,6 @@ public class CaptionManager
 				caption.FlagAsDisposed();
 
 				// Want the caption to show up for at least long enough to read
-				_capi.Logger.Debug($"[ClosedCaptions] Disposed {caption.Params.Location}, start={caption.StartTime} now={_capi.ElapsedMilliseconds} earliest={caption.StartTime + ClosedCaptionsModSystem.UserConfig.MinimumDisplayDuration}");
 				caption.FadeOutStartTime = _capi.ElapsedMilliseconds;
 				if (caption.FadeOutStartTime < caption.StartTime + ClosedCaptionsModSystem.UserConfig.MinimumDisplayDuration)
 					caption.FadeOutStartTime = caption.StartTime + ClosedCaptionsModSystem.UserConfig.MinimumDisplayDuration;

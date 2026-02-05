@@ -130,6 +130,7 @@ public class ClosedCaptionsModSystem : ModSystem
 				config.ShowWalk = false;
 				config.ShowWearable = false;
 				config.ShowWeather = false;
+				config.ShowUnknown = false;
 			}
 			config.ShowAmbience = OnCheckBox("show-ambience", config.ShowAmbience, ref modified);
 			config.ShowAnimal = OnCheckBox("show-animal", config.ShowAnimal, ref modified);
@@ -145,6 +146,7 @@ public class ClosedCaptionsModSystem : ModSystem
 			config.ShowWalk = OnCheckBox("show-walk", config.ShowWalk, ref modified);
 			config.ShowWearable = OnCheckBox("show-wearable", config.ShowWearable, ref modified);
 			config.ShowWeather = OnCheckBox("show-weather", config.ShowWeather, ref modified);
+			config.ShowUnknown = OnCheckBox("show-unknown", config.ShowUnknown, ref modified);
 			ImGui.Unindent();
 		}
 

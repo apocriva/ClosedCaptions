@@ -32,8 +32,8 @@
 	"closedcaptions:config-show-wearable-tooltip": "Sounds from wearables/armor. Very noisy while walking!",
 	"closedcaptions:config-show-weather": "Show weather sounds",
 	"closedcaptions:config-show-weather-tooltip": "Weather sounds. Wind, rain, hail, etc.",
-	"closedcaptions:config-include-untagged": "Include untagged sounds",
-	"closedcaptions:config-include-untagged-tooltip": "Sounds which are not in any of the above categories. Mostly UI sounds.",
+	"closedcaptions:config-show-unknown": "Show unknown sounds",
+	"closedcaptions:config-show-unknown-tooltip": "Sounds which are not configured. Likely from other mods.",
 
 	"closedcaptions:config-show-icons": "Show icons",
 	"closedcaptions:config-show-icons-tooltip": "Show icons in the captions. Not supported by every sound.",

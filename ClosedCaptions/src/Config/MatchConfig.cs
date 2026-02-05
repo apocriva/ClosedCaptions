@@ -64,9 +64,15 @@ public class MatchConfig
 
 	public ICoreClientAPI? Api { get; set; }
 
-	public string? FindCaptionForSound(AssetLocation location, ref CaptionManager.Tags tags, ref CaptionManager.Flags flags, ref string iconType, ref string iconCode)
+	public bool FindCaptionForSound(
+		AssetLocation location,
+		ref string? text,
+		ref CaptionManager.Tags tags,
+		ref CaptionManager.Flags flags,
+		ref string iconType,
+		ref string iconCode)
 	{
-		string? ret = null;
+		text = null;
 		tags = CaptionManager.Tags.None;
 		flags = CaptionManager.Flags.None;
 		iconType = null;
@@ -76,7 +82,7 @@ public class MatchConfig
 		foreach (var ignore in Ignore)
 		{
 			if (WildcardUtil.Match(new AssetLocation(ignore), location))
-				return null;
+				return false;
 		}
 
 		// Iterate the mappings in reverse, to prioritize more recently-added
@@ -99,17 +105,25 @@ public class MatchConfig
 							iconType = mapping.IconType;
 						if (!string.IsNullOrEmpty(mapping.IconCode))
 							iconCode = mapping.IconCode;
-						return Lang.Get(mapping.CaptionKey);
+						text = Lang.Get(mapping.CaptionKey);
+						return true;
 					}
 				}
 
 				// It did not have a better match. Store the group's default
 				// key for now in case for some reason there's another match
 				// group that has a better match.
-				ret ??= Lang.Get(matchGroup.DefaultKey);
+				text ??= Lang.Get(matchGroup.DefaultKey);
 			}
 		}
 
-		return ret;
+		// Text can be null, if the sound was not matched, in which case it is an unknown sound.
+		if (text == null)
+		{
+			text = Lang.Get("closedcaptions:unknown-sound");
+			return false;
+		}
+
+		return true;
 	}
 }

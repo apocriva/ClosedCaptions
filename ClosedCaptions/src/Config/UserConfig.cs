@@ -18,8 +18,7 @@ public class UserConfig
 	public bool ShowWalk { get; set; } = false;
 	public bool ShowWearable { get; set; } = false;
 	public bool ShowWeather { get; set; } = true;
-
-	public bool IncludeUntagged { get; set; } = false;
+	public bool ShowUnknown { get; set; } = false;
 
 	// public bool ShowIcons { get; set; } = true;
 	public int DisplayOffset { get; set; } = 300;
