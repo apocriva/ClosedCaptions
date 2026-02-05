@@ -5,7 +5,8 @@
 		"sounds/stone_switch.ogg",
 		"sounds/tick.ogg",
 		"sounds/toggleswitch.ogg",
-		"sounds/creature/hooved/elk/bellowafter.ogg",
+		"sounds/creature/animal/mammal/hooved/deer/elk-bellowafter.ogg",
+		"sounds/block/waterwheel-wood.ogg",
 	],
 	"soundMap": [
 		{
@@ -52,6 +53,7 @@
 				{ "match": "sounds/block/door.ogg", "tags": "block,interaction", "captionKey": "closedcaptions:block-door" },
 				{ "match": "sounds/block/glass.ogg", "tags": "block,interaction", "captionKey": "closedcaptions:block-glass" },
 				{ "match": "sounds/block/gravel.ogg", "tags": "block", "captionKey": "closedcaptions:block-gravel" },
+				{ "match": "sounds/block/grindingwheel.ogg", "tags": "block,interaction,tool", "captionKey": "closedcaptions:block-grindingwheel" },
 				{ "match": "sounds/block/heavyice.ogg", "tags": "block", "captionKey": "closedcaptions:block-heavyice" },
 				{ "match": "sounds/block/heavymetal*", "tags": "block", "captionKey": "closedcaptions:block-heavymetal" },
 				{ "match": "sounds/block/hewnfancegate.ogg", "tags": "block,interaction", "captionKey": "closedcaptions:block-hewnfencegate" },
@@ -95,6 +97,7 @@
 				{ "match": "sounds/block/vesselopen.ogg", "tags": "interaction", "captionKey": "closedcaptions:block-vessel-open" },
 				{ "match": "sounds/block/vinyl.ogg", "tags": "block,environment", "captionKey": "closedcaptions:block-vinyl" },
 				{ "match": "sounds/block/water.ogg", "captionKey": "closedcaptions:block-water" },
+				{ "match": "sounds/block/waterwheel-water.ogg", "tags": "block,environment", "captionKey": "closedcaptions:block-waterwheel" },
 				{ "match": "sounds/block/wood-tool.ogg", "tags": "block,interaction", "captionKey": "closedcaptions:block-wood-tool" },
 				{ "match": "sounds/block/woodcreak*", "tags": "block,environment", "captionKey": "closedcaptions:block-wood-creak" },
 			]
@@ -103,6 +106,7 @@
 			"group": "sounds/creature*",
 			"defaultKey": "closedcaptions:creature",
 			"mappings": [
+				{ "match": "sounds/creature/charlemange*", "tags": "danger,enemy", "captionKey": "closedcaptions:creature-charlemange" },
 				{ "match": "sounds/creature/eidolon*", "tags": "danger,enemy", "captionKey": "closedcaptions:creature-eidolon" },
 				{ "match": "sounds/creature/erel*", "tags": "danger,enemy", "captionKey": "closedcaptions:creature-erel" },
 				{ "match": "sounds/creature/animal-eat*", "tags": "animal", "captionKey": "closedcaptions:creature-animal-eat" },
@@ -118,14 +122,37 @@
 			]
 		},
 		{
+			"group": "sounds/creature/animal/hooved/deer*",
+			"defaultKey": "closedcaptions:creature",
+			"mappings": [
+				{ "match": "sounds/creature/animal/hooved/deer/elk-bellow*", "tags": "animal", "captionKey": "closedcaptions:creature-elk-bellow" },
+				{ "match": "sounds/creature/animal/hooved/deer/elk-bugle*", "tags": "animal", "captionKey": "closedcaptions:creature-elk-bugle" },
+				{ "match": "sounds/creature/animal/hooved/deer/elk-death*", "tags": "animal,combat", "captionKey": "closedcaptions:creature-elk-death" },
+				{ "match": "sounds/creature/animal/hooved/deer/elk-hurt*", "tags": "animal,combat", "captionKey": "closedcaptions:creature-elk-hurt" },
+			]
+		},
+		{
 			"group": "sounds/creature/bear*",
 			"defaultKey": "closedcaptions:creature-bear",
 			"mappings": [
+				{ "match": "sounds/creature/bear/footsteps*", "tags": "animal,combat", "captionKey": "closedcaptions:creature-bear-footsteps" },
 				{ "match": "sounds/creature/bear/aggro.ogg", "tags": "animal,danger", "captionKey": "closedcaptions:creature-bear-aggro" },
 				{ "match": "sounds/creature/bear/attack.ogg", "tags": "animal,combat,danger", "captionKey": "closedcaptions:creature-bear-attack" },
 				{ "match": "sounds/creature/bear/flee.ogg", "tags": "animal,combat", "captionKey": "closedcaptions:creature-bear-flee" },
 				{ "match": "sounds/creature/bear/growl*", "tags": "animal,danger", "captionKey": "closedcaptions:creature-bear-growl" },
-				{ "match": "sounds/creature/bear/hurt.ogg", "tags": "animal,combat", "captionKey": "closedcaptions:creature-bear-hurt" }
+				{ "match": "sounds/creature/bear/hurt.ogg", "tags": "animal,combat", "captionKey": "closedcaptions:creature-bear-hurt" },
+			]
+		},
+		{
+			"group": "sounds/creature/bell*",
+			"defaultKey": "closedcaptions:creature",
+			"mappings": [
+				{ "match": "sounds/creature/bell/alarm.ogg", "tags": "danger,enemy", "captionKey": "closedcaptions:creature-bell-alarm" },
+				{ "match": "sounds/creature/bell/bell.ogg", "tags": "enemy", "captionKey": "closedcaptions:creature-bell-bell" },
+				{ "match": "sounds/creature/bell/death.ogg", "tags": "combat,enemy", "captionKey": "closedcaptions:creature-bell-death" },
+				{ "match": "sounds/creature/bell/hurt.ogg", "tags": "combat,enemy", "captionKey": "closedcaptions:creature-bell-hurt" },
+				{ "match": "sounds/creature/bell/listen.ogg", "tags": "enemy", "captionKey": "closedcaptions:creature-bell-listen" },
+				{ "match": "sounds/creature/bell/walk.ogg", "tags": "danger,enemy", "captionKey": "closedcaptions:creature-bell-walk" },
 			]
 		},
 		{
@@ -197,8 +224,6 @@
 			"mappings": [
 				{ "match": "sounds/creature/hooved/generic/call*", "tags": "animal", "captionKey": "closedcaptions:creature-hooved-generic-call" },
 				{ "match": "sounds/creature/hooved/generic/sniff.ogg", "tags": "animal", "captionKey": "closedcaptions:creature-hooved-generic-sniff" },
-				{ "match": "sounds/creature/hooved/large/elk/bellow*", "tags": "animal", "captionKey": "closedcaptions:creature-hooved-elk-bellow" },
-				{ "match": "sounds/creature/hooved/large/elk/bugle*", "tags": "animal", "captionKey": "closedcaptions:creature-hooved-elk-bugle" },
 				{ "match": "sounds/creature/hooved/large/redstag/bellow*", "tags": "animal", "captionKey": "closedcaptions:creature-hooved-redstag-bellow" },
 				{ "match": "sounds/creature/hooved/large/redstag/roar*", "tags": "animal", "captionKey": "closedcaptions:creature-hooved-redstag-roar" },
 				{ "match": "sounds/creature/hooved/medium/buck-bellow*", "tags": "animal", "captionKey": "closedcaptions:creature-hooved-buck-bellow" },
@@ -282,8 +307,9 @@
 			"group": "sounds/creature/wolf*",
 			"defaultKey": "closedcaptions:creature-wolf",
 			"mappings": [
-				{ "match": "sounds/creature/wolf/attack.ogg", "tags": "animal,combat,danger", "captionKey": "closedcaptions:creature-wolf-attack" },
-				{ "match": "sounds/creature/wolf/growl.ogg", "tags": "animal,danger", "captionKey": "closedcaptions:creature-wolf-growl" },
+				{ "match": "sounds/creature/wolf/attack*", "tags": "animal,combat,danger", "captionKey": "closedcaptions:creature-wolf-attack" },
+				{ "match": "sounds/creature/wolf/footsteps*", "tags": "animal,danger", "captionKey": "closedcaptions:creature-wolf-footsteps" },
+				{ "match": "sounds/creature/wolf/growl*", "tags": "animal,danger", "captionKey": "closedcaptions:creature-wolf-growl" },
 				{ "match": "sounds/creature/wolf/howl*", "tags": "animal,danger", "captionKey": "closedcaptions:creature-wolf-howl" },
 				{ "match": "sounds/creature/wolf/hurt.ogg", "tags": "animal,combat", "captionKey": "closedcaptions:creature-wolf-hurt" },
 				{ "match": "sounds/creature/wolf/pup-bark.ogg", "tags": "animal", "captionKey": "closedcaptions:creature-wolf-pup-bark" },
@@ -298,6 +324,7 @@
 			"mappings": [
 				{ "match": "sounds/effect/anvilhit*", "tags":"interaction,tool", "captionKey": "closedcaptions:effect-anvilhit" },
 				{ "match": "sounds/effect/anvilmergehit.ogg", "tags":"interaction,tool", "captionKey": "closedcaptions:effect-anvilmergehit" },
+				{ "match": "sounds/effect/bellows.ogg", "tags":"interaction,tool", "captionKey": "closedcaptions:effect-bellows" },
 				{ "match": "sounds/effect/cashregister.ogg", "tags":"interaction,tool", "captionKey": "closedcaptions:effect-cashregister" },
 				{ "match": "sounds/effect/clayform.ogg", "tags":"interaction,tool", "captionKey": "closedcaptions:effect-clayform" },
 				{ "match": "sounds/effect/clothrip.ogg", "tags":"interaction,tool", "captionKey": "closedcaptions:effect-clothrip" },
@@ -315,15 +342,18 @@
 				{ "match": "sounds/effect/latch.ogg", "tags":"ambience,environment,interaction", "captionKey": "closedcaptions:effect-latch" },
 				{ "match": "sounds/effect/longfuse.ogg", "tags":"ambience,danger,environment,tool", "captionKey": "closedcaptions:effect-longfuse" },
 				{ "match": "sounds/effect/mediumexplosion.ogg", "tags":"danger,environment,tool", "captionKey": "closedcaptions:effect-explosion-medium" },
+				{ "match": "sounds/effect/metalgrinding.ogg", "tags":"interaction,tool", "captionKey": "closedcaptions:effect-metalgrinding" },
 				{ "match": "sounds/effect/moltenmetal.ogg", "tags":"ambience,environment", "captionKey": "closedcaptions:effect-moltenmetal" },
 				{ "match": "sounds/effect/noise.ogg", "tags":"ambience,environment", "captionKey": "closedcaptions:effect-noise" },
 				{ "match": "sounds/effect/planetary_gears.ogg", "tags":"ambience,environment", "captionKey": "closedcaptions:effect-planetarygears" },
+				{ "match": "sounds/effect/poleswing.ogg", "tags":"interaction,tool", "captionKey": "closedcaptions:effect-poleswing" },
 				{ "match": "sounds/effect/portal.ogg", "tags":"ambience,environment", "captionKey": "closedcaptions:effect-portal" },
 				{ "match": "sounds/effect/receptionbell.ogg", "tags":"ambience,environment,interaction", "captionKey": "closedcaptions:effect-receptionbell" },
 				{ "match": "sounds/effect/rift.ogg", "tags":"ambience,danger,environment,temporal", "flags": "unique", "captionKey": "closedcaptions:effect-rift" },
 				{ "match": "sounds/effect/rockslide.ogg", "tags":"ambience,danger,environment", "flags": "unique", "captionKey": "closedcaptions:effect-rockslide" },
 				{ "match": "sounds/effect/ropestretch.ogg", "tags":"interaction,tool", "captionKey": "closedcaptions:effect-ropestretch" },
 				{ "match": "sounds/effect/smallexplosion.ogg", "tags":"danger,environment,tool", "captionKey": "closedcaptions:effect-explosion-small" },
+				{ "match": "sounds/effect/snowshovelling.ogg", "tags":"interaction,tool", "captionKey": "closedcaptions:effect-snowshovelling" },
 				{ "match": "sounds/effect/squish*", "tags":"interaction,tool", "captionKey": "closedcaptions:effect-squish" },
 				{ "match": "sounds/effect/stonecrush.ogg", "tags":"interation,tool", "captionKey": "closedcaptions:effect-stonecrush" },
 				{ "match": "sounds/effect/swoosh.ogg", "tags":"ambience,environment", "captionKey": "closedcaptions:effect-swoosh" },
@@ -342,6 +372,7 @@
 				{ "match": "sounds/effect/watering.ogg", "tags": "interaction,tool", "captionKey": "closedcaptions:effect-watering" },
 				{ "match": "sounds/effect/woodgrind.ogg", "tags": "interaction,tool", "captionKey": "closedcaptions:effect-woodgrind" },
 				{ "match": "sounds/effect/woodswitch.ogg", "tags": "interaction,tool", "captionKey": "closedcaptions:effect-woodswitch" },
+				{ "match": "sounds/effect/wormgrunting.ogg", "tags":"interaction,tool", "captionKey": "closedcaptions:effect-wormgrunting" },
 				{ "match": "sounds/effect/writing.ogg", "tags": "interaction,tool", "captionKey": "closedcaptions:effect-writing" },
 			]
 		},
@@ -357,6 +388,7 @@
 				{ "match": "sounds/environment/lava.ogg", "tags": "ambience,environment", "captionKey": "closedcaptions:environment-lava" },
 				{ "match": "sounds/environment/mediumsplash.ogg", "tags": "ambience,environment", "captionKey": "closedcaptions:environment-splash-medium" },
 				{ "match": "sounds/environment/rainwindow.ogg", "tags": "weather", "flags": "directionless,unique", "captionKey": "closedcaptions:environment-rainwindow" },
+				{ "match": "sounds/environment/rapids.ogg", "tags":"environment", "flags": "unique", "captionKey": "closedcaptions:environment-rapids" },
 				{ "match": "sounds/environment/smallsplash.ogg", "tags": "ambience,environment", "captionKey": "closedcaptions:environment-splash-small" },
 				{ "match": "sounds/environment/underwater.ogg", "tags": "ambience", "captionKey": "closedcaptions:environment-underwater" },
 				{ "match": "sounds/environment/waterfall.ogg", "tags": "ambience,environment", "flags": "unique", "captionKey": "closedcaptions:environment-waterfall" },

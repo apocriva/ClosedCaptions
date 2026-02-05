@@ -249,7 +249,7 @@ public class CaptionManager
 				if (caption.Params.RelativePosition)
 					relativePosition = caption.Params.Position;
 
-				return -relativePosition.Length();
+				return (float)-relativePosition.Length();
 			});
 
 		return ordered;

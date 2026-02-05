@@ -20,6 +20,8 @@
                 // "--playStyle" , "preset-surviveandbuild",
                 "--openWorld" , "modding test world",
                 "--tracelog",
+				"--dataPath",
+				"${env:VINTAGE_STORY_DATA}",
                 "--addModPath",
                 "${workspaceFolder}/ClosedCaptions/bin/Debug/Mods",
                 "--addOrigin",

@@ -9,6 +9,7 @@
     "description": "To be added",
     "version": "0.0.1",
     "dependencies": {
-        "game": "1.21.0"
+        "game": "1.22.0-pre.1",
+		"configlib": "1.10.13"
     }
 }
