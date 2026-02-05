@@ -37,6 +37,10 @@
 
 	"closedcaptions:config-show-icons": "Show icons",
 	"closedcaptions:config-show-icons-tooltip": "Show icons in the captions. Not supported by every sound.",
+	"closedcaptions:config-display-offset": "Display offset",
+	"closedcaptions:config-display-offset-tooltip": "Offset from anchor for caption display.",
+	"closedcaptions:config-minimum-direction-distance": "Minimum direction distance (blocks)",
+	"closedcaptions:config-minimum-direction-distance-tooltip": "Only sounds further than this will show direction indicators.",
 	"closedcaptions:config-minimum-display-duration": "Minimum display duration (ms)",
 	"closedcaptions:config-minimum-display-duration-tooltip": "Minimum duration to display a caption. Allows short sounds to remain visible long enough to read.",
 	"closedcaptions:config-fade-out-duration": "Fade out duration (ms)",

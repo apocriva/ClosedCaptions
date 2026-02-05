@@ -33,6 +33,14 @@ public class CaptionManager
 		Weather		= 1 << 13,
 	}
 
+	[Flags]
+	public enum Flags
+	{
+		None			= 0,
+		Unique			= 1 << 0,
+		Directionless	= 1 << 1,
+	}
+
 	public class Caption
 	{
 		public readonly long ID;
@@ -41,6 +49,7 @@ public class CaptionManager
 		public long StartTime;
 		public long FadeOutStartTime;
 		public readonly Tags Tags;
+		public readonly Flags Flags;
 		public readonly string? IconType;
 		public readonly string? IconCode;
 
@@ -56,9 +65,15 @@ public class CaptionManager
 
 				return Vec3f.Zero;
 			}
+
+			set
+			{
+				if (Params.Position != null)
+					Params.Position = value;
+			}
 		}
 
-		public Caption(long id, ILoadedSound loadedSound, long startTime, string text, Tags tags, string? iconType = null, string? iconCode = null)
+		public Caption(long id, ILoadedSound loadedSound, long startTime, string text, Tags tags, Flags flags, string? iconType = null, string? iconCode = null)
 		{
 			ID = id;
 			LoadedSound = loadedSound;
@@ -66,6 +81,7 @@ public class CaptionManager
 			Text = text;
 			FadeOutStartTime = 0;
 			Tags = tags;
+			Flags = flags;
 			IconType = iconType;
 			IconCode = iconCode;
 
@@ -132,9 +148,10 @@ public class CaptionManager
 		//_capi.Logger.Log(EnumLogType.Debug, string.Format("StartPlaying: {0}", location));
 
 		Tags tags = Tags.None;
+		Flags flags = Flags.None;
 		string? iconType = null;
 		string? iconCode = null;
-		var text = _instance._matchConfig.FindCaptionForSound(location, ref tags, ref iconType, ref iconCode);
+		var text = _instance._matchConfig.FindCaptionForSound(location, ref tags, ref flags, ref iconType, ref iconCode);
 		if (text == null)
 			return;
 
@@ -148,6 +165,20 @@ public class CaptionManager
 			duplicate.StartTime = _capi.ElapsedMilliseconds;
 			duplicate.FadeOutStartTime = 0;
 			duplicate.LoadedSound = loadedSound;
+
+			// Use the location of the sound that's closest.
+			if (loadedSound.Params.RelativePosition ||loadedSound.Params.Position == null)
+				duplicate.Position = Vec3f.Zero;
+			else
+			{
+				var playerPos = _capi.World.Player.Entity.Pos.XYZ.ToVec3f();
+				var newDistance = (loadedSound.Params.Position - playerPos).Length();
+				var oldDistance = (duplicate.Position - playerPos).Length();
+
+				if (newDistance < oldDistance)
+					duplicate.Position = loadedSound.Params.Position;
+			}
+
 			_instance._needsRefresh = true;
 			return;
 		}
@@ -161,6 +192,7 @@ public class CaptionManager
 			_capi.ElapsedMilliseconds,
 			text,
 			tags,
+			flags,
 			iconType,
 			iconCode
 			));
@@ -171,16 +203,43 @@ public class CaptionManager
 	{
 		var player = _capi.World.Player;
 		// This has an error for a sound that is reverbing
+		// Also an error where sounds that are far enough away that they haven't displayed
+		// are still being displayed when they stop. This whole thing needs to be refactored!
 		var ordered = _instance._captions
+			// .Where(caption =>
+			// 	(!caption.IsLoadedSoundDisposed &&
+			// 	!caption.IsPaused &&
+			// 	caption.IsPlaying &&
+			// 	caption.Params.Volume > 0.1f &&
+			// 	(!caption.Params.RelativePosition &&
+			// 	(caption.Params.Position - player.Entity.Pos.XYZFloat).Length() < caption.Params.Range ||
+			// 	caption.Params.RelativePosition)) ||
+			// 	caption.IsFading)
 			.Where(caption =>
-				(!caption.IsLoadedSoundDisposed &&
-				!caption.IsPaused &&
-				caption.IsPlaying &&
-				caption.Params.Volume > 0.1f &&
-				(!caption.Params.RelativePosition &&
-				(caption.Params.Position - player.Entity.Pos.XYZFloat).Length() < caption.Params.Range ||
-				caption.Params.RelativePosition)) ||
-				caption.IsFading)
+			{
+				var distance = 0f;
+				if (!caption.Params.RelativePosition)
+					distance = (caption.Params.Position - player.Entity.Pos.XYZFloat).Length();
+				
+				// We show disposed sounds...
+				if (caption.IsLoadedSoundDisposed)
+				{
+					// ...but only if they are fading _and_ were already visible.
+					// (TODO: second part of that)
+					if (caption.IsFading && distance < caption.Params.Range)
+						return true;
+
+					return false;
+				}
+
+				if (caption.IsPlaying &&
+					!caption.IsPaused &&
+					distance < caption.Params.Range &&
+					caption.Params.Volume > float.Epsilon)
+					return true;
+
+				return false;
+			})
 			.OrderBy(caption =>
 			{
 				if (caption.Params.Position == null)
@@ -227,6 +286,7 @@ public class CaptionManager
 				caption.FlagAsDisposed();
 
 				// Want the caption to show up for at least long enough to read
+				_capi.Logger.Debug($"[ClosedCaptions] Disposed {caption.Params.Location}, start={caption.StartTime} now={_capi.ElapsedMilliseconds} earliest={caption.StartTime + ClosedCaptionsModSystem.UserConfig.MinimumDisplayDuration}");
 				caption.FadeOutStartTime = _capi.ElapsedMilliseconds;
 				if (caption.FadeOutStartTime < caption.StartTime + ClosedCaptionsModSystem.UserConfig.MinimumDisplayDuration)
 					caption.FadeOutStartTime = caption.StartTime + ClosedCaptionsModSystem.UserConfig.MinimumDisplayDuration;
@@ -263,13 +323,20 @@ public class CaptionManager
 			if (caption.LoadedSound == newSound)
 				return caption;
 
-			// Filter sounds that are very similar and close to sounds that are already playing.
-			var position = newSound.Params.Position ?? _capi.World.Player.Entity.Pos.XYZ.ToVec3f();
-			var distance = (position - caption.Params.Position).Length();
-			if (caption.Text == newText &&
-				_capi.ElapsedMilliseconds - caption.StartTime < ClosedCaptionsModSystem.UserConfig.GroupingMaxTime &&
-				distance < ClosedCaptionsModSystem.UserConfig.GroupingRange)
-				return caption;
+			// Same sort of sound...
+			if (caption.Text == newText)
+			{
+				// Unique sounds are unique!
+				if ((caption.Flags & Flags.Unique) != 0)
+					return caption;
+
+				// Filter sounds that are very similar and close to sounds that are already playing.
+				var position = newSound.Params.Position ?? _capi.World.Player.Entity.Pos.XYZ.ToVec3f();
+				var distance = (position - caption.Params.Position).Length();
+				if (_capi.ElapsedMilliseconds - caption.StartTime < ClosedCaptionsModSystem.UserConfig.GroupingMaxTime &&
+					distance < ClosedCaptionsModSystem.UserConfig.GroupingRange)
+					return caption;
+			}
 		}
 		return null;
 	}

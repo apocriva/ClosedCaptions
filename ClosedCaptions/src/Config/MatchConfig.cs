@@ -23,26 +23,28 @@ public class MatchConfig
 	{
 		public string Match;
         public string CaptionKey;
-		[JsonConverter(typeof(TagsConverter))]
+		[JsonConverter(typeof(FlagsConverter))]
 		public CaptionManager.Tags Tags;
+		[JsonConverter(typeof(FlagsConverter))]
+		public CaptionManager.Flags Flags;
 		public string IconType;
 		public string IconCode;
 
-		private class TagsConverter : JsonConverter
+		private class FlagsConverter : JsonConverter
 		{
 			public override bool CanConvert(Type objectType)
 			{
-				return objectType == typeof(CaptionManager.Tags);
+				return Attribute.GetCustomAttribute(objectType, typeof(FlagsAttribute)) != null;
 			}
 
 			public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
 			{
 				if (string.IsNullOrEmpty((string?)reader.Value))
-					return CaptionManager.Tags.None;
+					return 0;
 
 				try
 				{
-					var ret = Enum.Parse<CaptionManager.Tags>((string)reader.Value, true);
+					var ret = Enum.Parse(objectType, (string)reader.Value, true);
 					return ret;
 				}
 				catch
@@ -62,10 +64,11 @@ public class MatchConfig
 
 	public ICoreClientAPI? Api { get; set; }
 
-	public string? FindCaptionForSound(AssetLocation location, ref CaptionManager.Tags tags, ref string iconType, ref string iconCode)
+	public string? FindCaptionForSound(AssetLocation location, ref CaptionManager.Tags tags, ref CaptionManager.Flags flags, ref string iconType, ref string iconCode)
 	{
 		string? ret = null;
 		tags = CaptionManager.Tags.None;
+		flags = CaptionManager.Flags.None;
 		iconType = null;
 		iconCode = null;
 
@@ -91,6 +94,7 @@ public class MatchConfig
 					if (WildcardUtil.Match(new AssetLocation(mapping.Match), location))
 					{
 						tags = mapping.Tags;
+						flags = mapping.Flags;
 						if (!string.IsNullOrEmpty(mapping.IconType))
 							iconType = mapping.IconType;
 						if (!string.IsNullOrEmpty(mapping.IconCode))

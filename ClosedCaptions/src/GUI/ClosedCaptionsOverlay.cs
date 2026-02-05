@@ -19,7 +19,6 @@ public class ClosedCaptionsOverlay : HudElement
 	public override double DrawOrder => 0.6;
 	public override bool ShouldReceiveMouseEvents() => false;
 
-	private static readonly float VolumeThreshold = 0.05f;
 	private static readonly float FontSize = 20f;
 	private static readonly double LineHeight = 24;
 
@@ -88,8 +87,10 @@ public class ClosedCaptionsOverlay : HudElement
 
 		string leftArrow = "";
 		string rightArrow = "";
-		if (!caption.Params.RelativePosition &&
-			relativePosition.Length() > 1)
+		var distance = relativePosition.Length();
+		if ((caption.Flags & CaptionManager.Flags.Directionless) == 0 &&
+			!caption.Params.RelativePosition &&
+			relativePosition.Length() > ClosedCaptionsModSystem.UserConfig.MinimumDirectionDistance)
 		{
 			if (angle >= 150f || angle <= -150f)
 			{
@@ -108,7 +109,6 @@ public class ClosedCaptionsOverlay : HudElement
 
 		float opacity = 1f;
 		// Modulate opacity by sound distance.
-		var distance = relativePosition.Length();
 		if (distance > ClosedCaptionsModSystem.UserConfig.AttenuationRange)
 		{
 			var span = ClosedCaptionsModSystem.UserConfig.AttenuationRange;
@@ -169,7 +169,7 @@ public class ClosedCaptionsOverlay : HudElement
 			
 		ElementBounds dialogBounds = ElementStdBounds.AutosizedMainDialog
 			.WithAlignment(EnumDialogArea.CenterBottom)
-			.WithFixedOffset(0, -200);
+			.WithFixedOffset(0, -ClosedCaptionsModSystem.UserConfig.DisplayOffset);
 		ElementBounds bgBounds = ElementBounds.Fill.WithSizing(ElementSizing.FitToChildren);
 		var bgColor = new double[] { 0.0, 0.0, 0.0, 0.3 };
 

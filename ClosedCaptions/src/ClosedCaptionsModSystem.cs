@@ -149,12 +149,14 @@ public class ClosedCaptionsModSystem : ModSystem
 		}
 
 		// config.ShowIcons = OnCheckBox("show-icons", config.ShowIcons, ref modified);
-		config.MinimumDisplayDuration = OnInputInt("minimum-display-duration", (int)config.MinimumDisplayDuration, ref modified);
-		config.FadeOutDuration = OnInputInt("fade-out-duration", (int)config.FadeOutDuration, ref modified);
-		config.AttenuationRange = OnInputInt("attenuation-range", config.AttenuationRange, ref modified);
-		config.MinimumAttenuationOpacity = OnInputInt("min-attenuation-opacity", (int)(config.MinimumAttenuationOpacity * 100), ref modified) / 100f;
-		config.GroupingRange = OnInputInt("grouping-range", config.GroupingRange, ref modified);
-		config.GroupingMaxTime = OnInputInt("grouping-max-time", config.GroupingMaxTime, ref modified);
+		config.DisplayOffset = OnInputInt("display-offset", (int)config.DisplayOffset, ref modified, 0);
+		config.MinimumDirectionDistance = OnInputFloat("minimum-direction-distance", (int)config.MinimumDirectionDistance, ref modified, 0f);
+		config.MinimumDisplayDuration = OnInputInt("minimum-display-duration", (int)config.MinimumDisplayDuration, ref modified, 0);
+		config.FadeOutDuration = OnInputInt("fade-out-duration", (int)config.FadeOutDuration, ref modified, 1);
+		config.AttenuationRange = OnInputInt("attenuation-range", config.AttenuationRange, ref modified, 0);
+		config.MinimumAttenuationOpacity = OnInputInt("min-attenuation-opacity", (int)(config.MinimumAttenuationOpacity * 100), ref modified, 0, 100) / 100f;
+		config.GroupingRange = OnInputInt("grouping-range", config.GroupingRange, ref modified, 0);
+		config.GroupingMaxTime = OnInputInt("grouping-max-time", config.GroupingMaxTime, ref modified, 0);
 
 		config.DebugMode = OnCheckBox("debug-mode", config.DebugMode, ref modified);
 
@@ -177,7 +179,23 @@ public class ClosedCaptionsModSystem : ModSystem
 		return newValue;
 	}
 
-	private int OnInputInt(string option, int value, ref bool modified)
+	private float OnInputFloat(string option, float value, ref bool modified, float min = float.MinValue, float max = float.MaxValue)
+	{
+		float newValue = value;
+		ImGui.InputFloat(Lang.Get("closedcaptions:config-" + option), ref newValue);
+		if (ImGui.IsItemHovered(ImGuiHoveredFlags.ForTooltip))
+		{
+			ImGui.BeginTooltip();
+			ImGui.PushTextWrapPos(ImGui.GetFontSize() * 35f);
+			ImGui.TextUnformatted(Lang.Get($"closedcaptions:config-{option}-tooltip"));
+			ImGui.EndTooltip();
+		}
+		newValue = Math.Max(min, Math.Min(newValue, max));
+		modified |= newValue != value;
+		return newValue;
+	}
+
+	private int OnInputInt(string option, int value, ref bool modified, int min = int.MinValue, int max = int.MaxValue)
 	{
 		int newValue = value;
 		ImGui.InputInt(Lang.Get("closedcaptions:config-" + option), ref newValue);
@@ -188,6 +206,7 @@ public class ClosedCaptionsModSystem : ModSystem
 			ImGui.TextUnformatted(Lang.Get($"closedcaptions:config-{option}-tooltip"));
 			ImGui.EndTooltip();
 		}
+		newValue = Math.Max(min, Math.Min(newValue, max));
 		modified |= newValue != value;
 		return newValue;
 	}
