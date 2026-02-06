@@ -20,8 +20,6 @@ public class UserConfig
 	public bool ShowWeather { get; set; } = true;
 	public bool ShowUnknown { get; set; } = false;
 
-	// public bool ShowIcons { get; set; } = true;
-	public int DisplayOffset { get; set; } = 300;
 	public float MinimumDirectionDistance { get; set; } = 1.5f;
 	public long MinimumDisplayDuration { get; set; } = 1000;
 	public long FadeOutDuration { get; set; } = 500;
@@ -29,6 +27,14 @@ public class UserConfig
 	public float MinimumAttenuationOpacity { get; set; } = 0.3f;
 	public int GroupingRange { get; set; } = 5;
 	public int GroupingMaxTime { get; set; } = 1500;
+
+	// public bool ShowIcons { get; set; } = true;
+	public int DisplayOffset { get; set; } = 300;
+	public int FontSize { get; set; } = 20;
+	public float CaptionBackgroundOpacity { get; set; } = 0.5f;
+	public int CaptionPaddingH { get; set; } = 30;
+	public int CaptionPaddingV { get; set; } = 0;
+	public int CaptionSpacing { get; set; } = 2;
 
 	public bool DebugMode { get; set; } = false;
 }

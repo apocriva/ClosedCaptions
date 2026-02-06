@@ -11,6 +11,7 @@ using System.Linq;
 using Vintagestory.API.Config;
 using ClosedCaptions.Config;
 using Microsoft.VisualBasic;
+using Cairo;
 
 namespace ClosedCaptions.GUI;
 
@@ -19,13 +20,10 @@ public class ClosedCaptionsOverlay : HudElement
 	public override double DrawOrder => -0.5;
 	public override bool ShouldReceiveMouseEvents() => false;
 
-	private static readonly float FontSize = 20f;
-	private static readonly double LineHeight = 24;
-
-	private readonly CairoFont _font;
+	private CairoFont? _font;
 	private readonly Vec4f _fontColor = new(0.91f, 0.87f, 0.81f, 1f);
 
-    private readonly MatchConfig _matchConfig;
+	private readonly MatchConfig _matchConfig;
 
 	private class CaptionLabel(CaptionManager.Caption caption, GuiElementRichtext richtext)
 	{
@@ -34,11 +32,11 @@ public class ClosedCaptionsOverlay : HudElement
 	}
 
 	private readonly List<CaptionLabel> _captionlabels = [];
+	private readonly List<GuiElementDynamicText> _arrows = [];
 
 	public ClosedCaptionsOverlay(ICoreClientAPI capi, MatchConfig matchConfig) : base(capi)
 	{
-		_font = InitFont();
-        _matchConfig = matchConfig;
+		_matchConfig = matchConfig;
 		BuildDialog();
 	}
 
@@ -56,14 +54,14 @@ public class ClosedCaptionsOverlay : HudElement
 		}
 	}
 
-	private CairoFont InitFont()
+	private void InitFont()
 	{
-		return new CairoFont()
+		_font = new CairoFont()
 			.WithColor([_fontColor.R, _fontColor.G, _fontColor.B, _fontColor.A])
 			.WithFont(GuiStyle.StandardFontName)
 			.WithOrientation(EnumTextOrientation.Center)
-			.WithFontSize(FontSize)
-			.WithWeight(Cairo.FontWeight.Normal)
+			.WithFontSize(ClosedCaptionsModSystem.UserConfig.FontSize)
+			.WithWeight(FontWeight.Normal)
 			.WithStroke([0, 0, 0, 0.5], 2);
 	}
 
@@ -156,53 +154,156 @@ public class ClosedCaptionsOverlay : HudElement
 		return label;
 	}
 
+	private void DrawBox(Context context, ImageSurface surface, ElementBounds bounds)
+	{
+		context.Save();
+		context.SetSourceRGBA(0, 0, 0, ClosedCaptionsModSystem.UserConfig.CaptionBackgroundOpacity);
+		context.Rectangle(bounds.drawX, bounds.drawY, bounds.InnerWidth, bounds.InnerHeight);
+		context.Fill();
+		context.Restore();
+	}
+
 	private void BuildDialog()
 	{
-		_captionlabels.Clear();
-		var captions = CaptionManager.GetSortedCaptions();
-		if (!captions.Any())
-		{
-			if (IsOpened())
-				TryClose();
-			return;
-		}
-			
-		ElementBounds dialogBounds = ElementStdBounds.AutosizedMainDialog
+		// TODO: Only re-init font if settings have changed.
+		InitFont();
+
+		_arrows.Clear();
+
+		ElementBounds dialogBounds =
+			ElementStdBounds.AutosizedMainDialog
 			.WithAlignment(EnumDialogArea.CenterBottom)
-			.WithFixedOffset(0, -ClosedCaptionsModSystem.UserConfig.DisplayOffset);
-		ElementBounds bgBounds = ElementBounds.Fill.WithSizing(ElementSizing.FitToChildren);
-		var bgColor = new double[] { 0.0, 0.0, 0.0, 0.3 };
+			.WithFixedAlignmentOffset(0.0, -ClosedCaptionsModSystem.UserConfig.DisplayOffset);
 
-		SingleComposer = capi.Gui.CreateCompo("closedCaptions", dialogBounds)
-			.AddGameOverlay(bgBounds, bgColor)
-			.BeginChildElements();
+		string[] strings = [
+			"One",
+			"This is the second",
+			"Number three",
+			"Now with <strong>formatting</strong>",
+			"Maybe even an <itemstack type=\"block\" code=\"packeddirt\"/> item?",
+			"And a sixth",
+		];
 
-		double currentY = 0;
-		foreach (var caption in captions)
+		SingleComposer = capi.Gui.CreateCompo("closedCaptions", dialogBounds);
+
+		Random rand = new();
+		int numStrings = (rand.Next() % (strings.Length - 1)) + 1;
+		double fontHeight = _font!.GetFontExtents().Height * _font!.LineHeightMultiplier;
+		double lineHeight = _font!.GetFontExtents().Height * _font!.LineHeightMultiplier + ClosedCaptionsModSystem.UserConfig.CaptionPaddingV * 2;
+		for (int i = 0; i < numStrings; ++i)
 		{
-			ElementBounds bounds = ElementBounds.Fixed(EnumDialogArea.LeftTop, 0, currentY, 600, LineHeight);
-			
-			var text = BuildCaptionLabel(caption, true);
-			var captionKey = "caption" + caption.ID.ToString();
-			SingleComposer.AddRichtext(text, _font, bounds, captionKey);
+			int lineY = i * ((int)lineHeight + ClosedCaptionsModSystem.UserConfig.CaptionSpacing) + ClosedCaptionsModSystem.UserConfig.CaptionPaddingV;
+			ElementBounds textBounds = ElementBounds.Fixed(0, lineY)
+				.WithAlignment(EnumDialogArea.CenterTop)
+				.WithFixedSize(600, fontHeight);
+			SingleComposer.AddRichtext(strings[i], _font, textBounds, $"rt{i}");
+			var element = SingleComposer.GetRichtext($"rt{i}");
+			element.BeforeCalcBounds();
+			textBounds.fixedWidth = element.MaxLineWidth / RuntimeEnv.GUIScale + 1.0;
 
-			var richtext = SingleComposer.GetRichtext(captionKey);
-			_captionlabels.Add(new(caption, richtext));
+			ElementBounds boxBounds = ElementBounds.Fixed(0, lineY - ClosedCaptionsModSystem.UserConfig.CaptionPaddingV)
+				.WithAlignment(EnumDialogArea.CenterTop)
+				.WithFixedSize(600 + ClosedCaptionsModSystem.UserConfig.CaptionPaddingH * 2, lineHeight);
+			SingleComposer.AddStaticCustomDraw(boxBounds, DrawBox);
+			boxBounds.fixedWidth = textBounds.fixedWidth + ClosedCaptionsModSystem.UserConfig.CaptionPaddingH * 2;
+			boxBounds.fixedHeight = textBounds.fixedHeight + ClosedCaptionsModSystem.UserConfig.CaptionPaddingV * 2;
 
-			currentY += LineHeight;
+			ElementBounds arrowBoundsL = ElementBounds.Fixed(0, lineY)
+				.WithAlignment(EnumDialogArea.CenterTop)
+				.WithFixedSize(lineHeight, lineHeight);
+			SingleComposer.AddDynamicText("<", _font, arrowBoundsL, $"arrow{i}l");
+			_arrows.Add(SingleComposer.GetDynamicText($"arrow{i}l"));
+			arrowBoundsL.fixedX = -textBounds.fixedWidth / 2 - lineHeight / 2;
+
+			ElementBounds arrowBoundsR = ElementBounds.Fixed(0, lineY)
+				.WithAlignment(EnumDialogArea.CenterTop)
+				.WithFixedSize(lineHeight, lineHeight);
+			SingleComposer.AddDynamicText("<", _font, arrowBoundsR, $"arrow{i}r");
+			_arrows.Add(SingleComposer.GetDynamicText($"arrow{i}r"));
+			arrowBoundsR.fixedX = textBounds.fixedWidth / 2 + lineHeight / 2;
 		}
-
-		SingleComposer.EndChildElements();
 
 		try
-        {
-            SingleComposer.Compose();
-        }
+		{
+			SingleComposer.Compose();
+			TryOpen();
+		}
 		catch (Exception e)
 		{
-            capi.Logger.Error($"Caption exception, no captions? {e}");
-        }
+			capi.Logger.Error(e);
+		}
 
-        TryOpen();
+		// _captionlabels.Clear();
+		// var captions = CaptionManager.GetSortedCaptions();
+		// if (!captions.Any())
+		// {
+		// 	if (IsOpened())
+		// 		TryClose();
+		// 	return;
+		// }
+
+		// ElementBounds dialogBounds = ElementStdBounds.AutosizedMainDialog
+		// 	.WithAlignment(EnumDialogArea.CenterBottom)
+		// 	.WithFixedOffset(0, -ClosedCaptionsModSystem.UserConfig.DisplayOffset);
+		// ElementBounds bgBounds = ElementBounds.Fill.WithSizing(ElementSizing.FitToChildren);
+		// var bgColor = new double[] { 0.0, 0.0, 0.0, 0.3 };
+
+		// SingleComposer = capi.Gui.CreateCompo("closedCaptions", dialogBounds)
+		// 	.AddGameOverlay(bgBounds, bgColor)
+		// 	.BeginChildElements();
+
+		// double currentY = 0;
+		// foreach (var caption in captions)
+		// {
+		// 	ElementBounds bounds = ElementBounds.Fixed(EnumDialogArea.LeftTop, 0, currentY, 600, LineHeight);
+
+		// 	var text = BuildCaptionLabel(caption, true);
+		// 	var captionKey = "caption" + caption.ID.ToString();
+		// 	SingleComposer.AddRichtext(text, _font, bounds, captionKey);
+
+		// 	var richtext = SingleComposer.GetRichtext(captionKey);
+		// 	_captionlabels.Add(new(caption, richtext));
+
+		// 	currentY += LineHeight;
+		// }
+
+		// SingleComposer.EndChildElements();
+
+		// try
+		// {
+		// 	SingleComposer.Compose();
+		// }
+		// catch (Exception e)
+		// {
+		// 	capi.Logger.Error($"Caption exception, no captions? {e}");
+		// }
+
+		// TryOpen();
+	}
+
+	int arrowIndex;
+	float arrowTime;
+	public override void OnRenderGUI(float deltaTime)
+	{
+		string[] arrows = [
+			"",
+			"<",
+			"v",
+			">"
+		];
+		arrowTime += deltaTime;
+		if (arrowTime > 1f)
+		{
+			arrowTime = 0f;
+			arrowIndex++;
+			if (arrowIndex >= arrows.Length)
+				arrowIndex = 0;
+		}
+		base.OnRenderGUI(deltaTime);
+		foreach (var arrow in _arrows)
+		{
+			arrow.SetNewText(arrows[arrowIndex]);
+			arrow.RecomposeText();
+		}
 	}
 }

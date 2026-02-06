@@ -150,15 +150,32 @@ public class ClosedCaptionsModSystem : ModSystem
 			ImGui.Unindent();
 		}
 
-		// config.ShowIcons = OnCheckBox("show-icons", config.ShowIcons, ref modified);
-		config.DisplayOffset = OnInputInt("display-offset", (int)config.DisplayOffset, ref modified, 0);
-		config.MinimumDirectionDistance = OnInputFloat("minimum-direction-distance", (int)config.MinimumDirectionDistance, ref modified, 0f);
-		config.MinimumDisplayDuration = OnInputInt("minimum-display-duration", (int)config.MinimumDisplayDuration, ref modified, 0);
-		config.FadeOutDuration = OnInputInt("fade-out-duration", (int)config.FadeOutDuration, ref modified, 1);
-		config.AttenuationRange = OnInputInt("attenuation-range", config.AttenuationRange, ref modified, 0);
-		config.MinimumAttenuationOpacity = OnInputInt("min-attenuation-opacity", (int)(config.MinimumAttenuationOpacity * 100), ref modified, 0, 100) / 100f;
-		config.GroupingRange = OnInputInt("grouping-range", config.GroupingRange, ref modified, 0);
-		config.GroupingMaxTime = OnInputInt("grouping-max-time", config.GroupingMaxTime, ref modified, 0);
+		if (ImGui.CollapsingHeader(Lang.Get("closedcaptions:config-behavior-header")))
+		{
+			ImGui.Indent();
+			config.MinimumDirectionDistance = OnInputFloat("minimum-direction-distance", (int)config.MinimumDirectionDistance, ref modified, 0f);
+			config.MinimumDisplayDuration = OnInputInt("minimum-display-duration", (int)config.MinimumDisplayDuration, ref modified, 0);
+			config.FadeOutDuration = OnInputInt("fade-out-duration", (int)config.FadeOutDuration, ref modified, 1);
+			config.AttenuationRange = OnInputInt("attenuation-range", config.AttenuationRange, ref modified, 0);
+			config.MinimumAttenuationOpacity = OnInputInt("min-attenuation-opacity", (int)(config.MinimumAttenuationOpacity * 100), ref modified, 0, 100) / 100f;
+			config.GroupingRange = OnInputInt("grouping-range", config.GroupingRange, ref modified, 0);
+			config.GroupingMaxTime = OnInputInt("grouping-max-time", config.GroupingMaxTime, ref modified, 0);
+			ImGui.Unindent();
+		}
+
+
+		if (ImGui.CollapsingHeader(Lang.Get("closedcaptions:config-display-header")))
+		{
+			ImGui.Indent();
+			// config.ShowIcons = OnCheckBox("show-icons", config.ShowIcons, ref modified);
+			config.DisplayOffset = OnInputInt("display-offset", config.DisplayOffset, ref modified, 0);
+			config.FontSize = OnInputInt("font-size", config.FontSize, ref modified, 6, 100);
+			config.CaptionBackgroundOpacity = OnInputInt("caption-opacity", (int)(config.CaptionBackgroundOpacity * 100f), ref modified, 0, 100) / 100f;
+			config.CaptionPaddingH = OnInputInt("caption-padding-h", config.CaptionPaddingH, ref modified, 0);
+			config.CaptionPaddingV = OnInputInt("caption-padding-v", config.CaptionPaddingV, ref modified, 0);
+			config.CaptionSpacing = OnInputInt("caption-spacing", config.CaptionSpacing, ref modified);
+			ImGui.Unindent();
+		}
 
 		config.DebugMode = OnCheckBox("debug-mode", config.DebugMode, ref modified);
 

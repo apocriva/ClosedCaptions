@@ -7,7 +7,7 @@
         "apocriva"
     ],
     "description": "Adds closed captions for the sounds in the game.",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "dependencies": {
         "game": "1.22.0-pre.1",
 		"configlib": "1.10.13"
