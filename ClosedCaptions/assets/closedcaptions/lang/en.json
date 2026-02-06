@@ -145,6 +145,7 @@
 	// Creatures
 	"closedcaptions:creature": "[Creature noises]",
 	"closedcaptions:creature-animal-eat": "[Animal eating noises]",
+	"closedcaptions:creature-beehive-wild": "[Wild buzzing]",
 	"closedcaptions:creature-beehive": "[Gentle buzzing]",
 	"closedcaptions:creature-beemob": "[Aggressive buzzing]",
 	"closedcaptions:creature-beesting": "[<i>Sting!</i>]",
