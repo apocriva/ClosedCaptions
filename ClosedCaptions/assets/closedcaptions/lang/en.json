@@ -160,7 +160,7 @@
 	"closedcaptions:creature-erel": "[Erel noises]",
 
 	"closedcaptions:creature-bear": "[Bear noises]",
-	"closedcaptions:creature-bear-footsteps": "[Thumping stomp]",
+	"closedcaptions:creature-bear-footsteps": "[Thumping footsteps]",
 	"closedcaptions:creature-bear-aggro": "[Rumbling grunt]",
 	"closedcaptions:creature-bear-attack": "[Deep roar]",
 	"closedcaptions:creature-bear-flee": "[Deep groaning]",
@@ -280,6 +280,7 @@
 
 	"closedcaptions:creature-wolf": "[Wolf noises]",
 	"closedcaptions:creature-wolf-attack": "[Snarling bark]",
+	"closedcaptions:creature-wolf-footsteps": "[Padded footsteps]",
 	"closedcaptions:creature-wolf-growl": "[Deep growling]",
 	"closedcaptions:creature-wolf-howl": "[Howling]",
 	"closedcaptions:creature-wolf-hurt": "[Pained bark]",
