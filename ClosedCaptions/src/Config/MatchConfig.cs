@@ -19,6 +19,12 @@ public class MatchConfig
         public Mapping[] Mappings = [];
 	}
 
+	public class Unique
+	{
+		public string Group = "";
+		public int Priority = 0;
+	}
+
 	public class Mapping
 	{
 		public string Match = "";
@@ -29,6 +35,7 @@ public class MatchConfig
 		public CaptionManager.Flags Flags = CaptionManager.Flags.None;
 		public string IconType = "";
 		public string IconCode = "";
+		public Unique? Unique = null;
 
 		private class FlagsConverter : JsonConverter
 		{
@@ -70,13 +77,15 @@ public class MatchConfig
 		ref CaptionManager.Tags tags,
 		ref CaptionManager.Flags flags,
 		ref string iconType,
-		ref string iconCode)
+		ref string iconCode,
+		ref Unique? unique)
 	{
 		text = null;
 		tags = CaptionManager.Tags.None;
 		flags = CaptionManager.Flags.None;
 		iconType = "";
 		iconCode = "";
+		unique = null;
 
 		// Check if this is an outright ignored sound.
 		foreach (var ignore in Ignore)
@@ -105,6 +114,7 @@ public class MatchConfig
 							iconType = mapping.IconType;
 						if (!string.IsNullOrEmpty(mapping.IconCode))
 							iconCode = mapping.IconCode;
+						unique = mapping.Unique;
 						text = Lang.Get(mapping.CaptionKey);
 						return true;
 					}

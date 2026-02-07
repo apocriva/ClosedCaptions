@@ -38,12 +38,12 @@ public class CaptionManager
 	public enum Flags
 	{
 		None			= 0,
-		Unique			= 1 << 0,
-		Directionless	= 1 << 1,
+		Directionless	= 1 << 0,
 	}
 
 	public class Caption
 	{
+		public bool IsVisibile = true;
 		public readonly long ID;
 		public readonly SoundParams Params;
 		public readonly string Text;
@@ -53,6 +53,7 @@ public class CaptionManager
 		public readonly Flags Flags;
 		public readonly string? IconType;
 		public readonly string? IconCode;
+		public readonly MatchConfig.Unique? Unique;
 
 		public ILoadedSound? LoadedSound { get; set; }
 
@@ -74,7 +75,12 @@ public class CaptionManager
 			}
 		}
 
-		public Caption(long id, ILoadedSound loadedSound, long startTime, string text, Tags tags, Flags flags, string? iconType = null, string? iconCode = null)
+		public Caption(
+			long id, ILoadedSound loadedSound,
+			long startTime, string text,
+			Tags tags, Flags flags,
+			string? iconType = null, string? iconCode = null,
+			MatchConfig.Unique? unique = null)
 		{
 			ID = id;
 			LoadedSound = loadedSound;
@@ -85,6 +91,7 @@ public class CaptionManager
 			Flags = flags;
 			IconType = iconType;
 			IconCode = iconCode;
+			Unique = unique;;
 
 			var p = LoadedSound.Params;
 			Params = new()
@@ -172,8 +179,9 @@ public class CaptionManager
 		Flags flags = Flags.None;
 		string iconType = "";
 		string iconCode = "";
+		MatchConfig.Unique? unique = null;
 
-		if (!Instance._matchConfig.FindCaptionForSound(location, ref text, ref tags, ref flags, ref iconType, ref iconCode))
+		if (!Instance._matchConfig.FindCaptionForSound(location, ref text, ref tags, ref flags, ref iconType, ref iconCode, ref unique))
 		{
 			if (!ClosedCaptionsModSystem.UserConfig.ShowUnknown)
 				return;
@@ -185,31 +193,6 @@ public class CaptionManager
 		if (Instance.IsFiltered(loadedSound, tags))
 			return;
 
-		var duplicate = Instance.FindDuplicate(loadedSound, text);
-		if (duplicate != null)
-		{
-			// Update with a new timestamp.
-			duplicate.StartTime = API.ElapsedMilliseconds;
-			duplicate.FadeOutStartTime = 0;
-			duplicate.LoadedSound = loadedSound;
-
-			// Use the location of the sound that's closest.
-			if (loadedSound.Params.RelativePosition ||loadedSound.Params.Position == null)
-				duplicate.Position = Vec3f.Zero;
-			else
-			{
-				var playerPos = API.World.Player.Entity.Pos.XYZ.ToVec3f();
-				var newDistance = (loadedSound.Params.Position - playerPos).Length();
-				var oldDistance = (duplicate.Position - playerPos).Length();
-
-				if (newDistance < oldDistance)
-					duplicate.Position = loadedSound.Params.Position;
-			}
-
-			Instance._needsRefresh = true;
-			return;
-		}
-
 		Instance._captions.Add(new Caption(
 			Instance._nextCaptionId++,
 			loadedSound,
@@ -218,7 +201,8 @@ public class CaptionManager
 			tags,
 			flags,
 			iconType,
-			iconCode
+			iconCode,
+			unique
 			));
 		Instance._needsRefresh = true;
 	}
@@ -243,6 +227,9 @@ public class CaptionManager
 			// 	caption.IsFading)
 			.Where(caption =>
 			{
+				if (!caption.IsVisibile)
+					return false;
+
 				var distance = 0f;
 				if (!caption.Params.RelativePosition)
 					distance = (caption.Params.Position - player.Entity.Pos.XYZFloat).Length();
@@ -310,9 +297,38 @@ public class CaptionManager
 
 	private void UpdateCaptions()
 	{
+		Dictionary<string, Caption> uniqueGroups = [];
+
+		var playerPos = API.World.Player != null ? API.World.Player.Entity.Pos.XYZFloat : Vec3f.Zero;
 		for (int i = _captions.Count - 1; i >= 0; --i)
 		{
 			var caption = _captions[i];
+			caption.IsVisibile = true;
+
+			if (caption.Unique != null)
+			{
+				if (uniqueGroups.TryGetValue(caption.Unique.Group, out Caption? comp))
+				{
+					if (caption.Unique.Priority > comp.Unique!.Priority ||
+						caption.Unique.Priority == comp.Unique!.Priority &&
+						(caption.Position - playerPos).Length() < (comp.Position - playerPos).Length())
+					{
+						uniqueGroups[caption.Unique.Group] = caption;
+						comp.IsVisibile = false;
+						caption.IsVisibile = true;
+					}
+					else
+					{
+						caption.IsVisibile = false;
+					}
+				}
+				else
+				{
+					uniqueGroups[caption.Unique.Group] = caption;
+					caption.IsVisibile = true;
+				}
+			}
+
 			if (caption.IsLoadedSoundDisposed &&
 				!caption.IsDisposeFlagged)
 			{
@@ -349,22 +365,31 @@ public class CaptionManager
 		_captions.Clear();
 	}
 
-	private Caption? FindDuplicate(ILoadedSound newSound, string newText)
+	private Caption? FindOverwrite(ILoadedSound newSound, string newText, MatchConfig.Unique? unique)
 	{
-        // Filter out sounds that are similar to one that's playing and close in space.
-        foreach (var caption in _captions)
+		Caption? ret = null;
+
+		// Filter out sounds that are similar to one that's playing and close in space.
+		foreach (var caption in _captions)
 		{
 			// This literal sound is already playing, get outta here!
 			if (caption.LoadedSound == newSound)
 				return caption;
+				
+			// Unique sounds are unique!
+			if (unique != null && caption.Unique != null &&
+				unique.Group == caption.Unique.Group)
+			{
+				if (ret == null ||
+					ret != null &&
+					ret.Unique != null &&
+					caption.Unique.Priority > ret.Unique.Priority)
+					ret = caption;
+				continue;
+			}
 
-			// Same sort of sound...
 			if (caption.Text == newText)
 			{
-				// Unique sounds are unique!
-				if ((caption.Flags & Flags.Unique) != 0)
-					return caption;
-
 				// Filter sounds that are very similar and close to sounds that are already playing.
 				var position = newSound.Params.Position ?? API.World.Player.Entity.Pos.XYZ.ToVec3f();
 				var distance = (position - caption.Params.Position).Length();
@@ -373,7 +398,8 @@ public class CaptionManager
 					return caption;
 			}
 		}
-		return null;
+
+		return ret;
 	}
 
 	private bool IsFiltered(ILoadedSound loadedSound, Tags soundTags)

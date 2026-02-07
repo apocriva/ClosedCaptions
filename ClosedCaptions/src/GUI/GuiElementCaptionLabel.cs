@@ -67,7 +67,7 @@ public class GuiElementCaptionLabel : GuiElement
 		// Text
 		api.Gui.TextTexture.GenOrUpdateTextTexture(
 			_caption.Text, _font,
-			ref _baseTexture);
+			ref _textTexture);
 	}
 
 	public override void RenderInteractiveElements(float deltaTime)
