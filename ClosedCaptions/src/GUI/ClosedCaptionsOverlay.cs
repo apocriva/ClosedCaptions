@@ -25,14 +25,17 @@ public class ClosedCaptionsOverlay : HudElement
 
 	private readonly MatchConfig _matchConfig;
 
-	private class CaptionLabel(CaptionManager.Caption caption, GuiElementRichtext richtext)
+	private class CaptionLabel(CaptionManager.Caption caption, GuiElementBox boxElement, GuiElementDynamicText leftArrow, GuiElementRichtext label, GuiElementDynamicText rightArrow)
 	{
 		public CaptionManager.Caption Caption = caption;
-		public GuiElementRichtext Richtext = richtext;
+
+		public GuiElementBox BoxElement = boxElement;
+		public GuiElementDynamicText LeftArrowElement = leftArrow;
+		public GuiElementRichtext LabelElement = label;
+		public GuiElementDynamicText RightArrowElement = rightArrow;
 	}
 
-	private readonly List<CaptionLabel> _captionlabels = [];
-	private readonly List<GuiElementDynamicText> _arrows = [];
+	private readonly List<CaptionLabel> _captionLabels = [];
 
 	public ClosedCaptionsOverlay(ICoreClientAPI capi, MatchConfig matchConfig) : base(capi)
 	{
@@ -47,11 +50,31 @@ public class ClosedCaptionsOverlay : HudElement
 
 	public void Tick()
 	{
-		foreach (var captionLabel in _captionlabels)
+	}
+
+	public override void OnRenderGUI(float deltaTime)
+	{
+		foreach (var captionLabel in _captionLabels)
 		{
-			var label = BuildCaptionLabel(captionLabel.Caption, false);
-			captionLabel.Richtext.SetNewText(label, _font);
+			string leftArrow = "";
+			string rightArrow = "";
+			float opacity = 1f;
+			GetIndicators(captionLabel.Caption, ref leftArrow, ref rightArrow, ref opacity);
+
+			// TODO: These have to fade too!
+			if (captionLabel.LeftArrowElement.GetText() != leftArrow)
+				captionLabel.LeftArrowElement.SetNewText(leftArrow);
+			if (captionLabel.RightArrowElement.GetText() != rightArrow)
+				captionLabel.RightArrowElement.SetNewText(rightArrow);
+
+			// Ideally we would like this to adjust the alpha of the element instead of
+			// using VTML but here we are.
+			captionLabel.LabelElement.SetNewText($"<font opacity=\"{opacity}\">{captionLabel.Caption.Text}</font>", _font);
+
+			captionLabel.BoxElement.Opacity = opacity;
 		}
+
+		base.OnRenderGUI(deltaTime);
 	}
 
 	private void InitFont()
@@ -63,6 +86,66 @@ public class ClosedCaptionsOverlay : HudElement
 			.WithFontSize(ClosedCaptionsModSystem.UserConfig.FontSize)
 			.WithWeight(FontWeight.Normal)
 			.WithStroke([0, 0, 0, 0.5], 2);
+	}
+
+	private void GetIndicators(CaptionManager.Caption caption, ref string leftArrow, ref string rightArrow, ref float opacity)
+	{
+		leftArrow = "";
+		rightArrow = "";
+		
+		var player = capi.World.Player;
+		var relativePosition = caption.Position - player.Entity.Pos.XYZFloat;
+		if (caption.Params.RelativePosition)
+			relativePosition = caption.Position;
+		relativePosition.Y = 0f;
+		var relativeDirection = relativePosition.Clone();
+		relativeDirection.Normalize();
+		
+		// Left or right?
+		Vec3f forward = new(MathF.Sin(player.CameraYaw), 0f, MathF.Cos(player.CameraYaw));
+		var dot = relativeDirection.Dot(forward);
+		var angle = MathF.Acos(dot) * 180f / MathF.PI;
+		var det = relativeDirection.X * forward.Z - relativeDirection.Z * forward.X;
+		if (det < 0)
+			angle = -angle;
+
+		var distance = relativePosition.Length();
+		if ((caption.Flags & CaptionManager.Flags.Directionless) == 0 &&
+			!caption.Params.RelativePosition &&
+			relativePosition.Length() > ClosedCaptionsModSystem.UserConfig.MinimumDirectionDistance)
+		{
+			if (angle >= 150f || angle <= -150f)
+			{
+				leftArrow = "v";
+				rightArrow = "v";
+			}
+			else if (angle >= 45f)
+			{
+				leftArrow = "<";
+			}
+			else if (angle <= -45f)
+			{
+				rightArrow = ">";
+			}
+		}
+		
+		opacity = 1f;
+
+		// Modulate opacity by sound distance.
+		if (distance > ClosedCaptionsModSystem.UserConfig.AttenuationRange)
+		{
+			var span = ClosedCaptionsModSystem.UserConfig.AttenuationRange;
+			var percent = (distance - ClosedCaptionsModSystem.UserConfig.AttenuationRange) / span * (1f - ClosedCaptionsModSystem.UserConfig.MinimumAttenuationOpacity);
+			percent = MathF.Max(0f, MathF.Min(percent, 1f - ClosedCaptionsModSystem.UserConfig.MinimumAttenuationOpacity));
+			opacity *= 1f - percent;
+		}
+		// Modulate opacity if the caption is fading out.
+		if (caption.FadeOutStartTime > 0)
+		{
+			var percent = 1f - (float)(capi.ElapsedMilliseconds - caption.FadeOutStartTime) / ClosedCaptionsModSystem.UserConfig.FadeOutDuration;
+			percent = MathF.Max(0f, MathF.Min(percent, 1f));
+			opacity *= percent;
+		}
 	}
 
 	private string? BuildCaptionLabel(CaptionManager.Caption caption, bool force)
@@ -168,59 +251,61 @@ public class ClosedCaptionsOverlay : HudElement
 		// TODO: Only re-init font if settings have changed.
 		InitFont();
 
-		_arrows.Clear();
+		_captionLabels.Clear();
+
+		var captions = CaptionManager.GetSortedCaptions();
+		if (!captions.Any())
+		{
+			if (IsOpened())
+				TryClose();
+			return;
+		}
 
 		ElementBounds dialogBounds =
 			ElementStdBounds.AutosizedMainDialog
 			.WithAlignment(EnumDialogArea.CenterBottom)
 			.WithFixedAlignmentOffset(0.0, -ClosedCaptionsModSystem.UserConfig.DisplayOffset);
 
-		string[] strings = [
-			"One",
-			"This is the second",
-			"Number three",
-			"Now with <strong>formatting</strong>",
-			"Maybe even an <itemstack type=\"block\" code=\"packeddirt\"/> item?",
-			"And a sixth",
-		];
-
 		SingleComposer = capi.Gui.CreateCompo("closedCaptions", dialogBounds);
 
-		Random rand = new();
-		int numStrings = (rand.Next() % (strings.Length - 1)) + 1;
 		double fontHeight = _font!.GetFontExtents().Height * _font!.LineHeightMultiplier;
 		double lineHeight = _font!.GetFontExtents().Height * _font!.LineHeightMultiplier + ClosedCaptionsModSystem.UserConfig.CaptionPaddingV * 2;
-		for (int i = 0; i < numStrings; ++i)
+		int lineY = 0;
+		foreach (var caption in captions)
 		{
-			int lineY = i * ((int)lineHeight + ClosedCaptionsModSystem.UserConfig.CaptionSpacing) + ClosedCaptionsModSystem.UserConfig.CaptionPaddingV;
 			ElementBounds textBounds = ElementBounds.Fixed(0, lineY)
 				.WithAlignment(EnumDialogArea.CenterTop)
 				.WithFixedSize(600, fontHeight);
-			SingleComposer.AddRichtext(strings[i], _font, textBounds, $"rt{i}");
-			var element = SingleComposer.GetRichtext($"rt{i}");
-			element.BeforeCalcBounds();
-			textBounds.fixedWidth = element.MaxLineWidth / RuntimeEnv.GUIScale + 1.0;
+			SingleComposer.AddRichtext(caption.Text, _font, textBounds, $"label{caption.ID}");
+			var labelElement = SingleComposer.GetRichtext($"label{caption.ID}");
+			labelElement.BeforeCalcBounds();
+			textBounds.fixedWidth = labelElement.MaxLineWidth / RuntimeEnv.GUIScale + 1.0;
 
 			ElementBounds boxBounds = ElementBounds.Fixed(0, lineY - ClosedCaptionsModSystem.UserConfig.CaptionPaddingV)
 				.WithAlignment(EnumDialogArea.CenterTop)
 				.WithFixedSize(600 + ClosedCaptionsModSystem.UserConfig.CaptionPaddingH * 2, lineHeight);
-			SingleComposer.AddStaticCustomDraw(boxBounds, DrawBox);
+			SingleComposer.AddInteractiveElement(new GuiElementBox(capi, boxBounds), $"box{caption.ID}");
+			var boxElement = (GuiElementBox)SingleComposer.GetElement($"box{caption.ID}");
 			boxBounds.fixedWidth = textBounds.fixedWidth + ClosedCaptionsModSystem.UserConfig.CaptionPaddingH * 2;
 			boxBounds.fixedHeight = textBounds.fixedHeight + ClosedCaptionsModSystem.UserConfig.CaptionPaddingV * 2;
 
 			ElementBounds arrowBoundsL = ElementBounds.Fixed(0, lineY)
 				.WithAlignment(EnumDialogArea.CenterTop)
 				.WithFixedSize(lineHeight, lineHeight);
-			SingleComposer.AddDynamicText("<", _font, arrowBoundsL, $"arrow{i}l");
-			_arrows.Add(SingleComposer.GetDynamicText($"arrow{i}l"));
+			SingleComposer.AddDynamicText("", _font, arrowBoundsL, $"arrowl{caption.ID}");
+			var leftArrowElement = SingleComposer.GetDynamicText($"arrowl{caption.ID}");
 			arrowBoundsL.fixedX = -textBounds.fixedWidth / 2 - lineHeight / 2;
 
 			ElementBounds arrowBoundsR = ElementBounds.Fixed(0, lineY)
 				.WithAlignment(EnumDialogArea.CenterTop)
 				.WithFixedSize(lineHeight, lineHeight);
-			SingleComposer.AddDynamicText("<", _font, arrowBoundsR, $"arrow{i}r");
-			_arrows.Add(SingleComposer.GetDynamicText($"arrow{i}r"));
+			SingleComposer.AddDynamicText("", _font, arrowBoundsR, $"arrowr{caption.ID}");
+			var rightArrowElement = SingleComposer.GetDynamicText($"arrowr{caption.ID}");
 			arrowBoundsR.fixedX = textBounds.fixedWidth / 2 + lineHeight / 2;
+
+			lineY += (int)lineHeight + ClosedCaptionsModSystem.UserConfig.CaptionSpacing + ClosedCaptionsModSystem.UserConfig.CaptionPaddingV;
+
+			_captionLabels.Add(new(caption, boxElement, leftArrowElement, labelElement, rightArrowElement));
 		}
 
 		try
@@ -231,79 +316,6 @@ public class ClosedCaptionsOverlay : HudElement
 		catch (Exception e)
 		{
 			capi.Logger.Error(e);
-		}
-
-		// _captionlabels.Clear();
-		// var captions = CaptionManager.GetSortedCaptions();
-		// if (!captions.Any())
-		// {
-		// 	if (IsOpened())
-		// 		TryClose();
-		// 	return;
-		// }
-
-		// ElementBounds dialogBounds = ElementStdBounds.AutosizedMainDialog
-		// 	.WithAlignment(EnumDialogArea.CenterBottom)
-		// 	.WithFixedOffset(0, -ClosedCaptionsModSystem.UserConfig.DisplayOffset);
-		// ElementBounds bgBounds = ElementBounds.Fill.WithSizing(ElementSizing.FitToChildren);
-		// var bgColor = new double[] { 0.0, 0.0, 0.0, 0.3 };
-
-		// SingleComposer = capi.Gui.CreateCompo("closedCaptions", dialogBounds)
-		// 	.AddGameOverlay(bgBounds, bgColor)
-		// 	.BeginChildElements();
-
-		// double currentY = 0;
-		// foreach (var caption in captions)
-		// {
-		// 	ElementBounds bounds = ElementBounds.Fixed(EnumDialogArea.LeftTop, 0, currentY, 600, LineHeight);
-
-		// 	var text = BuildCaptionLabel(caption, true);
-		// 	var captionKey = "caption" + caption.ID.ToString();
-		// 	SingleComposer.AddRichtext(text, _font, bounds, captionKey);
-
-		// 	var richtext = SingleComposer.GetRichtext(captionKey);
-		// 	_captionlabels.Add(new(caption, richtext));
-
-		// 	currentY += LineHeight;
-		// }
-
-		// SingleComposer.EndChildElements();
-
-		// try
-		// {
-		// 	SingleComposer.Compose();
-		// }
-		// catch (Exception e)
-		// {
-		// 	capi.Logger.Error($"Caption exception, no captions? {e}");
-		// }
-
-		// TryOpen();
-	}
-
-	int arrowIndex;
-	float arrowTime;
-	public override void OnRenderGUI(float deltaTime)
-	{
-		string[] arrows = [
-			"",
-			"<",
-			"v",
-			">"
-		];
-		arrowTime += deltaTime;
-		if (arrowTime > 1f)
-		{
-			arrowTime = 0f;
-			arrowIndex++;
-			if (arrowIndex >= arrows.Length)
-				arrowIndex = 0;
-		}
-		base.OnRenderGUI(deltaTime);
-		foreach (var arrow in _arrows)
-		{
-			arrow.SetNewText(arrows[arrowIndex]);
-			arrow.RecomposeText();
 		}
 	}
 }

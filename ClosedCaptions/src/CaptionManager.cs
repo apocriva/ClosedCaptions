@@ -246,20 +246,30 @@ public class CaptionManager
 					distance = (caption.Params.Position - player.Entity.Pos.XYZFloat).Length();
 				
 				// We show disposed sounds...
-				if (caption.IsLoadedSoundDisposed)
+				if (caption.IsLoadedSoundDisposed ||
+					caption.IsFading)
 				{
 					// ...but only if they are fading _and_ were already visible.
 					// (TODO: second part of that)
 					if (caption.IsFading && distance < caption.Params.Range)
+					{
 						return true;
+					}
 
 					return false;
 				}
 
-				if (caption.IsPlaying &&
-					!caption.IsPaused &&
+				// Sometimes sounds will have stopped by the time we're asking
+				// for them, but *before* we've updated them in Tick().
+				// Maybe we should call Tick() at the start of this method.
+				// (Not exactly though, because it forces a refresh which
+				// will call in here, etc)
+				if ((caption.IsPlaying && !caption.IsPaused ||
+					API.ElapsedMilliseconds - caption.StartTime < ClosedCaptionsModSystem.UserConfig.MinimumDisplayDuration) &&
 					distance < caption.Params.Range)
+				{
 					return true;
+				}
 
 				return false;
 			})
