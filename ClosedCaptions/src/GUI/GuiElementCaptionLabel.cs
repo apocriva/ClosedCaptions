@@ -19,6 +19,21 @@ public class GuiElementCaptionLabel : GuiElement
 	private LoadedTexture _textTexture;
 	private LoadedTexture _arrowTexture;
 
+	private string _debugText = "";
+	private LoadedTexture _debugTexture;
+
+	public string DebugText
+	{
+		get => _debugText;
+		set
+		{
+			_debugText = value;
+			api.Gui.TextTexture.GenOrUpdateTextTexture(
+				_debugText, CairoFont.WhiteSmallText().WithSlant(FontSlant.Italic),
+				ref _debugTexture);
+		}
+	}
+
 	private float _opacity = 1f;
 	private float? _angle = null;
 
@@ -29,6 +44,7 @@ public class GuiElementCaptionLabel : GuiElement
 		_baseTexture = new LoadedTexture(capi);
 		_textTexture = new LoadedTexture(capi);
 		_arrowTexture = new LoadedTexture(capi);
+		_debugTexture = new LoadedTexture(capi);
 	}
 
 	public void Update(float opacity, float? angle)
@@ -68,6 +84,11 @@ public class GuiElementCaptionLabel : GuiElement
 		api.Gui.TextTexture.GenOrUpdateTextTexture(
 			_caption.Text, _font,
 			ref _textTexture);
+
+		// Debug text
+		api.Gui.TextTexture.GenOrUpdateTextTexture(
+			_debugText, CairoFont.WhiteSmallText().WithSlant(FontSlant.Italic),
+			ref _debugTexture);
 	}
 
 	public override void RenderInteractiveElements(float deltaTime)
@@ -103,6 +124,32 @@ public class GuiElementCaptionLabel : GuiElement
 				arrowRenderSize, arrowRenderSize, 55,
 				renderColor);
 			api.Render.GlPopMatrix();
+			
+			api.Render.GlPushMatrix();
+			api.Render.GlTranslate(
+				Bounds.renderX + Bounds.OuterWidth - Bounds.OuterHeight / 2,
+				Bounds.renderY + Bounds.OuterHeight / 2,
+				0);
+			api.Render.GlRotate(_angle.Value, 0, 0, 1);
+			api.Render.GlTranslate(-arrowRenderSize / 2, -arrowRenderSize / 2, 0);
+			api.Render.RenderTexture(
+				_arrowTexture.TextureId,
+				0, 0,
+				arrowRenderSize, arrowRenderSize, 55,
+				renderColor);
+			api.Render.GlPopMatrix();
+		}
+
+		if (ClosedCaptionsModSystem.UserConfig.DebugMode && !string.IsNullOrEmpty(_debugText))
+		{
+			api.Render.RenderTexture(
+				_baseTexture.TextureId,
+				Bounds.renderX + Bounds.OuterWidth + 10, Bounds.renderY,
+				_debugTexture.Width, _debugTexture.Height, 50);
+			api.Render.RenderTexture(
+				_debugTexture.TextureId,
+				Bounds.renderX + Bounds.OuterWidth + 10, Bounds.renderY,
+				_debugTexture.Width, _debugTexture.Height, 60);
 		}
 	}
 
@@ -110,6 +157,7 @@ public class GuiElementCaptionLabel : GuiElement
 	{
 		base.Dispose();
 		_arrowTexture?.Dispose();
+		_debugTexture?.Dispose();
 		_textTexture?.Dispose();
 		_baseTexture?.Dispose();
 	}

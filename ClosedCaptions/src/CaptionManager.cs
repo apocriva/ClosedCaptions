@@ -193,6 +193,34 @@ public class CaptionManager
 		if (Instance.IsFiltered(loadedSound, tags))
 			return;
 
+		// If this is a duplicate of a nearby sound, we'll ignore it entirely.
+		foreach (var caption in Instance._captions)
+		{
+			// Literally the same sound!
+			if (caption.LoadedSound == loadedSound)
+			{
+				API.Logger.Warning("[Closed Captions] Duplicate sound played: " + location.ToString());
+				return;
+			}
+
+			if (caption.Text == text)
+			{
+				// Filter sounds that are very similar and close to sounds that are already playing.
+				var position = loadedSound.Params.Position ?? API.World.Player.Entity.Pos.XYZFloat;
+				var distance = (position - caption.Params.Position).Length();
+				if (API.ElapsedMilliseconds - caption.StartTime < ClosedCaptionsModSystem.UserConfig.GroupingMaxTime &&
+					distance < ClosedCaptionsModSystem.UserConfig.GroupingRange)
+				{
+					// Reset its timers and stuff.
+					caption.LoadedSound = loadedSound;
+					caption.StartTime = API.ElapsedMilliseconds;
+					caption.FadeOutStartTime = 0;
+					caption.Position = position;
+					return;
+				}
+			}
+		}
+
 		Instance._captions.Add(new Caption(
 			Instance._nextCaptionId++,
 			loadedSound,
@@ -303,8 +331,7 @@ public class CaptionManager
 		for (int i = _captions.Count - 1; i >= 0; --i)
 		{
 			var caption = _captions[i];
-			caption.IsVisibile = true;
-
+			
 			if (caption.Unique != null)
 			{
 				if (uniqueGroups.TryGetValue(caption.Unique.Group, out Caption? comp))
@@ -319,6 +346,7 @@ public class CaptionManager
 					}
 					else
 					{
+						comp.IsVisibile = true;
 						caption.IsVisibile = false;
 					}
 				}
@@ -363,43 +391,6 @@ public class CaptionManager
 	public void Dispose()
 	{
 		_captions.Clear();
-	}
-
-	private Caption? FindOverwrite(ILoadedSound newSound, string newText, MatchConfig.Unique? unique)
-	{
-		Caption? ret = null;
-
-		// Filter out sounds that are similar to one that's playing and close in space.
-		foreach (var caption in _captions)
-		{
-			// This literal sound is already playing, get outta here!
-			if (caption.LoadedSound == newSound)
-				return caption;
-				
-			// Unique sounds are unique!
-			if (unique != null && caption.Unique != null &&
-				unique.Group == caption.Unique.Group)
-			{
-				if (ret == null ||
-					ret != null &&
-					ret.Unique != null &&
-					caption.Unique.Priority > ret.Unique.Priority)
-					ret = caption;
-				continue;
-			}
-
-			if (caption.Text == newText)
-			{
-				// Filter sounds that are very similar and close to sounds that are already playing.
-				var position = newSound.Params.Position ?? API.World.Player.Entity.Pos.XYZ.ToVec3f();
-				var distance = (position - caption.Params.Position).Length();
-				if (API.ElapsedMilliseconds - caption.StartTime < ClosedCaptionsModSystem.UserConfig.GroupingMaxTime &&
-					distance < ClosedCaptionsModSystem.UserConfig.GroupingRange)
-					return caption;
-			}
-		}
-
-		return ret;
 	}
 
 	private bool IsFiltered(ILoadedSound loadedSound, Tags soundTags)

@@ -393,7 +393,7 @@
 				{ "match": "sounds/environment/smallsplash.ogg", "tags": "ambience,environment", "unique": { "group": "splash", "priority" : 0 }, "captionKey": "closedcaptions:environment-splash-small" },
 				{ "match": "sounds/environment/underwater.ogg", "tags": "ambience", "unique": { "group": "underwater" }, "captionKey": "closedcaptions:environment-underwater" },
 				{ "match": "sounds/environment/waterfall.ogg", "tags": "ambience,environment", "unique": { "group": "water", "priority" : 5 }, "captionKey": "closedcaptions:environment-waterfall" },
-				{ "match": "sounds/environment/waterwaves.ogg", "tags": "ambience,environment", "unique": { "group": "water", "priority" : 0 }, "captionKey": "closedcaptions:environment-waterwaves" },
+				{ "match": "sounds/environment/waterwaves.ogg", "tags": "ambience,environment", "flags": "directionless", "unique": { "group": "water", "priority" : 0 }, "captionKey": "closedcaptions:environment-waterwaves" },
 				{ "match": "sounds/environment/wind.ogg", "tags": "ambience,weather", "flags": "directionless", "unique": { "group": "weather", "priority" : 0 }, "captionKey": "closedcaptions:environment-wind" },
 			]
 		},
