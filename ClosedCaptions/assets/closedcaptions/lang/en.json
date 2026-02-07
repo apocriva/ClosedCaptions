@@ -365,6 +365,8 @@
 	"closedcaptions:environment-fire": "[Fire roaring]",
 	"closedcaptions:environment-firepit": "[Fire gently burning]",
 	"closedcaptions:environment-lava": "[Rumbling and burning]",
+	"closedcaptions:environment-rainwindow": "[Muffled rainfall]",
+	"closedcaptions:environment-rapids": "[Rushing water]",
 	"closedcaptions:environment-splash-large": "[Splash!!]",
 	"closedcaptions:environment-splash-medium": "[Splash!]",
 	"closedcaptions:environment-splash-small": "[Splash]",

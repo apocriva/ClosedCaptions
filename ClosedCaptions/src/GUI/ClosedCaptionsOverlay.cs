@@ -71,7 +71,7 @@ public class ClosedCaptionsOverlay : HudElement
 			// using VTML but here we are.
 			captionLabel.LabelElement.SetNewText($"<font opacity=\"{opacity}\">{captionLabel.Caption.Text}</font>", _font);
 
-			captionLabel.BoxElement.Opacity = opacity;
+			captionLabel.BoxElement.Opacity = opacity * ClosedCaptionsModSystem.UserConfig.CaptionBackgroundOpacity;
 		}
 
 		base.OnRenderGUI(deltaTime);
@@ -84,8 +84,7 @@ public class ClosedCaptionsOverlay : HudElement
 			.WithFont(GuiStyle.StandardFontName)
 			.WithOrientation(EnumTextOrientation.Center)
 			.WithFontSize(ClosedCaptionsModSystem.UserConfig.FontSize)
-			.WithWeight(FontWeight.Normal)
-			.WithStroke([0, 0, 0, 0.5], 2);
+			.WithWeight(FontWeight.Normal);
 	}
 
 	private void GetIndicators(CaptionManager.Caption caption, ref string leftArrow, ref string rightArrow, ref float opacity)
@@ -140,110 +139,33 @@ public class ClosedCaptionsOverlay : HudElement
 			opacity *= 1f - percent;
 		}
 		// Modulate opacity if the caption is fading out.
-		if (caption.FadeOutStartTime > 0)
+		if (caption.FadeOutStartTime > 0 &&
+			capi.ElapsedMilliseconds > caption.FadeOutStartTime)
 		{
 			var percent = 1f - (float)(capi.ElapsedMilliseconds - caption.FadeOutStartTime) / ClosedCaptionsModSystem.UserConfig.FadeOutDuration;
 			percent = MathF.Max(0f, MathF.Min(percent, 1f));
 			opacity *= percent;
-		}
-	}
 
-	private string? BuildCaptionLabel(CaptionManager.Caption caption, bool force)
-	{
-		var player = capi.World.Player;
-		var relativePosition = caption.Position - player.Entity.Pos.XYZFloat;
-		if (caption.Params.RelativePosition)
-			relativePosition = caption.Position;
-		relativePosition.Y = 0f;
-		var relativeDirection = relativePosition.Clone();
-		relativeDirection.Normalize();
+			leftArrow = rightArrow = "";
+		}
 		
-		// Left or right?
-		Vec3f forward = new(MathF.Sin(player.CameraYaw), 0f, MathF.Cos(player.CameraYaw));
-		var dot = relativeDirection.Dot(forward);
-		var angle = MathF.Acos(dot) * 180f / MathF.PI;
-		var det = relativeDirection.X * forward.Z - relativeDirection.Z * forward.X;
-		if (det < 0)
-			angle = -angle;
-
-		string leftArrow = "";
-		string rightArrow = "";
-		var distance = relativePosition.Length();
-		if ((caption.Flags & CaptionManager.Flags.Directionless) == 0 &&
-			!caption.Params.RelativePosition &&
-			relativePosition.Length() > ClosedCaptionsModSystem.UserConfig.MinimumDirectionDistance)
-		{
-			if (angle >= 150f || angle <= -150f)
-			{
-				leftArrow = "v";
-				rightArrow = "v";
-			}
-			else if (angle >= 45f)
-			{
-				leftArrow = "&lt;";
-			}
-			else if (angle <= -45f)
-			{
-				rightArrow = "&gt;";
-			}
-		}
-
-		float opacity = 1f;
-		// Modulate opacity by sound distance.
-		if (distance > ClosedCaptionsModSystem.UserConfig.AttenuationRange)
-		{
-			var span = ClosedCaptionsModSystem.UserConfig.AttenuationRange;
-			var percent = (distance - ClosedCaptionsModSystem.UserConfig.AttenuationRange) / span * (1f - ClosedCaptionsModSystem.UserConfig.MinimumAttenuationOpacity);
-			percent = MathF.Max(0f, MathF.Min(percent, 1f - ClosedCaptionsModSystem.UserConfig.MinimumAttenuationOpacity));
-			opacity *= 1f - percent;
-		}
-		// Modulate opacity if the caption is fading out.
-		if (caption.FadeOutStartTime > 0)
-		{
-			var percent = 1f - (float)(capi.ElapsedMilliseconds - caption.FadeOutStartTime) / ClosedCaptionsModSystem.UserConfig.FadeOutDuration;
-			percent = MathF.Max(0f, MathF.Min(percent, 1f));
-			opacity *= percent;
-		}
-
-		// string iconText = string.Empty;
-		// if (ClosedCaptionsModSystem.UserConfig.ShowIcons &&
-		// 	!string.IsNullOrEmpty(caption.IconType) &&
-		// 	!string.IsNullOrEmpty(caption.IconCode))
+		// string debugInfo = string.Empty;
+		// if (ClosedCaptionsModSystem.UserConfig.DebugMode)
 		// {
-		// 	iconText = $"<itemstack floattype=\"inline\" type=\"{caption.IconType}\" code=\"{caption.IconCode}\"/>";
+		// 	debugInfo =
+		// 		$"<font size=\"10\" color=\"#999933\">{caption.Params.Location.Path[..caption.Params.Location.Path.LastIndexOf('/')]}/</font>" +
+		// 		$"<font size=\"10\" color=\"#ffff33\" weight=\"bold\">{caption.Params.Location.GetName()}</font>" +
+		// 		$"<font size=\"10\" color=\"#33ffff\"> type:{caption.Params.SoundType}</font>" +
+		// 		//$"<font size=\"10\" color=\"#3333ff\"> vol:{(int)(caption.Params.Volume * 100):D}%</font>" +
+		// 		(!caption.Params.RelativePosition ?
+		// 			$"<font size=\"10\" color=\"#33ff33\"> rel!</font>" +
+		// 			$"<font size=\"10\" color=\"#ffffff\"> distance:{relativePosition.Length():F0}</font>" +
+		// 			$"<font size=\"10\" color=\"#ffffff\"> range:{caption.Params.Range}</font>"
+		// 			// $"<font size=\"10\" color=\"#33ff33\"> forward:({forward.X:F1}, {forward.Z:F1})</font>" +
+		// 			// $"<font size=\"10\" color=\"#3399ff\"> rel:({relativePosition.X:F1}, {relativePosition.Z:F1})</font>" +
+		// 			// $"<font size=\"10\" color=\"#33ff33\"> angle:{angle}°</font>"
+		// 			: "");
 		// }
-
-		string debugInfo = string.Empty;
-		if (ClosedCaptionsModSystem.UserConfig.DebugMode)
-		{
-			debugInfo =
-				$"<font size=\"10\" color=\"#999933\">{caption.Params.Location.Path[..caption.Params.Location.Path.LastIndexOf('/')]}/</font>" +
-				$"<font size=\"10\" color=\"#ffff33\" weight=\"bold\">{caption.Params.Location.GetName()}</font>" +
-				$"<font size=\"10\" color=\"#33ffff\"> type:{caption.Params.SoundType}</font>" +
-				//$"<font size=\"10\" color=\"#3333ff\"> vol:{(int)(caption.Params.Volume * 100):D}%</font>" +
-				(!caption.Params.RelativePosition ?
-					$"<font size=\"10\" color=\"#33ff33\"> rel!</font>" +
-					$"<font size=\"10\" color=\"#ffffff\"> distance:{relativePosition.Length():F0}</font>" +
-					$"<font size=\"10\" color=\"#ffffff\"> range:{caption.Params.Range}</font>"
-					// $"<font size=\"10\" color=\"#33ff33\"> forward:({forward.X:F1}, {forward.Z:F1})</font>" +
-					// $"<font size=\"10\" color=\"#3399ff\"> rel:({relativePosition.X:F1}, {relativePosition.Z:F1})</font>" +
-					// $"<font size=\"10\" color=\"#33ff33\"> angle:{angle}°</font>"
-					: "");
-		}
-
-		var label = $"<font opacity=\"{opacity}\">{leftArrow} {caption.Text} {rightArrow}</font>{debugInfo}";
-		//capi.Logger.Debug("[ClosedCaptions]: " + label);
-
-		return label;
-	}
-
-	private void DrawBox(Context context, ImageSurface surface, ElementBounds bounds)
-	{
-		context.Save();
-		context.SetSourceRGBA(0, 0, 0, ClosedCaptionsModSystem.UserConfig.CaptionBackgroundOpacity);
-		context.Rectangle(bounds.drawX, bounds.drawY, bounds.InnerWidth, bounds.InnerHeight);
-		context.Fill();
-		context.Restore();
 	}
 
 	private void BuildDialog()

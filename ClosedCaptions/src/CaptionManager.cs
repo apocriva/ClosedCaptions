@@ -265,7 +265,7 @@ public class CaptionManager
 				// (Not exactly though, because it forces a refresh which
 				// will call in here, etc)
 				if ((caption.IsPlaying && !caption.IsPaused ||
-					API.ElapsedMilliseconds - caption.StartTime < ClosedCaptionsModSystem.UserConfig.MinimumDisplayDuration) &&
+					API.ElapsedMilliseconds - caption.StartTime < ClosedCaptionsModSystem.UserConfig.MinimumDisplayDuration && caption.Params.Volume > 0) &&
 					distance < caption.Params.Range)
 				{
 					return true;

@@ -381,7 +381,7 @@
 			"group": "sounds/environment*",
 			"defaultKey": "closedcaptions:environment",
 			"mappings": [
-				{ "match": "sounds/environment/creek.ogg", "tags": "environment", "captionKey": "closedcaptions:environment-creek" },
+				{ "match": "sounds/environment/creek.ogg", "tags": "environment", "flags": "unique", "captionKey": "closedcaptions:environment-creek" },
 				{ "match": "sounds/environment/drip*", "tags": "ambience,environment", "captionKey": "closedcaptions:environment-drip" },
 				{ "match": "sounds/environment/fire.ogg", "tags": "ambience,environment", "flags": "unique", "tags": "danger", "captionKey": "closedcaptions:environment-fire" },
 				{ "match": "sounds/environment/fireplace.ogg", "tags": "ambience,environment", "flags": "directionless,unique", "captionKey": "closedcaptions:environment-firepit" },
