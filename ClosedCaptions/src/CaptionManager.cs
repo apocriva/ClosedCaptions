@@ -160,7 +160,7 @@ public class CaptionManager
 			throw e;
 		}
 
-		_overlay = new(capi, _matchConfig);
+		_overlay = new(capi);
 	}
 
 	public static void SoundStarted(ILoadedSound loadedSound, AssetLocation location)
@@ -225,6 +225,8 @@ public class CaptionManager
 
 	public static IOrderedEnumerable<Caption> GetSortedCaptions()
 	{
+		Instance.UpdateCaptions();
+
 		var player = API.World.Player;
 		// This has an error for a sound that is reverbing
 		// Also an error where sounds that are far enough away that they haven't displayed
@@ -264,8 +266,8 @@ public class CaptionManager
 				// Maybe we should call Tick() at the start of this method.
 				// (Not exactly though, because it forces a refresh which
 				// will call in here, etc)
-				if ((caption.IsPlaying && !caption.IsPaused ||
-					API.ElapsedMilliseconds - caption.StartTime < ClosedCaptionsModSystem.UserConfig.MinimumDisplayDuration && caption.Params.Volume > 0) &&
+				if (caption.IsPlaying &&
+					!caption.IsPaused &&
 					distance < caption.Params.Range)
 				{
 					return true;
@@ -306,9 +308,8 @@ public class CaptionManager
 		_needsRefresh = true;
 	}
 
-	public void Tick()
+	private void UpdateCaptions()
 	{
-		bool refresh = _needsRefresh;
 		for (int i = _captions.Count - 1; i >= 0; --i)
 		{
 			var caption = _captions[i];
@@ -328,15 +329,17 @@ public class CaptionManager
 				if (API.ElapsedMilliseconds - caption.FadeOutStartTime > ClosedCaptionsModSystem.UserConfig.FadeOutDuration)
 				{
 					_captions.RemoveAt(i);
-					refresh = true;
+					_needsRefresh = true;
 				}
 			}
 		}
+	}
 
-		if (refresh)
+	public void Tick()
+	{
+		UpdateCaptions();
+		if (_needsRefresh)
 			_overlay.Refresh();
-		else
-			_overlay.Tick();
 
 		_needsRefresh = false;
 	}

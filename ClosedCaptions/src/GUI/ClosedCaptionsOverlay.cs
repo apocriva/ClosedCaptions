@@ -23,23 +23,10 @@ public class ClosedCaptionsOverlay : HudElement
 	private CairoFont? _font;
 	private readonly Vec4f _fontColor = new(0.91f, 0.87f, 0.81f, 1f);
 
-	private readonly MatchConfig _matchConfig;
+	private readonly List<GuiElementCaptionLabel> _captionLabels = [];
 
-	private class CaptionLabel(CaptionManager.Caption caption, GuiElementBox boxElement, GuiElementDynamicText leftArrow, GuiElementRichtext label, GuiElementDynamicText rightArrow)
+	public ClosedCaptionsOverlay(ICoreClientAPI capi) : base(capi)
 	{
-		public CaptionManager.Caption Caption = caption;
-
-		public GuiElementBox BoxElement = boxElement;
-		public GuiElementDynamicText LeftArrowElement = leftArrow;
-		public GuiElementRichtext LabelElement = label;
-		public GuiElementDynamicText RightArrowElement = rightArrow;
-	}
-
-	private readonly List<CaptionLabel> _captionLabels = [];
-
-	public ClosedCaptionsOverlay(ICoreClientAPI capi, MatchConfig matchConfig) : base(capi)
-	{
-		_matchConfig = matchConfig;
 		BuildDialog();
 	}
 
@@ -48,30 +35,14 @@ public class ClosedCaptionsOverlay : HudElement
 		BuildDialog();
 	}
 
-	public void Tick()
-	{
-	}
-
 	public override void OnRenderGUI(float deltaTime)
 	{
 		foreach (var captionLabel in _captionLabels)
 		{
-			string leftArrow = "";
-			string rightArrow = "";
+			float? angle = null;
 			float opacity = 1f;
-			GetIndicators(captionLabel.Caption, ref leftArrow, ref rightArrow, ref opacity);
-
-			// TODO: These have to fade too!
-			if (captionLabel.LeftArrowElement.GetText() != leftArrow)
-				captionLabel.LeftArrowElement.SetNewText(leftArrow);
-			if (captionLabel.RightArrowElement.GetText() != rightArrow)
-				captionLabel.RightArrowElement.SetNewText(rightArrow);
-
-			// Ideally we would like this to adjust the alpha of the element instead of
-			// using VTML but here we are.
-			captionLabel.LabelElement.SetNewText($"<font opacity=\"{opacity}\">{captionLabel.Caption.Text}</font>", _font);
-
-			captionLabel.BoxElement.Opacity = opacity * ClosedCaptionsModSystem.UserConfig.CaptionBackgroundOpacity;
+			GetIndicators(captionLabel.Caption, ref opacity, ref angle);
+			captionLabel.Update(opacity, angle);
 		}
 
 		base.OnRenderGUI(deltaTime);
@@ -84,14 +55,12 @@ public class ClosedCaptionsOverlay : HudElement
 			.WithFont(GuiStyle.StandardFontName)
 			.WithOrientation(EnumTextOrientation.Center)
 			.WithFontSize(ClosedCaptionsModSystem.UserConfig.FontSize)
-			.WithWeight(FontWeight.Normal);
+			.WithWeight(FontWeight.Normal)
+			.WithStroke([0, 0, 0, 0.5], 1);
 	}
 
-	private void GetIndicators(CaptionManager.Caption caption, ref string leftArrow, ref string rightArrow, ref float opacity)
+	private void GetIndicators(CaptionManager.Caption caption, ref float opacity, ref float? angle)
 	{
-		leftArrow = "";
-		rightArrow = "";
-		
 		var player = capi.World.Player;
 		var relativePosition = caption.Position - player.Entity.Pos.XYZFloat;
 		if (caption.Params.RelativePosition)
@@ -103,29 +72,18 @@ public class ClosedCaptionsOverlay : HudElement
 		// Left or right?
 		Vec3f forward = new(MathF.Sin(player.CameraYaw), 0f, MathF.Cos(player.CameraYaw));
 		var dot = relativeDirection.Dot(forward);
-		var angle = MathF.Acos(dot) * 180f / MathF.PI;
+		angle = MathF.Acos(dot) * 180f / MathF.PI;
 		var det = relativeDirection.X * forward.Z - relativeDirection.Z * forward.X;
-		if (det < 0)
+		if (det > 0)
 			angle = -angle;
 
 		var distance = relativePosition.Length();
-		if ((caption.Flags & CaptionManager.Flags.Directionless) == 0 &&
-			!caption.Params.RelativePosition &&
-			relativePosition.Length() > ClosedCaptionsModSystem.UserConfig.MinimumDirectionDistance)
+		if ((caption.Flags & CaptionManager.Flags.Directionless) != 0 ||
+			caption.Params.RelativePosition ||
+			(!caption.Params.RelativePosition &&
+			relativePosition.Length() < ClosedCaptionsModSystem.UserConfig.MinimumDirectionDistance))
 		{
-			if (angle >= 150f || angle <= -150f)
-			{
-				leftArrow = "v";
-				rightArrow = "v";
-			}
-			else if (angle >= 45f)
-			{
-				leftArrow = "<";
-			}
-			else if (angle <= -45f)
-			{
-				rightArrow = ">";
-			}
+			angle = null;
 		}
 		
 		opacity = 1f;
@@ -145,8 +103,6 @@ public class ClosedCaptionsOverlay : HudElement
 			var percent = 1f - (float)(capi.ElapsedMilliseconds - caption.FadeOutStartTime) / ClosedCaptionsModSystem.UserConfig.FadeOutDuration;
 			percent = MathF.Max(0f, MathF.Min(percent, 1f));
 			opacity *= percent;
-
-			leftArrow = rightArrow = "";
 		}
 		
 		// string debugInfo = string.Empty;
@@ -198,36 +154,12 @@ public class ClosedCaptionsOverlay : HudElement
 			ElementBounds textBounds = ElementBounds.Fixed(0, lineY)
 				.WithAlignment(EnumDialogArea.CenterTop)
 				.WithFixedSize(600, fontHeight);
-			SingleComposer.AddRichtext(caption.Text, _font, textBounds, $"label{caption.ID}");
-			var labelElement = SingleComposer.GetRichtext($"label{caption.ID}");
-			labelElement.BeforeCalcBounds();
-			textBounds.fixedWidth = labelElement.MaxLineWidth / RuntimeEnv.GUIScale + 1.0;
-
-			ElementBounds boxBounds = ElementBounds.Fixed(0, lineY - ClosedCaptionsModSystem.UserConfig.CaptionPaddingV)
-				.WithAlignment(EnumDialogArea.CenterTop)
-				.WithFixedSize(600 + ClosedCaptionsModSystem.UserConfig.CaptionPaddingH * 2, lineHeight);
-			SingleComposer.AddInteractiveElement(new GuiElementBox(capi, boxBounds), $"box{caption.ID}");
-			var boxElement = (GuiElementBox)SingleComposer.GetElement($"box{caption.ID}");
-			boxBounds.fixedWidth = textBounds.fixedWidth + ClosedCaptionsModSystem.UserConfig.CaptionPaddingH * 2;
-			boxBounds.fixedHeight = textBounds.fixedHeight + ClosedCaptionsModSystem.UserConfig.CaptionPaddingV * 2;
-
-			ElementBounds arrowBoundsL = ElementBounds.Fixed(0, lineY)
-				.WithAlignment(EnumDialogArea.CenterTop)
-				.WithFixedSize(lineHeight, lineHeight);
-			SingleComposer.AddDynamicText("", _font, arrowBoundsL, $"arrowl{caption.ID}");
-			var leftArrowElement = SingleComposer.GetDynamicText($"arrowl{caption.ID}");
-			arrowBoundsL.fixedX = -textBounds.fixedWidth / 2 - lineHeight / 2;
-
-			ElementBounds arrowBoundsR = ElementBounds.Fixed(0, lineY)
-				.WithAlignment(EnumDialogArea.CenterTop)
-				.WithFixedSize(lineHeight, lineHeight);
-			SingleComposer.AddDynamicText("", _font, arrowBoundsR, $"arrowr{caption.ID}");
-			var rightArrowElement = SingleComposer.GetDynamicText($"arrowr{caption.ID}");
-			arrowBoundsR.fixedX = textBounds.fixedWidth / 2 + lineHeight / 2;
-
-			lineY += (int)lineHeight + ClosedCaptionsModSystem.UserConfig.CaptionSpacing + ClosedCaptionsModSystem.UserConfig.CaptionPaddingV;
-
-			_captionLabels.Add(new(caption, boxElement, leftArrowElement, labelElement, rightArrowElement));
+			_font.AutoBoxSize(caption.Text, textBounds);
+			textBounds.fixedWidth += fontHeight * 2 + ClosedCaptionsModSystem.UserConfig.CaptionPaddingH * 2;
+			SingleComposer.AddCaptionLabel(caption, _font, textBounds, $"label{caption.ID}");
+			_captionLabels.Add(SingleComposer.GetCaptionLabel($"label{caption.ID}"));
+			
+			lineY += (int)lineHeight + ClosedCaptionsModSystem.UserConfig.CaptionSpacing + ClosedCaptionsModSystem.UserConfig.CaptionPaddingV * 2;
 		}
 
 		try
