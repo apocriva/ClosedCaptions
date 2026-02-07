@@ -78,7 +78,8 @@ public class ClosedCaptionsOverlay : HudElement
 			angle = -angle;
 
 		var distance = relativePosition.Length();
-		if ((caption.Flags & CaptionManager.Flags.Directionless) != 0 ||
+		if (!ClosedCaptionsModSystem.UserConfig.ShowDirection ||
+			(caption.Flags & CaptionManager.Flags.Directionless) != 0 ||
 			caption.Params.RelativePosition ||
 			(!caption.Params.RelativePosition &&
 			relativePosition.Length() < ClosedCaptionsModSystem.UserConfig.MinimumDirectionDistance))
@@ -156,10 +157,11 @@ public class ClosedCaptionsOverlay : HudElement
 				.WithFixedSize(600, fontHeight);
 			_font.AutoBoxSize(caption.Text, textBounds);
 			textBounds.fixedWidth += fontHeight * 2 + ClosedCaptionsModSystem.UserConfig.CaptionPaddingH * 2;
+			textBounds.fixedHeight = fontHeight + ClosedCaptionsModSystem.UserConfig.CaptionPaddingV * 2;
 			SingleComposer.AddCaptionLabel(caption, _font, textBounds, $"label{caption.ID}");
 			_captionLabels.Add(SingleComposer.GetCaptionLabel($"label{caption.ID}"));
 			
-			lineY += (int)lineHeight + ClosedCaptionsModSystem.UserConfig.CaptionSpacing + ClosedCaptionsModSystem.UserConfig.CaptionPaddingV * 2;
+			lineY += (int)lineHeight + ClosedCaptionsModSystem.UserConfig.CaptionSpacing;
 		}
 
 		try

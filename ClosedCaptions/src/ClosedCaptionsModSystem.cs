@@ -173,7 +173,8 @@ public class ClosedCaptionsModSystem : ModSystem
 			config.CaptionBackgroundOpacity = OnInputInt("caption-opacity", (int)(config.CaptionBackgroundOpacity * 100f), ref modified, 0, 100) / 100f;
 			config.CaptionPaddingH = OnInputInt("caption-padding-h", config.CaptionPaddingH, ref modified, 0);
 			config.CaptionPaddingV = OnInputInt("caption-padding-v", config.CaptionPaddingV, ref modified, 0);
-			config.CaptionSpacing = OnInputInt("caption-spacing", config.CaptionSpacing, ref modified);
+			config.CaptionSpacing = OnInputInt("caption-spacing", config.CaptionSpacing, ref modified, 0);
+			config.ShowDirection = OnCheckBox("show-direction", config.ShowDirection, ref modified);
 			ImGui.Unindent();
 		}
 

@@ -32,9 +32,10 @@ public class UserConfig
 	public int DisplayOffset { get; set; } = 300;
 	public int FontSize { get; set; } = 20;
 	public float CaptionBackgroundOpacity { get; set; } = 0.5f;
-	public int CaptionPaddingH { get; set; } = 30;
+	public int CaptionPaddingH { get; set; } = 0;
 	public int CaptionPaddingV { get; set; } = 0;
-	public int CaptionSpacing { get; set; } = 2;
+	public int CaptionSpacing { get; set; } = 0;
+	public bool ShowDirection { get; set; } = true;
 
 	public bool DebugMode { get; set; } = false;
 }
