@@ -526,7 +526,7 @@
 			"defaultKey": "closedcaptions:weather",
 			"mappings": [
 				{ "match": "sounds/weather/tracks/hail.ogg", "tags": "danger,weather", "flags":"directionless", "unique": { "group": "weather", "priority" : 15 }, "captionKey": "closedcaptions:weather-hail" },
-				{ "match": "sounds/weather/tracks/lowtremble.ogg", "tags": "ambience,weather", "flags":"directionless", "unique": { "group": "weather", "priority" : 0 }, "captionKey": "closedcaptions:weather-lowtremble" },
+				{ "match": "sounds/weather/tracks/lowtremble.ogg", "tags": "ambience,weather", "flags":"directionless", "unique": { "group": "weather", "priority" : 1 }, "captionKey": "closedcaptions:weather-lowtremble" },
 				{ "match": "sounds/weather/tracks/rain-leafless.ogg", "tags": "weather", "flags":"directionless", "unique": { "group": "weather", "priority" : 10 }, "captionKey": "closedcaptions:weather-rain-leafless" },
 				{ "match": "sounds/weather/tracks/rain-leafy.ogg", "tags": "weather", "flags":"directionless", "unique": { "group": "weather", "priority" : 11 }, "captionKey": "closedcaptions:weather-rain-leafy" },
 				{ "match": "sounds/weather/tracks/verylowtremble.ogg", "tags": "ambience,weather", "flags":"directionless", "unique": { "group": "weather", "priority" : 0 }, "captionKey": "closedcaptions:weather-verylowtremble" },

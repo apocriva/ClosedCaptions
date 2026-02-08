@@ -6,21 +6,21 @@ using Vintagestory.API.MathTools;
 
 namespace ClosedCaptions.GUI;
 
-public class GuiElementCaptionLabel : GuiElement
+public class GuiElementCaptionLabel(ICoreClientAPI capi, CaptionManager.Caption caption, CairoFont font, ElementBounds bounds) : GuiElement(capi, bounds)
 {
 	private static readonly int ArrowTextureSize = 64;
 	private static readonly double ArrowSize = ArrowTextureSize;
 	private static readonly double ArrowRenderScale = 0.7;
 
 	public CaptionManager.Caption Caption { get => _caption; }
-	private CaptionManager.Caption _caption;
-	private CairoFont _font;
-	private LoadedTexture _baseTexture;
-	private LoadedTexture _textTexture;
-	private LoadedTexture _arrowTexture;
+	private readonly CaptionManager.Caption _caption = caption;
+	private readonly CairoFont _font = font;
+	private LoadedTexture _baseTexture = new(capi);
+	private LoadedTexture _textTexture = new(capi);
+	private LoadedTexture _arrowTexture = new(capi);
 
 	private string _debugText = "";
-	private LoadedTexture _debugTexture;
+	private LoadedTexture _debugTexture = new(capi);
 
 	public string DebugText
 	{
@@ -36,16 +36,6 @@ public class GuiElementCaptionLabel : GuiElement
 
 	private float _opacity = 1f;
 	private float? _angle = null;
-
-	public GuiElementCaptionLabel(ICoreClientAPI capi, CaptionManager.Caption caption, CairoFont font, ElementBounds bounds) : base(capi, bounds)
-	{
-		_caption = caption;
-		_font = font;
-		_baseTexture = new LoadedTexture(capi);
-		_textTexture = new LoadedTexture(capi);
-		_arrowTexture = new LoadedTexture(capi);
-		_debugTexture = new LoadedTexture(capi);
-	}
 
 	public void Update(float opacity, float? angle)
 	{
