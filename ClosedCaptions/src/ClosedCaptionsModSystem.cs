@@ -155,6 +155,8 @@ public class ClosedCaptionsModSystem : ModSystem
 			ImGui.Indent();
 			config.MinimumDirectionDistance = OnInputFloat("minimum-direction-distance", (int)config.MinimumDirectionDistance, ref modified, 0f);
 			config.MinimumDisplayDuration = OnInputInt("minimum-display-duration", (int)config.MinimumDisplayDuration, ref modified, 0);
+			config.DimTime = OnInputInt("dim-time", (int)config.DimTime, ref modified, 0);
+			config.DimPercent = OnInputInt("dim-percent", (int)(config.DimPercent * 100), ref modified, 0, 100) / 100f;
 			config.FadeOutDuration = OnInputInt("fade-out-duration", (int)config.FadeOutDuration, ref modified, 1);
 			config.AttenuationRange = OnInputInt("attenuation-range", config.AttenuationRange, ref modified, 0);
 			config.MinimumAttenuationOpacity = OnInputInt("min-attenuation-opacity", (int)(config.MinimumAttenuationOpacity * 100), ref modified, 0, 100) / 100f;

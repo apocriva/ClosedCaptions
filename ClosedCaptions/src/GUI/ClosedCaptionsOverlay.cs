@@ -97,6 +97,13 @@ public class ClosedCaptionsOverlay : HudElement
 			percent = MathF.Max(0f, MathF.Min(percent, 1f - ClosedCaptionsModSystem.UserConfig.MinimumAttenuationOpacity));
 			opacity *= 1f - percent;
 		}
+
+		// Sounds that have been playing a while may be dimmed.
+		if (capi.ElapsedMilliseconds - caption.StartTime > ClosedCaptionsModSystem.UserConfig.DimTime)
+		{
+			opacity *= ClosedCaptionsModSystem.UserConfig.DimPercent;
+		}
+
 		// Modulate opacity if the caption is fading out.
 		if (caption.FadeOutStartTime > 0 &&
 			capi.ElapsedMilliseconds > caption.FadeOutStartTime)

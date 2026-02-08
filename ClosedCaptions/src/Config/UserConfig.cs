@@ -22,6 +22,8 @@ public class UserConfig
 
 	public float MinimumDirectionDistance { get; set; } = 1.5f;
 	public long MinimumDisplayDuration { get; set; } = 1000;
+	public long DimTime { get; set; } = 5000;
+	public float DimPercent { get; set; } = 0.7f;
 	public long FadeOutDuration { get; set; } = 500;
 	public int AttenuationRange { get; set; } = 16;
 	public float MinimumAttenuationOpacity { get; set; } = 0.3f;
@@ -34,7 +36,7 @@ public class UserConfig
 	public float CaptionBackgroundOpacity { get; set; } = 0.5f;
 	public int CaptionPaddingH { get; set; } = 0;
 	public int CaptionPaddingV { get; set; } = 0;
-	public int CaptionSpacing { get; set; } = 0;
+	public int CaptionSpacing { get; set; } = 1;
 	public bool ShowDirection { get; set; } = true;
 
 	public bool DebugMode { get; set; } = false;
