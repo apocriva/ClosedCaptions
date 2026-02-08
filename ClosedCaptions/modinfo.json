@@ -6,6 +6,7 @@
     "authors": [
         "apocriva"
     ],
+    "side": "client",
     "description": "Adds closed captions for the sounds in the game.",
     "version": "0.0.1",
     "dependencies": {
