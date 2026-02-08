@@ -4,16 +4,16 @@ public class UserConfig
 {
 	public static readonly string Filename = "closedcaptions.json";
 
-	public bool ShowAmbience { get; set; } = true;
+	public bool ShowAmbience { get; set; } = false;
 	public bool ShowAnimal { get; set; } = true;
 	public bool ShowBlock { get; set; } = false;
-	public bool ShowCombat { get; set; } = true;
+	public bool ShowCombat { get; set; } = false;
 	public bool ShowDanger { get; set; } = true;
 	public bool ShowEnemy { get; set; } = true;
 	public bool ShowEnvironment { get; set; } = false;
 	public bool ShowInteraction { get; set; } = false;
 	public bool ShowTemporal { get; set; } = true;
-	public bool ShowTool { get; set; } = true;
+	public bool ShowTool { get; set; } = false;
 	public bool ShowVoice { get; set; } = true;
 	public bool ShowWalk { get; set; } = false;
 	public bool ShowWearable { get; set; } = false;

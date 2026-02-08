@@ -332,7 +332,9 @@ public class CaptionManager
 		{
 			var caption = _captions[i];
 			
-			if (caption.Unique != null && caption.IsPlaying)
+			if (caption.Unique != null &&
+				caption.IsPlaying &&
+				caption.Params.Volume > 0.05f)
 			{
 				if (uniqueGroups.TryGetValue(caption.Unique.Group, out Caption? comp))
 				{

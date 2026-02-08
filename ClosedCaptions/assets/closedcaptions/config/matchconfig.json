@@ -5,8 +5,11 @@
 		"sounds/stone_switch.ogg",
 		"sounds/tick.ogg",
 		"sounds/toggleswitch.ogg",
-		"sounds/creature/animal/mammal/hooved/deer/elk-bellowafter.ogg",
 		"sounds/block/waterwheel-wood.ogg",
+		"sounds/creature/animal/mammal/hooved/deer/elk-bellowafter.ogg",
+		"sounds/weather/tracks/lowtremble.ogg",
+		"sounds/weather/tracks/verylowtremble.ogg",
+		"sounds/weather/lowgrumble.ogg"
 	],
 	"soundMap": [
 		{
