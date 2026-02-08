@@ -332,7 +332,7 @@ public class CaptionManager
 		{
 			var caption = _captions[i];
 			
-			if (caption.Unique != null)
+			if (caption.Unique != null && caption.IsPlaying)
 			{
 				if (uniqueGroups.TryGetValue(caption.Unique.Group, out Caption? comp))
 				{

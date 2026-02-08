@@ -479,7 +479,7 @@
 
 	// Weather
 	"closedcaptions:weather-hail": "[Hail falling]",
-	"closedcaptions:weather-lowtremble": "[Low rumbling]",
+	"closedcaptions:weather-lowtremble": "[Storm rumbling]",
 	"closedcaptions:weather-rain-leafless": "[Rain falling]",
 	"closedcaptions:weather-rain-leafy": "[Leaves rustling in rain]",
 	"closedcaptions:weather-verylowtremble": "[Deep rumbling]",
@@ -487,7 +487,7 @@
 	"closedcaptions:weather-lightning-near": "[Thunder cracking and rumbling]",
 	"closedcaptions:weather-lightning-verynear": "[Lightning cracking and reverberating]",
 	"closedcaptions:weather-lightning-nodistance": "[LIGHTNING CRACKING]",
-	"closedcaptions:weather-lowgrumble": "[Low grumbling]",
+	"closedcaptions:weather-lowgrumble": "[Storm grumbling]",
 	"closedcaptions:weather-wind-leafless": "[Wind howling]",
 	"closedcaptions:weather-wind-leafy": "[Wind rustling through leaves]",
 }
