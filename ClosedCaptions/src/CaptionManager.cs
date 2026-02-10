@@ -9,6 +9,7 @@ using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.API.MathTools;
+using Vintagestory.API.Util;
 
 namespace ClosedCaptions;
 
@@ -54,7 +55,8 @@ public class CaptionManager
 		public readonly MatchConfig.Unique? Unique;
 		public readonly MatchConfig.Icon? Icon;
 
-		public ILoadedSound? LoadedSound { get; set; }
+		public ILoadedSound? LoadedSound;
+		public nint LoadedSoundID;
 
 		// Params.Position can be null, why?
 		public Vec3f Position
@@ -82,6 +84,7 @@ public class CaptionManager
 			MatchConfig.Icon? icon = null)
 		{
 			ID = id;
+			LoadedSoundID = loadedSound.ToIntPtr();
 			LoadedSound = loadedSound;
 			StartTime = startTime;
 			Text = text;
@@ -91,7 +94,7 @@ public class CaptionManager
 			Unique = unique;
 			Icon = icon;
 
-			var p = LoadedSound.Params;
+			var p = loadedSound.Params;
 			Params = new()
 			{
 				Location = p.Location,
@@ -132,7 +135,7 @@ public class CaptionManager
 	}
 
 	private static ICoreClientAPI? _capi;
-	private static ICoreClientAPI API
+	public static ICoreClientAPI Api
 	{
 		get
 		{
@@ -182,7 +185,7 @@ public class CaptionManager
 			if (wasIgnored)
 				return;
 
-			API.Logger.Warning("[Closed Captions] Unconfigured sound: " + location.ToString());
+			Api.Logger.Warning("[Closed Captions] Unconfigured sound: " + location.ToString());
 			if (!ClosedCaptionsModSystem.UserConfig.ShowUnknown)
 				return;
 		}
@@ -199,21 +202,21 @@ public class CaptionManager
 			// Literally the same sound!
 			if (caption.LoadedSound == loadedSound)
 			{
-				API.Logger.Warning("[Closed Captions] Duplicate sound played: " + location.ToString());
+				Api.Logger.Warning("[Closed Captions] Duplicate sound played: " + location.ToString());
 				return;
 			}
 
 			if (caption.Text == text)
 			{
 				// Filter sounds that are very similar and close to sounds that are already playing.
-				var position = loadedSound.Params.Position ?? API.World.Player.Entity.Pos.XYZFloat;
+				var position = loadedSound.Params.Position ?? Api.World.Player.Entity.Pos.XYZFloat;
 				var distance = (position - caption.Params.Position).Length();
-				if (API.ElapsedMilliseconds - caption.StartTime < ClosedCaptionsModSystem.UserConfig.GroupingMaxTime &&
+				if (Api.ElapsedMilliseconds - caption.StartTime < ClosedCaptionsModSystem.UserConfig.GroupingMaxTime &&
 					distance < ClosedCaptionsModSystem.UserConfig.GroupingRange)
 				{
 					// Reset its timers and stuff.
 					caption.LoadedSound = loadedSound;
-					caption.StartTime = API.ElapsedMilliseconds;
+					caption.StartTime = Api.ElapsedMilliseconds;
 					caption.FadeOutStartTime = 0;
 					caption.Position = position;
 					return;
@@ -224,7 +227,7 @@ public class CaptionManager
 		Instance._captions.Add(new Caption(
 			Instance._nextCaptionId++,
 			loadedSound,
-			API.ElapsedMilliseconds,
+			Api.ElapsedMilliseconds,
 			text,
 			tags,
 			flags,
@@ -238,7 +241,7 @@ public class CaptionManager
 	{
 		Instance.UpdateCaptions();
 
-		var player = API.World.Player;
+		var player = Api.World.Player;
 		// This has an error for a sound that is reverbing
 		// Also an error where sounds that are far enough away that they haven't displayed
 		// are still being displayed when they stop. This whole thing needs to be refactored!
@@ -314,7 +317,7 @@ public class CaptionManager
 		// Rebuild caption list.
 		_captions.Clear();
 
-		foreach (var loadedSound in API.GetActiveSounds())
+		foreach (var loadedSound in Api.GetActiveSounds())
 		{
 			SoundStarted(loadedSound, loadedSound.Params.Location);
 		}
@@ -326,7 +329,7 @@ public class CaptionManager
 	{
 		Dictionary<string, Caption> uniqueGroups = [];
 
-		var playerPos = API.World.Player != null ? API.World.Player.Entity.Pos.XYZFloat : Vec3f.Zero;
+		var playerPos = Api.World.Player != null ? Api.World.Player.Entity.Pos.XYZFloat : Vec3f.Zero;
 		for (int i = _captions.Count - 1; i >= 0; --i)
 		{
 			var caption = _captions[i];
@@ -369,13 +372,13 @@ public class CaptionManager
 				caption.FlagAsDisposed();
 
 				// Want the caption to show up for at least long enough to read
-				caption.FadeOutStartTime = API.ElapsedMilliseconds;
+				caption.FadeOutStartTime = Api.ElapsedMilliseconds;
 				if (caption.FadeOutStartTime < caption.StartTime + ClosedCaptionsModSystem.UserConfig.MinimumDisplayDuration)
 					caption.FadeOutStartTime = caption.StartTime + ClosedCaptionsModSystem.UserConfig.MinimumDisplayDuration;
 			}
 			else if (caption.IsFading)
 			{
-				if (API.ElapsedMilliseconds - caption.FadeOutStartTime > ClosedCaptionsModSystem.UserConfig.FadeOutDuration)
+				if (Api.ElapsedMilliseconds - caption.FadeOutStartTime > ClosedCaptionsModSystem.UserConfig.FadeOutDuration)
 				{
 					_captions.RemoveAt(i);
 					_needsRefresh = true;
