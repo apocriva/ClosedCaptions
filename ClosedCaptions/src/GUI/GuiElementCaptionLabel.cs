@@ -20,6 +20,7 @@ public class GuiElementCaptionLabel : GuiElement
 	private LoadedTexture _textTexture;
 	private LoadedTexture _arrowTexture;
 	private readonly DummySlot? _dummySlot;
+	private Vec4f _textColor = new(1f, 1f, 1f, 1f);
 
 	private string _debugText = "";
 	private LoadedTexture _debugTexture;
@@ -56,6 +57,14 @@ public class GuiElementCaptionLabel : GuiElement
 			var dummyInventory = new DummyInventory(capi);
 			var dummyStack = new ItemStack(cobj);
 			_dummySlot = new DummySlot(dummyStack, dummyInventory);
+		}
+
+		_textColor = ClosedCaptionsModSystem.UserConfig.Color;
+		if (ClosedCaptionsModSystem.UserConfig.DangerBold &&
+			(_caption.Tags & CaptionManager.Tags.Danger) != 0)
+		{
+			_textColor = ClosedCaptionsModSystem.UserConfig.DangerColor;
+			_font = _font.Clone().WithWeight(FontWeight.Bold);
 		}
 	}
 
@@ -105,20 +114,22 @@ public class GuiElementCaptionLabel : GuiElement
 
 	public override void RenderInteractiveElements(float deltaTime)
 	{
-		var renderColor = new Vec4f(1f, 1f, 1f, _opacity);
+		var whiteColor = new Vec4f(1f, 1f, 1f, _opacity);
+		var textColor = _textColor.Clone();
+		textColor.A *= _opacity;
 
 		api.Render.RenderTexture(
 			_baseTexture.TextureId,
 			Bounds.renderX, Bounds.renderY,
 			Bounds.OuterWidth, Bounds.OuterHeight, 50,
-			renderColor);
+			whiteColor);
 
 		api.Render.RenderTexture(
 			_textTexture.TextureId,
 			Bounds.renderX + (Bounds.OuterWidth - _textTexture.Width) / 2,
 			Bounds.renderY + (Bounds.OuterHeight - _textTexture.Height) / 2,
 			_textTexture.Width, _textTexture.Height, 55,
-			renderColor);
+			textColor);
 
 		if (_angle != null)
 		{
@@ -134,7 +145,7 @@ public class GuiElementCaptionLabel : GuiElement
 				_arrowTexture.TextureId,
 				0, 0,
 				arrowRenderSize, arrowRenderSize, 55,
-				renderColor);
+				whiteColor);
 			api.Render.GlPopMatrix();
 			
 			api.Render.GlPushMatrix();
@@ -148,7 +159,7 @@ public class GuiElementCaptionLabel : GuiElement
 				_arrowTexture.TextureId,
 				0, 0,
 				arrowRenderSize, arrowRenderSize, 55,
-				renderColor);
+				whiteColor);
 			api.Render.GlPopMatrix();
 		}
 
@@ -158,7 +169,7 @@ public class GuiElementCaptionLabel : GuiElement
 			api.Render.RenderItemstackToGui(
 				_dummySlot,
 				Bounds.renderX - iconRenderSize, Bounds.renderY + iconRenderSize / 2, 70,
-				iconRenderSize, ColorUtil.ColorFromRgba(renderColor), true, false, false);
+				iconRenderSize, ColorUtil.ColorFromRgba(whiteColor), true, false, false);
 		}
 
 		if (ClosedCaptionsModSystem.UserConfig.DebugMode && !string.IsNullOrEmpty(_debugText))

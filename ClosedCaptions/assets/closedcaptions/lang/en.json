@@ -72,6 +72,12 @@
 	"closedcaptions:config-caption-spacing-tooltip": "Spacing between captions.",
 	"closedcaptions:config-show-direction": "Show direction indicators",
 	"closedcaptions:config-show-direction-tooltip": "Shows arrows on captions pointing to a sound's source.",
+	"closedcaptions:config-color": "Base caption color",
+	"closedcaptions:config-color-tooltip": "Color for basic captions.",
+	"closedcaptions:config-danger-bold": "Bold dangerous text",
+	"closedcaptions:config-danger-bold-tooltip": "Use a bold font for captions tagged as dangerous.",
+	"closedcaptions:config-danger-color": "Dangerous caption color",
+	"closedcaptions:config-danger-color-tooltip": "Color for captions tagged as dangerous.",
 
 	"closedcaptions:config-debug-mode": "Enable debug mode",
 	"closedcaptions:config-debug-mode-tooltip": "Enables some additional information for debugging.",

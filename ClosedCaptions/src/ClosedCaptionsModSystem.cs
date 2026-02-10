@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Numerics;
 using System.Threading;
 using ClosedCaptions.Config;
 using ClosedCaptions.GUI;
@@ -10,6 +11,7 @@ using Vintagestory;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
+using Vintagestory.API.MathTools;
 using Vintagestory.Common;
 
 namespace ClosedCaptions;
@@ -177,6 +179,9 @@ public class ClosedCaptionsModSystem : ModSystem
 			config.CaptionSpacing = OnInputInt("caption-spacing", config.CaptionSpacing, ref modified, 0);
 			config.ShowDirection = OnCheckBox("show-direction", config.ShowDirection, ref modified);
 			config.ShowIcons = OnCheckBox("show-icons", config.ShowIcons, ref modified);
+			config.Color = OnColor("color", config.Color, ref modified);
+			config.DangerBold = OnCheckBox("danger-bold", config.DangerBold, ref modified);
+			config.DangerColor = OnColor("danger-color", config.DangerColor, ref modified);
 			ImGui.Unindent();
 		}
 
@@ -231,5 +236,21 @@ public class ClosedCaptionsModSystem : ModSystem
 		newValue = Math.Max(min, Math.Min(newValue, max));
 		modified |= newValue != value;
 		return newValue;
+	}
+
+	private Vec4f OnColor(string option, Vec4f value, ref bool modified)
+	{
+		Vector4 newValue = new(value.X, value.Y, value.Z, value.W);
+		ImGui.ColorEdit4(Lang.Get("closedcaptions:config-" + option), ref newValue);
+		if (ImGui.IsItemHovered(ImGuiHoveredFlags.ForTooltip))
+		{
+			ImGui.BeginTooltip();
+			ImGui.PushTextWrapPos(ImGui.GetFontSize() * 35f);
+			ImGui.TextUnformatted(Lang.Get($"closedcaptions:config-{option}-tooltip"));
+			ImGui.EndTooltip();
+		}
+		Vec4f ret = new(newValue.X, newValue.Y, newValue.Z, newValue.W);
+		modified |= ret != value;
+		return ret;
 	}
 }
