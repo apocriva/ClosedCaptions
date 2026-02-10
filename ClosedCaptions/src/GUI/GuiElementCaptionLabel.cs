@@ -13,14 +13,14 @@ public class GuiElementCaptionLabel : GuiElement
 	private static readonly double ArrowSize = ArrowTextureSize;
 	private static readonly double ArrowRenderScale = 0.7;
 
-	public CaptionManager.Caption Caption { get => _caption; }
-	private readonly CaptionManager.Caption _caption;
+	public Caption Caption { get => _caption; }
+	private readonly Caption _caption;
 	private readonly CairoFont _font;
 	private LoadedTexture _baseTexture;
 	private LoadedTexture _textTexture;
 	private LoadedTexture _arrowTexture;
 	private readonly DummySlot? _dummySlot;
-	private Vec4f _textColor = new(1f, 1f, 1f, 1f);
+	private readonly Vec4f _textColor = new(1f, 1f, 1f, 1f);
 
 	private string _debugText = "";
 	private LoadedTexture _debugTexture;
@@ -40,7 +40,7 @@ public class GuiElementCaptionLabel : GuiElement
 	private float _opacity = 1f;
 	private float? _angle = null;
 
-	public GuiElementCaptionLabel(ICoreClientAPI capi, CaptionManager.Caption caption, CairoFont font, ElementBounds bounds) : base(capi, bounds)
+	public GuiElementCaptionLabel(ICoreClientAPI capi, Caption caption, CairoFont font, ElementBounds bounds) : base(capi, bounds)
 	{
 		_caption = caption;
 		_font = font;
@@ -60,14 +60,14 @@ public class GuiElementCaptionLabel : GuiElement
 		}
 
 		_textColor = ClosedCaptionsModSystem.UserConfig.Color;
-		if ((_caption.Tags & CaptionManager.Tags.Danger) != 0)
+		if ((_caption.Tags & CaptionTags.Danger) != 0)
 		{
 			_textColor = ClosedCaptionsModSystem.UserConfig.DangerColor;
 			if (ClosedCaptionsModSystem.UserConfig.DangerBold)
 				_font = _font.Clone().WithWeight(FontWeight.Bold);
 		}
-		else if ((_caption.Tags & CaptionManager.Tags.Ambience) != 0 ||
-			(_caption.Tags & CaptionManager.Tags.Weather) != 0)
+		else if ((_caption.Tags & CaptionTags.Ambience) != 0 ||
+			(_caption.Tags & CaptionTags.Weather) != 0)
 		{
 			_textColor = ClosedCaptionsModSystem.UserConfig.PassiveColor;
 			if (ClosedCaptionsModSystem.UserConfig.PassiveItalic)
@@ -204,7 +204,7 @@ public class GuiElementCaptionLabel : GuiElement
 
 public static partial class GuiComposerHelpers
 {
-	public static GuiComposer AddCaptionLabel(this GuiComposer composer, CaptionManager.Caption caption, CairoFont font, ElementBounds bounds, string? key = null)
+	public static GuiComposer AddCaptionLabel(this GuiComposer composer, Caption caption, CairoFont font, ElementBounds bounds, string? key = null)
 	{
 		if (!composer.Composed)
 		{

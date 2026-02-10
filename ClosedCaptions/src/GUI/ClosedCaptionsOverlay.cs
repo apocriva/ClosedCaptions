@@ -59,11 +59,11 @@ public class ClosedCaptionsOverlay : HudElement
 			.WithStroke([0, 0, 0, 0.5], 1);
 	}
 
-	private void GetIndicators(CaptionManager.Caption caption, ref float opacity, ref float? angle)
+	private void GetIndicators(Caption caption, ref float opacity, ref float? angle)
 	{
 		var player = capi.World.Player;
 		var relativePosition = caption.Position - player.Entity.Pos.XYZFloat;
-		if (caption.Params.RelativePosition)
+		if (caption.IsRelative)
 			relativePosition = caption.Position;
 		relativePosition.Y = 0f;
 		var relativeDirection = relativePosition.Clone();
@@ -79,9 +79,9 @@ public class ClosedCaptionsOverlay : HudElement
 
 		var distance = relativePosition.Length();
 		if (!ClosedCaptionsModSystem.UserConfig.ShowDirection ||
-			(caption.Flags & CaptionManager.Flags.Directionless) != 0 ||
-			caption.Params.RelativePosition ||
-			(!caption.Params.RelativePosition &&
+			(caption.Flags & CaptionFlags.Directionless) != 0 ||
+			caption.IsRelative ||
+			(!caption.IsRelative &&
 			relativePosition.Length() < ClosedCaptionsModSystem.UserConfig.MinimumDirectionDistance))
 		{
 			angle = null;
@@ -167,7 +167,7 @@ public class ClosedCaptionsOverlay : HudElement
 			textBounds.fixedHeight = fontHeight + ClosedCaptionsModSystem.UserConfig.CaptionPaddingV * 2;
 			SingleComposer.AddCaptionLabel(caption, _font, textBounds, $"label{caption.ID}");
 			var label = SingleComposer.GetCaptionLabel($"label{caption.ID}");
-			label.DebugText = $"{caption.Params.Location}";
+			label.DebugText = $"{caption.AssetLocation}";
 			_captionLabels.Add(label);
 			
 			lineY += (int)lineHeight + ClosedCaptionsModSystem.UserConfig.CaptionSpacing;

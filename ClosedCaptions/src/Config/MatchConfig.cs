@@ -4,6 +4,7 @@ using Newtonsoft.Json.Converters;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
+using Vintagestory.API.MathTools;
 using Vintagestory.API.Util;
 
 namespace ClosedCaptions.Config;
@@ -19,42 +20,16 @@ public class MatchConfig
         public Mapping[] Mappings = [];
 	}
 
-	public class Unique
-	{
-		public string Group = "";
-		public int Priority = 0;
-	}
-
-	public class Icon
-	{
-		public string Type = "";
-		public string Code = "";
-
-		public CollectibleObject GetCollectibleObject(ICoreAPI capi)
-		{
-			if (string.IsNullOrEmpty(Type) || string.IsNullOrEmpty(Code))
-				return capi.World.GetBlock(0);
-
-			CollectibleObject? ret;
-			if (Type == "item")
-				ret = capi.World.GetItem(new AssetLocation(Code));
-			else
-				ret = capi.World.GetBlock(new AssetLocation(Code));
-
-			return ret ?? capi.World.GetBlock(0);
-		}
-	}
-
 	public class Mapping
 	{
 		public string Match = "";
         public string CaptionKey = "";
 		[JsonConverter(typeof(FlagsConverter))]
-		public CaptionManager.Tags Tags = CaptionManager.Tags.None;
+		public CaptionTags Tags = CaptionTags.None;
 		[JsonConverter(typeof(FlagsConverter))]
-		public CaptionManager.Flags Flags = CaptionManager.Flags.None;
-		public Unique? Unique = null;
-		public Icon? Icon = null;
+		public CaptionFlags Flags = CaptionFlags.None;
+		public CaptionGroup? Group = null;
+		public CaptionIcon? Icon = null;
 
 		private class FlagsConverter : JsonConverter
 		{
@@ -75,7 +50,7 @@ public class MatchConfig
 				}
 				catch
 				{
-					return CaptionManager.Tags.None;
+					return CaptionTags.None;
 				}
 			}
 
@@ -96,30 +71,22 @@ public class MatchConfig
 		Api = capi;
 	}
 
-	public bool FindCaptionForSound(
-		AssetLocation location,
-		ref bool wasIgnored,
-		ref string? text,
-		ref CaptionManager.Tags tags,
-		ref CaptionManager.Flags flags,
-		ref Unique? unique,
-		ref Icon? icon)
+	public void BuildCaptionForSound(ILoadedSound sound, out Caption? caption, out bool wasIgnored)
 	{
-		text = null;
-		tags = CaptionManager.Tags.None;
-		flags = CaptionManager.Flags.None;
-		unique = null;
-		icon = null;
+		caption = null;
 
 		// Check if this is an outright ignored sound.
 		foreach (var ignore in Ignore)
 		{
-			if (WildcardUtil.Match(new AssetLocation(ignore), location))
+			if (WildcardUtil.Match(new AssetLocation(ignore), sound.Params.Location))
 			{
 				wasIgnored = true;
-				return false;
+				return;
 			}
 		}
+
+		wasIgnored = false;
+		MatchGroup? partialMatch = null;
 
 		// Iterate the mappings in reverse, to prioritize more recently-added
 		// entries. This way if new entries are added by a mod, they will always
@@ -127,39 +94,56 @@ public class MatchConfig
 		for (int i = SoundMap.Length - 1; i >= 0; --i)
 		{
 			var matchGroup = SoundMap[i];
-			if (WildcardUtil.Match(new AssetLocation(matchGroup.Group), location))
+			if (WildcardUtil.Match(new AssetLocation(matchGroup.Group), sound.Params.Location))
 			{
 				// Sound is in this group! Does it have a better match?
 				for (int j = matchGroup.Mappings.Length - 1; j >= 0; --j)
 				{
 					var mapping = matchGroup.Mappings[j];
-					if (WildcardUtil.Match(new AssetLocation(mapping.Match), location))
+					if (WildcardUtil.Match(new AssetLocation(mapping.Match), sound.Params.Location))
 					{
-						tags = mapping.Tags;
-						flags = mapping.Flags;
-						unique = mapping.Unique;
-						icon = mapping.Icon;
-						text = Lang.Get(mapping.CaptionKey);
+						var text = Lang.Get(mapping.CaptionKey);
 						if (text == mapping.CaptionKey)
-							Api?.Logger.Warning($"[ClosedCaptions] Text not found for sound '{location}' ({mapping.CaptionKey})");
-						return true;
+							Api?.Logger.Warning($"[ClosedCaptions] Text not found for sound '{sound.Params.Location}' ({mapping.CaptionKey})");
+
+						var position = Vec3f.Zero;
+						if (!sound.Params.RelativePosition)
+							position = sound.Params.Position;
+
+						caption = new Caption(
+							sound,
+							text,
+							CaptionManager.Api.ElapsedMilliseconds,
+							sound.Params.Volume,
+							sound.Params.RelativePosition,
+							position,
+							mapping.Tags,
+							mapping.Flags,
+							mapping.Group,
+							mapping.Icon);
+
+						return;
 					}
 				}
 
-				// It did not have a better match. Store the group's default
-				// key for now in case for some reason there's another match
-				// group that has a better match.
-				text ??= Lang.Get(matchGroup.DefaultKey);
+				// It did not have a better match. Store the group for now
+				// in case for some reason there's another match group that
+				// has a better match.
+				partialMatch ??= matchGroup;
 			}
 		}
 
-		// Text can be null, if the sound was not matched, in which case it is an unknown sound.
-		if (text == null)
-		{
-			text = Lang.Get("closedcaptions:unknown-sound");
-			return false;
-		}
-
-		return true;
+		// If partialMatch is null, the sound was not matched, in which case it is an unknown sound.
+		caption = new Caption(
+			sound,
+			partialMatch == null ? Lang.Get("closedcaptions:unknown-sound") : Lang.Get(partialMatch.DefaultKey),
+			CaptionManager.Api.ElapsedMilliseconds,
+			1f,
+			true,
+			Vec3f.Zero,
+			CaptionTags.None,
+			CaptionFlags.None,
+			null,
+			null);
 	}
 }

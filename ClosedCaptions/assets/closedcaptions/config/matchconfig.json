@@ -454,14 +454,14 @@
 				{
 					"match": "sounds/creature/beehive-wild.ogg",
 					"tags": "ambience,animal,environment",
-					"unique": { "group": "insect", "priority": 10 },
+					"group": { "name": "insect", "priority": 10 },
 					"icon": { "type": "block", "code": "wildbeehive-large" },
 					"captionKey": "closedcaptions:creature-beehive-wild"
 				},
 				{
 					"match": "sounds/creature/beehive.ogg",
 					"tags": "ambience,environment",
-					"unique": { "group": "insect" },
+					"group": { "name": "insect" },
 					"icon": { "type": "block", "code": "skep-reed-populated-south" },
 					"captionKey": "closedcaptions:creature-beehive"
 				},
@@ -478,19 +478,19 @@
 				{
 					"match": "sounds/creature/cicada*",
 					"tags": "ambience,environment",
-					"unique": { "group": "insect" },
+					"group": { "name": "insect" },
 					"captionKey": "closedcaptions:creature-cicada"
 				},
 				{
 					"match": "sounds/creature/coqui.ogg",
 					"tags": "ambience,environment",
-					"unique": { "group": "insect" },
+					"group": { "name": "insect" },
 					"captionKey": "closedcaptions:creature-coqui"
 				},
 				{
 					"match": "sounds/creature/grasshopper.ogg",
 					"tags": "ambience,environment",
-					"unique": { "group": "insect" },
+					"group": { "name": "insect" },
 					"captionKey": "closedcaptions:creature-grasshopper"
 				},
 				{
@@ -1354,13 +1354,13 @@
 				{
 					"match": "sounds/effect/rift.ogg",
 					"tags":"ambience,danger,environment,temporal",
-					"unique": { "group": "rift" },
+					"group": { "name": "rift" },
 					"captionKey": "closedcaptions:effect-rift"
 				},
 				{
 					"match": "sounds/effect/rockslide.ogg",
 					"tags":"ambience,danger,environment",
-					"unique": { "group": "rockslide" },
+					"group": { "name": "rockslide" },
 					"captionKey": "closedcaptions:effect-rockslide"
 				},
 				{
@@ -1397,28 +1397,28 @@
 					"match": "sounds/effect/tempstab-drain.ogg",
 					"tags":"ambience,environment,temporal",
 					"flags": "directionless",
-					"unique": { "group": "tempstab", "priority": 0 },
+					"group": { "name": "tempstab", "priority": 0 },
 					"captionKey": "closedcaptions:effect-tempstab-drain"
 				},
 				{
 					"match": "sounds/effect/tempstab-low.ogg",
 					"tags": "ambience,danger,environment,temporal",
 					"flags": "directionless",
-					"unique": { "group": "tempstab", "priority": 1 },
+					"group": { "name": "tempstab", "priority": 1 },
 					"captionKey": "closedcaptions:effect-tempstab-low"
 				},
 				{
 					"match": "sounds/effect/tempstab-verylow.ogg",
 					"tags": "ambience,danger,environment,temporal",
 					"flags": "directionless",
-					"unique": { "group": "tempstab", "priority": 2 },
+					"group": { "name": "tempstab", "priority": 2 },
 					"captionKey": "closedcaptions:effect-tempstab-verylow"
 				},
 				{
 					"match": "sounds/effect/timeswitch.ogg",
 					"tags": "ambience,danger,environment,temporal",
 					"flags": "directionless",
-					"unique": { "group": "tempstab", "priority": 0 },
+					"group": { "name": "tempstab", "priority": 0 },
 					"captionKey": "closedcaptions:effect-timeswitch"
 				},
 				{
@@ -1496,7 +1496,7 @@
 					"match": "sounds/environment/creek.ogg",
 					"tags": "environment",
 					"flags": "directionless",
-					"unique": { "group": "water", "priority": 1 },
+					"group": { "name": "water", "priority": 1 },
 					"captionKey": "closedcaptions:environment-creek"
 				},
 				{
@@ -1507,20 +1507,20 @@
 				{
 					"match": "sounds/environment/fire.ogg",
 					"tags": "ambience,danger,environment",
-					"unique": { "group": "fire", "priority" : 10 },
+					"group": { "name": "fire", "priority" : 10 },
 					"tags": "danger",
 					"captionKey": "closedcaptions:environment-fire"
 				},
 				{
 					"match": "sounds/environment/fireplace.ogg",
 					"tags": "ambience,environment",
-					"unique": { "group": "fire", "priority" : 0 },
+					"group": { "name": "fire", "priority" : 0 },
 					"captionKey": "closedcaptions:environment-firepit"
 				},
 				{
 					"match": "sounds/environment/largesplash*",
 					"tags": "ambience,environment",
-					"unique": { "group": "splash", "priority" : 2 },
+					"group": { "name": "splash", "priority" : 2 },
 					"captionKey": "closedcaptions:environment-splash-large"
 				},
 				{
@@ -1531,52 +1531,52 @@
 				{
 					"match": "sounds/environment/mediumsplash.ogg",
 					"tags": "ambience,environment",
-					"unique": { "group": "splash", "priority" : 1 },
+					"group": { "name": "splash", "priority" : 1 },
 					"captionKey": "closedcaptions:environment-splash-medium"
 				},
 				{
 					"match": "sounds/environment/rainwindow.ogg",
 					"tags": "weather",
 					"flags": "directionless",
-					"unique": { "group": "weather", "priority" : 10 },
+					"group": { "name": "weather", "priority" : 10 },
 					"captionKey": "closedcaptions:environment-rainwindow"
 				},
 				{
 					"match": "sounds/environment/rapids.ogg",
 					"tags":"environment",
-					"unique": { "group": "water", "priority" : 10 },
+					"group": { "name": "water", "priority" : 10 },
 					"captionKey": "closedcaptions:environment-rapids"
 				},
 				{
 					"match": "sounds/environment/smallsplash.ogg",
 					"tags": "ambience,environment",
-					"unique": { "group": "splash", "priority" : 0 },
+					"group": { "name": "splash", "priority" : 0 },
 					"captionKey": "closedcaptions:environment-splash-small"
 				},
 				{
 					"match": "sounds/environment/underwater.ogg",
 					"tags": "ambience",
-					"unique": { "group": "underwater" },
+					"group": { "name": "underwater" },
 					"captionKey": "closedcaptions:environment-underwater"
 				},
 				{
 					"match": "sounds/environment/waterfall.ogg",
 					"tags": "ambience,environment",
-					"unique": { "group": "water", "priority" : 5 },
+					"group": { "name": "water", "priority" : 5 },
 					"captionKey": "closedcaptions:environment-waterfall"
 				},
 				{
 					"match": "sounds/environment/waterwaves.ogg",
 					"tags": "ambience,environment",
 					"flags": "directionless",
-					"unique": { "group": "water", "priority" : 0 },
+					"group": { "name": "water", "priority" : 0 },
 					"captionKey": "closedcaptions:environment-waterwaves"
 				},
 				{
 					"match": "sounds/environment/wind.ogg",
 					"tags": "ambience,weather",
 					"flags": "directionless",
-					"unique": { "group": "weather", "priority" : 0 },
+					"group": { "name": "weather", "priority" : 0 },
 					"captionKey": "closedcaptions:environment-wind"
 				 },
 			]
@@ -2040,82 +2040,82 @@
 					"match": "sounds/weather/tracks/hail.ogg",
 					"tags": "danger,weather",
 					"flags":"directionless",
-					"unique": { "group": "weather", "priority" : 15 },
+					"group": { "name": "weather", "priority" : 15 },
 					"captionKey": "closedcaptions:weather-hail"
 				},
 				{
 					"match": "sounds/weather/tracks/lowtremble.ogg",
 					"tags": "ambience,weather",
 					"flags":"directionless",
-					"unique": { "group": "weather", "priority" : 1 },
+					"group": { "name": "weather", "priority" : 1 },
 					"captionKey": "closedcaptions:weather-lowtremble"
 				},
 				{
 					"match": "sounds/weather/tracks/rain-leafless.ogg",
 					"tags": "weather",
 					"flags":"directionless",
-					"unique": { "group": "weather", "priority" : 10 },
+					"group": { "name": "weather", "priority" : 10 },
 					"captionKey": "closedcaptions:weather-rain-leafless"
 				},
 				{
 					"match": "sounds/weather/tracks/rain-leafy.ogg",
 					"tags": "weather",
 					"flags":"directionless",
-					"unique": { "group": "weather", "priority" : 11 },
+					"group": { "name": "weather", "priority" : 11 },
 					"captionKey": "closedcaptions:weather-rain-leafy"
 				},
 				{
 					"match": "sounds/weather/tracks/verylowtremble.ogg",
 					"tags": "ambience,weather",
 					"flags":"directionless",
-					"unique": { "group": "weather", "priority" : 0 },
+					"group": { "name": "weather", "priority" : 0 },
 					"captionKey": "closedcaptions:weather-verylowtremble"
 				},
 				{
 					"match": "sounds/weather/lightning-distant.ogg",
 					"tags": "weather",
 					"flags":"directionless",
-					"unique": { "group": "weather", "priority" : 50 },
+					"group": { "name": "weather", "priority" : 50 },
 					"captionKey": "closedcaptions:weather-lightning-distant"
 				},
 				{
 					"match": "sounds/weather/lightning-near.ogg",
 					"tags": "weather",
 					"flags":"directionless",
-					"unique": { "group": "weather", "priority" : 60 },
+					"group": { "name": "weather", "priority" : 60 },
 					"captionKey": "closedcaptions:weather-lightning-near"
 				},
 				{
 					"match": "sounds/weather/lightning-nodistance.ogg",
 					"tags": "danger,weather",
-					"unique": { "group": "weather", "priority" : 70 },
+					"group": { "name": "weather", "priority" : 70 },
 					"captionKey": "closedcaptions:weather-lightning-nodistance"
 				},
 				{
 					"match": "sounds/weather/lightning-verynear.ogg",
 					"tags": "danger,weather",
-					"unique": { "group": "weather", "priority" : 80 },
+					"group": { "name": "weather", "priority" : 80 },
 					"captionKey": "closedcaptions:weather-lightning-verynear"
 				},
 				{
 					"match": "sounds/weather/lowgrumble.ogg",
 					"tags": "ambience,weather",
 					"flags":"directionless",
-					"unique": { "group": "weather", "priority" : 2 },
+					"group": { "name": "weather", "priority" : 2 },
 					"captionKey": "closedcaptions:weather-lowgrumble"
 				},
 				{
 					"match": "sounds/weather/wind-leafless.ogg",
 					"tags": "weather",
 					"flags":"directionless",
-					"unique": { "group": "weather", "priority" : 5 },
+					"group": { "name": "weather", "priority" : 5 },
 					"captionKey": "closedcaptions:weather-wind-leafless"
 				},
 				{
 					"match": "sounds/weather/wind-leafy.ogg",
 					"tags": "weather",
 					"flags":"directionless",
-					"unique": { "group": "weather", "priority" : 6 },
+					"group": { "name": "weather", "priority" : 6 },
 					"captionKey": "closedcaptions:weather-wind-leafy"
 				 },
 			]
