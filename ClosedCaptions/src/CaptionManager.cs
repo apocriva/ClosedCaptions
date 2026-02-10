@@ -51,9 +51,8 @@ public class CaptionManager
 		public long FadeOutStartTime;
 		public readonly Tags Tags;
 		public readonly Flags Flags;
-		public readonly string? IconType;
-		public readonly string? IconCode;
 		public readonly MatchConfig.Unique? Unique;
+		public readonly MatchConfig.Icon? Icon;
 
 		public ILoadedSound? LoadedSound { get; set; }
 
@@ -79,8 +78,8 @@ public class CaptionManager
 			long id, ILoadedSound loadedSound,
 			long startTime, string text,
 			Tags tags, Flags flags,
-			string? iconType = null, string? iconCode = null,
-			MatchConfig.Unique? unique = null)
+			MatchConfig.Unique? unique = null,
+			MatchConfig.Icon? icon = null)
 		{
 			ID = id;
 			LoadedSound = loadedSound;
@@ -89,9 +88,8 @@ public class CaptionManager
 			FadeOutStartTime = 0;
 			Tags = tags;
 			Flags = flags;
-			IconType = iconType;
-			IconCode = iconCode;
-			Unique = unique;;
+			Unique = unique;
+			Icon = icon;
 
 			var p = LoadedSound.Params;
 			Params = new()
@@ -177,11 +175,10 @@ public class CaptionManager
 		string? text = null;
 		Tags tags = Tags.None;
 		Flags flags = Flags.None;
-		string iconType = "";
-		string iconCode = "";
 		MatchConfig.Unique? unique = null;
+		MatchConfig.Icon? icon = null;
 
-		if (!Instance._matchConfig.FindCaptionForSound(location, ref text, ref tags, ref flags, ref iconType, ref iconCode, ref unique))
+		if (!Instance._matchConfig.FindCaptionForSound(location, ref text, ref tags, ref flags, ref unique, ref icon))
 		{
 			if (!ClosedCaptionsModSystem.UserConfig.ShowUnknown)
 				return;
@@ -228,9 +225,8 @@ public class CaptionManager
 			text,
 			tags,
 			flags,
-			iconType,
-			iconCode,
-			unique
+			unique,
+			icon
 			));
 		Instance._needsRefresh = true;
 	}

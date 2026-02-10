@@ -25,6 +25,26 @@ public class MatchConfig
 		public int Priority = 0;
 	}
 
+	public class Icon
+	{
+		public string Type = "";
+		public string Code = "";
+
+		public CollectibleObject GetCollectibleObject(ICoreAPI capi)
+		{
+			if (string.IsNullOrEmpty(Type) || string.IsNullOrEmpty(Code))
+				return capi.World.GetBlock(0);
+
+			CollectibleObject? ret;
+			if (Type == "item")
+				ret = capi.World.GetItem(new AssetLocation(Code));
+			else
+				ret = capi.World.GetBlock(new AssetLocation(Code));
+
+			return ret ?? capi.World.GetBlock(0);
+		}
+	}
+
 	public class Mapping
 	{
 		public string Match = "";
@@ -33,9 +53,8 @@ public class MatchConfig
 		public CaptionManager.Tags Tags = CaptionManager.Tags.None;
 		[JsonConverter(typeof(FlagsConverter))]
 		public CaptionManager.Flags Flags = CaptionManager.Flags.None;
-		public string IconType = "";
-		public string IconCode = "";
 		public Unique? Unique = null;
+		public Icon? Icon = null;
 
 		private class FlagsConverter : JsonConverter
 		{
@@ -76,16 +95,14 @@ public class MatchConfig
 		ref string? text,
 		ref CaptionManager.Tags tags,
 		ref CaptionManager.Flags flags,
-		ref string iconType,
-		ref string iconCode,
-		ref Unique? unique)
+		ref Unique? unique,
+		ref Icon? icon)
 	{
 		text = null;
 		tags = CaptionManager.Tags.None;
 		flags = CaptionManager.Flags.None;
-		iconType = "";
-		iconCode = "";
 		unique = null;
+		icon = null;
 
 		// Check if this is an outright ignored sound.
 		foreach (var ignore in Ignore)
@@ -110,11 +127,8 @@ public class MatchConfig
 					{
 						tags = mapping.Tags;
 						flags = mapping.Flags;
-						if (!string.IsNullOrEmpty(mapping.IconType))
-							iconType = mapping.IconType;
-						if (!string.IsNullOrEmpty(mapping.IconCode))
-							iconCode = mapping.IconCode;
 						unique = mapping.Unique;
+						icon = mapping.Icon;
 						text = Lang.Get(mapping.CaptionKey);
 						return true;
 					}

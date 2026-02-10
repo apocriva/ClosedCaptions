@@ -175,13 +175,69 @@
 			"group": "sounds/creature/chicken*",
 			"defaultKey": "closedcaptions:creature-chicken",
 			"mappings": [
-				{ "match": "sounds/creature/chicken/chick*", "tags": "animal", "captionKey": "closedcaptions:creature-chicken-chick", "iconType": "item", "iconCode": "creature-chicken-baby" },
-				{ "match": "sounds/creature/chicken/hen-flee.ogg", "tags": "animal", "captionKey": "closedcaptions:creature-chicken-hen-flee", "iconType": "item", "iconCode": "creature-chicken-hen" },
-				{ "match": "sounds/creature/chicken/hen-idle*", "tags": "animal", "captionKey": "closedcaptions:creature-chicken-hen-idle", "iconType": "item", "iconCode": "creature-chicken-hen" },
-				{ "match": "sounds/creature/chicken/hen-lay*", "tags": "animal", "captionKey": "closedcaptions:creature-chicken-hen-lay", "iconType": "item", "iconCode": "creature-chicken-hen" },
-				{ "match": "sounds/creature/chicken/hen-hurt.ogg", "tags": "animal,combat", "captionKey": "closedcaptions:creature-chicken-hurt", "iconType": "item", "iconCode": "creature-chicken-hen" },
-				{ "match": "sounds/creature/chicken/rooster-alarm*", "tags": "animal", "captionKey": "closedcaptions:creature-chicken-rooster-alarm", "iconType": "item", "iconCode": "creature-chicken-rooster" },
-				{ "match": "sounds/creature/chicken/rooster-call.ogg", "tags": "animal", "captionKey": "closedcaptions:creature-chicken-rooster_call", "iconType": "item", "iconCode": "creature-chicken-rooster" },
+				{
+					"match": "sounds/creature/chicken/chick*",
+					"tags": "animal",
+					"captionKey": "closedcaptions:creature-chicken-chick",
+					"icon":{
+						"type": "item",
+						"code": "creature-chicken-baby"
+					}
+				},
+				{
+					"match": "sounds/creature/chicken/hen-flee.ogg",
+					"tags": "animal",
+					"captionKey": "closedcaptions:creature-chicken-hen-flee",
+					"icon":{
+						"type": "item",
+						"code": "creature-chicken-hen"
+					}
+				},
+				{
+					"match": "sounds/creature/chicken/hen-idle*",
+					"tags": "animal",
+					"captionKey": "closedcaptions:creature-chicken-hen-idle",
+					"icon":{
+						"type": "item",
+						"code": "creature-chicken-hen"
+					}
+				},
+				{
+					"match": "sounds/creature/chicken/hen-lay*",
+					"tags": "animal",
+					"captionKey": "closedcaptions:creature-chicken-hen-lay",
+					"icon":{
+						"type": "item",
+						"code": "creature-chicken-hen"
+					}
+				},
+				{
+					"match": "sounds/creature/chicken/hen-hurt.ogg",
+					"tags": "animal,combat",
+					"captionKey": "closedcaptions:creature-chicken-hurt",
+					"icon":{
+						"type": "item",
+						"code": "creature-chicken-hen"
+					}
+				},
+				{
+					"match": "sounds/creature/chicken/rooster-alarm*",
+					"tags": "animal",
+					"captionKey": "closedcaptions:creature-chicken-rooster-alarm",
+					"icon":{
+						"type": "item",
+						"code": "creature-chicken-rooster"
+					}
+				},
+				{
+					"match": "sounds/creature/chicken/rooster-call.ogg",
+					"tags": "animal",
+					"captionKey": "closedcaptions:creature-chicken-rooster_call",
+					"icon":{
+						"type": "item",
+						"code": "creature-chicken-rooster"
+					}
+				},
 			]
 		},
 		{

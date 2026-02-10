@@ -1,26 +1,28 @@
 using System;
 using Cairo;
+using HarmonyLib;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.MathTools;
 
 namespace ClosedCaptions.GUI;
 
-public class GuiElementCaptionLabel(ICoreClientAPI capi, CaptionManager.Caption caption, CairoFont font, ElementBounds bounds) : GuiElement(capi, bounds)
+public class GuiElementCaptionLabel : GuiElement
 {
 	private static readonly int ArrowTextureSize = 64;
 	private static readonly double ArrowSize = ArrowTextureSize;
 	private static readonly double ArrowRenderScale = 0.7;
 
 	public CaptionManager.Caption Caption { get => _caption; }
-	private readonly CaptionManager.Caption _caption = caption;
-	private readonly CairoFont _font = font;
-	private LoadedTexture _baseTexture = new(capi);
-	private LoadedTexture _textTexture = new(capi);
-	private LoadedTexture _arrowTexture = new(capi);
+	private readonly CaptionManager.Caption _caption;
+	private readonly CairoFont _font;
+	private LoadedTexture _baseTexture;
+	private LoadedTexture _textTexture;
+	private LoadedTexture _arrowTexture;
+	private DummySlot? _dummySlot;
 
 	private string _debugText = "";
-	private LoadedTexture _debugTexture = new(capi);
+	private LoadedTexture _debugTexture;
 
 	public string DebugText
 	{
@@ -36,6 +38,25 @@ public class GuiElementCaptionLabel(ICoreClientAPI capi, CaptionManager.Caption 
 
 	private float _opacity = 1f;
 	private float? _angle = null;
+
+	public GuiElementCaptionLabel(ICoreClientAPI capi, CaptionManager.Caption caption, CairoFont font, ElementBounds bounds) : base(capi, bounds)
+	{
+		_caption = caption;
+		_font = font;
+		_baseTexture = new(capi);
+		_textTexture = new(capi);
+		_arrowTexture = new(capi);
+
+		_debugTexture = new(capi);
+
+		if (caption.Icon != null)
+		{
+			CollectibleObject? cobj = caption.Icon.GetCollectibleObject(capi);
+
+			var dummyInventory = new DummyInventory(capi);
+			_dummySlot = new DummySlot(new ItemStack(cobj), dummyInventory);
+		}
+	}
 
 	public void Update(float opacity, float? angle)
 	{
@@ -128,6 +149,15 @@ public class GuiElementCaptionLabel(ICoreClientAPI capi, CaptionManager.Caption 
 				arrowRenderSize, arrowRenderSize, 55,
 				renderColor);
 			api.Render.GlPopMatrix();
+		}
+
+		if (_dummySlot != null)
+		{
+			float iconRenderSize = (float)_font.GetFontExtents().Height;
+			api.Render.RenderItemstackToGui(
+				_dummySlot,
+				Bounds.renderX - iconRenderSize, Bounds.renderY + iconRenderSize / 2, 70,
+				iconRenderSize, ColorUtil.ColorFromRgba(renderColor), true, false, false);
 		}
 
 		if (ClosedCaptionsModSystem.UserConfig.DebugMode && !string.IsNullOrEmpty(_debugText))
