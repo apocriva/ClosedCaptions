@@ -30,7 +30,6 @@ public class UserConfig
 	public int GroupingRange { get; set; } = 5;
 	public int GroupingMaxTime { get; set; } = 1500;
 
-	// public bool ShowIcons { get; set; } = true;
 	public int DisplayOffset { get; set; } = 300;
 	public int FontSize { get; set; } = 20;
 	public float CaptionBackgroundOpacity { get; set; } = 0.5f;
@@ -38,6 +37,7 @@ public class UserConfig
 	public int CaptionPaddingV { get; set; } = 0;
 	public int CaptionSpacing { get; set; } = 1;
 	public bool ShowDirection { get; set; } = true;
+	public bool ShowIcons { get; set; } = true;
 
 	public bool DebugMode { get; set; } = false;
 }

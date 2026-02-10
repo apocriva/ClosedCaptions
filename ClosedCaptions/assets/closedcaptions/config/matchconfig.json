@@ -513,29 +513,29 @@
 			]
 		},
 		{
-			"group": "sounds/creature/animal/hooved/deer*",
+			"group": "sounds/creature/animal/mammal/hooved/deer*",
 			"defaultKey": "closedcaptions:creature",
 			"mappings": [
 				{
-					"match": "sounds/creature/animal/hooved/deer/elk-bellow*",
+					"match": "sounds/creature/animal/mammal/hooved/deer/elk-bellow*",
 					"tags": "animal",
 					"icon": { "type": "item", "code": "creature-deer-elk-adult-male" },
 					"captionKey": "closedcaptions:creature-elk-bellow"
 				},
 				{
-					"match": "sounds/creature/animal/hooved/deer/elk-bugle*",
+					"match": "sounds/creature/animal/mammal/hooved/deer/elk-bugle*",
 					"tags": "animal",
 					"icon": { "type": "item", "code": "creature-deer-elk-adult-male" },
 					"captionKey": "closedcaptions:creature-elk-bugle"
 				},
 				{
-					"match": "sounds/creature/animal/hooved/deer/elk-death*",
+					"match": "sounds/creature/animal/mammal/hooved/deer/elk-death*",
 					"tags": "animal,combat",
 					"icon": { "type": "item", "code": "creature-deer-elk-adult-male" },
 					"captionKey": "closedcaptions:creature-elk-death"
 				},
 				{
-					"match": "sounds/creature/animal/hooved/deer/elk-hurt*",
+					"match": "sounds/creature/animal/mammal/hooved/deer/elk-hurt*",
 					"tags": "animal,combat",
 					"icon": { "type": "item", "code": "creature-deer-elk-adult-male" },
 					"captionKey": "closedcaptions:creature-elk-hurt"

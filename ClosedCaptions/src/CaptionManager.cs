@@ -175,9 +175,13 @@ public class CaptionManager
 		Flags flags = Flags.None;
 		MatchConfig.Unique? unique = null;
 		MatchConfig.Icon? icon = null;
+		bool wasIgnored = false;
 
-		if (!Instance._matchConfig.FindCaptionForSound(location, ref text, ref tags, ref flags, ref unique, ref icon))
+		if (!Instance._matchConfig.FindCaptionForSound(location, ref wasIgnored, ref text, ref tags, ref flags, ref unique, ref icon))
 		{
+			if (wasIgnored)
+				return;
+				
 			API.Logger.Warning("[Closed Captions] Unconfigured sound: " + location.ToString());
 			if (!ClosedCaptionsModSystem.UserConfig.ShowUnknown)
 				return;

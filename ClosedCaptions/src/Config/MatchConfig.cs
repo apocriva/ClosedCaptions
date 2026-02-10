@@ -98,6 +98,7 @@ public class MatchConfig
 
 	public bool FindCaptionForSound(
 		AssetLocation location,
+		ref bool wasIgnored,
 		ref string? text,
 		ref CaptionManager.Tags tags,
 		ref CaptionManager.Flags flags,
@@ -114,7 +115,10 @@ public class MatchConfig
 		foreach (var ignore in Ignore)
 		{
 			if (WildcardUtil.Match(new AssetLocation(ignore), location))
+			{
+				wasIgnored = true;
 				return false;
+			}
 		}
 
 		// Iterate the mappings in reverse, to prioritize more recently-added
@@ -136,6 +140,8 @@ public class MatchConfig
 						unique = mapping.Unique;
 						icon = mapping.Icon;
 						text = Lang.Get(mapping.CaptionKey);
+						if (text == mapping.CaptionKey)
+							Api?.Logger.Warning($"[ClosedCaptions] Text not found for sound '{location}' ({mapping.CaptionKey})");
 						return true;
 					}
 				}

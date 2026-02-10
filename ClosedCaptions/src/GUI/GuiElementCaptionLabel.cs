@@ -152,7 +152,7 @@ public class GuiElementCaptionLabel : GuiElement
 			api.Render.GlPopMatrix();
 		}
 
-		if (_dummySlot != null)
+		if (ClosedCaptionsModSystem.UserConfig.ShowIcons && _dummySlot != null)
 		{
 			float iconRenderSize = (float)_font.GetFontExtents().Height;
 			api.Render.RenderItemstackToGui(

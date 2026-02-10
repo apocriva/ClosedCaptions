@@ -169,7 +169,6 @@ public class ClosedCaptionsModSystem : ModSystem
 		if (ImGui.CollapsingHeader(Lang.Get("closedcaptions:config-display-header")))
 		{
 			ImGui.Indent();
-			// config.ShowIcons = OnCheckBox("show-icons", config.ShowIcons, ref modified);
 			config.DisplayOffset = OnInputInt("display-offset", config.DisplayOffset, ref modified, 0);
 			config.FontSize = OnInputInt("font-size", config.FontSize, ref modified, 6, 100);
 			config.CaptionBackgroundOpacity = OnInputInt("caption-opacity", (int)(config.CaptionBackgroundOpacity * 100f), ref modified, 0, 100) / 100f;
@@ -177,6 +176,7 @@ public class ClosedCaptionsModSystem : ModSystem
 			config.CaptionPaddingV = OnInputInt("caption-padding-v", config.CaptionPaddingV, ref modified, 0);
 			config.CaptionSpacing = OnInputInt("caption-spacing", config.CaptionSpacing, ref modified, 0);
 			config.ShowDirection = OnCheckBox("show-direction", config.ShowDirection, ref modified);
+			config.ShowIcons = OnCheckBox("show-icons", config.ShowIcons, ref modified);
 			ImGui.Unindent();
 		}
 
