@@ -60,11 +60,18 @@ public class GuiElementCaptionLabel : GuiElement
 		}
 
 		_textColor = ClosedCaptionsModSystem.UserConfig.Color;
-		if (ClosedCaptionsModSystem.UserConfig.DangerBold &&
-			(_caption.Tags & CaptionManager.Tags.Danger) != 0)
+		if ((_caption.Tags & CaptionManager.Tags.Danger) != 0)
 		{
 			_textColor = ClosedCaptionsModSystem.UserConfig.DangerColor;
-			_font = _font.Clone().WithWeight(FontWeight.Bold);
+			if (ClosedCaptionsModSystem.UserConfig.DangerBold)
+				_font = _font.Clone().WithWeight(FontWeight.Bold);
+		}
+		else if ((_caption.Tags & CaptionManager.Tags.Ambience) != 0 ||
+			(_caption.Tags & CaptionManager.Tags.Weather) != 0)
+		{
+			_textColor = ClosedCaptionsModSystem.UserConfig.PassiveColor;
+			if (ClosedCaptionsModSystem.UserConfig.PassiveItalic)
+				_font = _font.Clone().WithSlant(FontSlant.Italic);
 		}
 	}
 

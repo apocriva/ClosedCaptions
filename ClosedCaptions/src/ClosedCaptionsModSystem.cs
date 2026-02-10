@@ -180,8 +180,10 @@ public class ClosedCaptionsModSystem : ModSystem
 			config.ShowDirection = OnCheckBox("show-direction", config.ShowDirection, ref modified);
 			config.ShowIcons = OnCheckBox("show-icons", config.ShowIcons, ref modified);
 			config.Color = OnColor("color", config.Color, ref modified);
-			config.DangerBold = OnCheckBox("danger-bold", config.DangerBold, ref modified);
 			config.DangerColor = OnColor("danger-color", config.DangerColor, ref modified);
+			config.DangerBold = OnCheckBox("danger-bold", config.DangerBold, ref modified);
+			config.PassiveColor = OnColor("passive-color", config.PassiveColor, ref modified);
+			config.PassiveItalic = OnCheckBox("passive-italic", config.PassiveItalic, ref modified);
 			ImGui.Unindent();
 		}
 

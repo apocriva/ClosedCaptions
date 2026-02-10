@@ -181,7 +181,7 @@ public class CaptionManager
 		{
 			if (wasIgnored)
 				return;
-				
+
 			API.Logger.Warning("[Closed Captions] Unconfigured sound: " + location.ToString());
 			if (!ClosedCaptionsModSystem.UserConfig.ShowUnknown)
 				return;
@@ -356,6 +356,10 @@ public class CaptionManager
 					uniqueGroups[caption.Unique.Group] = caption;
 					caption.IsVisibile = true;
 				}
+			}
+			else if (caption.Unique != null)
+			{
+				caption.IsVisibile = false;
 			}
 
 			if (caption.IsLoadedSoundDisposed &&

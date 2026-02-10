@@ -41,8 +41,10 @@ public class UserConfig
 	public bool ShowDirection { get; set; } = true;
 	public bool ShowIcons { get; set; } = true;
 	public Vec4f Color { get; set; } = new(1f, 1f, 1f, 1f);
-	public bool DangerBold { get; set; } = true;
 	public Vec4f DangerColor { get; set; } = new(1f, 0.75f, 0.25f, 1f);
+	public bool DangerBold { get; set; } = true;
+	public Vec4f PassiveColor { get; set; } = new(1f, 1f, 1f, 0.7f);
+	public bool PassiveItalic { get; set; } = true;
 
 	public bool DebugMode { get; set; } = false;
 }
