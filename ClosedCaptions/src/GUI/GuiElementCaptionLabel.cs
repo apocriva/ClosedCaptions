@@ -19,7 +19,7 @@ public class GuiElementCaptionLabel : GuiElement
 	private LoadedTexture _baseTexture;
 	private LoadedTexture _textTexture;
 	private LoadedTexture _arrowTexture;
-	private DummySlot? _dummySlot;
+	private readonly DummySlot? _dummySlot;
 
 	private string _debugText = "";
 	private LoadedTexture _debugTexture;
@@ -54,7 +54,8 @@ public class GuiElementCaptionLabel : GuiElement
 			CollectibleObject? cobj = caption.Icon.GetCollectibleObject(capi);
 
 			var dummyInventory = new DummyInventory(capi);
-			_dummySlot = new DummySlot(new ItemStack(cobj), dummyInventory);
+			var dummyStack = new ItemStack(cobj);
+			_dummySlot = new DummySlot(dummyStack, dummyInventory);
 		}
 	}
 

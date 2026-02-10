@@ -162,7 +162,7 @@ public class CaptionManager
 		catch (Exception e)
 		{
 			capi.Logger.Error($"Error loading {MatchConfig.Filename}: {e}");
-			throw e;
+			_matchConfig = new(capi);
 		}
 
 		_overlay = new(capi);
@@ -170,8 +170,6 @@ public class CaptionManager
 
 	public static void SoundStarted(ILoadedSound loadedSound, AssetLocation location)
 	{
-		//_capi.Logger.Log(EnumLogType.Debug, string.Format("StartPlaying: {0}", location));
-
 		string? text = null;
 		Tags tags = Tags.None;
 		Flags flags = Flags.None;
@@ -180,6 +178,7 @@ public class CaptionManager
 
 		if (!Instance._matchConfig.FindCaptionForSound(location, ref text, ref tags, ref flags, ref unique, ref icon))
 		{
+			API.Logger.Warning("[Closed Captions] Unconfigured sound: " + location.ToString());
 			if (!ClosedCaptionsModSystem.UserConfig.ShowUnknown)
 				return;
 		}

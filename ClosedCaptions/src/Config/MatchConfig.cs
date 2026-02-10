@@ -90,6 +90,12 @@ public class MatchConfig
 
 	public ICoreClientAPI? Api { get; set; }
 
+	public MatchConfig() { }
+	public MatchConfig(ICoreClientAPI capi)
+	{
+		Api = capi;
+	}
+
 	public bool FindCaptionForSound(
 		AssetLocation location,
 		ref string? text,
