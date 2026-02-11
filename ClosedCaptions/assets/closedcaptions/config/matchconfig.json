@@ -133,7 +133,7 @@
 					"captionKey": "closedcaptions:block-chandelier-hit"
 				},
 				{
-					"match": "sounds/block/charcoal.ogg",
+					"match": "sounds/block/charcoal*",
 					"tags": "block,interaction",
 					"captionKey": "closedcaptions:block-charcoal"
 				},
