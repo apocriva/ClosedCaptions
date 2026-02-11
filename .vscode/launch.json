@@ -19,7 +19,7 @@
             "args": [
                 // "--playStyle" , "preset-surviveandbuild",
                 "--openWorld" , "modding test world",
-                "--tracelog",
+                //"--tracelog",
 				"--dataPath",
 				"${env:VINTAGE_STORY_DATA}",
                 "--addModPath",
