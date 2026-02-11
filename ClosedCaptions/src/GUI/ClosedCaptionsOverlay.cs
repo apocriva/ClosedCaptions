@@ -30,7 +30,7 @@ public class ClosedCaptionsOverlay : HudElement
 		BuildDialog();
 	}
 
-	public void Refresh()
+	public void Rebuild()
 	{
 		BuildDialog();
 	}
@@ -139,13 +139,15 @@ public class ClosedCaptionsOverlay : HudElement
 
 		_captionLabels.Clear();
 
-		var captions = CaptionManager.GetSortedCaptions();
+		var captions = CaptionManager.GetDisplayedCaptions();
 		if (!captions.Any())
 		{
 			if (IsOpened())
 				TryClose();
 			return;
 		}
+
+		captions.Sort(Caption.CompareByDistance);
 
 		ElementBounds dialogBounds =
 			ElementStdBounds.AutosizedMainDialog

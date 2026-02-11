@@ -8,12 +8,14 @@ using ClosedCaptions.Config;
 using ClosedCaptions.Extensions;
 using ClosedCaptions.GUI;
 using HarmonyLib;
+using OpenTK.Audio.OpenAL;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Util;
 using Vintagestory.Client;
+using Vintagestory.Common;
 
 namespace ClosedCaptions;
 
@@ -44,16 +46,10 @@ public class CaptionManager
 
 	private readonly ClosedCaptionsOverlay _overlay;
 	private readonly MatchConfig _matchConfig;
-	private readonly Dictionary<nint, Caption> _captions = [];
-	private readonly List<Caption> _displayCaptions = [];
+	private readonly Dictionary<int, Caption> _captions = [];
+	private readonly List<Caption> _displayedCaptions = [];
 
-	private bool _isDirty = false;
 	private bool _needsRefresh = false;
-
-	public static void MarkDirty()
-	{
-		Instance._isDirty = true;
-	}
 
 	public CaptionManager(ICoreClientAPI capi)
 	{
@@ -74,10 +70,9 @@ public class CaptionManager
 		_overlay = new(capi);
 	}
 
-	public static ReadOnlyCollection<Caption> GetSortedCaptions()
+	public static List<Caption> GetDisplayedCaptions()
 	{
-		Instance.SortDisplayCaptions();
-		return Instance._displayCaptions.AsReadOnly();
+		return [.. Instance._displayedCaptions];
 	}
 
 	public void Dispose()
@@ -87,34 +82,43 @@ public class CaptionManager
 
 	public void Tick()
 	{
+		UpdateSoundsStatus();
+
 		if (_needsRefresh)
 		{
 			ForceRefresh();
 			_needsRefresh = false;
-			_isDirty = false;
-		}
-		else if (_isDirty)
-		{
-			SortDisplayCaptions();
-			_overlay.Refresh();
 		}
 	}
 
 	public void ForceRefresh()
 	{
 		// Fully rebuild display list?
-		SortDisplayCaptions();
-		_overlay.Refresh();
+		_overlay.Rebuild();
 	}
 
 #region Harmony patches
+	// [HarmonyPostfix()]
+	// [HarmonyPatch(typeof(LoadedSoundNative), "disposeSoundSource")]
+	// public static void Sound_Dispose(LoadedSoundNative __instance)
+	// {
+	// 	if (!Instance._captions.TryGetValue(__instance.GetSourceID(), out Caption? caption))
+	// 	{
+	// 		//Api.Logger.Debug($"[ClosedCaptions] sound.disposeSoundSource() for untracked sound '{__instance.Params.Location}'");
+	// 		return;
+	// 	}
+
+	// 	Api.Logger.Debug($"[ClosedCaptions] sound.disposeSoundSource() '{__instance.Params.Location}'");
+	// 	Instance.RemoveCaption(caption);
+	// }
+
 	[HarmonyPostfix()]
 	[HarmonyPatch(typeof(LoadedSoundNative), "Start")]
 	public static void Sound_Start(LoadedSoundNative __instance)
 	{
-		if (Instance._captions.TryGetValue(__instance.ToIntPtr(), out Caption? caption))
+		if (Instance._captions.TryGetValue(__instance.GetSourceID(), out Caption? caption))
 		{
-			Api.Logger.Debug($"[ClosedCaptions] sound.Start() for existing sound {__instance.Params.Location}");
+			Api.Logger.Debug($"[ClosedCaptions] sound.Start() for existing sound '{__instance.Params.Location}'");
 			caption.UpdateFrom(__instance);
 			return;
 		}
@@ -122,14 +126,27 @@ public class CaptionManager
 		Instance._matchConfig.BuildCaptionForSound(__instance, out caption, out var wasIgnored);
 		if (wasIgnored)
 		{
-			Api.Logger.Debug($"[ClosedCaptions] sound.Start() ignored {__instance.Params.Location}");
+			Api.Logger.Debug($"[ClosedCaptions] sound.Start() ignored '{__instance.Params.Location}'");
 			return;
 		}
 
 		if (caption == null)
-			throw new Exception($"[ClosedCaptions] sound.Start() failed to generated caption for {__instance.Params.Location}");
+			throw new Exception($"[ClosedCaptions] sound.Start() failed to generated caption for '{__instance.Params.Location}'");
 
 		Instance.AddCaption(caption);
+	}
+
+	[HarmonyPostfix()]
+	[HarmonyPatch(typeof(LoadedSoundNative), "Stop")]
+	public static void Sound_Stop(LoadedSoundNative __instance)
+	{
+		if (!Instance._captions.TryGetValue(__instance.GetSourceID(), out Caption? caption))
+		{
+			//Api.Logger.Debug($"[ClosedCaptions] sound.Stop() for untracked sound '{__instance.Params.Location}'");
+			return;
+		}
+
+		Instance.RemoveCaption(caption);
 	}
 #endregion
 
@@ -138,23 +155,57 @@ public class CaptionManager
 		if (_captions.ContainsKey(caption.ID))
 			throw new Exception($"[ClosedCaptions] Attempting to add duplicate caption. [{caption.ID}] '{caption.AssetLocation}'");
 
+		Api.Logger.Debug($"[ClosedCaptions] Added tracked sound [{caption.ID}] '{caption.AssetLocation}");
 		_captions.Add(caption.ID, caption);
+		AddDisplayedCaption(caption);
+	}
 
+	private void RemoveCaption(Caption caption)
+	{
+		if (!_captions.ContainsKey(caption.ID))
+			throw new Exception($"[ClosedCaptions] Attempting to remove untracked caption. [{caption.ID}] '{caption.AssetLocation}'");
+
+		Api.Logger.Debug($"[ClosedCaptions] Removed tracked sound [{caption.ID}] '{caption.AssetLocation}");
+		_captions.Remove(caption.ID);
+		_displayedCaptions.RemoveAll(match => match.ID == caption.ID);
+
+		// This might have been suppressing another caption!
+		if (caption.Group != null)
+		{
+			_captions.Where(e => e.Value.Group != null && e.Value.Group.Name == caption.Group.Name)
+				.Do(c => AddDisplayedCaption(c.Value));
+		}
+
+		_needsRefresh = true;
+	}
+
+	private void AddDisplayedCaption(Caption caption)
+	{
 		// Add into the display list if appopriate.
 		float distance = caption.IsRelative ? 0f : (caption.Position - Api.World.Player.Entity.Pos.XYZFloat).Length();
 
-		if (_displayCaptions.Where(check => check.ID == caption.ID).Any())
-			throw new Exception($"[ClosedCaptions] Display list already contains new caption. [{caption.ID}] '{caption.AssetLocation}'");
-
-		for (int i = _displayCaptions.Count - 1; i >= 0; --i)
+		if (_displayedCaptions.Where(check => check.ID == caption.ID).Any())
 		{
-			var comp = _displayCaptions[i];
-			if (comp.Group != null && comp.Group == caption.Group)
+			Api.Logger.Warning($"[ClosedCaptions] Display list already contains new caption. [{caption.ID}] '{caption.AssetLocation}'");
+			return;
+		}
+
+		bool shouldAdd = true;
+		for (int i = _displayedCaptions.Count - 1; i >= 0; --i)
+		{
+			var comp = _displayedCaptions[i];
+			if (comp.Group != null && caption.Group != null &&
+				comp.Group.Name == caption.Group.Name)
 			{
 				// We're in the same group! Only allow the highest priority to stay.
 				if (caption.Group.Priority >= comp.Group.Priority)
 				{
-					_displayCaptions.RemoveAt(i);
+					_displayedCaptions.RemoveAt(i);
+					break;
+				}
+				else
+				{
+					shouldAdd = false;
 					break;
 				}
 			}
@@ -166,24 +217,54 @@ public class CaptionManager
 					(caption.Position - comp.Position).Length() <= ClosedCaptionsModSystem.UserConfig.GroupingRange ||
 					Math.Abs(caption.StartTime - comp.StartTime) <= ClosedCaptionsModSystem.UserConfig.GroupingMaxTime)
 				{
-					_displayCaptions.RemoveAt(i);
+					_displayedCaptions.RemoveAt(i);
 					break;
 				}
 			}
 		}
 
-		_displayCaptions.Add(caption);
-		_needsRefresh = true;
+		if (shouldAdd)
+		{
+			_displayedCaptions.Add(caption);
+			_needsRefresh = true;
+		}
 	}
 
-	private void SortDisplayCaptions()
+	private void RebuildDisplayedCaptions()
 	{
-		if (!_isDirty)
-			return;
+		_displayedCaptions.Clear();
 
-		_displayCaptions.Sort(Caption.CompareByDistance);
+		foreach (var caption in _captions.Values)
+		{
+			AddDisplayedCaption(caption);
+		}
+	}
 
-		_isDirty = false;
+	private void UpdateSoundsStatus()
+	{
+		foreach (var caption in _captions.Values)
+		{
+			if (!AL.IsSource(caption.ID))
+			{
+				RemoveCaption(caption);
+				continue;
+			}
+
+			AL.GetSource(caption.ID, ALGetSourcei.SourceState, out var statei);
+
+			var state = (ALSourceState)statei;
+			if (state != ALSourceState.Playing)
+			{
+				RemoveCaption(caption);
+				continue;
+			}
+
+			AL.GetSource(caption.ID, ALSourcef.Gain, out var value);
+			caption.Volume = value;
+
+			AL.GetSource(caption.ID, ALSource3f.Position, out var position);
+			caption.Position.Set(position.X, position.Y, position.Z);
+		}
 	}
 
 	// public static void SoundStarted(ILoadedSound loadedSound, AssetLocation location)

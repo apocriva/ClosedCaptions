@@ -713,7 +713,7 @@
 					"match": "sounds/creature/chicken/rooster-call.ogg",
 					"tags": "animal",
 					"icon":{ "type": "item", "code": "creature-chicken-rooster" },
-					"captionKey": "closedcaptions:creature-chicken-rooster_call",
+					"captionKey": "closedcaptions:creature-chicken-rooster-call",
 				},
 			]
 		},

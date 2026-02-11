@@ -4,6 +4,7 @@ using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Util;
+using Vintagestory.Client;
 
 namespace ClosedCaptions;
 
@@ -34,10 +35,31 @@ public enum CaptionFlags
 	Directionless	= 1 << 0,
 }
 
+public static class LoadedSoundExtensions
+{
+	public static int GetSourceID(this LoadedSoundNative sound)
+	{
+		var ret = typeof(LoadedSoundNative).GetField("sourceId", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.GetValue(sound);
+
+		if (ret != null)
+			return (int)ret;
+
+		return 0;
+	}
+
+	public static int GetSourceID(this ILoadedSound sound)
+	{
+		if (sound is not LoadedSoundNative)
+			return 0;
+
+		return (sound as LoadedSoundNative)!.GetSourceID();
+	}
+}
+
 public class Caption
 {
 	
-	public readonly nint ID;
+	public readonly int ID;
 	public readonly AssetLocation AssetLocation;
 	public readonly string Text;
 	public long StartTime;
@@ -62,7 +84,7 @@ public class Caption
 		CaptionGroup? group,
 		CaptionIcon? icon)
 	{
-		ID = loadedSound.ToIntPtr();
+		ID = loadedSound.GetSourceID();
 		AssetLocation = loadedSound.Params.Location;
 		Text = text;
 		StartTime = startTime;
@@ -78,7 +100,7 @@ public class Caption
 
 	public void UpdateFrom(ILoadedSound sound)
 	{
-		if (sound.ToIntPtr() != ID)
+		if (sound.GetSourceID() != ID)
 			CaptionManager.Api.Logger.Warning($"[ClosedCaptions] Updating sound '{AssetLocation}' from a different LoadedSound?");
 
 		Volume = sound.Params.Volume;
@@ -86,8 +108,6 @@ public class Caption
 			Position = Vec3f.Zero;
 		else
 			Position = sound.Params.Position;
-
-		CaptionManager.MarkDirty();
 	}
 
 	public static int CompareByDistance(Caption a, Caption b)
