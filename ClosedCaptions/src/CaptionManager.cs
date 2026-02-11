@@ -93,47 +93,50 @@ public class CaptionManager
 
 	public void ForceRefresh()
 	{
-		// Fully rebuild display list?
+		RebuildDisplayCaptions();
 		_overlay.Rebuild();
 	}
 
 #region Harmony patches
-	// [HarmonyPostfix()]
-	// [HarmonyPatch(typeof(LoadedSoundNative), "disposeSoundSource")]
-	// public static void Sound_Dispose(LoadedSoundNative __instance)
-	// {
-	// 	if (!Instance._captions.TryGetValue(__instance.GetSourceID(), out Caption? caption))
-	// 	{
-	// 		//Api.Logger.Debug($"[ClosedCaptions] sound.disposeSoundSource() for untracked sound '{__instance.Params.Location}'");
-	// 		return;
-	// 	}
-
-	// 	Api.Logger.Debug($"[ClosedCaptions] sound.disposeSoundSource() '{__instance.Params.Location}'");
-	// 	Instance.RemoveCaption(caption);
-	// }
-
 	[HarmonyPostfix()]
 	[HarmonyPatch(typeof(LoadedSoundNative), "Start")]
 	public static void Sound_Start(LoadedSoundNative __instance)
 	{
 		if (Instance._captions.TryGetValue(__instance.GetSourceID(), out Caption? caption))
 		{
-			Api.Logger.Debug($"[ClosedCaptions] sound.Start() for existing sound '{__instance.Params.Location}'");
-			caption.UpdateFrom(__instance);
-			return;
+			// Orphan the old caption. We don't have its underlying
+			// source ID anymore, so we will let it complete gracefully.
+			var oldId = caption.ID;
+			caption.Orphan();
+			Instance._captions.Remove(oldId);
+			Instance._captions.Add(caption.ID, caption);
+
+			if (__instance.Params.Location.ToString().Contains("walk/grass"))
+				Api.Logger.Debug($"[ClosedCaptions] sound.Start() orphaning [{oldId}] -> [{caption.ID}] '{caption.AssetLocation}");
 		}
 
 		Instance._matchConfig.BuildCaptionForSound(__instance, out caption, out var wasIgnored);
 		if (wasIgnored)
 		{
-			Api.Logger.Debug($"[ClosedCaptions] sound.Start() ignored '{__instance.Params.Location}'");
+			//Api.Logger.Debug($"[ClosedCaptions] sound.Start() ignored '{__instance.Params.Location}'");
 			return;
 		}
 
 		if (caption == null)
 			throw new Exception($"[ClosedCaptions] sound.Start() failed to generated caption for '{__instance.Params.Location}'");
 
+		if (__instance.Params.Location.ToString().Contains("walk/grass"))
+			Api.Logger.Debug($"[ClosedCaptions] sound.Start() new [{__instance.GetSourceID()}] '{__instance.Params.Location}");
 		Instance.AddCaption(caption);
+	}
+
+	[HarmonyPostfix()]
+	[HarmonyPatch(typeof(LoadedSoundNative), "SetVolume", [])]
+	[HarmonyPatch(typeof(LoadedSoundNative), "SetVolume", typeof(float))]
+	public static void Sound_SetVolume(LoadedSoundNative __instance)
+	{
+		if (!Instance._captions.ContainsKey(__instance.GetSourceID()))
+			Sound_Start(__instance);
 	}
 
 	[HarmonyPostfix()]
@@ -142,11 +145,12 @@ public class CaptionManager
 	{
 		if (!Instance._captions.TryGetValue(__instance.GetSourceID(), out Caption? caption))
 		{
-			//Api.Logger.Debug($"[ClosedCaptions] sound.Stop() for untracked sound '{__instance.Params.Location}'");
+			//Api.Logger.Debug($"[ClosedCaptions] sound.Stop() for untracked sound. [{__instance.GetSourceID()}] '{__instance.Params.Location}'");
 			return;
 		}
 
-		Instance.RemoveCaption(caption);
+		if (!caption.IsFading)
+			caption.BeginFade();
 	}
 #endregion
 
@@ -155,9 +159,10 @@ public class CaptionManager
 		if (_captions.ContainsKey(caption.ID))
 			throw new Exception($"[ClosedCaptions] Attempting to add duplicate caption. [{caption.ID}] '{caption.AssetLocation}'");
 
-		Api.Logger.Debug($"[ClosedCaptions] Added tracked sound [{caption.ID}] '{caption.AssetLocation}");
+		if (caption.Text.Contains("rass"))
+			Api.Logger.Debug($"[ClosedCaptions] Added tracked sound [{caption.ID}] '{caption.AssetLocation}");
 		_captions.Add(caption.ID, caption);
-		AddDisplayedCaption(caption);
+		AddOrUpdateDisplayedCaption(caption);
 	}
 
 	private void RemoveCaption(Caption caption)
@@ -165,31 +170,39 @@ public class CaptionManager
 		if (!_captions.ContainsKey(caption.ID))
 			throw new Exception($"[ClosedCaptions] Attempting to remove untracked caption. [{caption.ID}] '{caption.AssetLocation}'");
 
-		Api.Logger.Debug($"[ClosedCaptions] Removed tracked sound [{caption.ID}] '{caption.AssetLocation}");
+		if (caption.Text.Contains("rass"))
+			Api.Logger.Debug($"[ClosedCaptions] Removed tracked sound [{caption.ID}] '{caption.AssetLocation}");
 		_captions.Remove(caption.ID);
 		_displayedCaptions.RemoveAll(match => match.ID == caption.ID);
 
-		// This might have been suppressing another caption!
-		if (caption.Group != null)
-		{
-			_captions.Where(e => e.Value.Group != null && e.Value.Group.Name == caption.Group.Name)
-				.Do(c => AddDisplayedCaption(c.Value));
-		}
-
+		// This might have been suppressing another caption, let's just rebuild the display list.
 		_needsRefresh = true;
 	}
 
-	private void AddDisplayedCaption(Caption caption)
+	private void RebuildDisplayCaptions()
 	{
-		// Add into the display list if appopriate.
-		float distance = caption.IsRelative ? 0f : (caption.Position - Api.World.Player.Entity.Pos.XYZFloat).Length();
+		_displayedCaptions.Clear();
 
-		if (_displayedCaptions.Where(check => check.ID == caption.ID).Any())
+		_captions.Values.Do(AddOrUpdateDisplayedCaption);
+	}
+
+	private void AddOrUpdateDisplayedCaption(Caption caption)
+	{
+		int removed = _displayedCaptions.RemoveAll(c => c == caption);
+
+		// We don't show filtered captions.
+		if (IsFiltered(caption))
 		{
-			Api.Logger.Warning($"[ClosedCaptions] Display list already contains new caption. [{caption.ID}] '{caption.AssetLocation}'");
+			if (removed > 0)
+			{
+				if (caption.Text.Contains("rass"))
+					Api.Logger.Debug($"[ClosedCaptions] On update, displayed sound is filtered. [{caption.ID}] '{caption.AssetLocation}'");
+				_needsRefresh = true;
+			}
 			return;
 		}
 
+		float distance = caption.IsRelative ? 0f : (caption.Position - Api.World.Player.Entity.Pos.XYZFloat).Length();
 		bool shouldAdd = true;
 		for (int i = _displayedCaptions.Count - 1; i >= 0; --i)
 		{
@@ -197,30 +210,84 @@ public class CaptionManager
 			if (comp.Group != null && caption.Group != null &&
 				comp.Group.Name == caption.Group.Name)
 			{
-				// We're in the same group! Only allow the highest priority to stay.
-				if (caption.Group.Priority >= comp.Group.Priority)
+				if (caption.Group.Priority > comp.Group.Priority)
 				{
+					// Only allow the highest priority to stay.
 					_displayedCaptions.RemoveAt(i);
 					break;
 				}
+				else if (caption.Group.Priority == comp.Group.Priority)
+				{
+					// If we are the same priority we'll try to take the closest.
+					float compDistance = comp.IsRelative ? 0f : (comp.Position - Api.World.Player.Entity.Pos.XYZFloat).Length();
+
+					if (!caption.IsRelative && !comp.IsRelative &&
+						distance < compDistance)
+					{
+						// New caption is closer!
+						_displayedCaptions.RemoveAt(i);
+						break;
+					}
+					else if (caption.Volume > comp.Volume)
+					{
+						// New caption is louder!
+						_displayedCaptions.RemoveAt(i);
+						break;
+					}
+					else
+					{
+						shouldAdd = false;
+					}
+				}
 				else
 				{
+					// Lower priority! Not a chance!
 					shouldAdd = false;
 					break;
 				}
 			}
 
 			// Are we close enough that we should be grouped anyway?
-			if (caption.Text == comp.Text)
-			{
-				if(!caption.IsRelative && !comp.IsRelative &&
-					(caption.Position - comp.Position).Length() <= ClosedCaptionsModSystem.UserConfig.GroupingRange ||
-					Math.Abs(caption.StartTime - comp.StartTime) <= ClosedCaptionsModSystem.UserConfig.GroupingMaxTime)
-				{
-					_displayedCaptions.RemoveAt(i);
-					break;
-				}
-			}
+			// if (caption.Text == comp.Text)
+			// {
+			// 	var distTime = Math.Abs(caption.StartTime - comp.StartTime);
+			// 	var checkSpace = !caption.IsRelative && !comp.IsRelative;
+			// 	var distSpace = (comp.Position - caption.Position).Length();
+			// 	var keepNew = false;
+			// 	if (checkSpace && distSpace <= ClosedCaptionsModSystem.UserConfig.GroupingRange &&
+			// 		distTime <= ClosedCaptionsModSystem.UserConfig.GroupingMaxTime ||
+			// 		!checkSpace && distTime <= ClosedCaptionsModSystem.UserConfig.GroupingMaxTime)
+			// 	{
+			// 		// Keep the most recent as long as it isn't fading.
+			// 		if (caption.StartTime > comp.StartTime &&
+			// 			!caption.IsFading ||
+			// 			comp.IsFading)
+			// 		{
+			// 			keepNew = true;
+			// 		}
+			// 		else if (caption.StartTime < comp.StartTime &&
+			// 			!comp.IsFading ||
+			// 			caption.IsFading)
+			// 		{
+			// 			keepNew = false;
+			// 		}
+			// 		else
+			// 		{
+			// 			// Too many things going on, just keep the new one.
+			// 			keepNew = true;
+			// 		}
+			// 	}
+
+			// 	if (keepNew)
+			// 	{
+			// 		_displayedCaptions.RemoveAt(i);
+			// 		shouldAdd = true;
+			// 	}
+			// 	else
+			// 	{
+			// 		shouldAdd = false;
+			// 	}
+			// }
 		}
 
 		if (shouldAdd)
@@ -228,15 +295,9 @@ public class CaptionManager
 			_displayedCaptions.Add(caption);
 			_needsRefresh = true;
 		}
-	}
-
-	private void RebuildDisplayedCaptions()
-	{
-		_displayedCaptions.Clear();
-
-		foreach (var caption in _captions.Values)
+		else if (removed > 0)
 		{
-			AddDisplayedCaption(caption);
+			_needsRefresh = true;
 		}
 	}
 
@@ -244,27 +305,82 @@ public class CaptionManager
 	{
 		foreach (var caption in _captions.Values)
 		{
-			if (!AL.IsSource(caption.ID))
+			if (caption.IsFading)
 			{
-				RemoveCaption(caption);
+				// if (caption.Text.Contains("rass"))
+				// 	Api.Logger.Debug($"[ClosedCaptions] Fading... {Api.ElapsedMilliseconds - caption.FadeOutStartTime}ms [{caption.ID}] '{caption.AssetLocation}'");
+				if (Api.ElapsedMilliseconds - caption.FadeOutStartTime >= ClosedCaptionsModSystem.UserConfig.FadeOutDuration)
+				{
+					if (caption.Text.Contains("rass"))
+						Api.Logger.Debug($"[ClosedCaptions] Sound finished fading. [{caption.ID}] '{caption.AssetLocation}'");
+					RemoveCaption(caption);
+				}
+
 				continue;
 			}
 
-			AL.GetSource(caption.ID, ALGetSourcei.SourceState, out var statei);
-
-			var state = (ALSourceState)statei;
-			if (state != ALSourceState.Playing)
+			if (AL.IsSource(caption.ID))
 			{
-				RemoveCaption(caption);
-				continue;
+				AL.GetSource(caption.ID, ALGetSourcei.SourceState, out var statei);
+				var state = (ALSourceState)statei;
+				if (state == ALSourceState.Playing)
+				{
+					AL.GetSource(caption.ID, ALSourcef.Gain, out var value);
+					caption.Volume = value;
+
+					AL.GetSource(caption.ID, ALSource3f.Position, out var position);
+					caption.Position.Set(position.X, position.Y, position.Z);
+
+					AddOrUpdateDisplayedCaption(caption);
+					continue;
+				}
+				else
+				{
+					if (caption.Text.Contains("rass"))
+						Api.Logger.Debug($"[ClosedCaptions] No longer playing, starting fade{(caption.IsFading ? "but is already fading?" : "")}. [{caption.ID}] '{caption.AssetLocation}'");
+				}
+			}
+			else
+			{
+				if (caption.Text.Contains("rass"))
+					Api.Logger.Debug($"[ClosedCaptions] No longer valid source, starting fade{(caption.IsFading ? "but is already fading?" : "")}. [{caption.ID}] '{caption.AssetLocation}'");
 			}
 
-			AL.GetSource(caption.ID, ALSourcef.Gain, out var value);
-			caption.Volume = value;
-
-			AL.GetSource(caption.ID, ALSource3f.Position, out var position);
-			caption.Position.Set(position.X, position.Y, position.Z);
+			// Sound is no longer visible for one reason or another.
+			caption.BeginFade();
 		}
+	}
+	
+	private bool IsFiltered(Caption caption)
+	{
+		// If any one of these passes, do not filter. This supercedes cases such as, for example
+		// a nearby lightning strike being filtered due to ShowWeather, but should be shown because
+		// it is tagged as Danger. We still want to let the case fall through if ShowDanger is unchecked
+		// but ShowWeather is checked.
+		if (caption.Tags != CaptionTags.None)
+		{
+			if ((caption.Tags & CaptionTags.Ambience) != 0 && ClosedCaptionsModSystem.UserConfig.ShowAmbience ||
+				(caption.Tags & CaptionTags.Animal) != 0 && ClosedCaptionsModSystem.UserConfig.ShowAnimal ||
+				(caption.Tags & CaptionTags.Block) != 0 && ClosedCaptionsModSystem.UserConfig.ShowBlock ||
+				(caption.Tags & CaptionTags.Combat) != 0 && ClosedCaptionsModSystem.UserConfig.ShowCombat ||
+				(caption.Tags & CaptionTags.Danger) != 0 && ClosedCaptionsModSystem.UserConfig.ShowDanger ||
+				(caption.Tags & CaptionTags.Enemy) != 0 && ClosedCaptionsModSystem.UserConfig.ShowEnemy ||
+				(caption.Tags & CaptionTags.Environment) != 0 && ClosedCaptionsModSystem.UserConfig.ShowEnvironment ||
+				(caption.Tags & CaptionTags.Interaction) != 0 && ClosedCaptionsModSystem.UserConfig.ShowInteraction ||
+				(caption.Tags & CaptionTags.Temporal) != 0 && ClosedCaptionsModSystem.UserConfig.ShowTemporal ||
+				(caption.Tags & CaptionTags.Tool) != 0 && ClosedCaptionsModSystem.UserConfig.ShowTool ||
+				(caption.Tags & CaptionTags.Voice) != 0 && ClosedCaptionsModSystem.UserConfig.ShowVoice ||
+				(caption.Tags & CaptionTags.Walk) != 0 && ClosedCaptionsModSystem.UserConfig.ShowWalk ||
+				(caption.Tags & CaptionTags.Wearable) != 0 && ClosedCaptionsModSystem.UserConfig.ShowWearable ||
+				(caption.Tags & CaptionTags.Weather) != 0 && ClosedCaptionsModSystem.UserConfig.ShowWeather)
+				return false;
+		}
+
+		// It is a tagged sound and should not be shown.
+		if (caption.Tags != CaptionTags.None)
+			return true;
+
+		return false;
 	}
 
 	// public static void SoundStarted(ILoadedSound loadedSound, AssetLocation location)
@@ -495,55 +611,5 @@ public class CaptionManager
 	// public void Dispose()
 	// {
 	// 	_captions.Clear();
-	// }
-
-	// private bool IsFiltered(ILoadedSound loadedSound, CaptionTags soundTags)
-	// {
-	// 	var assetName = loadedSound.Params.Location.ToString();
-
-	// 	// If any one of these passes, do not filter. This supercedes cases such as, for example
-	// 	// a nearby lightning strike being filtered due to ShowWeather, but should be shown because
-	// 	// it is tagged as Danger. We still want to let the case fall through if ShowDanger is unchecked
-	// 	// but ShowWeather is checked.
-	// 	if (soundTags != CaptionTags.None)
-	// 	{
-	// 		if ((soundTags & CaptionTags.Ambience) != 0 && ClosedCaptionsModSystem.UserConfig.ShowAmbience ||
-	// 			(soundTags & CaptionTags.Animal) != 0 && ClosedCaptionsModSystem.UserConfig.ShowAnimal ||
-	// 			(soundTags & CaptionTags.Block) != 0 && ClosedCaptionsModSystem.UserConfig.ShowBlock ||
-	// 			(soundTags & CaptionTags.Combat) != 0 && ClosedCaptionsModSystem.UserConfig.ShowCombat ||
-	// 			(soundTags & CaptionTags.Danger) != 0 && ClosedCaptionsModSystem.UserConfig.ShowDanger ||
-	// 			(soundTags & CaptionTags.Enemy) != 0 && ClosedCaptionsModSystem.UserConfig.ShowEnemy ||
-	// 			(soundTags & CaptionTags.Environment) != 0 && ClosedCaptionsModSystem.UserConfig.ShowEnvironment ||
-	// 			(soundTags & CaptionTags.Interaction) != 0 && ClosedCaptionsModSystem.UserConfig.ShowInteraction ||
-	// 			(soundTags & CaptionTags.Temporal) != 0 && ClosedCaptionsModSystem.UserConfig.ShowTemporal ||
-	// 			(soundTags & CaptionTags.Tool) != 0 && ClosedCaptionsModSystem.UserConfig.ShowTool ||
-	// 			(soundTags & CaptionTags.Voice) != 0 && ClosedCaptionsModSystem.UserConfig.ShowVoice ||
-	// 			(soundTags & CaptionTags.Walk) != 0 && ClosedCaptionsModSystem.UserConfig.ShowWalk ||
-	// 			(soundTags & CaptionTags.Wearable) != 0 && ClosedCaptionsModSystem.UserConfig.ShowWearable ||
-	// 			(soundTags & CaptionTags.Weather) != 0 && ClosedCaptionsModSystem.UserConfig.ShowWeather)
-	// 			return false;
-	// 	}
-
-	// 	// Check user filters.
-	// 	if (!ClosedCaptionsModSystem.UserConfig.ShowWeather)
-	// 	{
-	// 		if (loadedSound.Params.SoundType == EnumSoundType.Weather)
-	// 			return true;
-	// 	}
-
-	// 	if (!ClosedCaptionsModSystem.UserConfig.ShowWalk)
-	// 	{
-	// 		if (assetName.Contains("walk") ||
-	// 			assetName.Contains("wearable"))
-	// 		{
-    //             return true;
-    //         }
-	// 	}
-
-	// 	// It is a tagged sound and should not be shown.
-	// 	if (soundTags != CaptionTags.None)
-	// 		return true;
-
-	// 	return false;
 	// }
 }

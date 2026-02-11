@@ -59,7 +59,7 @@ public static class LoadedSoundExtensions
 public class Caption
 {
 	
-	public readonly int ID;
+	public int ID { get; private set; }
 	public readonly AssetLocation AssetLocation;
 	public readonly string Text;
 	public long StartTime;
@@ -71,6 +71,10 @@ public class Caption
 	public readonly CaptionFlags Flags;
 	public readonly CaptionGroup? Group;
 	public readonly CaptionIcon? Icon;
+
+	private static int NextOrphanId = -1;
+
+	public bool IsFading => FadeOutStartTime > 0;
 
 	public Caption(
 		ILoadedSound loadedSound,
@@ -98,16 +102,18 @@ public class Caption
 		Icon = icon;
 	}
 
-	public void UpdateFrom(ILoadedSound sound)
+	public void Orphan()
 	{
-		if (sound.GetSourceID() != ID)
-			CaptionManager.Api.Logger.Warning($"[ClosedCaptions] Updating sound '{AssetLocation}' from a different LoadedSound?");
+		ID = NextOrphanId--;
+		if (!IsFading)
+			BeginFade();
+	}
 
-		Volume = sound.Params.Volume;
-		if (sound.Params.RelativePosition)
-			Position = Vec3f.Zero;
-		else
-			Position = sound.Params.Position;
+	public void BeginFade()
+	{
+		FadeOutStartTime = CaptionManager.Api.ElapsedMilliseconds;
+		if (FadeOutStartTime < StartTime + ClosedCaptionsModSystem.UserConfig.FadeOutDuration)
+			FadeOutStartTime = StartTime + ClosedCaptionsModSystem.UserConfig.FadeOutDuration;
 	}
 
 	public static int CompareByDistance(Caption a, Caption b)

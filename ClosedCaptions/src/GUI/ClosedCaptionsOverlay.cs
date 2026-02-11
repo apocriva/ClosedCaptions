@@ -169,7 +169,7 @@ public class ClosedCaptionsOverlay : HudElement
 			textBounds.fixedHeight = fontHeight + ClosedCaptionsModSystem.UserConfig.CaptionPaddingV * 2;
 			SingleComposer.AddCaptionLabel(caption, _font, textBounds, $"label{caption.ID}");
 			var label = SingleComposer.GetCaptionLabel($"label{caption.ID}");
-			label.DebugText = $"{caption.AssetLocation}";
+			label.DebugText = $"[{caption.ID}] {caption.AssetLocation}";
 			_captionLabels.Add(label);
 			
 			lineY += (int)lineHeight + ClosedCaptionsModSystem.UserConfig.CaptionSpacing;
