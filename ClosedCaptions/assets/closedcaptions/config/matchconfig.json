@@ -1935,6 +1935,11 @@
 					"captionKey": "closedcaptions:walk-leafy"
 				},
 				{
+					"match": "sounds/walk/default*",
+					"tags": "walk",
+					"captionKey": "closedcaptions:walk"
+				},
+				{
 					"match": "sounds/walk/cloth*",
 					"tags": "walk",
 					"captionKey": "closedcaptions:walk-cloth"
