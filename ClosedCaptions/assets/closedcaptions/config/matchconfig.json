@@ -737,7 +737,6 @@
 				{
 					"match": "sounds/creature/drifter-hit.ogg",
 					"tags": "combat,enemy",
-					"icon":{ "type": "item", "code": "creature-drifter-normal" },
 					"captionKey": "closedcaptions:creature-drifter-hit"
 				},
 				{
