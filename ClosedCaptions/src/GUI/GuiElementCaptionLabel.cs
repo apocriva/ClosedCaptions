@@ -37,7 +37,8 @@ public class GuiElementCaptionLabel : GuiElement
 		}
 	}
 
-	private float _opacity = 1f;
+	private float _baseOpacity = 1f;
+	private float _textOpacity = 1f;
 	private float? _angle = null;
 
 	public GuiElementCaptionLabel(ICoreClientAPI capi, Caption caption, CairoFont font, ElementBounds bounds) : base(capi, bounds)
@@ -75,9 +76,10 @@ public class GuiElementCaptionLabel : GuiElement
 		}
 	}
 
-	public void Update(float opacity, float? angle)
+	public void Update(float baseOpacity, float textOpacity, float? angle)
 	{
-		_opacity = opacity;
+		_baseOpacity = baseOpacity;
+		_textOpacity = textOpacity;
 		_angle = angle;
 	}
 
@@ -121,9 +123,9 @@ public class GuiElementCaptionLabel : GuiElement
 
 	public override void RenderInteractiveElements(float deltaTime)
 	{
-		var whiteColor = new Vec4f(1f, 1f, 1f, _opacity);
+		var whiteColor = new Vec4f(1f, 1f, 1f, _baseOpacity);
 		var textColor = _textColor.Clone();
-		textColor.A *= _opacity;
+		textColor.A *= _textOpacity * _baseOpacity;
 
 		api.Render.RenderTexture(
 			_baseTexture.TextureId,

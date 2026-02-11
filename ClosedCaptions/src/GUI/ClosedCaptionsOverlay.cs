@@ -40,9 +40,10 @@ public class ClosedCaptionsOverlay : HudElement
 		foreach (var captionLabel in _captionLabels)
 		{
 			float? angle = null;
-			float opacity = 1f;
-			GetIndicators(captionLabel.Caption, ref opacity, ref angle);
-			captionLabel.Update(opacity, angle);
+			float baseOpacity = 1f;
+			float textOpacity = 1f;
+			GetIndicators(captionLabel.Caption, ref baseOpacity, ref textOpacity, ref angle);
+			captionLabel.Update(baseOpacity, textOpacity, angle);
 		}
 
 		base.OnRenderGUI(deltaTime);
@@ -59,7 +60,7 @@ public class ClosedCaptionsOverlay : HudElement
 			.WithStroke([0, 0, 0, 0.5], 1);
 	}
 
-	private void GetIndicators(Caption caption, ref float opacity, ref float? angle)
+	private void GetIndicators(Caption caption, ref float baseOpacity, ref float textOpacity, ref float? angle)
 	{
 		var player = capi.World.Player;
 		var relativePosition = caption.Position - player.Entity.Pos.XYZFloat;
@@ -87,7 +88,7 @@ public class ClosedCaptionsOverlay : HudElement
 			angle = null;
 		}
 		
-		opacity = 1f;
+		baseOpacity = 1f;
 
 		// Modulate opacity by sound distance.
 		if (distance > ClosedCaptionsModSystem.UserConfig.AttenuationRange)
@@ -95,13 +96,7 @@ public class ClosedCaptionsOverlay : HudElement
 			var span = ClosedCaptionsModSystem.UserConfig.AttenuationRange;
 			var percent = (distance - ClosedCaptionsModSystem.UserConfig.AttenuationRange) / span * (1f - ClosedCaptionsModSystem.UserConfig.MinimumAttenuationOpacity);
 			percent = MathF.Max(0f, MathF.Min(percent, 1f - ClosedCaptionsModSystem.UserConfig.MinimumAttenuationOpacity));
-			opacity *= 1f - percent;
-		}
-
-		// Sounds that have been playing a while may be dimmed.
-		if (capi.ElapsedMilliseconds - caption.StartTime > ClosedCaptionsModSystem.UserConfig.DimTime)
-		{
-			opacity *= ClosedCaptionsModSystem.UserConfig.DimPercent;
+			baseOpacity *= 1f - percent;
 		}
 
 		// Modulate opacity if the caption is fading out.
@@ -110,7 +105,15 @@ public class ClosedCaptionsOverlay : HudElement
 		{
 			var percent = 1f - (float)(capi.ElapsedMilliseconds - caption.FadeOutStartTime) / ClosedCaptionsModSystem.UserConfig.FadeOutDuration;
 			percent = MathF.Max(0f, MathF.Min(percent, 1f));
-			opacity *= percent;
+			baseOpacity *= percent;
+		}
+
+		textOpacity = 1f;
+
+		// Sounds that have been playing a while may be dimmed.
+		if (capi.ElapsedMilliseconds - caption.StartTime > ClosedCaptionsModSystem.UserConfig.DimTime)
+		{
+			textOpacity *= ClosedCaptionsModSystem.UserConfig.DimPercent;
 		}
 		
 		// string debugInfo = string.Empty;

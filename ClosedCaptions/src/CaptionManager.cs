@@ -102,20 +102,20 @@ public class CaptionManager
 	[HarmonyPatch(typeof(LoadedSoundNative), "Start")]
 	public static void Sound_Start(LoadedSoundNative __instance)
 	{
-		if (Instance._captions.TryGetValue(__instance.GetSourceID(), out Caption? caption))
+		if (Instance._captions.TryGetValue(__instance.GetSourceID(), out Caption? oldCaption))
 		{
 			// Orphan the old caption. We don't have its underlying
 			// source ID anymore, so we will let it complete gracefully.
-			var oldId = caption.ID;
-			caption.Orphan();
+			var oldId = oldCaption.ID;
+			oldCaption.Orphan();
 			Instance._captions.Remove(oldId);
-			Instance._captions.Add(caption.ID, caption);
+			Instance._captions.Add(oldCaption.ID, oldCaption);
 
 			// if (__instance.Params.Location.ToString().Contains("walk/grass"))
 			// 	Api.Logger.Debug($"[ClosedCaptions] sound.Start() orphaning [{oldId}] -> [{caption.ID}] '{caption.AssetLocation}");
 		}
 
-		Instance._matchConfig.BuildCaptionForSound(__instance, out caption, out var wasIgnored);
+		Instance._matchConfig.BuildCaptionForSound(__instance, out Caption? caption, out var wasIgnored);
 		if (wasIgnored)
 		{
 			//Api.Logger.Debug($"[ClosedCaptions] sound.Start() ignored '{__instance.Params.Location}'");
@@ -123,7 +123,7 @@ public class CaptionManager
 		}
 
 		if (caption == null)
-			throw new Exception($"[ClosedCaptions] sound.Start() failed to generated caption for '{__instance.Params.Location}'");
+			throw new Exception($"[ClosedCaptions] sound.Start() failed to generate caption for '{__instance.Params.Location}'");
 
 		// if (__instance.Params.Location.ToString().Contains("walk/grass"))
 		// 	Api.Logger.Debug($"[ClosedCaptions] sound.Start() new [{__instance.GetSourceID()}] '{__instance.Params.Location}");

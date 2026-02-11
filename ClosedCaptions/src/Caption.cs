@@ -89,6 +89,10 @@ public class Caption
 		CaptionIcon? icon)
 	{
 		ID = loadedSound.GetSourceID();
+		if (ID == 0)
+		{
+			CaptionManager.Api.Logger.Debug($"[ClosedCaptions] Creating caption with no source ID. '{loadedSound.Params.Location}'");
+		}
 		AssetLocation = loadedSound.Params.Location;
 		Text = text;
 		StartTime = startTime;
