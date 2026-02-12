@@ -157,7 +157,10 @@ public class CaptionManager
 	private void AddCaption(Caption caption)
 	{
 		if (_captions.ContainsKey(caption.ID))
-			throw new Exception($"[ClosedCaptions] Attempting to add duplicate caption. [{caption.ID}] '{caption.AssetLocation}'");
+		{
+			Api.Logger.Warning($"[ClosedCaptions] Attempting to add duplicate caption. [{caption.ID}] '{caption.AssetLocation}'");
+			return;
+		}
 
 		// if (caption.Text.Contains("rass"))
 		// 	Api.Logger.Debug($"[ClosedCaptions] Added tracked sound [{caption.ID}] '{caption.AssetLocation}");
@@ -168,7 +171,10 @@ public class CaptionManager
 	private void RemoveCaption(Caption caption)
 	{
 		if (!_captions.ContainsKey(caption.ID))
-			throw new Exception($"[ClosedCaptions] Attempting to remove untracked caption. [{caption.ID}] '{caption.AssetLocation}'");
+		{
+			Api.Logger.Warning($"[ClosedCaptions] Attempting to remove untracked caption. [{caption.ID}] '{caption.AssetLocation}'");
+			return;
+		}
 
 		// if (caption.Text.Contains("rass"))
 		// 	Api.Logger.Debug($"[ClosedCaptions] Removed tracked sound [{caption.ID}] '{caption.AssetLocation}");

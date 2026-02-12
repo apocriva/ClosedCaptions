@@ -79,7 +79,7 @@ public class ClosedCaptionsOverlay : HudElement
 			angle = -angle;
 
 		var distance = relativePosition.Length();
-		if (!ClosedCaptionsModSystem.UserConfig.ShowDirection ||
+		if (ClosedCaptionsModSystem.UserConfig.DirectionIndicators == CaptionDirectionIndicators.None ||
 			(caption.Flags & CaptionFlags.Directionless) != 0 ||
 			caption.IsRelative ||
 			(!caption.IsRelative &&
@@ -115,24 +115,6 @@ public class ClosedCaptionsOverlay : HudElement
 		{
 			textOpacity *= ClosedCaptionsModSystem.UserConfig.DimPercent;
 		}
-		
-		// string debugInfo = string.Empty;
-		// if (ClosedCaptionsModSystem.UserConfig.DebugMode)
-		// {
-		// 	debugInfo =
-		// 		$"<font size=\"10\" color=\"#999933\">{caption.Params.Location.Path[..caption.Params.Location.Path.LastIndexOf('/')]}/</font>" +
-		// 		$"<font size=\"10\" color=\"#ffff33\" weight=\"bold\">{caption.Params.Location.GetName()}</font>" +
-		// 		$"<font size=\"10\" color=\"#33ffff\"> type:{caption.Params.SoundType}</font>" +
-		// 		//$"<font size=\"10\" color=\"#3333ff\"> vol:{(int)(caption.Params.Volume * 100):D}%</font>" +
-		// 		(!caption.Params.RelativePosition ?
-		// 			$"<font size=\"10\" color=\"#33ff33\"> rel!</font>" +
-		// 			$"<font size=\"10\" color=\"#ffffff\"> distance:{relativePosition.Length():F0}</font>" +
-		// 			$"<font size=\"10\" color=\"#ffffff\"> range:{caption.Params.Range}</font>"
-		// 			// $"<font size=\"10\" color=\"#33ff33\"> forward:({forward.X:F1}, {forward.Z:F1})</font>" +
-		// 			// $"<font size=\"10\" color=\"#3399ff\"> rel:({relativePosition.X:F1}, {relativePosition.Z:F1})</font>" +
-		// 			// $"<font size=\"10\" color=\"#33ff33\"> angle:{angle}°</font>"
-		// 			: "");
-		// }
 	}
 
 	private void BuildDialog()
@@ -154,8 +136,8 @@ public class ClosedCaptionsOverlay : HudElement
 
 		ElementBounds dialogBounds =
 			ElementStdBounds.AutosizedMainDialog
-			.WithAlignment(EnumDialogArea.CenterBottom)
-			.WithFixedAlignmentOffset(0.0, -ClosedCaptionsModSystem.UserConfig.DisplayOffset);
+			.WithAlignment(ClosedCaptionsModSystem.UserConfig.ScreenAnchor.ToEnumDialogArea())
+			.WithFixedAlignmentOffset(ClosedCaptionsModSystem.UserConfig.DisplayOffset.X, ClosedCaptionsModSystem.UserConfig.DisplayOffset.Y);
 
 		SingleComposer = capi.Gui.CreateCompo("closedCaptions", dialogBounds);
 
@@ -165,7 +147,7 @@ public class ClosedCaptionsOverlay : HudElement
 		foreach (var caption in captions)
 		{
 			ElementBounds textBounds = ElementBounds.Fixed(0, lineY)
-				.WithAlignment(EnumDialogArea.CenterTop)
+				.WithAlignment(ClosedCaptionsModSystem.UserConfig.CaptionAnchor.ToEnumDialogArea())
 				.WithFixedSize(600, fontHeight);
 			_font.AutoBoxSize(caption.Text, textBounds);
 			textBounds.fixedWidth += fontHeight * 2 + ClosedCaptionsModSystem.UserConfig.CaptionPaddingH * 2;

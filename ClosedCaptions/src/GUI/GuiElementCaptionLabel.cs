@@ -97,13 +97,13 @@ public class GuiElementCaptionLabel : GuiElement
 		surface.Dispose();
 		context.Dispose();
 
-		// Arrow indicator
 		surface = new ImageSurface(Format.Argb32, ArrowTextureSize, ArrowTextureSize);
 		context = new Context(surface);
 		context.SetSourceRGBA(1, 1, 1, _font.Color[3]);
 		context.MoveTo(ArrowSize / 2, 0);
-		context.LineTo(ArrowSize * 0.8, ArrowSize * 0.7); 
-		context.LineTo(ArrowSize * 0.2, ArrowSize * 0.7);
+		context.LineTo(ArrowSize * 0.8, ArrowSize * 0.8);
+		context.LineTo(ArrowSize * 0.5, ArrowSize * 0.6);
+		context.LineTo(ArrowSize * 0.2, ArrowSize * 0.8);
 		context.LineTo(ArrowSize / 2, 0);
 		context.Fill();
 		generateTexture(surface, ref _arrowTexture);
@@ -140,44 +140,53 @@ public class GuiElementCaptionLabel : GuiElement
 			_textTexture.Width, _textTexture.Height, 55,
 			textColor);
 
-		if (_angle != null)
+		if (_angle != null && ClosedCaptionsModSystem.UserConfig.DirectionIndicators != Config.CaptionDirectionIndicators.None)
 		{
 			var arrowRenderSize = _font.GetFontExtents().Height * ArrowRenderScale;
-			api.Render.GlPushMatrix();
-			api.Render.GlTranslate(
-				Bounds.renderX + Bounds.OuterHeight / 2,
-				Bounds.renderY + Bounds.OuterHeight / 2,
-				0);
-			api.Render.GlRotate(_angle.Value, 0, 0, 1);
-			api.Render.GlTranslate(-arrowRenderSize / 2, -arrowRenderSize / 2, 0);
-			api.Render.RenderTexture(
-				_arrowTexture.TextureId,
-				0, 0,
-				arrowRenderSize, arrowRenderSize, 55,
-				whiteColor);
-			api.Render.GlPopMatrix();
-			
-			api.Render.GlPushMatrix();
-			api.Render.GlTranslate(
-				Bounds.renderX + Bounds.OuterWidth - Bounds.OuterHeight / 2,
-				Bounds.renderY + Bounds.OuterHeight / 2,
-				0);
-			api.Render.GlRotate(_angle.Value, 0, 0, 1);
-			api.Render.GlTranslate(-arrowRenderSize / 2, -arrowRenderSize / 2, 0);
-			api.Render.RenderTexture(
-				_arrowTexture.TextureId,
-				0, 0,
-				arrowRenderSize, arrowRenderSize, 55,
-				whiteColor);
-			api.Render.GlPopMatrix();
+			if ((ClosedCaptionsModSystem.UserConfig.DirectionIndicators & Config.CaptionDirectionIndicators.Left) != 0)
+			{
+				api.Render.GlPushMatrix();
+				api.Render.GlTranslate(
+					Bounds.renderX + Bounds.OuterHeight / 2,
+					Bounds.renderY + Bounds.OuterHeight / 2,
+					0);
+				api.Render.GlRotate(_angle.Value, 0, 0, 1);
+				api.Render.GlTranslate(-arrowRenderSize / 2, -arrowRenderSize / 2, 0);
+				api.Render.RenderTexture(
+					_arrowTexture.TextureId,
+					0, 0,
+					arrowRenderSize, arrowRenderSize, 55,
+					whiteColor);
+				api.Render.GlPopMatrix();
+			}
+
+			if ((ClosedCaptionsModSystem.UserConfig.DirectionIndicators & Config.CaptionDirectionIndicators.Right) != 0)
+			{
+				api.Render.GlPushMatrix();
+				api.Render.GlTranslate(
+					Bounds.renderX + Bounds.OuterWidth - Bounds.OuterHeight / 2,
+					Bounds.renderY + Bounds.OuterHeight / 2,
+					0);
+				api.Render.GlRotate(_angle.Value, 0, 0, 1);
+				api.Render.GlTranslate(-arrowRenderSize / 2, -arrowRenderSize / 2, 0);
+				api.Render.RenderTexture(
+					_arrowTexture.TextureId,
+					0, 0,
+					arrowRenderSize, arrowRenderSize, 55,
+					whiteColor);
+				api.Render.GlPopMatrix();
+			}
 		}
 
-		if (ClosedCaptionsModSystem.UserConfig.ShowIcons && _dummySlot != null)
+		if (ClosedCaptionsModSystem.UserConfig.Icon != Config.CaptionIconIndicator.None && _dummySlot != null)
 		{
 			float iconRenderSize = (float)_font.GetFontExtents().Height;
+			var iconX = ClosedCaptionsModSystem.UserConfig.Icon == Config.CaptionIconIndicator.Left
+				? Bounds.renderX - iconRenderSize
+				: Bounds.renderX + Bounds.OuterWidth + iconRenderSize;
 			api.Render.RenderItemstackToGui(
 				_dummySlot,
-				Bounds.renderX - iconRenderSize, Bounds.renderY + iconRenderSize / 2, 70,
+				iconX, Bounds.renderY + iconRenderSize / 2, 70,
 				iconRenderSize, ColorUtil.ColorFromRgba(whiteColor), true, false, false);
 		}
 

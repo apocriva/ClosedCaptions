@@ -27,11 +27,17 @@ public class ClosedCaptionsModSystem : ModSystem
 
 	private CancellationTokenSource _cancelSource = new();
 
+	private string[] _captionAnchorStrings = [];
+	private string[] _directionIndicatorsStrings = [];
+	private string[] _iconStrings = [];
+
 	public override void StartPre(ICoreAPI api)
 	{
 		base.StartPre(api);
 
 		UserConfig = api.LoadModConfig<UserConfig>(UserConfig.Filename) ?? new UserConfig();
+
+		InitConfigLuts();
 	}
 
 	public override void StartClientSide(ICoreClientAPI api)
@@ -87,6 +93,32 @@ public class ClosedCaptionsModSystem : ModSystem
 		{
 			BuildSettings(UserConfig);
 		}
+	}
+
+	private void InitConfigLuts()
+	{
+		_captionAnchorStrings = [
+			Lang.Get("closedcaptions:config-anchor-lefttop"),
+			Lang.Get("closedcaptions:config-anchor-centertop"),
+			Lang.Get("closedcaptions:config-anchor-righttop"),
+			Lang.Get("closedcaptions:config-anchor-left"),
+			Lang.Get("closedcaptions:config-anchor-center"),
+			Lang.Get("closedcaptions:config-anchor-right"),
+			Lang.Get("closedcaptions:config-anchor-leftbottom"),
+			Lang.Get("closedcaptions:config-anchor-centerbottom"),
+			Lang.Get("closedcaptions:config-anchor-rightbottom")
+		];
+		_directionIndicatorsStrings = [
+			Lang.Get("closedcaptions:config-direction-indicators-none"),
+			Lang.Get("closedcaptions:config-direction-indicators-left"),
+			Lang.Get("closedcaptions:config-direction-indicators-right"),
+			Lang.Get("closedcaptions:config-direction-indicators-both"),
+		];
+		_iconStrings = [
+			Lang.Get("closedcaptions:config-direction-indicators-none"),
+			Lang.Get("closedcaptions:config-direction-indicators-left"),
+			Lang.Get("closedcaptions:config-direction-indicators-right"),
+		];
 	}
 
 	private void BuildSettings(UserConfig config)
@@ -171,14 +203,16 @@ public class ClosedCaptionsModSystem : ModSystem
 		if (ImGui.CollapsingHeader(Lang.Get("closedcaptions:config-display-header")))
 		{
 			ImGui.Indent();
-			config.DisplayOffset = OnInputInt("display-offset", config.DisplayOffset, ref modified, 0);
+			config.ScreenAnchor = (CaptionAnchor)OnDropdown("screen-anchor", (int)config.ScreenAnchor, _captionAnchorStrings, ref modified);
+			config.CaptionAnchor = (CaptionAnchor)OnDropdown("caption-align", (int)config.CaptionAnchor, _captionAnchorStrings, ref modified);
+			config.DisplayOffset = OnVec2i("display-offset", config.DisplayOffset, ref modified);
 			config.FontSize = OnInputInt("font-size", config.FontSize, ref modified, 6, 100);
 			config.CaptionBackgroundOpacity = OnInputInt("caption-opacity", (int)(config.CaptionBackgroundOpacity * 100f), ref modified, 0, 100) / 100f;
 			config.CaptionPaddingH = OnInputInt("caption-padding-h", config.CaptionPaddingH, ref modified, 0);
 			config.CaptionPaddingV = OnInputInt("caption-padding-v", config.CaptionPaddingV, ref modified, 0);
 			config.CaptionSpacing = OnInputInt("caption-spacing", config.CaptionSpacing, ref modified, 0);
-			config.ShowDirection = OnCheckBox("show-direction", config.ShowDirection, ref modified);
-			config.ShowIcons = OnCheckBox("show-icons", config.ShowIcons, ref modified);
+			config.DirectionIndicators = (CaptionDirectionIndicators)OnDropdown("direction-indicators", (int)config.DirectionIndicators, _directionIndicatorsStrings, ref modified);
+			config.Icon = (CaptionIconIndicator)OnDropdown("show-icons", (int)config.Icon, _iconStrings, ref modified);
 			config.Color = OnColor("color", config.Color, ref modified);
 			config.DangerColor = OnColor("danger-color", config.DangerColor, ref modified);
 			config.DangerBold = OnCheckBox("danger-bold", config.DangerBold, ref modified);
@@ -193,10 +227,8 @@ public class ClosedCaptionsModSystem : ModSystem
 			_manager?.ForceRefresh();
 	}
 
-	private bool OnCheckBox(string option, bool value, ref bool modified)
+	private void Tooltip(string option)
 	{
-		bool newValue = value;
-		ImGui.Checkbox(Lang.Get("closedcaptions:config-" + option), ref newValue);
 		if (ImGui.IsItemHovered(ImGuiHoveredFlags.ForTooltip))
 		{
 			ImGui.BeginTooltip();
@@ -204,6 +236,13 @@ public class ClosedCaptionsModSystem : ModSystem
 			ImGui.TextUnformatted(Lang.Get($"closedcaptions:config-{option}-tooltip"));
 			ImGui.EndTooltip();
 		}
+	}
+
+	private bool OnCheckBox(string option, bool value, ref bool modified)
+	{
+		bool newValue = value;
+		ImGui.Checkbox(Lang.Get("closedcaptions:config-" + option), ref newValue);
+		Tooltip(option);
 		modified |= newValue != value;
 		return newValue;
 	}
@@ -212,13 +251,7 @@ public class ClosedCaptionsModSystem : ModSystem
 	{
 		float newValue = value;
 		ImGui.InputFloat(Lang.Get("closedcaptions:config-" + option), ref newValue);
-		if (ImGui.IsItemHovered(ImGuiHoveredFlags.ForTooltip))
-		{
-			ImGui.BeginTooltip();
-			ImGui.PushTextWrapPos(ImGui.GetFontSize() * 35f);
-			ImGui.TextUnformatted(Lang.Get($"closedcaptions:config-{option}-tooltip"));
-			ImGui.EndTooltip();
-		}
+		Tooltip(option);
 		newValue = Math.Max(min, Math.Min(newValue, max));
 		modified |= newValue != value;
 		return newValue;
@@ -228,14 +261,17 @@ public class ClosedCaptionsModSystem : ModSystem
 	{
 		int newValue = value;
 		ImGui.InputInt(Lang.Get("closedcaptions:config-" + option), ref newValue);
-		if (ImGui.IsItemHovered(ImGuiHoveredFlags.ForTooltip))
-		{
-			ImGui.BeginTooltip();
-			ImGui.PushTextWrapPos(ImGui.GetFontSize() * 35f);
-			ImGui.TextUnformatted(Lang.Get($"closedcaptions:config-{option}-tooltip"));
-			ImGui.EndTooltip();
-		}
+		Tooltip(option);
 		newValue = Math.Max(min, Math.Min(newValue, max));
+		modified |= newValue != value;
+		return newValue;
+	}
+
+	private Vec2i OnVec2i(string option, Vec2i value, ref bool modified)
+	{
+		Vec2i newValue = value.Copy();
+		ImGui.InputInt2(Lang.Get("closedcaptions:config-" + option), ref newValue.X);
+		Tooltip(option);
 		modified |= newValue != value;
 		return newValue;
 	}
@@ -244,15 +280,18 @@ public class ClosedCaptionsModSystem : ModSystem
 	{
 		Vector4 newValue = new(value.X, value.Y, value.Z, value.W);
 		ImGui.ColorEdit4(Lang.Get("closedcaptions:config-" + option), ref newValue);
-		if (ImGui.IsItemHovered(ImGuiHoveredFlags.ForTooltip))
-		{
-			ImGui.BeginTooltip();
-			ImGui.PushTextWrapPos(ImGui.GetFontSize() * 35f);
-			ImGui.TextUnformatted(Lang.Get($"closedcaptions:config-{option}-tooltip"));
-			ImGui.EndTooltip();
-		}
+		Tooltip(option);
 		Vec4f ret = new(newValue.X, newValue.Y, newValue.Z, newValue.W);
 		modified |= ret != value;
 		return ret;
+	}
+
+	private int OnDropdown(string option, int value, string[] items, ref bool modified)
+	{
+		int newValue = value;
+		ImGui.Combo(Lang.Get("closedcaptions:config-" + option), ref newValue, items, items.Length);
+		Tooltip(option);
+		modified |= newValue != value;
+		return newValue;
 	}
 }

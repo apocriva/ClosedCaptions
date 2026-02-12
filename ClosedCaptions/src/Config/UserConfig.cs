@@ -1,6 +1,37 @@
+using System;
+using Vintagestory.API.Client;
 using Vintagestory.API.MathTools;
 
 namespace ClosedCaptions.Config;
+
+public enum CaptionAnchor
+{
+	LeftTop,
+	CenterTop,
+	RightTop,
+	Left,
+	Center,
+	Right,
+	LeftBottom,
+	CenterBottom,
+	RightBottom
+}
+
+[Flags]
+public enum CaptionDirectionIndicators
+{
+	None = 0,
+	Left = 1,
+	Right = 2,
+	Both = Left | Right,
+}
+
+public enum CaptionIconIndicator
+{
+	None,
+	Left,
+	Right,
+}
 
 public class UserConfig
 {
@@ -32,14 +63,17 @@ public class UserConfig
 	public int GroupingRange { get; set; } = 5;
 	public int GroupingMaxTime { get; set; } = 1500;
 
-	public int DisplayOffset { get; set; } = 300;
+	public CaptionAnchor ScreenAnchor { get; set; } = CaptionAnchor.RightBottom;
+	public CaptionAnchor CaptionAnchor { get; set; } = CaptionAnchor.RightTop;
+
+	public Vec2i DisplayOffset { get; set; } = new(-400, -300);
 	public int FontSize { get; set; } = 20;
 	public float CaptionBackgroundOpacity { get; set; } = 0.5f;
 	public int CaptionPaddingH { get; set; } = 0;
 	public int CaptionPaddingV { get; set; } = 0;
 	public int CaptionSpacing { get; set; } = 1;
-	public bool ShowDirection { get; set; } = true;
-	public bool ShowIcons { get; set; } = true;
+	public CaptionDirectionIndicators DirectionIndicators { get; set; } = CaptionDirectionIndicators.Right;
+	public CaptionIconIndicator Icon { get; set; } = CaptionIconIndicator.Right;
 	public Vec4f Color { get; set; } = new(1f, 1f, 1f, 1f);
 	public Vec4f DangerColor { get; set; } = new(1f, 0.75f, 0.25f, 1f);
 	public bool DangerBold { get; set; } = true;
@@ -47,4 +81,24 @@ public class UserConfig
 	public bool PassiveItalic { get; set; } = true;
 
 	public bool DebugMode { get; set; } = false;
+}
+
+public static class ConfigHelpers
+{
+	public static EnumDialogArea ToEnumDialogArea(this CaptionAnchor anchor)
+	{
+		return anchor switch
+		{
+			CaptionAnchor.LeftTop => EnumDialogArea.LeftTop,
+			CaptionAnchor.CenterTop => EnumDialogArea.CenterMiddle,
+			CaptionAnchor.RightTop => EnumDialogArea.RightTop,
+			CaptionAnchor.Left => EnumDialogArea.LeftMiddle,
+			CaptionAnchor.Center => EnumDialogArea.CenterMiddle,
+			CaptionAnchor.Right => EnumDialogArea.RightMiddle,
+			CaptionAnchor.LeftBottom => EnumDialogArea.LeftBottom,
+			CaptionAnchor.CenterBottom => EnumDialogArea.CenterBottom,
+			CaptionAnchor.RightBottom => EnumDialogArea.RightBottom,
+			_ => EnumDialogArea.CenterMiddle,
+		};
+	}
 }
