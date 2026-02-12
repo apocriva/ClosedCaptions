@@ -106,8 +106,8 @@ public class MatchConfig
 						if (text == mapping.CaptionKey)
 							Api?.Logger.Warning($"[ClosedCaptions] Text not found for sound '{sound.Params.Location}' ({mapping.CaptionKey})");
 
-						var position = Vec3f.Zero;
-						if (!sound.Params.RelativePosition)
+						Vec3f position = Vec3f.Zero;
+						if (!sound.Params.RelativePosition && sound.Params.Position != null)
 							position = sound.Params.Position;
 
 						caption = new Caption(

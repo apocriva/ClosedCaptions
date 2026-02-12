@@ -339,7 +339,7 @@ public class CaptionManager
 					caption.Volume = value;
 
 					AL.GetSource(caption.ID, ALSource3f.Position, out var position);
-					caption.Position.Set(position.X, position.Y, position.Z);
+					caption.Position = new Vec3f(position.X, position.Y, position.Z);
 
 					AddOrUpdateDisplayedCaption(caption);
 					continue;
