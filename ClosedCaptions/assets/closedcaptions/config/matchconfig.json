@@ -2050,7 +2050,7 @@
 				},
 				{
 					"match": "sounds/weather/tracks/lowtremble.ogg",
-					"tags": "ambience,weather",
+					"tags": "ambience",
 					"flags":"directionless",
 					"group": { "name": "weather", "priority" : 1 },
 					"captionKey": "closedcaptions:weather-lowtremble"
@@ -2071,7 +2071,7 @@
 				},
 				{
 					"match": "sounds/weather/tracks/verylowtremble.ogg",
-					"tags": "ambience,weather",
+					"tags": "ambience",
 					"flags":"directionless",
 					"group": { "name": "weather", "priority" : 0 },
 					"captionKey": "closedcaptions:weather-verylowtremble"
@@ -2104,21 +2104,21 @@
 				},
 				{
 					"match": "sounds/weather/lowgrumble.ogg",
-					"tags": "ambience,weather",
+					"tags": "ambience",
 					"flags":"directionless",
 					"group": { "name": "weather", "priority" : 2 },
 					"captionKey": "closedcaptions:weather-lowgrumble"
 				},
 				{
 					"match": "sounds/weather/wind-leafless.ogg",
-					"tags": "weather",
+					"tags": "ambience",
 					"flags":"directionless",
 					"group": { "name": "weather", "priority" : 5 },
 					"captionKey": "closedcaptions:weather-wind-leafless"
 				},
 				{
 					"match": "sounds/weather/wind-leafy.ogg",
-					"tags": "weather",
+					"tags": "ambience",
 					"flags":"directionless",
 					"group": { "name": "weather", "priority" : 6 },
 					"captionKey": "closedcaptions:weather-wind-leafy"
