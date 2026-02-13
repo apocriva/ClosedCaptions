@@ -309,7 +309,8 @@ public class CaptionManager
 		if (shouldAdd)
 		{
 			_displayedCaptions.Add(caption);
-			_needsRefresh = true;
+			if (removed == 0)
+				_needsRefresh = true;
 		}
 		else if (removed > 0)
 		{

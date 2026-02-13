@@ -79,6 +79,7 @@ public class UserConfig
 	public bool DangerBold { get; set; } = true;
 	public Vec4f PassiveColor { get; set; } = new(1f, 1f, 1f, 0.7f);
 	public bool PassiveItalic { get; set; } = true;
+	public bool ShowGlitch { get; set; } = true;
 
 	public bool DebugMode { get; set; } = false;
 }

@@ -218,6 +218,7 @@ public class ClosedCaptionsModSystem : ModSystem
 			config.DangerBold = OnCheckBox("danger-bold", config.DangerBold, ref modified);
 			config.PassiveColor = OnColor("passive-color", config.PassiveColor, ref modified);
 			config.PassiveItalic = OnCheckBox("passive-italic", config.PassiveItalic, ref modified);
+			config.ShowGlitch = OnCheckBox("show-glitch", config.ShowGlitch, ref modified);
 			ImGui.Unindent();
 		}
 

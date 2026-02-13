@@ -4,6 +4,7 @@ using HarmonyLib;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.MathTools;
+using Vintagestory.API.Util;
 
 namespace ClosedCaptions.GUI;
 
@@ -14,6 +15,8 @@ public class GuiElementCaptionLabel : GuiElement
 	private static readonly double ArrowRenderScale = 0.7;
 
 	public Caption Caption { get => _caption; }
+	private float _lastGlitchStrength = 0f;
+	private string _captionText;
 	private readonly Caption _caption;
 	private readonly CairoFont _font;
 	private LoadedTexture _baseTexture;
@@ -44,6 +47,8 @@ public class GuiElementCaptionLabel : GuiElement
 	public GuiElementCaptionLabel(ICoreClientAPI capi, Caption caption, CairoFont font, ElementBounds bounds) : base(capi, bounds)
 	{
 		_caption = caption;
+		_captionText = caption.Text;
+		_lastGlitchStrength = 0f;
 		_font = font;
 		_baseTexture = new(capi);
 		_textTexture = new(capi);
@@ -109,10 +114,10 @@ public class GuiElementCaptionLabel : GuiElement
 		generateTexture(surface, ref _arrowTexture);
 		surface.Dispose();
 		context.Dispose();
-
+		
 		// Text
 		api.Gui.TextTexture.GenOrUpdateTextTexture(
-			_caption.Text, _font,
+			_captionText, _font,
 			ref _textTexture);
 
 		// Debug text
@@ -133,6 +138,8 @@ public class GuiElementCaptionLabel : GuiElement
 			Bounds.OuterWidth, Bounds.OuterHeight, 50,
 			whiteColor);
 
+		if (ClosedCaptionsModSystem.UserConfig.ShowGlitch)
+			UpdateGlitchText();
 		api.Render.RenderTexture(
 			_textTexture.TextureId,
 			Bounds.renderX + (Bounds.OuterWidth - _textTexture.Width) / 2,
@@ -210,6 +217,81 @@ public class GuiElementCaptionLabel : GuiElement
 		_debugTexture?.Dispose();
 		_textTexture?.Dispose();
 		_baseTexture?.Dispose();
+	}
+
+	private void UpdateGlitchText()
+	{
+		bool changed = false;
+		var strength = GetGlitchStrength();
+
+		if (strength > 0f)
+		{
+			if (_lastGlitchStrength == 0f ||
+				Math.Abs(strength - _lastGlitchStrength) > 0.1f)
+			{
+				_captionText = destabilizeText(_caption.Text, strength);
+				_lastGlitchStrength = strength;
+				changed = true;
+			}
+		}
+		else if (strength == 0f && _lastGlitchStrength > 0f)
+		{
+			_captionText = _caption.Text;
+			_lastGlitchStrength = 0f;
+			changed = true;
+		}
+
+		if (changed)
+		{
+			api.Gui.TextTexture.GenOrUpdateTextTexture(
+				_captionText, _font,
+				ref _textTexture);
+		}
+	}
+
+	private float GetGlitchStrength()
+	{
+		float strength = (api.Render.ShaderUniforms.GlitchStrength - 0.5f) * 2f;
+		return Math.Max(0f, Math.Min(strength, 1f));
+	}
+
+	// From BehaviorTemporalStabilityAffected in vssurvivalmod
+	private string destabilizeText(string text, float str)
+	{
+		//those always stay in the middle
+		char[] zalgo_mid = new char[] {
+				'\u0315', /*     ̕     */		'\u031b', /*     ̛     */		'\u0340', /*     ̀     */		'\u0341', /*     ́     */
+				'\u0358', /*     ͘     */		'\u0321', /*     ̡     */		'\u0322', /*     ̢     */		'\u0327', /*     ̧     */
+				'\u0328', /*     ̨     */		'\u0334', /*     ̴     */		'\u0335', /*     ̵     */		'\u0336', /*     ̶     */
+				'\u034f', /*     ͏     */		'\u035c', /*     ͜     */		'\u035d', /*     ͝     */		'\u035e', /*     ͞     */
+				'\u035f', /*     ͟     */		'\u0360', /*     ͠     */		'\u0362', /*     ͢     */		'\u0338', /*     ̸     */
+				'\u0337', /*     ̷     */		'\u0361', /*     ͡     */		'\u0489' /*     ҉_     */
+			};
+
+		string text3 = "";
+		for (int i = 0; i < text.Length; i++)
+		{
+			text3 += text[i];
+
+			if (i < text.Length - 1 && zalgo_mid.Contains(text[i + 1]))
+			{
+				text3 += text[i + 1];
+				i++;
+				continue;
+			}
+
+			if (zalgo_mid.Contains(text[i]))
+			{
+				continue;
+			}
+
+			if (api.World.Rand.NextDouble() < str)
+			{
+				text3 += zalgo_mid[api.World.Rand.Next(zalgo_mid.Length)];
+			}
+		}
+
+		return text3;
 	}
 }
 
