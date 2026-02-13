@@ -18,7 +18,7 @@
             "preLaunchTask": "build",
             "args": [
                 // "--playStyle" , "preset-surviveandbuild",
-                "--openWorld" , "modding test world",
+                // "--openWorld" , "modding test world",
                 //"--tracelog",
 				"--dataPath",
 				"${env:VINTAGE_STORY_DATA}",
