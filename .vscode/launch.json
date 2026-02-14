@@ -8,12 +8,12 @@
             "name": "Launch Client (Debug)",
             "type": "coreclr",
             "request": "launch",
-            "program": "${env:VINTAGE_STORY}/Vintagestory.exe",
+            "program": "${env:VINTAGE_STORY_STABLE}/Vintagestory.exe",
             "linux": {
-                "program": "${env:VINTAGE_STORY}/Vintagestory.dll"
+                "program": "${env:VINTAGE_STORY_STABLE}/Vintagestory.dll"
             },
             "osx": {
-                "program": "${env:VINTAGE_STORY}/Vintagestory"
+                "program": "${env:VINTAGE_STORY_STABLE}/Vintagestory"
             },
             "preLaunchTask": "build",
             "args": [
@@ -21,7 +21,7 @@
                 // "--openWorld" , "modding test world",
                 //"--tracelog",
 				"--dataPath",
-				"${env:VINTAGE_STORY_DATA}",
+				"${env:VINTAGE_STORY_DATA_STABLE}",
                 "--addModPath",
                 "${workspaceFolder}/ClosedCaptions/bin/Debug/Mods",
                 "--addOrigin",
@@ -34,12 +34,12 @@
             "name": "Launch Server",
             "type": "coreclr",
             "request": "launch",
-            "program": "${env:VINTAGE_STORY}/VintagestoryServer.exe",
+            "program": "${env:VINTAGE_STORY_STABLE}/VintagestoryServer.exe",
             "linux": {
-                "program": "${env:VINTAGE_STORY}/VintagestoryServer"
+                "program": "${env:VINTAGE_STORY_STABLE}/VintagestoryServer"
             },
             "osx": {
-                "program": "${env:VINTAGE_STORY}/VintagestoryServer"
+                "program": "${env:VINTAGE_STORY_STABLE}/VintagestoryServer"
             },
             "preLaunchTask": "build",
             "args": [
@@ -57,7 +57,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build (Cake)",
-            "program": "${workspaceFolder}/CakeBuild/bin/Debug/net10.0/CakeBuild.dll",
+            "program": "${workspaceFolder}/CakeBuild/bin/Debug/net8.0/CakeBuild.dll",
             "args": [],
             "cwd": "${workspaceFolder}/CakeBuild",
             "stopAtEntry": false,
