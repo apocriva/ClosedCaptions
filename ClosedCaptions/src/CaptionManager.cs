@@ -102,32 +102,33 @@ public class CaptionManager
 	[HarmonyPatch(typeof(LoadedSoundNative), "Start")]
 	public static void Sound_Start(LoadedSoundNative __instance)
 	{
-		if (Instance._captions.TryGetValue(__instance.GetSourceID(), out Caption? oldCaption))
+		Api.Event.EnqueueMainThreadTask(() =>
 		{
-			// Orphan the old caption. We don't have its underlying
-			// source ID anymore, so we will let it complete gracefully.
-			var oldId = oldCaption.ID;
-			oldCaption.Orphan();
-			Instance._captions.Remove(oldId);
-			Instance._captions.Add(oldCaption.ID, oldCaption);
+			if (Instance._captions.TryGetValue(__instance.GetSourceID(), out Caption? oldCaption))
+			{
+				// Orphan the old caption. We don't have its underlying
+				// source ID anymore, so we will let it complete gracefully.
+				var oldId = oldCaption.ID;
+				oldCaption.Orphan();
+				Instance._captions.Remove(oldId);
+				Instance._captions.Add(oldCaption.ID, oldCaption);
+			}
 
-			// if (__instance.Params.Location.ToString().Contains("walk/grass"))
-			// 	Api.Logger.Debug($"[ClosedCaptions] sound.Start() orphaning [{oldId}] -> [{caption.ID}] '{caption.AssetLocation}");
-		}
+			Instance._matchConfig.BuildCaptionForSound(__instance, out Caption? caption, out var wasIgnored);
+			if (wasIgnored)
+			{
+				//Api.Logger.Debug($"[ClosedCaptions] sound.Start() ignored '{__instance.Params.Location}'");
+				return;
+			}
 
-		Instance._matchConfig.BuildCaptionForSound(__instance, out Caption? caption, out var wasIgnored);
-		if (wasIgnored)
-		{
-			//Api.Logger.Debug($"[ClosedCaptions] sound.Start() ignored '{__instance.Params.Location}'");
-			return;
-		}
+			if (caption == null)
+			{
+				Api.Logger.Error($"[ClosedCaptions] sound.Start() failed to generate caption for '{__instance.Params.Location}'");
+				return;
+			}
 
-		if (caption == null)
-			throw new Exception($"[ClosedCaptions] sound.Start() failed to generate caption for '{__instance.Params.Location}'");
-
-		// if (__instance.Params.Location.ToString().Contains("walk/grass"))
-		// 	Api.Logger.Debug($"[ClosedCaptions] sound.Start() new [{__instance.GetSourceID()}] '{__instance.Params.Location}");
-		Instance.AddCaption(caption);
+			Instance.AddCaption(caption);
+		}, "cc_soundstart");
 	}
 
 	[HarmonyPostfix()]
@@ -135,35 +136,45 @@ public class CaptionManager
 	[HarmonyPatch(typeof(LoadedSoundNative), "SetVolume", typeof(float))]
 	public static void Sound_SetVolume(LoadedSoundNative __instance)
 	{
-		if (!Instance._captions.ContainsKey(__instance.GetSourceID()))
-			Sound_Start(__instance);
+		Api.Event.EnqueueMainThreadTask(() =>
+		{
+			if (!Instance._captions.ContainsKey(__instance.GetSourceID()))
+				Sound_Start(__instance);
+		}, "cc_soundsetvolume");
 	}
 
 	[HarmonyPostfix()]
 	[HarmonyPatch(typeof(LoadedSoundNative), "Stop")]
 	public static void Sound_Stop(LoadedSoundNative __instance)
 	{
-		if (!Instance._captions.TryGetValue(__instance.GetSourceID(), out Caption? caption))
+		Api.Event.EnqueueMainThreadTask(() =>
 		{
-			//Api.Logger.Debug($"[ClosedCaptions] sound.Stop() for untracked sound. [{__instance.GetSourceID()}] '{__instance.Params.Location}'");
-			return;
-		}
+			if (!Instance._captions.TryGetValue(__instance.GetSourceID(), out Caption? caption))
+			{
+				//Api.Logger.Debug($"[ClosedCaptions] sound.Stop() for untracked sound. [{__instance.GetSourceID()}] '{__instance.Params.Location}'");
+				return;
+			}
 
-		if (!caption.IsFading)
-			caption.BeginFade();
+			if (!caption.IsFading)
+				caption.BeginFade();
+		}, "cc_soundstop");
 	}
 #endregion
 
 	private void AddCaption(Caption caption)
 	{
+		if (caption == null)
+		{
+			Api.Logger.Error($"[ClosedCaptions] Attemping to add null caption.");
+			return;
+		}
+
 		if (_captions.ContainsKey(caption.ID))
 		{
 			Api.Logger.Warning($"[ClosedCaptions] Attempting to add duplicate caption. [{caption.ID}] '{caption.AssetLocation}'");
 			return;
 		}
 
-		// if (caption.Text.Contains("rass"))
-		// 	Api.Logger.Debug($"[ClosedCaptions] Added tracked sound [{caption.ID}] '{caption.AssetLocation}");
 		_captions.Add(caption.ID, caption);
 		AddOrUpdateDisplayedCaption(caption);
 	}
@@ -176,8 +187,6 @@ public class CaptionManager
 			return;
 		}
 
-		// if (caption.Text.Contains("rass"))
-		// 	Api.Logger.Debug($"[ClosedCaptions] Removed tracked sound [{caption.ID}] '{caption.AssetLocation}");
 		_captions.Remove(caption.ID);
 		_displayedCaptions.RemoveAll(match => match.ID == caption.ID);
 
@@ -189,21 +198,40 @@ public class CaptionManager
 	{
 		_displayedCaptions.Clear();
 
-		foreach (var kv in _captions)
+		if (_captions.Values.Contains(c => c == null))
 		{
-			if (kv.Value == null)
+			Api.Logger.Error($"[ClosedCaptions] Captions list has a null caption. Correcting, but something is wrong.");
+
+			List<int> toRemove = [];
+			foreach (var kv in _captions)
 			{
-				Api.Logger.Warning($"[ClosedCaptions] Captions list has a null caption for ID [{kv.Key}]");
-				_captions.Remove(kv.Key);
-				continue;
+				if (kv.Value == null)
+				{
+					toRemove.Add(kv.Key);
+				}
+
 			}
 
+			foreach (var id in toRemove)
+			{
+				_captions.Remove(id);
+			}
+		}
+
+		foreach (var kv in _captions)
+		{
 			AddOrUpdateDisplayedCaption(kv.Value);
 		}
 	}
 
 	private void AddOrUpdateDisplayedCaption(Caption caption)
 	{
+		if (caption == null)
+		{
+			Api.Logger.Error($"[ClosedCaptions] AddOrUpdateDisplayedCaption on null caption.");
+			return;
+		}
+
 		int removed = _displayedCaptions.RemoveAll(c => c == caption);
 
 		// We don't show filtered captions.
@@ -211,8 +239,6 @@ public class CaptionManager
 		{
 			if (removed > 0)
 			{
-				// if (caption.Text.Contains("rass"))
-				// 	Api.Logger.Debug($"[ClosedCaptions] On update, displayed sound is filtered. [{caption.ID}] '{caption.AssetLocation}'");
 				_needsRefresh = true;
 			}
 			return;
@@ -320,19 +346,21 @@ public class CaptionManager
 
 	private void UpdateSoundsStatus()
 	{
+		List<Caption> toRemove = [];
 		foreach (var caption in _captions.Values)
 		{
+			if (caption == null)
+			{
+				Api.Logger.Error("[ClosedCaptions] There is a null caption! This shouldn't be able to happen.");
+				continue;
+			}
 			if (caption.IsFading)
 			{
-				// if (caption.Text.Contains("rass"))
-				// 	Api.Logger.Debug($"[ClosedCaptions] Fading... {Api.ElapsedMilliseconds - caption.FadeOutStartTime}ms [{caption.ID}] '{caption.AssetLocation}'");
 				if (Api.ElapsedMilliseconds - caption.FadeOutStartTime >= ClosedCaptionsModSystem.UserConfig.FadeOutDuration)
 				{
-					// if (caption.Text.Contains("rass"))
-					// 	Api.Logger.Debug($"[ClosedCaptions] Sound finished fading. [{caption.ID}] '{caption.AssetLocation}'");
-					RemoveCaption(caption);
+					//RemoveCaption(caption);
+					toRemove.Add(caption);
 				}
-
 				continue;
 			}
 
@@ -351,21 +379,13 @@ public class CaptionManager
 					AddOrUpdateDisplayedCaption(caption);
 					continue;
 				}
-				// else
-				// {
-				// 	if (caption.Text.Contains("rass"))
-				// 		Api.Logger.Debug($"[ClosedCaptions] No longer playing, starting fade{(caption.IsFading ? "but is already fading?" : "")}. [{caption.ID}] '{caption.AssetLocation}'");
-				// }
 			}
-			// else
-			// {
-			// 	if (caption.Text.Contains("rass"))
-			// 		Api.Logger.Debug($"[ClosedCaptions] No longer valid source, starting fade{(caption.IsFading ? "but is already fading?" : "")}. [{caption.ID}] '{caption.AssetLocation}'");
-			// }
 
 			// Sound is no longer visible for one reason or another.
 			caption.BeginFade();
 		}
+
+		toRemove.Foreach(RemoveCaption);
 	}
 	
 	private bool IsFiltered(Caption caption)

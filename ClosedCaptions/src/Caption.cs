@@ -91,7 +91,8 @@ public class Caption
 		ID = loadedSound.GetSourceID();
 		if (ID == 0)
 		{
-			CaptionManager.Api.Logger.Debug($"[ClosedCaptions] Creating caption with no source ID. '{loadedSound.Params.Location}'");
+			ID = NextOrphanId--;
+			//CaptionManager.Api.Logger.Debug($"[ClosedCaptions] Creating caption with no source ID. Assigning orphan ID. [{ID}] '{loadedSound.Params.Location}'");
 		}
 		AssetLocation = loadedSound.Params.Location;
 		Text = text;
