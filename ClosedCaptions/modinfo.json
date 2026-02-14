@@ -8,7 +8,7 @@
     ],
     "side": "client",
     "description": "Adds closed captions for the sounds in the game.",
-    "version": "0.2.3",
+    "version": "0.1.3-pre.1",
     "dependencies": {
         "game": "1.22.0-pre.1",
 		"configlib": "1.10.13"
