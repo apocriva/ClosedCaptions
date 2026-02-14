@@ -67,6 +67,7 @@ public class Caption
 	public float Volume;
 	public bool IsRelative;
 	public Vec3f Position;
+	public float Range;
 	public readonly CaptionTags Tags;
 	public readonly CaptionFlags Flags;
 	public readonly CaptionGroup? Group;
@@ -83,6 +84,7 @@ public class Caption
 		float volume,
 		bool isRelative,
 		Vec3f position,
+		float range,
 		CaptionTags tags,
 		CaptionFlags flags,
 		CaptionGroup? group,
@@ -101,6 +103,7 @@ public class Caption
 		Volume = volume;
 		IsRelative = isRelative;
 		Position = position;
+		Range = range;
 		Tags = tags;
 		Flags = flags;
 		Group = group;

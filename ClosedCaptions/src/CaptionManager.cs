@@ -234,8 +234,10 @@ public class CaptionManager
 
 		int removed = _displayedCaptions.RemoveAll(c => c == caption);
 
-		// We don't show filtered captions.
-		if (IsFiltered(caption))
+		// We don't show filtered or out of range captions.
+		float distance = caption.IsRelative ? 0f : (caption.Position - Api.World.Player.Entity.Pos.XYZFloat).Length();
+		if (IsFiltered(caption) ||
+			!caption.IsRelative && distance >= caption.Range)
 		{
 			if (removed > 0)
 			{
@@ -244,7 +246,6 @@ public class CaptionManager
 			return;
 		}
 
-		float distance = caption.IsRelative ? 0f : (caption.Position - Api.World.Player.Entity.Pos.XYZFloat).Length();
 		bool shouldAdd = true;
 		for (int i = _displayedCaptions.Count - 1; i >= 0; --i)
 		{
