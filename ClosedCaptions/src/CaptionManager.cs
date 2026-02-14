@@ -198,7 +198,7 @@ public class CaptionManager
 	{
 		_displayedCaptions.Clear();
 
-		if (_captions.Values.Contains(c => c == null))
+		if (_captions.Values.Contains((Caption?)null))
 		{
 			Api.Logger.Error($"[ClosedCaptions] Captions list has a null caption. Correcting, but something is wrong.");
 
