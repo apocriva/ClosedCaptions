@@ -98,6 +98,8 @@
 	"closedcaptions:config-danger-color-tooltip": "Color for captions tagged as dangerous.",
 	"closedcaptions:config-danger-bold": "Bold dangerous text",
 	"closedcaptions:config-danger-bold-tooltip": "Use a bold font for captions tagged as dangerous.",
+	"closedcaptions:config-rust-color": "Rust caption color",
+	"closedcaptions:config-rust-color-tooltip": "Color for captions related to temporal instability.",
 	"closedcaptions:config-passive-color": "Passive caption color",
 	"closedcaptions:config-passive-color-tooltip": "Color for captions tagged as ambience/weather.",
 	"closedcaptions:config-passive-italic": "Italic passive text",
