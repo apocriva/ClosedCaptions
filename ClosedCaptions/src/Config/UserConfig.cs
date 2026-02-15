@@ -77,6 +77,7 @@ public class UserConfig
 	public Vec4f Color { get; set; } = new(1f, 1f, 1f, 1f);
 	public Vec4f DangerColor { get; set; } = new(1f, 0.75f, 0.25f, 1f);
 	public bool DangerBold { get; set; } = true;
+	public Vec4f RustColor { get; set; } = new(1.0f, 0.4f, 0.4f, 1f);
 	public Vec4f PassiveColor { get; set; } = new(1f, 1f, 1f, 0.7f);
 	public bool PassiveItalic { get; set; } = true;
 	public bool ShowGlitch { get; set; } = true;

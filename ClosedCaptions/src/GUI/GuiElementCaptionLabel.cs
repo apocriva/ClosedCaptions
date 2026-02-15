@@ -66,7 +66,14 @@ public class GuiElementCaptionLabel : GuiElement
 		}
 
 		_textColor = ClosedCaptionsModSystem.UserConfig.Color;
-		if ((_caption.Tags & CaptionTags.Danger) != 0)
+		if ((_caption.Tags & CaptionTags.Temporal) != 0)
+		{
+			_textColor = ClosedCaptionsModSystem.UserConfig.RustColor;
+			if ((_caption.Tags & CaptionTags.Danger) != 0 &&
+				ClosedCaptionsModSystem.UserConfig.DangerBold)
+				_font = _font.Clone().WithWeight(FontWeight.Bold);
+		}
+		else if ((_caption.Tags & CaptionTags.Danger) != 0)
 		{
 			_textColor = ClosedCaptionsModSystem.UserConfig.DangerColor;
 			if (ClosedCaptionsModSystem.UserConfig.DangerBold)
