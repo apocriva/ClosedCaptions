@@ -1258,7 +1258,7 @@
 				},
 				{
 					"match": "sounds/effect/deepbell.ogg",
-					"tags":"ambience,environment,temporal",
+					"tags":"ambience,environment,rust",
 					"captionKey": "closedcaptions:effect-deepbell"
 				},
 				{
@@ -1353,7 +1353,7 @@
 				},
 				{
 					"match": "sounds/effect/rift.ogg",
-					"tags":"ambience,danger,environment,temporal",
+					"tags":"ambience,danger,environment,rust",
 					"group": { "name": "rift" },
 					"captionKey": "closedcaptions:effect-rift"
 				},
@@ -1395,28 +1395,28 @@
 				},
 				{
 					"match": "sounds/effect/tempstab-drain.ogg",
-					"tags":"ambience,environment,temporal",
+					"tags":"ambience,environment,rust",
 					"flags": "directionless",
 					"group": { "name": "tempstab", "priority": 0 },
 					"captionKey": "closedcaptions:effect-tempstab-drain"
 				},
 				{
 					"match": "sounds/effect/tempstab-low.ogg",
-					"tags": "ambience,danger,environment,temporal",
+					"tags": "ambience,danger,environment,rust",
 					"flags": "directionless",
 					"group": { "name": "tempstab", "priority": 1 },
 					"captionKey": "closedcaptions:effect-tempstab-low"
 				},
 				{
 					"match": "sounds/effect/tempstab-verylow.ogg",
-					"tags": "ambience,danger,environment,temporal",
+					"tags": "ambience,danger,environment,rust",
 					"flags": "directionless",
 					"group": { "name": "tempstab", "priority": 2 },
 					"captionKey": "closedcaptions:effect-tempstab-verylow"
 				},
 				{
 					"match": "sounds/effect/timeswitch.ogg",
-					"tags": "ambience,danger,environment,temporal",
+					"tags": "ambience,danger,environment,rust",
 					"flags": "directionless",
 					"group": { "name": "tempstab", "priority": 0 },
 					"captionKey": "closedcaptions:effect-timeswitch"
@@ -1428,17 +1428,20 @@
 				},
 				{
 					"match": "sounds/effect/translocate-active.ogg",
-					"tags": "environment,tool",
+					"tags": "environment,interaction,temporal,tool",
+					"group": { "name": "translocator", "priority": 5 },
 					"captionKey": "closedcaptions:effect-translocate-active"
 				},
 				{
 					"match": "sounds/effect/translocate-breakdimension.ogg",
-					"tags": "environment,tool",
+					"tags": "environment,interaction,temporal,tool",
+					"group": { "name": "translocator", "priority": 10 },
 					"captionKey": "closedcaptions:effect-translocate-breakdimension"
 				},
 				{
 					"match": "sounds/effect/translocate-idle.ogg",
-					"tags": "ambience,environment",
+					"tags": "ambience,environment,temporal",
+					"group": { "name": "translocator", "priority": 0 },
 					"captionKey": "closedcaptions:effect-translocate-idle"
 				},
 				{

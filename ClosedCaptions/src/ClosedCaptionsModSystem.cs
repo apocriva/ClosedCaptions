@@ -140,7 +140,7 @@ public class ClosedCaptionsModSystem : ModSystem
 				config.ShowEnemy = true;
 				config.ShowEnvironment = true;
 				config.ShowInteraction = true;
-				config.ShowTemporal = true;
+				config.ShowRust = true;
 				config.ShowTool = true;
 				config.ShowVoice = true;
 				config.ShowWalk = true;
@@ -158,7 +158,7 @@ public class ClosedCaptionsModSystem : ModSystem
 				config.ShowEnemy = false;
 				config.ShowEnvironment = false;
 				config.ShowInteraction = false;
-				config.ShowTemporal = false;
+				config.ShowRust = false;
 				config.ShowTool = false;
 				config.ShowVoice = false;
 				config.ShowWalk = false;
@@ -174,6 +174,7 @@ public class ClosedCaptionsModSystem : ModSystem
 			config.ShowEnemy = OnCheckBox("show-enemy", config.ShowEnemy, ref modified);
 			config.ShowEnvironment = OnCheckBox("show-environment", config.ShowEnvironment, ref modified);
 			config.ShowInteraction = OnCheckBox("show-interaction", config.ShowInteraction, ref modified);
+			config.ShowRust = OnCheckBox("show-rust", config.ShowRust, ref modified);
 			config.ShowTemporal = OnCheckBox("show-temporal", config.ShowTemporal, ref modified);
 			config.ShowTool = OnCheckBox("show-tool", config.ShowTool, ref modified);
 			config.ShowVoice = OnCheckBox("show-voice", config.ShowVoice, ref modified);
@@ -217,6 +218,7 @@ public class ClosedCaptionsModSystem : ModSystem
 			config.DangerColor = OnColor("danger-color", config.DangerColor, ref modified);
 			config.DangerBold = OnCheckBox("danger-bold", config.DangerBold, ref modified);
 			config.RustColor = OnColor("rust-color", config.RustColor, ref modified);
+			config.TemporalColor = OnColor("temporal-color", config.TemporalColor, ref modified);
 			config.PassiveColor = OnColor("passive-color", config.PassiveColor, ref modified);
 			config.PassiveItalic = OnCheckBox("passive-italic", config.PassiveItalic, ref modified);
 			config.ShowGlitch = OnCheckBox("show-glitch", config.ShowGlitch, ref modified);

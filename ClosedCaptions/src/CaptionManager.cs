@@ -405,6 +405,7 @@ public class CaptionManager
 				(caption.Tags & CaptionTags.Enemy) != 0 && ClosedCaptionsModSystem.UserConfig.ShowEnemy ||
 				(caption.Tags & CaptionTags.Environment) != 0 && ClosedCaptionsModSystem.UserConfig.ShowEnvironment ||
 				(caption.Tags & CaptionTags.Interaction) != 0 && ClosedCaptionsModSystem.UserConfig.ShowInteraction ||
+				(caption.Tags & CaptionTags.Rust) != 0 && ClosedCaptionsModSystem.UserConfig.ShowRust ||
 				(caption.Tags & CaptionTags.Temporal) != 0 && ClosedCaptionsModSystem.UserConfig.ShowTemporal ||
 				(caption.Tags & CaptionTags.Tool) != 0 && ClosedCaptionsModSystem.UserConfig.ShowTool ||
 				(caption.Tags & CaptionTags.Voice) != 0 && ClosedCaptionsModSystem.UserConfig.ShowVoice ||

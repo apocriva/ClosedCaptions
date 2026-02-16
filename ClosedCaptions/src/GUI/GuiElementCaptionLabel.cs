@@ -66,23 +66,30 @@ public class GuiElementCaptionLabel : GuiElement
 		}
 
 		_textColor = ClosedCaptionsModSystem.UserConfig.Color;
+		bool hasPriorityColor = false;
 		if ((_caption.Tags & CaptionTags.Temporal) != 0)
 		{
-			_textColor = ClosedCaptionsModSystem.UserConfig.RustColor;
-			if ((_caption.Tags & CaptionTags.Danger) != 0 &&
-				ClosedCaptionsModSystem.UserConfig.DangerBold)
-				_font = _font.Clone().WithWeight(FontWeight.Bold);
+			_textColor = ClosedCaptionsModSystem.UserConfig.TemporalColor;
+			hasPriorityColor = true;
 		}
-		else if ((_caption.Tags & CaptionTags.Danger) != 0)
+		else if ((_caption.Tags & CaptionTags.Rust) != 0)
 		{
-			_textColor = ClosedCaptionsModSystem.UserConfig.DangerColor;
+			_textColor = ClosedCaptionsModSystem.UserConfig.RustColor;
+			hasPriorityColor = true;
+		}
+		
+		if ((_caption.Tags & CaptionTags.Danger) != 0)
+		{
+			if (!hasPriorityColor)
+				_textColor = ClosedCaptionsModSystem.UserConfig.DangerColor;
 			if (ClosedCaptionsModSystem.UserConfig.DangerBold)
 				_font = _font.Clone().WithWeight(FontWeight.Bold);
 		}
 		else if ((_caption.Tags & CaptionTags.Ambience) != 0 ||
 			(_caption.Tags & CaptionTags.Weather) != 0)
 		{
-			_textColor = ClosedCaptionsModSystem.UserConfig.PassiveColor;
+			if (!hasPriorityColor)
+				_textColor = ClosedCaptionsModSystem.UserConfig.PassiveColor;
 			if (ClosedCaptionsModSystem.UserConfig.PassiveItalic)
 				_font = _font.Clone().WithSlant(FontSlant.Italic);
 		}

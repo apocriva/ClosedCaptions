@@ -20,12 +20,13 @@ public enum CaptionTags
 	Enemy		= 1 << 5,
 	Environment	= 1 << 6,
 	Interaction = 1 << 7,
-	Temporal	= 1 << 8,
-	Tool		= 1 << 9,
-	Voice		= 1 << 10,
-	Walk		= 1 << 11,
-	Wearable	= 1 << 12,
-	Weather		= 1 << 13,
+	Rust		= 1 << 8,
+	Temporal	= 1 << 9,
+	Tool		= 1 << 10,
+	Voice		= 1 << 11,
+	Walk		= 1 << 12,
+	Wearable	= 1 << 13,
+	Weather		= 1 << 14,
 }
 
 [Flags]

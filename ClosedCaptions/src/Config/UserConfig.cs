@@ -45,6 +45,7 @@ public class UserConfig
 	public bool ShowEnemy { get; set; } = true;
 	public bool ShowEnvironment { get; set; } = false;
 	public bool ShowInteraction { get; set; } = false;
+	public bool ShowRust { get; set; } = true;
 	public bool ShowTemporal { get; set; } = true;
 	public bool ShowTool { get; set; } = false;
 	public bool ShowVoice { get; set; } = true;
@@ -78,6 +79,7 @@ public class UserConfig
 	public Vec4f DangerColor { get; set; } = new(1f, 0.75f, 0.25f, 1f);
 	public bool DangerBold { get; set; } = true;
 	public Vec4f RustColor { get; set; } = new(1.0f, 0.4f, 0.4f, 1f);
+	public Vec4f TemporalColor { get; set; } = new(0.0f, 1.0f, 0.7f, 1f);
 	public Vec4f PassiveColor { get; set; } = new(1f, 1f, 1f, 0.7f);
 	public bool PassiveItalic { get; set; } = true;
 	public bool ShowGlitch { get; set; } = true;
