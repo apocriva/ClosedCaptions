@@ -136,6 +136,9 @@ public class CaptionManager
 	[HarmonyPatch(typeof(LoadedSoundNative), "SetVolume", typeof(float))]
 	public static void Sound_SetVolume(LoadedSoundNative __instance)
 	{
+		if (__instance.Params.Volume == 0f)
+			return;
+
 		Api.Event.EnqueueMainThreadTask(() =>
 		{
 			if (!Instance._captions.ContainsKey(__instance.GetSourceID()))
@@ -237,7 +240,8 @@ public class CaptionManager
 		// We don't show filtered or out of range captions.
 		float distance = caption.IsRelative ? 0f : (caption.Position - Api.World.Player.Entity.Pos.XYZFloat).Length();
 		if (IsFiltered(caption) ||
-			!caption.IsRelative && distance >= caption.Range)
+			!caption.IsMusic && !caption.IsRelative && distance >= caption.Range ||
+			caption.IsMusic && caption.Volume == 0f)
 		{
 			if (removed > 0)
 			{
@@ -391,6 +395,16 @@ public class CaptionManager
 	
 	private bool IsFiltered(Caption caption)
 	{
+		// Music is a special case.
+		if (caption.IsMusic)
+		{
+			if (ClosedCaptionsModSystem.UserConfig.ShowMusic == MusicOption.All ||
+				ClosedCaptionsModSystem.UserConfig.ShowMusic == MusicOption.OnlyEvent && (caption.Tags & CaptionTags.Event) != 0)
+				return false;
+
+			return true;
+		}
+
 		// If any one of these passes, do not filter. This supercedes cases such as, for example
 		// a nearby lightning strike being filtered due to ShowWeather, but should be shown because
 		// it is tagged as Danger. We still want to let the case fall through if ShowDanger is unchecked

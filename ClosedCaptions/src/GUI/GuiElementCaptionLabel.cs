@@ -10,9 +10,10 @@ namespace ClosedCaptions.GUI;
 
 public class GuiElementCaptionLabel : GuiElement
 {
-	private static readonly int ArrowTextureSize = 64;
-	private static readonly double ArrowSize = ArrowTextureSize;
-	private static readonly double ArrowRenderScale = 0.7;
+	private static readonly int IconTextureSize = 64;
+	private static readonly double IconSize = IconTextureSize;
+	private static readonly double IconRenderScale = 0.7;
+	private static readonly string MusicNoteFilename = "textures/icons/musicnote.svg";
 
 	public Caption Caption { get => _caption; }
 	private float _lastGlitchStrength = 0f;
@@ -22,6 +23,7 @@ public class GuiElementCaptionLabel : GuiElement
 	private LoadedTexture _baseTexture;
 	private LoadedTexture _textTexture;
 	private LoadedTexture _arrowTexture;
+	private LoadedTexture? _musicNoteTexture;
 	private readonly DummySlot? _dummySlot;
 	private readonly Vec4f _textColor = new(1f, 1f, 1f, 1f);
 
@@ -67,7 +69,12 @@ public class GuiElementCaptionLabel : GuiElement
 
 		_textColor = ClosedCaptionsModSystem.UserConfig.Color;
 		bool hasPriorityColor = false;
-		if ((_caption.Tags & CaptionTags.Temporal) != 0)
+		if (_caption.IsMusic)
+		{
+			_textColor = ClosedCaptionsModSystem.UserConfig.MusicColor;
+			hasPriorityColor = true;
+		}
+		else if ((_caption.Tags & CaptionTags.Temporal) != 0)
 		{
 			_textColor = ClosedCaptionsModSystem.UserConfig.TemporalColor;
 			hasPriorityColor = true;
@@ -93,6 +100,12 @@ public class GuiElementCaptionLabel : GuiElement
 			if (ClosedCaptionsModSystem.UserConfig.PassiveItalic)
 				_font = _font.Clone().WithSlant(FontSlant.Italic);
 		}
+
+		_musicNoteTexture = null;
+		if (_caption.IsMusic)
+		{
+			_musicNoteTexture = api.Gui.LoadSvgWithPadding(new AssetLocation("closedcaptions", MusicNoteFilename), IconTextureSize, IconTextureSize, 5, ColorUtil.WhiteArgb);
+		}
 	}
 
 	public void Update(float baseOpacity, float textOpacity, float? angle)
@@ -116,14 +129,14 @@ public class GuiElementCaptionLabel : GuiElement
 		surface.Dispose();
 		context.Dispose();
 
-		surface = new ImageSurface(Format.Argb32, ArrowTextureSize, ArrowTextureSize);
+		surface = new ImageSurface(Format.Argb32, IconTextureSize, IconTextureSize);
 		context = new Context(surface);
 		context.SetSourceRGBA(1, 1, 1, _font.Color[3]);
-		context.MoveTo(ArrowSize / 2, 0);
-		context.LineTo(ArrowSize * 0.8, ArrowSize * 0.8);
-		context.LineTo(ArrowSize * 0.5, ArrowSize * 0.6);
-		context.LineTo(ArrowSize * 0.2, ArrowSize * 0.8);
-		context.LineTo(ArrowSize / 2, 0);
+		context.MoveTo(IconSize / 2, 0);
+		context.LineTo(IconSize * 0.8, IconSize * 0.8);
+		context.LineTo(IconSize * 0.5, IconSize * 0.6);
+		context.LineTo(IconSize * 0.2, IconSize * 0.8);
+		context.LineTo(IconSize / 2, 0);
 		context.Fill();
 		generateTexture(surface, ref _arrowTexture);
 		surface.Dispose();
@@ -163,7 +176,7 @@ public class GuiElementCaptionLabel : GuiElement
 
 		if (_angle != null && ClosedCaptionsModSystem.UserConfig.DirectionIndicators != Config.CaptionDirectionIndicators.None)
 		{
-			var arrowRenderSize = _font.GetFontExtents().Height * ArrowRenderScale;
+			var arrowRenderSize = _font.GetFontExtents().Height * IconRenderScale;
 			if ((ClosedCaptionsModSystem.UserConfig.DirectionIndicators & Config.CaptionDirectionIndicators.Left) != 0)
 			{
 				api.Render.GlPushMatrix();
@@ -199,7 +212,21 @@ public class GuiElementCaptionLabel : GuiElement
 			}
 		}
 
-		if (ClosedCaptionsModSystem.UserConfig.Icon != Config.CaptionIconIndicator.None && _dummySlot != null)
+		if (_caption.IsMusic && _musicNoteTexture != null)
+		{
+			float iconRenderSize = (float)_font.GetFontExtents().Height;
+			api.Render.RenderTexture(_musicNoteTexture.TextureId,
+				Bounds.renderX + Bounds.OuterHeight / 2 - iconRenderSize / 2,
+				Bounds.renderY + Bounds.OuterHeight / 2 - iconRenderSize / 2,
+				iconRenderSize, iconRenderSize, 70,
+				textColor);
+			api.Render.RenderTexture(_musicNoteTexture.TextureId,
+				Bounds.renderX + Bounds.OuterWidth - Bounds.OuterHeight / 2 - iconRenderSize / 2,
+				Bounds.renderY + Bounds.OuterHeight / 2 - iconRenderSize / 2,
+				iconRenderSize, iconRenderSize, 70,
+				textColor);
+		}
+		else if (ClosedCaptionsModSystem.UserConfig.Icon != Config.CaptionIconIndicator.None && _dummySlot != null)
 		{
 			float iconRenderSize = (float)_font.GetFontExtents().Height;
 			var iconX = ClosedCaptionsModSystem.UserConfig.Icon == Config.CaptionIconIndicator.Left
@@ -227,6 +254,7 @@ public class GuiElementCaptionLabel : GuiElement
 	public override void Dispose()
 	{
 		base.Dispose();
+		_musicNoteTexture?.Dispose();
 		_arrowTexture?.Dispose();
 		_debugTexture?.Dispose();
 		_textTexture?.Dispose();

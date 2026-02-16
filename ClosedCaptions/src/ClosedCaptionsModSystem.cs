@@ -30,6 +30,7 @@ public class ClosedCaptionsModSystem : ModSystem
 	private string[] _captionAnchorStrings = [];
 	private string[] _directionIndicatorsStrings = [];
 	private string[] _iconStrings = [];
+	private string[] _showMusicStrings = [];
 
 	public override void StartPre(ICoreAPI api)
 	{
@@ -119,6 +120,11 @@ public class ClosedCaptionsModSystem : ModSystem
 			Lang.Get("closedcaptions:config-direction-indicators-left"),
 			Lang.Get("closedcaptions:config-direction-indicators-right"),
 		];
+		_showMusicStrings = [
+			Lang.Get("closedcaptions:config-music-none"),
+			Lang.Get("closedcaptions:config-music-onlyevent"),
+			Lang.Get("closedcaptions:config-music-all"),
+		];
 	}
 
 	private void BuildSettings(UserConfig config)
@@ -148,6 +154,8 @@ public class ClosedCaptionsModSystem : ModSystem
 				config.ShowWalk = true;
 				config.ShowWearable = true;
 				config.ShowWeather = true;
+
+				config.ShowMusic = MusicOption.None;
 			}
 			if (ImGui.Button(Lang.Get("closedcaptions:config-uncheck-all")))
 			{
@@ -169,6 +177,8 @@ public class ClosedCaptionsModSystem : ModSystem
 				config.ShowWearable = false;
 				config.ShowWeather = false;
 				config.ShowUnknown = false;
+
+				config.ShowMusic = MusicOption.All;
 			}
 			config.ShowAmbience = OnCheckBox("show-ambience", config.ShowAmbience, ref modified);
 			config.ShowAnimal = OnCheckBox("show-animal", config.ShowAnimal, ref modified);
@@ -187,6 +197,8 @@ public class ClosedCaptionsModSystem : ModSystem
 			config.ShowWearable = OnCheckBox("show-wearable", config.ShowWearable, ref modified);
 			config.ShowWeather = OnCheckBox("show-weather", config.ShowWeather, ref modified);
 			config.ShowUnknown = OnCheckBox("show-unknown", config.ShowUnknown, ref modified);
+			ImGui.NewLine();
+			config.ShowMusic = (MusicOption)OnDropdown("show-music", (int)config.ShowMusic, _showMusicStrings, ref modified);
 			ImGui.Unindent();
 		}
 
@@ -225,6 +237,7 @@ public class ClosedCaptionsModSystem : ModSystem
 			config.TemporalColor = OnColor("temporal-color", config.TemporalColor, ref modified);
 			config.PassiveColor = OnColor("passive-color", config.PassiveColor, ref modified);
 			config.PassiveItalic = OnCheckBox("passive-italic", config.PassiveItalic, ref modified);
+			config.MusicColor = OnColor("music-color", config.MusicColor, ref modified);
 			config.ShowGlitch = OnCheckBox("show-glitch", config.ShowGlitch, ref modified);
 			ImGui.Unindent();
 		}

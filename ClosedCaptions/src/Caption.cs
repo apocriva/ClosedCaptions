@@ -28,6 +28,9 @@ public enum CaptionTags
 	Walk		= 1 << 13,
 	Wearable	= 1 << 14,
 	Weather		= 1 << 15,
+
+	// Music-specific tags
+	Event		= 1 << 16,
 }
 
 [Flags]
@@ -71,6 +74,7 @@ public class Caption
 	public Vec3f Position;
 	public float Range;
 	public float AttenuationRange;
+	public bool IsMusic;
 	public readonly CaptionTags Tags;
 	public readonly CaptionFlags Flags;
 	public readonly CaptionGroup? Group;
@@ -113,6 +117,16 @@ public class Caption
 		Flags = flags;
 		Group = group;
 		Icon = icon;
+
+		IsMusic = loadedSound.Params.SoundType == EnumSoundType.Music ||
+			loadedSound.Params.SoundType == EnumSoundType.MusicGlitchunaffected;
+
+		if (IsMusic)
+		{
+			// This probably doesn't work for resonator tracks.
+			IsRelative = true;
+			Position = Vec3f.Zero;
+		}
 	}
 
 	public void Orphan()

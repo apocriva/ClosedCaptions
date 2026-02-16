@@ -1,6 +1,6 @@
 {
 	"ignore": [
-		"music/*",
+		"music/deepunderground/*",
 		"sounds/camerasnap.ogg",
 		"sounds/menubutton*",
 		"sounds/stone_switch.ogg",
@@ -13,6 +13,279 @@
 		"sounds/weather/lowgrumble.ogg"
 	],
 	"soundMap": [
+		{
+			"group": "music/*",
+			"defaultKey": "closedcaptions:unknown-music",
+			"mappings": [
+				{
+					"match": "music/tuningcylinder/culturedtavern.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-cultured-tavern"
+				},
+				{
+					"match": "music/tuningcylinder/quirkytavern.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-quirky-tavern"
+				},
+				{
+					"match": "music/tuningcylinder/the-seraphs.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-the-seraphs"
+				},
+				{
+					"match": "music/tuningcylinder/theinvention.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-the-invention"
+				},
+				{
+					"match": "music/adventuring.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-adventuring"
+				},
+				{
+					"match": "music/arcticwinds.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-arctic-winds"
+				},
+				{
+					"match": "music/building.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-building"
+				},
+				{
+					"match": "music/chilly-village.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-chilly-village"
+				},
+				{
+					"match": "music/creating.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-creating"
+				},
+				{
+					"match": "music/daylight.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-daylight"
+				},
+				{
+					"match": "music/devastation-baselayer.ogg",
+					"tags": "event",
+					"group": { "name": "music-devastation", "priority": 0 },
+					"captionKey": "closedcaptions:music-devastation-baselayer"
+				},
+				{
+					"match": "music/devastation-bellsandrust.ogg",
+					"tags": "event",
+					"group": { "name": "music-devastation", "priority": 1 },
+					"captionKey": "closedcaptions:music-devastation-bellsandrust"
+				},
+				{
+					"match": "music/devastation-erelfight.ogg",
+					"tags": "event",
+					"group": { "name": "music-devastation", "priority": 10 },
+					"captionKey": "closedcaptions:music-devastation-erelfight"
+				},
+				{
+					"match": "music/devastation-erelharrass.ogg",
+					"tags": "event",
+					"group": { "name": "music-devastation", "priority": 5 },
+					"captionKey": "closedcaptions:music-devastation-erelharrass"
+				},
+				{
+					"match": "music/fall-o'-croft.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-fall-o-croft"
+				},
+				{
+					"match": "music/fall.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-fall"
+				},
+				{
+					"match": "music/groove.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-groove"
+				},
+				{
+					"match": "music/hallowcroft.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-hallowcroft"
+				},
+				{
+					"match": "music/heartbeat-create.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-heartbeat-create"
+				},
+				{
+					"match": "music/heartbeat-survive.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-heartbeat-survive"
+				},
+				{
+					"match": "music/latvia.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-latvia"
+				},
+				{
+					"match": "music/midnight.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-midnight"
+				},
+				{
+					"match": "music/mirror.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-mirror"
+				},
+				{
+					"match": "music/nadiya-fall.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-nadiya-fall"
+				},
+				{
+					"match": "music/nadiya-spring.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-nadiya-spring"
+				},
+				{
+					"match": "music/nadiya-summer.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-nadiya-summer"
+				},
+				{
+					"match": "music/nadiya-winter.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-nadiya-winter"
+				},
+				{
+					"match": "music/night-to-day.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-night-to-day"
+				},
+				{
+					"match": "music/nostalgic.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-nostalgic"
+				},
+				{
+					"match": "music/peaceful-village.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-peaceful-village"
+				},
+				{
+					"match": "music/radiance-and-rust.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-radiance-and-rust"
+				},
+				{
+					"match": "music/roots.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-roots"
+				},
+				{
+					"match": "music/safety-of-a-warm-fire.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-safety-of-a-warm-fire"
+				},
+				{
+					"match": "music/setting-sun.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-setting-sun"
+				},
+				{
+					"match": "music/spring.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-spring"
+				},
+				{
+					"match": "music/substitute-epitaph.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-substitute-epitaph"
+				},
+				{
+					"match": "music/summer-day.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-summer-day"
+				},
+				{
+					"match": "music/summer-stroll.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-summer-stroll"
+				},
+				{
+					"match": "music/sunny village.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-sunny-village"
+				},
+				{
+					"match": "music/sunny-village-create.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-sunny-village-create"
+				},
+				{
+					"match": "music/sunny-village-survive.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-sunny-village-survive"
+				},
+				{
+					"match": "music/the-lazaret.ogg",
+					"tags": "event",
+					"captionKey": "closedcaptions:music-the-lazaret"
+				},
+				{
+					"match": "music/theresonancearchives-barren.ogg",
+					"tags": "",
+					"group": { "name": "resonancearchives", "priority": 0 },
+					"captionKey": "closedcaptions:music-theresonancearchives-barren"
+				},
+				{
+					"match": "music/theresonancearchives-eidolon.ogg",
+					"tags": "event",
+					"group": { "name": "resonancearchives", "priority": 10 },
+					"captionKey": "closedcaptions:music-theresonancearchives-eidolon"
+				},
+				{
+					"match": "music/theresonancearchives-library.ogg",
+					"tags": "event",
+					"group": { "name": "resonancearchives", "priority": 5 },
+					"captionKey": "closedcaptions:music-theresonancearchives-library"
+				},
+				{
+					"match": "music/through-the-grass-create.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-through-the-grass-create"
+				},
+				{
+					"match": "music/through-the-grass-survive.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-through-the-grass-survive"
+				},
+				{
+					"match": "music/to-dawn.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-to-dawn"
+				},
+				{
+					"match": "music/tobias.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-tobias"
+				},
+				{
+					"match": "music/vintagestory.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-vintagestory"
+				},
+				{
+					"match": "music/windy-village.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-windy-village"
+				},
+				{
+					"match": "music/winter.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-winter"
+				},
+			]
+		},
 		{
 			"group": "sounds/*",
 			"defaultKey": "closedcaptions:unknown-sound",

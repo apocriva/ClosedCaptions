@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="72"
+   height="72"
+   viewBox="0 0 72 72"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+   sodipodi:docname="musicnote.svg"
+   inkscape:export-filename="musicnote.svg"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="px"
+     inkscape:zoom="1.4271465"
+     inkscape:cx="55.004866"
+     inkscape:cy="137.68734"
+     inkscape:window-width="1620"
+     inkscape:window-height="1018"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="font-size:113.628px;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans';stroke-width:1.18362;fill:#000000;fill-opacity:1"
+       d="m 36.323272,4.6970119 h 4.216664 v 5.5482421 l 8.488811,10.708107 q 6.047584,8.155916 6.047584,17.587928 0,8.322363 -5.215348,15.035736 h -2.607674 q 3.162498,-7.10175 3.162498,-13.759641 0,-6.65789 -3.162498,-11.041001 -3.162498,-4.383112 -6.713373,-4.993418 V 51.85707 q 0,6.824338 -4.105699,11.041002 -4.050216,4.161181 -9.986836,4.161181 -3.162498,0 -4.771488,-1.498025 -1.60899,-1.498026 -1.60899,-4.050217 0,-4.272146 3.43991,-7.490127 3.495393,-3.21798 7.823022,-3.21798 2.441226,0 4.993417,1.054166 z"
+       id="text1"
+       aria-label="♪" />
+  </g>
+</svg>

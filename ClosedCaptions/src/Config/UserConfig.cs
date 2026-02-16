@@ -33,6 +33,13 @@ public enum CaptionIconIndicator
 	Right,
 }
 
+public enum MusicOption
+{
+	None,
+	OnlyEvent,
+	All,
+}
+
 public class UserConfig
 {
 	public static readonly string Filename = "closedcaptions.json";
@@ -54,6 +61,8 @@ public class UserConfig
 	public bool ShowWearable { get; set; } = false;
 	public bool ShowWeather { get; set; } = true;
 	public bool ShowUnknown { get; set; } = false;
+
+	public MusicOption ShowMusic { get; set; } = MusicOption.All;
 
 	public float MinimumDirectionDistance { get; set; } = 1.5f;
 	public long MinimumDisplayDuration { get; set; } = 1000;
@@ -82,6 +91,7 @@ public class UserConfig
 	public Vec4f TemporalColor { get; set; } = new(0.0f, 1.0f, 0.7f, 1f);
 	public Vec4f PassiveColor { get; set; } = new(1f, 1f, 1f, 0.7f);
 	public bool PassiveItalic { get; set; } = true;
+	public Vec4f MusicColor { get; set; } = new(0.5f, 0.7f, 1f, 1f);
 	public bool ShowGlitch { get; set; } = true;
 
 	public bool DebugMode { get; set; } = false;
