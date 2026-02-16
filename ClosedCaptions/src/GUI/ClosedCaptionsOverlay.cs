@@ -90,15 +90,6 @@ public class ClosedCaptionsOverlay : HudElement
 		
 		baseOpacity = 1f;
 
-		// Modulate opacity by sound distance.
-		if (distance > ClosedCaptionsModSystem.UserConfig.AttenuationRange)
-		{
-			var span = ClosedCaptionsModSystem.UserConfig.AttenuationRange;
-			var percent = (distance - ClosedCaptionsModSystem.UserConfig.AttenuationRange) / span * (1f - ClosedCaptionsModSystem.UserConfig.MinimumAttenuationOpacity);
-			percent = MathF.Max(0f, MathF.Min(percent, 1f - ClosedCaptionsModSystem.UserConfig.MinimumAttenuationOpacity));
-			baseOpacity *= 1f - percent;
-		}
-
 		// Modulate opacity if the caption is fading out.
 		if (caption.FadeOutStartTime > 0 &&
 			capi.ElapsedMilliseconds > caption.FadeOutStartTime)
@@ -114,6 +105,15 @@ public class ClosedCaptionsOverlay : HudElement
 		if (capi.ElapsedMilliseconds - caption.StartTime > ClosedCaptionsModSystem.UserConfig.DimTime)
 		{
 			textOpacity *= ClosedCaptionsModSystem.UserConfig.DimPercent;
+		}
+
+		// Modulate opacity by sound distance.
+		if (distance > caption.AttenuationRange)
+		{
+			var span = caption.Range - caption.AttenuationRange;
+			var percent = (distance - caption.AttenuationRange) / span * (1f - ClosedCaptionsModSystem.UserConfig.MinimumAttenuationOpacity);
+			percent = MathF.Max(0f, MathF.Min(percent, 1f - ClosedCaptionsModSystem.UserConfig.MinimumAttenuationOpacity));
+			textOpacity *= 1f - percent;
 		}
 	}
 

@@ -1,6 +1,6 @@
 {
 	"ignore": [
-		"music/*",
+		"music/deepunderground/*",
 		"sounds/camerasnap.ogg",
 		"sounds/menubutton*",
 		"sounds/stone_switch.ogg",
@@ -13,6 +13,279 @@
 		"sounds/weather/lowgrumble.ogg"
 	],
 	"soundMap": [
+		{
+			"group": "music/*",
+			"defaultKey": "closedcaptions:unknown-music",
+			"mappings": [
+				{
+					"match": "music/tuningcylinder/culturedtavern.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-cultured-tavern"
+				},
+				{
+					"match": "music/tuningcylinder/quirkytavern.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-quirky-tavern"
+				},
+				{
+					"match": "music/tuningcylinder/the-seraphs.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-the-seraphs"
+				},
+				{
+					"match": "music/tuningcylinder/theinvention.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-the-invention"
+				},
+				{
+					"match": "music/adventuring.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-adventuring"
+				},
+				{
+					"match": "music/arcticwinds.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-arctic-winds"
+				},
+				{
+					"match": "music/building.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-building"
+				},
+				{
+					"match": "music/chilly-village.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-chilly-village"
+				},
+				{
+					"match": "music/creating.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-creating"
+				},
+				{
+					"match": "music/daylight.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-daylight"
+				},
+				{
+					"match": "music/devastation-baselayer.ogg",
+					"tags": "event",
+					"group": { "name": "music-devastation", "priority": 0 },
+					"captionKey": "closedcaptions:music-devastation-baselayer"
+				},
+				{
+					"match": "music/devastation-bellsandrust.ogg",
+					"tags": "event",
+					"group": { "name": "music-devastation", "priority": 1 },
+					"captionKey": "closedcaptions:music-devastation-bellsandrust"
+				},
+				{
+					"match": "music/devastation-erelfight.ogg",
+					"tags": "event",
+					"group": { "name": "music-devastation", "priority": 10 },
+					"captionKey": "closedcaptions:music-devastation-erelfight"
+				},
+				{
+					"match": "music/devastation-erelharrass.ogg",
+					"tags": "event",
+					"group": { "name": "music-devastation", "priority": 5 },
+					"captionKey": "closedcaptions:music-devastation-erelharrass"
+				},
+				{
+					"match": "music/fall-o'-croft.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-fall-o-croft"
+				},
+				{
+					"match": "music/fall.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-fall"
+				},
+				{
+					"match": "music/groove.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-groove"
+				},
+				{
+					"match": "music/hallowcroft.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-hallowcroft"
+				},
+				{
+					"match": "music/heartbeat-create.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-heartbeat-create"
+				},
+				{
+					"match": "music/heartbeat-survive.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-heartbeat-survive"
+				},
+				{
+					"match": "music/latvia.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-latvia"
+				},
+				{
+					"match": "music/midnight.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-midnight"
+				},
+				{
+					"match": "music/mirror.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-mirror"
+				},
+				{
+					"match": "music/nadiya-fall.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-nadiya-fall"
+				},
+				{
+					"match": "music/nadiya-spring.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-nadiya-spring"
+				},
+				{
+					"match": "music/nadiya-summer.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-nadiya-summer"
+				},
+				{
+					"match": "music/nadiya-winter.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-nadiya-winter"
+				},
+				{
+					"match": "music/night-to-day.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-night-to-day"
+				},
+				{
+					"match": "music/nostalgic.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-nostalgic"
+				},
+				{
+					"match": "music/peaceful-village.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-peaceful-village"
+				},
+				{
+					"match": "music/radiance-and-rust.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-radiance-and-rust"
+				},
+				{
+					"match": "music/roots.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-roots"
+				},
+				{
+					"match": "music/safety-of-a-warm-fire.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-safety-of-a-warm-fire"
+				},
+				{
+					"match": "music/setting-sun.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-setting-sun"
+				},
+				{
+					"match": "music/spring.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-spring"
+				},
+				{
+					"match": "music/substitute-epitaph.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-substitute-epitaph"
+				},
+				{
+					"match": "music/summer-day.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-summer-day"
+				},
+				{
+					"match": "music/summer-stroll.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-summer-stroll"
+				},
+				{
+					"match": "music/sunny village.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-sunny-village"
+				},
+				{
+					"match": "music/sunny-village-create.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-sunny-village-create"
+				},
+				{
+					"match": "music/sunny-village-survive.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-sunny-village-survive"
+				},
+				{
+					"match": "music/the-lazaret.ogg",
+					"tags": "event",
+					"captionKey": "closedcaptions:music-the-lazaret"
+				},
+				{
+					"match": "music/theresonancearchives-barren.ogg",
+					"tags": "",
+					"group": { "name": "resonancearchives", "priority": 0 },
+					"captionKey": "closedcaptions:music-theresonancearchives-barren"
+				},
+				{
+					"match": "music/theresonancearchives-eidolon.ogg",
+					"tags": "event",
+					"group": { "name": "resonancearchives", "priority": 10 },
+					"captionKey": "closedcaptions:music-theresonancearchives-eidolon"
+				},
+				{
+					"match": "music/theresonancearchives-library.ogg",
+					"tags": "event",
+					"group": { "name": "resonancearchives", "priority": 5 },
+					"captionKey": "closedcaptions:music-theresonancearchives-library"
+				},
+				{
+					"match": "music/through-the-grass-create.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-through-the-grass-create"
+				},
+				{
+					"match": "music/through-the-grass-survive.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-through-the-grass-survive"
+				},
+				{
+					"match": "music/to-dawn.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-to-dawn"
+				},
+				{
+					"match": "music/tobias.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-tobias"
+				},
+				{
+					"match": "music/vintagestory.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-vintagestory"
+				},
+				{
+					"match": "music/windy-village.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-windy-village"
+				},
+				{
+					"match": "music/winter.ogg",
+					"tags": "",
+					"captionKey": "closedcaptions:music-winter"
+				},
+			]
+		},
 		{
 			"group": "sounds/*",
 			"defaultKey": "closedcaptions:unknown-sound",
@@ -154,7 +427,8 @@
 				},
 				{
 					"match": "sounds/block/chute.ogg",
-					"tags": "environment,interaction",
+					"tags": "environment,interaction,machinery",
+					"group": { "name": "machinery", "priority": 5 },
 					"captionKey": "closedcaptions:block-chute"
 				},
 				{
@@ -194,7 +468,8 @@
 				},
 				{
 					"match": "sounds/block/grindingwheel.ogg",
-					"tags": "block,interaction,tool",
+					"tags": "block,interaction,machinery,tool",
+					"group": { "name": "machinery", "priority": 8 },
 					"captionKey": "closedcaptions:block-grindingwheel"
 				},
 				{
@@ -219,7 +494,8 @@
 				},
 				{
 					"match": "sounds/block/hoppertumble.ogg",
-					"tags": "environment,interaction",
+					"tags": "environment,interaction,machinery",
+					"group": { "name": "machinery", "priority": 5 },
 					"captionKey": "closedcaptions:block-hopper-tumble"
 				},
 				{
@@ -423,7 +699,8 @@
 				},
 				{
 					"match": "sounds/block/woodcreak*",
-					"tags": "block,environment",
+					"tags": "ambient,block,environment,machinery",
+					"group": { "name": "machinery", "priority": 0 },
 					"captionKey": "closedcaptions:block-wood-creak"
 				 },
 			]
@@ -750,6 +1027,42 @@
 					"tags": "danger,enemy",
 					"icon":{ "type": "item", "code": "creature-drifter-normal" },
 					"captionKey": "closedcaptions:creature-drifter-idle"
+				},
+			]
+		},
+		{
+			"group": "sounds/creature/eidolon*",
+			"defaultKey": "closedcaptions:creature",
+			"mappings": [
+				{
+					"match": "sounds/creature/eidolon/awake.ogg",
+					"tags": "enemy",
+					"captionKey": "closedcaptions:creature-eidolon-awake"
+				},
+				{
+					"match": "sounds/creature/eidolon/awaken.ogg",
+					"tags": "combat,danger,enemy,rust",
+					"captionKey": "closedcaptions:creature-eidolon-awaken"
+				},
+				{
+					"match": "sounds/creature/eidolon/death.ogg",
+					"tags": "combat,enemy",
+					"captionKey": "closedcaptions:creature-eidolon-death"
+				},
+				{
+					"match": "sounds/creature/eidolon/hit.ogg",
+					"tags": "combat,enemy",
+					"captionKey": "closedcaptions:creature-eidolon-hit"
+				},
+				{
+					"match": "sounds/creature/eidolon/rockfallslam.ogg",
+					"tags": "combat,danger,enemy",
+					"captionKey": "closedcaptions:creature-eidolon-rockfallslam"
+				},
+				{
+					"match": "sounds/creature/eidolon/throw.ogg",
+					"tags": "combat,danger,enemy",
+					"captionKey": "closedcaptions:creature-eidolon-throw"
 				},
 			]
 		},
@@ -1228,7 +1541,8 @@
 				},
 				{
 					"match": "sounds/effect/bellows.ogg",
-					"tags":"interaction,tool",
+					"tags":"interaction,machinery,tool",
+					"group": { "name": "machinery", "priority": 10 },
 					"captionKey": "closedcaptions:effect-bellows"
 				},
 				{
@@ -1253,17 +1567,19 @@
 				},
 				{
 					"match": "sounds/effect/crusher-impact*",
-					"tags":"environment,tool",
+					"tags":"environment,machinery,tool",
 					"captionKey": "closedcaptions:effect-crusherimpact"
 				},
 				{
 					"match": "sounds/effect/deepbell.ogg",
-					"tags":"ambience,environment,temporal",
+					"tags":"ambience,environment,rust",
 					"captionKey": "closedcaptions:effect-deepbell"
 				},
 				{
 					"match": "sounds/effect/echochamber*",
-					"tags":"ambience,environment",
+					"tags":"ambience,environment,rust",
+					"attenuationRange": 32.0,
+					"group": { "name": "echochamber" },
 					"captionKey": "closedcaptions:effect-echochamber"
 				},
 				{
@@ -1283,12 +1599,14 @@
 				},
 				{
 					"match": "sounds/effect/gearbox_turn.ogg",
-					"tags":"ambience,environment",
+					"tags":"ambience,environment,machinery",
+					"group": { "name": "machinery", "priority": 5 },
 					"captionKey": "closedcaptions:effect-gearbox-turn"
 				},
 				{
 					"match": "sounds/effect/gears.ogg",
-					"tags":"ambience,environment",
+					"tags":"ambience,environment,machinery",
+					"group": { "name": "machinery", "priority": 5 },
 					"captionKey": "closedcaptions:effect-gears"
 				},
 				{
@@ -1318,7 +1636,8 @@
 				},
 				{
 					"match": "sounds/effect/metalgrinding.ogg",
-					"tags":"interaction,tool",
+					"tags":"interaction,machinery,tool",
+					"group": { "name": "machinery", "priority": 15 },
 					"captionKey": "closedcaptions:effect-metalgrinding"
 				},
 				{
@@ -1334,6 +1653,7 @@
 				{
 					"match": "sounds/effect/planetary_gears.ogg",
 					"tags":"ambience,environment",
+					"group": { "name": "machinery", "priority": 5 },
 					"captionKey": "closedcaptions:effect-planetarygears"
 				},
 				{
@@ -1343,7 +1663,7 @@
 				},
 				{
 					"match": "sounds/effect/portal.ogg",
-					"tags":"ambience,environment",
+					"tags":"ambience,environment,temporal",
 					"captionKey": "closedcaptions:effect-portal"
 				},
 				{
@@ -1353,7 +1673,7 @@
 				},
 				{
 					"match": "sounds/effect/rift.ogg",
-					"tags":"ambience,danger,environment,temporal",
+					"tags":"ambience,danger,environment,rust",
 					"group": { "name": "rift" },
 					"captionKey": "closedcaptions:effect-rift"
 				},
@@ -1385,7 +1705,8 @@
 				},
 				{
 					"match": "sounds/effect/stonecrush.ogg",
-					"tags":"interation,tool",
+					"tags":"interation,machinery,tool",
+					"group": { "name": "machinery", "priority": 5 },
 					"captionKey": "closedcaptions:effect-stonecrush"
 				},
 				{
@@ -1395,28 +1716,28 @@
 				},
 				{
 					"match": "sounds/effect/tempstab-drain.ogg",
-					"tags":"ambience,environment,temporal",
+					"tags":"ambience,environment,rust",
 					"flags": "directionless",
 					"group": { "name": "tempstab", "priority": 0 },
 					"captionKey": "closedcaptions:effect-tempstab-drain"
 				},
 				{
 					"match": "sounds/effect/tempstab-low.ogg",
-					"tags": "ambience,danger,environment,temporal",
+					"tags": "ambience,danger,environment,rust",
 					"flags": "directionless",
 					"group": { "name": "tempstab", "priority": 1 },
 					"captionKey": "closedcaptions:effect-tempstab-low"
 				},
 				{
 					"match": "sounds/effect/tempstab-verylow.ogg",
-					"tags": "ambience,danger,environment,temporal",
+					"tags": "ambience,danger,environment,rust",
 					"flags": "directionless",
 					"group": { "name": "tempstab", "priority": 2 },
 					"captionKey": "closedcaptions:effect-tempstab-verylow"
 				},
 				{
 					"match": "sounds/effect/timeswitch.ogg",
-					"tags": "ambience,danger,environment,temporal",
+					"tags": "ambience,danger,environment,rust",
 					"flags": "directionless",
 					"group": { "name": "tempstab", "priority": 0 },
 					"captionKey": "closedcaptions:effect-timeswitch"
@@ -1428,17 +1749,20 @@
 				},
 				{
 					"match": "sounds/effect/translocate-active.ogg",
-					"tags": "environment,tool",
+					"tags": "environment,interaction,temporal,tool",
+					"group": { "name": "translocator", "priority": 5 },
 					"captionKey": "closedcaptions:effect-translocate-active"
 				},
 				{
 					"match": "sounds/effect/translocate-breakdimension.ogg",
-					"tags": "environment,tool",
+					"tags": "environment,interaction,temporal,tool",
+					"group": { "name": "translocator", "priority": 10 },
 					"captionKey": "closedcaptions:effect-translocate-breakdimension"
 				},
 				{
 					"match": "sounds/effect/translocate-idle.ogg",
-					"tags": "ambience,environment",
+					"tags": "ambience,environment,machinery",
+					"group": { "name": "machinery", "priority": 0 },
 					"captionKey": "closedcaptions:effect-translocate-idle"
 				},
 				{
@@ -1468,7 +1792,8 @@
 				},
 				{
 					"match": "sounds/effect/woodgrind.ogg",
-					"tags": "interaction,tool",
+					"tags": "interaction,tool,machinery",
+					"group": { "name": "machinery", "priority": 10 },
 					"captionKey": "closedcaptions:effect-woodgrind"
 				},
 				{

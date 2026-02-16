@@ -30,6 +30,7 @@ public class ClosedCaptionsModSystem : ModSystem
 	private string[] _captionAnchorStrings = [];
 	private string[] _directionIndicatorsStrings = [];
 	private string[] _iconStrings = [];
+	private string[] _showMusicStrings = [];
 
 	public override void StartPre(ICoreAPI api)
 	{
@@ -119,6 +120,11 @@ public class ClosedCaptionsModSystem : ModSystem
 			Lang.Get("closedcaptions:config-direction-indicators-left"),
 			Lang.Get("closedcaptions:config-direction-indicators-right"),
 		];
+		_showMusicStrings = [
+			Lang.Get("closedcaptions:config-music-none"),
+			Lang.Get("closedcaptions:config-music-onlyevent"),
+			Lang.Get("closedcaptions:config-music-all"),
+		];
 	}
 
 	private void BuildSettings(UserConfig config)
@@ -140,12 +146,16 @@ public class ClosedCaptionsModSystem : ModSystem
 				config.ShowEnemy = true;
 				config.ShowEnvironment = true;
 				config.ShowInteraction = true;
+				config.ShowMachinery = true;
+				config.ShowRust = true;
 				config.ShowTemporal = true;
 				config.ShowTool = true;
 				config.ShowVoice = true;
 				config.ShowWalk = true;
 				config.ShowWearable = true;
 				config.ShowWeather = true;
+
+				config.ShowMusic = MusicOption.None;
 			}
 			if (ImGui.Button(Lang.Get("closedcaptions:config-uncheck-all")))
 			{
@@ -158,13 +168,17 @@ public class ClosedCaptionsModSystem : ModSystem
 				config.ShowEnemy = false;
 				config.ShowEnvironment = false;
 				config.ShowInteraction = false;
-				config.ShowTemporal = false;
+				config.ShowMachinery = true;
+				config.ShowRust = false;
+				config.ShowTemporal = true;
 				config.ShowTool = false;
 				config.ShowVoice = false;
 				config.ShowWalk = false;
 				config.ShowWearable = false;
 				config.ShowWeather = false;
 				config.ShowUnknown = false;
+
+				config.ShowMusic = MusicOption.All;
 			}
 			config.ShowAmbience = OnCheckBox("show-ambience", config.ShowAmbience, ref modified);
 			config.ShowAnimal = OnCheckBox("show-animal", config.ShowAnimal, ref modified);
@@ -174,6 +188,8 @@ public class ClosedCaptionsModSystem : ModSystem
 			config.ShowEnemy = OnCheckBox("show-enemy", config.ShowEnemy, ref modified);
 			config.ShowEnvironment = OnCheckBox("show-environment", config.ShowEnvironment, ref modified);
 			config.ShowInteraction = OnCheckBox("show-interaction", config.ShowInteraction, ref modified);
+			config.ShowMachinery = OnCheckBox("show-machinery", config.ShowMachinery, ref modified);
+			config.ShowRust = OnCheckBox("show-rust", config.ShowRust, ref modified);
 			config.ShowTemporal = OnCheckBox("show-temporal", config.ShowTemporal, ref modified);
 			config.ShowTool = OnCheckBox("show-tool", config.ShowTool, ref modified);
 			config.ShowVoice = OnCheckBox("show-voice", config.ShowVoice, ref modified);
@@ -181,6 +197,8 @@ public class ClosedCaptionsModSystem : ModSystem
 			config.ShowWearable = OnCheckBox("show-wearable", config.ShowWearable, ref modified);
 			config.ShowWeather = OnCheckBox("show-weather", config.ShowWeather, ref modified);
 			config.ShowUnknown = OnCheckBox("show-unknown", config.ShowUnknown, ref modified);
+			ImGui.NewLine();
+			config.ShowMusic = (MusicOption)OnDropdown("show-music", (int)config.ShowMusic, _showMusicStrings, ref modified);
 			ImGui.Unindent();
 		}
 
@@ -192,7 +210,6 @@ public class ClosedCaptionsModSystem : ModSystem
 			config.DimTime = OnInputInt("dim-time", (int)config.DimTime, ref modified, 0);
 			config.DimPercent = OnInputInt("dim-percent", (int)(config.DimPercent * 100), ref modified, 0, 100) / 100f;
 			config.FadeOutDuration = OnInputInt("fade-out-duration", (int)config.FadeOutDuration, ref modified, 1);
-			config.AttenuationRange = OnInputInt("attenuation-range", config.AttenuationRange, ref modified, 0);
 			config.MinimumAttenuationOpacity = OnInputInt("min-attenuation-opacity", (int)(config.MinimumAttenuationOpacity * 100), ref modified, 0, 100) / 100f;
 			config.GroupingRange = OnInputInt("grouping-range", config.GroupingRange, ref modified, 0);
 			config.GroupingMaxTime = OnInputInt("grouping-max-time", config.GroupingMaxTime, ref modified, 0);
@@ -217,8 +234,10 @@ public class ClosedCaptionsModSystem : ModSystem
 			config.DangerColor = OnColor("danger-color", config.DangerColor, ref modified);
 			config.DangerBold = OnCheckBox("danger-bold", config.DangerBold, ref modified);
 			config.RustColor = OnColor("rust-color", config.RustColor, ref modified);
+			config.TemporalColor = OnColor("temporal-color", config.TemporalColor, ref modified);
 			config.PassiveColor = OnColor("passive-color", config.PassiveColor, ref modified);
 			config.PassiveItalic = OnCheckBox("passive-italic", config.PassiveItalic, ref modified);
+			config.MusicColor = OnColor("music-color", config.MusicColor, ref modified);
 			config.ShowGlitch = OnCheckBox("show-glitch", config.ShowGlitch, ref modified);
 			ImGui.Unindent();
 		}

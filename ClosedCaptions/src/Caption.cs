@@ -20,12 +20,17 @@ public enum CaptionTags
 	Enemy		= 1 << 5,
 	Environment	= 1 << 6,
 	Interaction = 1 << 7,
-	Temporal	= 1 << 8,
-	Tool		= 1 << 9,
-	Voice		= 1 << 10,
-	Walk		= 1 << 11,
-	Wearable	= 1 << 12,
-	Weather		= 1 << 13,
+	Machinery	= 1 << 8,
+	Rust		= 1 << 9,
+	Temporal	= 1 << 10,
+	Tool		= 1 << 11,
+	Voice		= 1 << 12,
+	Walk		= 1 << 13,
+	Wearable	= 1 << 14,
+	Weather		= 1 << 15,
+
+	// Music-specific tags
+	Event		= 1 << 16,
 }
 
 [Flags]
@@ -68,6 +73,8 @@ public class Caption
 	public bool IsRelative;
 	public Vec3f Position;
 	public float Range;
+	public float AttenuationRange;
+	public bool IsMusic;
 	public readonly CaptionTags Tags;
 	public readonly CaptionFlags Flags;
 	public readonly CaptionGroup? Group;
@@ -85,6 +92,7 @@ public class Caption
 		bool isRelative,
 		Vec3f position,
 		float range,
+		float attenuationRange,
 		CaptionTags tags,
 		CaptionFlags flags,
 		CaptionGroup? group,
@@ -104,10 +112,21 @@ public class Caption
 		IsRelative = isRelative;
 		Position = position;
 		Range = range;
+		AttenuationRange = attenuationRange;
 		Tags = tags;
 		Flags = flags;
 		Group = group;
 		Icon = icon;
+
+		IsMusic = loadedSound.Params.SoundType == EnumSoundType.Music ||
+			loadedSound.Params.SoundType == EnumSoundType.MusicGlitchunaffected;
+
+		if (IsMusic)
+		{
+			// This probably doesn't work for resonator tracks.
+			IsRelative = true;
+			Position = Vec3f.Zero;
+		}
 	}
 
 	public void Orphan()

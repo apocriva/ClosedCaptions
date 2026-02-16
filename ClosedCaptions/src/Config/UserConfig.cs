@@ -33,11 +33,18 @@ public enum CaptionIconIndicator
 	Right,
 }
 
+public enum MusicOption
+{
+	None,
+	OnlyEvent,
+	All,
+}
+
 public class UserConfig
 {
 	public static readonly string Filename = "closedcaptions.json";
 
-	public bool ShowAmbience { get; set; } = false;
+	public bool ShowAmbience { get; set; } = true;
 	public bool ShowAnimal { get; set; } = true;
 	public bool ShowBlock { get; set; } = false;
 	public bool ShowCombat { get; set; } = false;
@@ -45,6 +52,8 @@ public class UserConfig
 	public bool ShowEnemy { get; set; } = true;
 	public bool ShowEnvironment { get; set; } = false;
 	public bool ShowInteraction { get; set; } = false;
+	public bool ShowMachinery { get; set; } = true;
+	public bool ShowRust { get; set; } = true;
 	public bool ShowTemporal { get; set; } = true;
 	public bool ShowTool { get; set; } = false;
 	public bool ShowVoice { get; set; } = true;
@@ -53,13 +62,14 @@ public class UserConfig
 	public bool ShowWeather { get; set; } = true;
 	public bool ShowUnknown { get; set; } = false;
 
+	public MusicOption ShowMusic { get; set; } = MusicOption.All;
+
 	public float MinimumDirectionDistance { get; set; } = 1.5f;
 	public long MinimumDisplayDuration { get; set; } = 1000;
 	public long DimTime { get; set; } = 5000;
 	public float DimPercent { get; set; } = 0.7f;
 	public long FadeOutDuration { get; set; } = 500;
-	public int AttenuationRange { get; set; } = 16;
-	public float MinimumAttenuationOpacity { get; set; } = 0.3f;
+	public float MinimumAttenuationOpacity { get; set; } = 0.5f;
 	public int GroupingRange { get; set; } = 5;
 	public int GroupingMaxTime { get; set; } = 1500;
 
@@ -78,8 +88,10 @@ public class UserConfig
 	public Vec4f DangerColor { get; set; } = new(1f, 0.75f, 0.25f, 1f);
 	public bool DangerBold { get; set; } = true;
 	public Vec4f RustColor { get; set; } = new(1.0f, 0.4f, 0.4f, 1f);
+	public Vec4f TemporalColor { get; set; } = new(0.0f, 1.0f, 0.7f, 1f);
 	public Vec4f PassiveColor { get; set; } = new(1f, 1f, 1f, 0.7f);
 	public bool PassiveItalic { get; set; } = true;
+	public Vec4f MusicColor { get; set; } = new(0.5f, 0.7f, 1f, 1f);
 	public bool ShowGlitch { get; set; } = true;
 
 	public bool DebugMode { get; set; } = false;
