@@ -388,7 +388,7 @@
 	"closedcaptions:effect-toolbreak": "[Crack!]",
 	"closedcaptions:effect-translocate-active": "[Intensifying mechanical thrumming]",
 	"closedcaptions:effect-translocate-breakdimension": "[Resounding mechanical clang]",
-	"closedcaptions:effect-translocate-active": "[Mechanical thrumming]",
+	"closedcaptions:effect-translocate-idle": "[Mechanical thrumming]",
 	"closedcaptions:effect-treefell": "[Wood cracking and leaves rustling]",
 	"closedcaptions:effect-water-fill": "[Splash!]",
 	"closedcaptions:effect-water-pour": "[Slosh!]",
