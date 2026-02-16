@@ -140,7 +140,9 @@ public class ClosedCaptionsModSystem : ModSystem
 				config.ShowEnemy = true;
 				config.ShowEnvironment = true;
 				config.ShowInteraction = true;
+				config.ShowMachinery = true;
 				config.ShowRust = true;
+				config.ShowTemporal = true;
 				config.ShowTool = true;
 				config.ShowVoice = true;
 				config.ShowWalk = true;
@@ -158,7 +160,9 @@ public class ClosedCaptionsModSystem : ModSystem
 				config.ShowEnemy = false;
 				config.ShowEnvironment = false;
 				config.ShowInteraction = false;
+				config.ShowMachinery = true;
 				config.ShowRust = false;
+				config.ShowTemporal = true;
 				config.ShowTool = false;
 				config.ShowVoice = false;
 				config.ShowWalk = false;
@@ -174,6 +178,7 @@ public class ClosedCaptionsModSystem : ModSystem
 			config.ShowEnemy = OnCheckBox("show-enemy", config.ShowEnemy, ref modified);
 			config.ShowEnvironment = OnCheckBox("show-environment", config.ShowEnvironment, ref modified);
 			config.ShowInteraction = OnCheckBox("show-interaction", config.ShowInteraction, ref modified);
+			config.ShowMachinery = OnCheckBox("show-machinery", config.ShowMachinery, ref modified);
 			config.ShowRust = OnCheckBox("show-rust", config.ShowRust, ref modified);
 			config.ShowTemporal = OnCheckBox("show-temporal", config.ShowTemporal, ref modified);
 			config.ShowTool = OnCheckBox("show-tool", config.ShowTool, ref modified);
@@ -193,7 +198,6 @@ public class ClosedCaptionsModSystem : ModSystem
 			config.DimTime = OnInputInt("dim-time", (int)config.DimTime, ref modified, 0);
 			config.DimPercent = OnInputInt("dim-percent", (int)(config.DimPercent * 100), ref modified, 0, 100) / 100f;
 			config.FadeOutDuration = OnInputInt("fade-out-duration", (int)config.FadeOutDuration, ref modified, 1);
-			config.AttenuationRange = OnInputInt("attenuation-range", config.AttenuationRange, ref modified, 0);
 			config.MinimumAttenuationOpacity = OnInputInt("min-attenuation-opacity", (int)(config.MinimumAttenuationOpacity * 100), ref modified, 0, 100) / 100f;
 			config.GroupingRange = OnInputInt("grouping-range", config.GroupingRange, ref modified, 0);
 			config.GroupingMaxTime = OnInputInt("grouping-max-time", config.GroupingMaxTime, ref modified, 0);

@@ -37,7 +37,7 @@ public class UserConfig
 {
 	public static readonly string Filename = "closedcaptions.json";
 
-	public bool ShowAmbience { get; set; } = false;
+	public bool ShowAmbience { get; set; } = true;
 	public bool ShowAnimal { get; set; } = true;
 	public bool ShowBlock { get; set; } = false;
 	public bool ShowCombat { get; set; } = false;
@@ -45,6 +45,7 @@ public class UserConfig
 	public bool ShowEnemy { get; set; } = true;
 	public bool ShowEnvironment { get; set; } = false;
 	public bool ShowInteraction { get; set; } = false;
+	public bool ShowMachinery { get; set; } = true;
 	public bool ShowRust { get; set; } = true;
 	public bool ShowTemporal { get; set; } = true;
 	public bool ShowTool { get; set; } = false;
@@ -59,8 +60,7 @@ public class UserConfig
 	public long DimTime { get; set; } = 5000;
 	public float DimPercent { get; set; } = 0.7f;
 	public long FadeOutDuration { get; set; } = 500;
-	public int AttenuationRange { get; set; } = 16;
-	public float MinimumAttenuationOpacity { get; set; } = 0.3f;
+	public float MinimumAttenuationOpacity { get; set; } = 0.5f;
 	public int GroupingRange { get; set; } = 5;
 	public int GroupingMaxTime { get; set; } = 1500;
 

@@ -20,13 +20,14 @@ public enum CaptionTags
 	Enemy		= 1 << 5,
 	Environment	= 1 << 6,
 	Interaction = 1 << 7,
-	Rust		= 1 << 8,
-	Temporal	= 1 << 9,
-	Tool		= 1 << 10,
-	Voice		= 1 << 11,
-	Walk		= 1 << 12,
-	Wearable	= 1 << 13,
-	Weather		= 1 << 14,
+	Machinery	= 1 << 8,
+	Rust		= 1 << 9,
+	Temporal	= 1 << 10,
+	Tool		= 1 << 11,
+	Voice		= 1 << 12,
+	Walk		= 1 << 13,
+	Wearable	= 1 << 14,
+	Weather		= 1 << 15,
 }
 
 [Flags]
@@ -69,6 +70,7 @@ public class Caption
 	public bool IsRelative;
 	public Vec3f Position;
 	public float Range;
+	public float AttenuationRange;
 	public readonly CaptionTags Tags;
 	public readonly CaptionFlags Flags;
 	public readonly CaptionGroup? Group;
@@ -86,6 +88,7 @@ public class Caption
 		bool isRelative,
 		Vec3f position,
 		float range,
+		float attenuationRange,
 		CaptionTags tags,
 		CaptionFlags flags,
 		CaptionGroup? group,
@@ -105,6 +108,7 @@ public class Caption
 		IsRelative = isRelative;
 		Position = position;
 		Range = range;
+		AttenuationRange = attenuationRange;
 		Tags = tags;
 		Flags = flags;
 		Group = group;

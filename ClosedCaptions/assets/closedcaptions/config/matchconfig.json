@@ -154,7 +154,8 @@
 				},
 				{
 					"match": "sounds/block/chute.ogg",
-					"tags": "environment,interaction",
+					"tags": "environment,interaction,machinery",
+					"group": { "name": "machinery", "priority": 5 },
 					"captionKey": "closedcaptions:block-chute"
 				},
 				{
@@ -194,7 +195,8 @@
 				},
 				{
 					"match": "sounds/block/grindingwheel.ogg",
-					"tags": "block,interaction,tool",
+					"tags": "block,interaction,machinery,tool",
+					"group": { "name": "machinery", "priority": 8 },
 					"captionKey": "closedcaptions:block-grindingwheel"
 				},
 				{
@@ -219,7 +221,8 @@
 				},
 				{
 					"match": "sounds/block/hoppertumble.ogg",
-					"tags": "environment,interaction",
+					"tags": "environment,interaction,machinery",
+					"group": { "name": "machinery", "priority": 5 },
 					"captionKey": "closedcaptions:block-hopper-tumble"
 				},
 				{
@@ -423,7 +426,8 @@
 				},
 				{
 					"match": "sounds/block/woodcreak*",
-					"tags": "block,environment",
+					"tags": "ambient,block,environment,machinery",
+					"group": { "name": "machinery", "priority": 0 },
 					"captionKey": "closedcaptions:block-wood-creak"
 				 },
 			]
@@ -750,6 +754,42 @@
 					"tags": "danger,enemy",
 					"icon":{ "type": "item", "code": "creature-drifter-normal" },
 					"captionKey": "closedcaptions:creature-drifter-idle"
+				},
+			]
+		},
+		{
+			"group": "sounds/creature/eidolon*",
+			"defaultKey": "closedcaptions:creature",
+			"mappings": [
+				{
+					"match": "sounds/creature/eidolon/awake.ogg",
+					"tags": "enemy",
+					"captionKey": "closedcaptions:creature-eidolon-awake"
+				},
+				{
+					"match": "sounds/creature/eidolon/awaken.ogg",
+					"tags": "combat,danger,enemy,rust",
+					"captionKey": "closedcaptions:creature-eidolon-awaken"
+				},
+				{
+					"match": "sounds/creature/eidolon/death.ogg",
+					"tags": "combat,enemy",
+					"captionKey": "closedcaptions:creature-eidolon-death"
+				},
+				{
+					"match": "sounds/creature/eidolon/hit.ogg",
+					"tags": "combat,enemy",
+					"captionKey": "closedcaptions:creature-eidolon-hit"
+				},
+				{
+					"match": "sounds/creature/eidolon/rockfallslam.ogg",
+					"tags": "combat,danger,enemy",
+					"captionKey": "closedcaptions:creature-eidolon-rockfallslam"
+				},
+				{
+					"match": "sounds/creature/eidolon/throw.ogg",
+					"tags": "combat,danger,enemy",
+					"captionKey": "closedcaptions:creature-eidolon-throw"
 				},
 			]
 		},
@@ -1228,7 +1268,8 @@
 				},
 				{
 					"match": "sounds/effect/bellows.ogg",
-					"tags":"interaction,tool",
+					"tags":"interaction,machinery,tool",
+					"group": { "name": "machinery", "priority": 10 },
 					"captionKey": "closedcaptions:effect-bellows"
 				},
 				{
@@ -1253,7 +1294,7 @@
 				},
 				{
 					"match": "sounds/effect/crusher-impact*",
-					"tags":"environment,tool",
+					"tags":"environment,machinery,tool",
 					"captionKey": "closedcaptions:effect-crusherimpact"
 				},
 				{
@@ -1263,7 +1304,9 @@
 				},
 				{
 					"match": "sounds/effect/echochamber*",
-					"tags":"ambience,environment",
+					"tags":"ambience,environment,rust",
+					"attenuationRange": 32.0,
+					"group": { "name": "echochamber" },
 					"captionKey": "closedcaptions:effect-echochamber"
 				},
 				{
@@ -1283,12 +1326,14 @@
 				},
 				{
 					"match": "sounds/effect/gearbox_turn.ogg",
-					"tags":"ambience,environment",
+					"tags":"ambience,environment,machinery",
+					"group": { "name": "machinery", "priority": 5 },
 					"captionKey": "closedcaptions:effect-gearbox-turn"
 				},
 				{
 					"match": "sounds/effect/gears.ogg",
-					"tags":"ambience,environment",
+					"tags":"ambience,environment,machinery",
+					"group": { "name": "machinery", "priority": 5 },
 					"captionKey": "closedcaptions:effect-gears"
 				},
 				{
@@ -1318,7 +1363,8 @@
 				},
 				{
 					"match": "sounds/effect/metalgrinding.ogg",
-					"tags":"interaction,tool",
+					"tags":"interaction,machinery,tool",
+					"group": { "name": "machinery", "priority": 15 },
 					"captionKey": "closedcaptions:effect-metalgrinding"
 				},
 				{
@@ -1334,6 +1380,7 @@
 				{
 					"match": "sounds/effect/planetary_gears.ogg",
 					"tags":"ambience,environment",
+					"group": { "name": "machinery", "priority": 5 },
 					"captionKey": "closedcaptions:effect-planetarygears"
 				},
 				{
@@ -1343,7 +1390,7 @@
 				},
 				{
 					"match": "sounds/effect/portal.ogg",
-					"tags":"ambience,environment",
+					"tags":"ambience,environment,temporal",
 					"captionKey": "closedcaptions:effect-portal"
 				},
 				{
@@ -1385,7 +1432,8 @@
 				},
 				{
 					"match": "sounds/effect/stonecrush.ogg",
-					"tags":"interation,tool",
+					"tags":"interation,machinery,tool",
+					"group": { "name": "machinery", "priority": 5 },
 					"captionKey": "closedcaptions:effect-stonecrush"
 				},
 				{
@@ -1440,8 +1488,8 @@
 				},
 				{
 					"match": "sounds/effect/translocate-idle.ogg",
-					"tags": "ambience,environment,temporal",
-					"group": { "name": "translocator", "priority": 0 },
+					"tags": "ambience,environment,machinery",
+					"group": { "name": "machinery", "priority": 0 },
 					"captionKey": "closedcaptions:effect-translocate-idle"
 				},
 				{
@@ -1471,7 +1519,8 @@
 				},
 				{
 					"match": "sounds/effect/woodgrind.ogg",
-					"tags": "interaction,tool",
+					"tags": "interaction,tool,machinery",
+					"group": { "name": "machinery", "priority": 10 },
 					"captionKey": "closedcaptions:effect-woodgrind"
 				},
 				{

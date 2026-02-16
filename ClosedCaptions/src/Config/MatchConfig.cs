@@ -13,7 +13,10 @@ public class MatchConfig
 {
     public static readonly string Filename = "config/matchconfig.json";
 
-    public class MatchGroup
+	private static readonly float AttenuationRangePercent = 0.5f;
+	private static readonly float MinimumAttenuationRange = 6.0f;
+
+	public class MatchGroup
 	{
 		public string Group = "";
 		public string DefaultKey = "";
@@ -30,6 +33,7 @@ public class MatchConfig
 		public CaptionFlags Flags = CaptionFlags.None;
 		public CaptionGroup? Group = null;
 		public CaptionIcon? Icon = null;
+		public float? AttenuationRange = null;
 
 		private class FlagsConverter : JsonConverter
 		{
@@ -118,6 +122,9 @@ public class MatchConfig
 							sound.Params.RelativePosition,
 							position,
 							sound.Params.Range,
+							mapping.AttenuationRange != null ?
+								mapping.AttenuationRange.Value :
+								Math.Max(MinimumAttenuationRange, sound.Params.Range * AttenuationRangePercent),
 							mapping.Tags,
 							mapping.Flags,
 							mapping.Group,
@@ -143,6 +150,7 @@ public class MatchConfig
 			true,
 			Vec3f.Zero,
 			32f,
+			32f * AttenuationRangePercent,
 			CaptionTags.None,
 			CaptionFlags.None,
 			null,
