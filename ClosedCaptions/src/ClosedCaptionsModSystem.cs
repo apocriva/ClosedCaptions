@@ -37,14 +37,14 @@ public class ClosedCaptionsModSystem : ModSystem
 		base.StartPre(api);
 
 		UserConfig = api.LoadModConfig<UserConfig>(UserConfig.Filename) ?? new UserConfig();
-
-		InitConfigLuts();
 	}
 
 	public override void StartClientSide(ICoreClientAPI api)
 	{
 		_capi = api;
 		base.StartClientSide(_capi);
+		
+		InitConfigLuts();
 
 		if (!Harmony.HasAnyPatches(Mod.Info.ModID))
 		{
