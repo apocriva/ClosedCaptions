@@ -142,6 +142,14 @@ public class MatchConfig
 		}
 
 		// If partialMatch is null, the sound was not matched, in which case it is an unknown sound.
+		if (ClosedCaptionsModSystem.UserConfig.DebugMode)
+		{
+			if (partialMatch == null)
+				Api?.Logger.Warning($"[Closed Captions] Unknown sound: '{sound.Params.Location}'");
+			else
+				Api?.Logger.Warning($"[Closed Captions] Partially matched sound: '{sound.Params.Location}'");
+		}
+		
 		caption = new Caption(
 			sound,
 			partialMatch == null ? Lang.Get("closedcaptions:unknown-sound") : Lang.Get(partialMatch.DefaultKey),

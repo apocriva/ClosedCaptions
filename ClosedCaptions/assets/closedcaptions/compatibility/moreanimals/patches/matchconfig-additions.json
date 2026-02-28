@@ -1,0 +1,128 @@
+[
+	{
+		"op": "addmerge",
+		"path": "/soundMap",
+		"file": "closedcaptions:config/matchconfig.json",
+		"value": [
+			{
+				"group": "moreanimals:sounds/capercaillie*",
+				"defaultKey": "closedcaptions:moreanimals-capercaillie",
+				"mappings": [
+					{
+						"match": "moreanimals:sounds/capercaillie/capercailliecall*",
+						"tags": "animal",
+						"captionKey": "closedcaptions:moreanimals-capercaillie-call"
+					},
+					{
+						"match": "moreanimals:sounds/capercaillie/capercailliecock*",
+						"tags": "animal",
+						"captionKey": "closedcaptions:moreanimals-capercaillie-cock"
+					},
+					{
+						"match": "moreanimals:sounds/capercaillie/capercailliehen*",
+						"tags": "animal",
+						"captionKey": "closedcaptions:moreanimals-capercaillie-hen"
+					},
+					{
+						"match": "moreanimals:sounds/capercaillie/capercailliehurt*",
+						"tags": "animal,combat",
+						"captionKey": "closedcaptions:moreanimals-capercaillie-hurt"
+					},
+				]
+			},
+			{
+				"group": "moreanimals:sounds/goldenpheasant*",
+				"defaultKey": "closedcaptions:moreanimals-goldenpheasant",
+				"mappings": [
+					{
+						"match": "moreanimals:sounds/goldenpheasant/goldenpheasantcock*",
+						"tags": "animal",
+						"captionKey": "closedcaptions:moreanimals-goldenpheasant-cock"
+					},
+					{
+						"match": "moreanimals:sounds/goldenpheasant/goldenpheasanthen*",
+						"tags": "animal",
+						"captionKey": "closedcaptions:moreanimals-goldenpheasant-hen"
+					},
+				]
+			},
+			{
+				"group": "moreanimals:sounds/pheasant*",
+				"defaultKey": "closedcaptions:moreanimals-pheasant",
+				"mappings": [
+					{
+						"match": "moreanimals:sounds/pheasant/pheasantdeath*",
+						"tags": "animal,combat",
+						"captionKey": "closedcaptions:moreanimals-pheasant-death"
+					},
+					{
+						"match": "moreanimals:sounds/pheasant/pheasanthenhurt*",
+						"tags": "animal",
+						"captionKey": "closedcaptions:moreanimals-pheasant-hen-hurt"
+					},
+					{
+						"match": "moreanimals:sounds/pheasant/pheasanthen*",
+						"tags": "animal,combat",
+						"captionKey": "closedcaptions:moreanimals-pheasant-hen"
+					},
+					{
+						"match": "moreanimals:sounds/pheasant/pheasanthurt*",
+						"tags": "animal,combat",
+						"captionKey": "closedcaptions:moreanimals-pheasant-hurt"
+					},
+					{
+						"match": "moreanimals:sounds/pheasant/pheasant*",
+						"tags": "animal",
+						"captionKey": "closedcaptions:moreanimals-pheasant-call"
+					},
+				]
+			},
+			{
+				"group": "moreanimals:sounds/turkey*",
+				"defaultKey": "closedcaptions:moreanimals-turkey",
+				"mappings": [
+					{
+						"match": "moreanimals:sounds/turkey/wildturkeydie*",
+						"tags": "animal,combat",
+						"captionKey": "closedcaptions:moreanimals-turkey-die"
+					},
+					{
+						"match": "moreanimals:sounds/turkey/wildturkeygobbleralert*",
+						"tags": "animal",
+						"captionKey": "closedcaptions:moreanimals-turkey-gobbler-alert"
+					},
+					{
+						"match": "moreanimals:sounds/turkey/wildturkeygobblercall*",
+						"tags": "animal",
+						"captionKey": "closedcaptions:moreanimals-turkey-gobbler-call"
+					},
+					{
+						"match": "moreanimals:sounds/turkey/wildturkeygobblerhurt*",
+						"tags": "animal,combat",
+						"captionKey": "closedcaptions:moreanimals-turkey-gobbler-hurt"
+					},
+					{
+						"match": "moreanimals:sounds/turkey/wildturkeygobbleridle*",
+						"tags": "animal",
+						"captionKey": "closedcaptions:moreanimals-turkey-gobbler-idle"
+					},
+					{
+						"match": "moreanimals:sounds/turkey/wildturkeyhenalert*",
+						"tags": "animal",
+						"captionKey": "closedcaptions:moreanimals-turkey-hen-alert"
+					},
+					{
+						"match": "moreanimals:sounds/turkey/wildturkeyhenhurt*",
+						"tags": "animal,combat",
+						"captionKey": "closedcaptions:moreanimals-turkey-hen-hurt"
+					},
+					{
+						"match": "moreanimals:sounds/turkey/wildturkeyhenidle*",
+						"tags": "animal",
+						"captionKey": "closedcaptions:moreanimals-turkey-hen-idle"
+					},
+				]
+			},
+		]
+	}
+]
