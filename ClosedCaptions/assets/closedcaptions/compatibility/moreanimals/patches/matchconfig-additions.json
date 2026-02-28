@@ -51,6 +51,11 @@
 				"defaultKey": "closedcaptions:moreanimals-pheasant",
 				"mappings": [
 					{
+						"match": "moreanimals:sounds/pheasant/pheasant*",
+						"tags": "animal",
+						"captionKey": "closedcaptions:moreanimals-pheasant-call"
+					},
+					{
 						"match": "moreanimals:sounds/pheasant/pheasantdeath*",
 						"tags": "animal,combat",
 						"captionKey": "closedcaptions:moreanimals-pheasant-death"
@@ -69,11 +74,6 @@
 						"match": "moreanimals:sounds/pheasant/pheasanthurt*",
 						"tags": "animal,combat",
 						"captionKey": "closedcaptions:moreanimals-pheasant-hurt"
-					},
-					{
-						"match": "moreanimals:sounds/pheasant/pheasant*",
-						"tags": "animal",
-						"captionKey": "closedcaptions:moreanimals-pheasant-call"
 					},
 				]
 			},
