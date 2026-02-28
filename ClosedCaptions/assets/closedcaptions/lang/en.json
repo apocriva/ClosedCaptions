@@ -624,4 +624,20 @@
 	"closedcaptions:moreanimals-turkey-hen-alert": "[Squawk!]",
 	"closedcaptions:moreanimals-turkey-hen-hurt": "[Pained squawk]",
 	"closedcaptions:moreanimals-turkey-hen-idle": "[Gentle squawking]",
+
+	// Mod support: Fauna of the Stone Age: Bovinae
+	"closedcaptions:bovinae": "[Bovinae noises]",
+	"closedcaptions:bovinae-carcass": "[Flies buzzing]",
+	"closedcaptions:bovinae-bos-hurt": "[Pained moo]",
+	"closedcaptions:bovinae-bos-moo": "[Deep moo]",
+	"closedcaptions:bovinae-bos-roar": "[Rumbled lowing]",
+	"closedcaptions:bovinae-boselaphus-nilgai-call": "[Grunt]",
+	"closedcaptions:bovinae-bubalus-anoa-call": "[Whining moo]",
+	"closedcaptions:bovinae-bubalus-buffalo-idle": "[Lowing]",
+	"closedcaptions:bovinae-bubalus-buffalo-moo": "[Deep moo]",
+	"closedcaptions:bovinae-pseudoryx-bleat": "[Deep bleating]",
+	"closedcaptions:bovinae-syncerus-growl": "[Deep snorting growl]",
+	"closedcaptions:bovinae-tetracerus-bark": "[Breathy bark]",
+	"closedcaptions:bovinae-strepsiceros-bark": "[Deep growling bark]",
+	"closedcaptions:bovinae-sylvaticus-bark": "[Deep bark]",
 }

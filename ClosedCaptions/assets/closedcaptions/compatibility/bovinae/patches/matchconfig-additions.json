@@ -1,0 +1,80 @@
+[
+	{
+		"op": "addmerge",
+		"path": "/soundMap",
+		"file": "closedcaptions:config/matchconfig.json",
+		"value": [
+			{
+				"group": "bovinae:sounds/creature*",
+				"defaultKey": "closedcaptions:bovinae",
+				"mappings": [
+					{
+						"match": "bovinae:sounds/creature/bos/hurt*",
+						"tags": "animal,combat",
+						"captionKey": "closedcaptions:bovinae-bos-hurt"
+					},
+					{
+						"match": "bovinae:sounds/creature/bos/moo*",
+						"tags": "animal",
+						"captionKey": "closedcaptions:bovinae-bos-moo"
+					},
+					{
+						"match": "bovinae:sounds/creature/bos/roar*",
+						"tags": "animal,combat",
+						"captionKey": "closedcaptions:bovinae-bos-roar"
+					},
+					{
+						"match": "bovinae:sounds/creature/boselaphus/nilgai-call*",
+						"tags": "animal",
+						"captionKey": "closedcaptions:bovinae-boselaphus-nilgai-call"
+					},
+					{
+						"match": "bovinae:sounds/creature/bubalus/anoa-call*",
+						"tags": "animal",
+						"captionKey": "closedcaptions:bovinae-bubalus-anoa-call"
+					},
+					{
+						"match": "bovinae:sounds/creature/bubalus/buffalo-idle*",
+						"tags": "animal",
+						"captionKey": "closedcaptions:bovinae-bubalus-buffalo-idle"
+					},
+					{
+						"match": "bovinae:sounds/creature/bubalus/buffalo-moo*",
+						"tags": "animal",
+						"captionKey": "closedcaptions:bovinae-bubalus-buffalo-moo"
+					},
+					{
+						"match": "bovinae:sounds/creature/pseudoryx/bleat*",
+						"tags": "animal",
+						"captionKey": "closedcaptions:bovinae-pseudoryx-bleat"
+					},
+					{
+						"match": "bovinae:sounds/creature/syncerus/growl*",
+						"tags": "animal",
+						"captionKey": "closedcaptions:bovinae-syncerus-growl"
+					},
+					{
+						"match": "bovinae:sounds/creature/tetracerus/bark*",
+						"tags": "animal",
+						"captionKey": "closedcaptions:bovinae-tetracerus-bark"
+					},
+					{
+						"match": "bovinae:sounds/creature/tragelaphus/strepsiceros-bark*",
+						"tags": "animal",
+						"captionKey": "closedcaptions:bovinae-strepsiceros-bark"
+					},
+					{
+						"match": "bovinae:sounds/creature/tragelaphus/sylvaticus-bark*",
+						"tags": "animal",
+						"captionKey": "closedcaptions:bovinae-sylvaticus-bark"
+					},
+					{
+						"match": "bovinae:sounds/creature/carcass.ogg",
+						"tags": "animal",
+						"captionKey": "closedcaptions:bovinae-carcass"
+					},
+				]
+			},
+		]
+	}
+]
