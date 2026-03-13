@@ -56,8 +56,7 @@ public class ClosedCaptionsModSystem : ModSystem
 
 		if (api.ModLoader.IsModEnabled("configlib"))
 		{
-			var configlib = api.ModLoader.GetModSystem<ConfigLibModSystem>();
-			configlib.RegisterCustomConfig(Lang.Get("closedcaptions:config"), (id, buttons) => EditConfig(buttons, api));
+			InitConfigLib(api);
 		}
 
 		_cancelSource = new CancellationTokenSource();
@@ -71,6 +70,12 @@ public class ClosedCaptionsModSystem : ModSystem
 				_capi.Event.EnqueueMainThreadTask(_manager.Tick, "closedcaptiontick");
 			}
 		}).Start();
+	}
+
+	private void InitConfigLib(ICoreAPI api)
+	{
+		var configlib = api.ModLoader.GetModSystem<ConfigLibModSystem>();
+		configlib.RegisterCustomConfig(Lang.Get("closedcaptions:config"), (id, buttons) => EditConfig(buttons, api));
 	}
 
 	public override void Dispose()
