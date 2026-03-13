@@ -11,21 +11,25 @@
 					{
 						"match": "moreanimals:sounds/capercaillie/capercailliecall*",
 						"tags": "animal",
+						"icon":{ "type": "item", "code": "moreanimals:creature-capercaillie-cock" },
 						"captionKey": "closedcaptions:moreanimals-capercaillie-call"
 					},
 					{
 						"match": "moreanimals:sounds/capercaillie/capercailliecock*",
 						"tags": "animal",
+						"icon":{ "type": "item", "code": "moreanimals:creature-capercaillie-cock" },
 						"captionKey": "closedcaptions:moreanimals-capercaillie-cock"
 					},
 					{
 						"match": "moreanimals:sounds/capercaillie/capercailliehen*",
 						"tags": "animal",
+						"icon":{ "type": "item", "code": "moreanimals:creature-capercaillie-hen" },
 						"captionKey": "closedcaptions:moreanimals-capercaillie-hen"
 					},
 					{
 						"match": "moreanimals:sounds/capercaillie/capercailliehurt*",
 						"tags": "animal,combat",
+						"icon":{ "type": "item", "code": "moreanimals:creature-capercaillie-cock" },
 						"captionKey": "closedcaptions:moreanimals-capercaillie-hurt"
 					},
 				]
@@ -37,11 +41,13 @@
 					{
 						"match": "moreanimals:sounds/goldenpheasant/goldenpheasantcock*",
 						"tags": "animal",
+						"icon":{ "type": "item", "code": "moreanimals:creature-goldenpheasant-cock" },
 						"captionKey": "closedcaptions:moreanimals-goldenpheasant-cock"
 					},
 					{
 						"match": "moreanimals:sounds/goldenpheasant/goldenpheasanthen*",
 						"tags": "animal",
+						"icon":{ "type": "item", "code": "moreanimals:creature-goldenpheasant-hen" },
 						"captionKey": "closedcaptions:moreanimals-goldenpheasant-hen"
 					},
 				]
@@ -53,26 +59,31 @@
 					{
 						"match": "moreanimals:sounds/pheasant/pheasant*",
 						"tags": "animal",
+						"icon":{ "type": "item", "code": "moreanimals:creature-pheasant-cock" },
 						"captionKey": "closedcaptions:moreanimals-pheasant-call"
 					},
 					{
 						"match": "moreanimals:sounds/pheasant/pheasantdeath*",
 						"tags": "animal,combat",
+						"icon":{ "type": "item", "code": "moreanimals:creature-pheasant-cock" },
 						"captionKey": "closedcaptions:moreanimals-pheasant-death"
 					},
 					{
 						"match": "moreanimals:sounds/pheasant/pheasanthenhurt*",
-						"tags": "animal",
+						"tags": "animal,combat",
+						"icon":{ "type": "item", "code": "moreanimals:creature-pheasant-hen" },
 						"captionKey": "closedcaptions:moreanimals-pheasant-hen-hurt"
 					},
 					{
 						"match": "moreanimals:sounds/pheasant/pheasanthen*",
 						"tags": "animal,combat",
+						"icon":{ "type": "item", "code": "moreanimals:creature-pheasant-hen" },
 						"captionKey": "closedcaptions:moreanimals-pheasant-hen"
 					},
 					{
 						"match": "moreanimals:sounds/pheasant/pheasanthurt*",
 						"tags": "animal,combat",
+						"icon":{ "type": "item", "code": "moreanimals:creature-pheasant-cock" },
 						"captionKey": "closedcaptions:moreanimals-pheasant-hurt"
 					},
 				]
@@ -84,41 +95,49 @@
 					{
 						"match": "moreanimals:sounds/turkey/wildturkeydie*",
 						"tags": "animal,combat",
+						"icon":{ "type": "item", "code": "moreanimals:creature-wildturkey-cock" },
 						"captionKey": "closedcaptions:moreanimals-turkey-die"
 					},
 					{
 						"match": "moreanimals:sounds/turkey/wildturkeygobbleralert*",
 						"tags": "animal",
+						"icon":{ "type": "item", "code": "moreanimals:creature-wildturkey-cock" },
 						"captionKey": "closedcaptions:moreanimals-turkey-gobbler-alert"
 					},
 					{
 						"match": "moreanimals:sounds/turkey/wildturkeygobblercall*",
 						"tags": "animal",
+						"icon":{ "type": "item", "code": "moreanimals:creature-wildturkey-cock" },
 						"captionKey": "closedcaptions:moreanimals-turkey-gobbler-call"
 					},
 					{
 						"match": "moreanimals:sounds/turkey/wildturkeygobblerhurt*",
 						"tags": "animal,combat",
+						"icon":{ "type": "item", "code": "moreanimals:creature-wildturkey-cock" },
 						"captionKey": "closedcaptions:moreanimals-turkey-gobbler-hurt"
 					},
 					{
 						"match": "moreanimals:sounds/turkey/wildturkeygobbleridle*",
 						"tags": "animal",
+						"icon":{ "type": "item", "code": "moreanimals:creature-wildturkey-cock" },
 						"captionKey": "closedcaptions:moreanimals-turkey-gobbler-idle"
 					},
 					{
 						"match": "moreanimals:sounds/turkey/wildturkeyhenalert*",
 						"tags": "animal",
+						"icon":{ "type": "item", "code": "moreanimals:creature-wildturkey-hen" },
 						"captionKey": "closedcaptions:moreanimals-turkey-hen-alert"
 					},
 					{
 						"match": "moreanimals:sounds/turkey/wildturkeyhenhurt*",
 						"tags": "animal,combat",
+						"icon":{ "type": "item", "code": "moreanimals:creature-wildturkey-hen" },
 						"captionKey": "closedcaptions:moreanimals-turkey-hen-hurt"
 					},
 					{
 						"match": "moreanimals:sounds/turkey/wildturkeyhenidle*",
 						"tags": "animal",
+						"icon":{ "type": "item", "code": "moreanimals:creature-wildturkey-hen" },
 						"captionKey": "closedcaptions:moreanimals-turkey-hen-idle"
 					},
 				]
