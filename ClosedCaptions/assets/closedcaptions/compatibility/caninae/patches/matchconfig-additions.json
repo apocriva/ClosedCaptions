@@ -1,0 +1,45 @@
+[
+	{
+		"op": "addmerge",
+		"path": "/soundMap",
+		"file": "closedcaptions:config/matchconfig.json",
+		"value": [
+			{
+				"group": "caninae:sounds/creature*",
+				"defaultKey": "closedcaptions:caninae",
+				"mappings": [
+					{
+						"match": "caninae:sounds/creature/aenocyon/bark*",
+						"tags": "animal,combat",
+						"icon":{ "type": "item", "code": "caninae:creature-caninae-canina-adult-male-aenocyon-dirus" },
+						"captionKey": "closedcaptions:caninae-aenocyon-dirus-bark"
+					},
+					{
+						"match": "caninae:sounds/creature/aenocyon/growl*",
+						"tags": "animal,combat",
+						"icon":{ "type": "item", "code": "caninae:creature-caninae-canina-adult-male-aenocyon-dirus" },
+						"captionKey": "closedcaptions:caninae-aenocyon-dirus-growl"
+					},
+					{
+						"match": "caninae:sounds/creature/aenocyon/howl*",
+						"tags": "animal,danger",
+						"icon":{ "type": "item", "code": "caninae:creature-caninae-canina-adult-male-aenocyon-dirus" },
+						"captionKey": "closedcaptions:caninae-aenocyon-dirus-howl"
+					},
+					{
+						"match": "caninae:sounds/creature/canis/aureus-bark*",
+						"tags": "animal,combat",
+						"icon":{ "type": "item", "code": "caninae:creature-caninae-canina-adult-male-canis-aureus" },
+						"captionKey": "closedcaptions:caninae-canis-aureus-bark"
+					},
+					{
+						"match": "caninae:sounds/creature/canis/aureus-howl*",
+						"tags": "animal",
+						"icon":{ "type": "item", "code": "caninae:creature-caninae-canina-adult-male-canis-aureus" },
+						"captionKey": "closedcaptions:caninae-canis-aureus-howl"
+					},
+				]
+			},
+		]
+	}
+]
