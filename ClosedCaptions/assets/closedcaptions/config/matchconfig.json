@@ -2359,7 +2359,7 @@
 					"match": "sounds/wearable/scale*",
 					"tags": "wearable",
 					"captionKey": "closedcaptions:wearable-scale"
-				 },
+				},
 			]
 		},
 		{
