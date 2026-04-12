@@ -1512,7 +1512,7 @@
 					"captionKey": "closedcaptions:creature-wolf-pup-flop"
 				},
 				{
-					"match": "sounds/creature/wolf/pop-howl*",
+					"match": "sounds/creature/wolf/pup-howl*",
 					"tags": "animal",
 					"icon":{ "type": "item", "code": "creature-wolf-eurasian-baby-male" },
 					"captionKey": "closedcaptions:creature-wolf-pup-howl"
