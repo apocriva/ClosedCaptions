@@ -17,157 +17,157 @@ namespace ClosedCaptions.GUI;
 
 public class ClosedCaptionsOverlay : HudElement
 {
-	public override double DrawOrder => -0.5;
-	public override bool ShouldReceiveMouseEvents() => false;
+    public override double DrawOrder => -0.5;
+    public override bool ShouldReceiveMouseEvents() => false;
 
-	private CairoFont? _font;
-	private readonly Vec4f _fontColor = new(0.91f, 0.87f, 0.81f, 1f);
+    private CairoFont? _font;
+    private readonly Vec4f _fontColor = new(0.91f, 0.87f, 0.81f, 1f);
 
-	private readonly List<GuiElementCaptionLabel> _captionLabels = [];
+    private readonly List<GuiElementCaptionLabel> _captionLabels = [];
 
-	public ClosedCaptionsOverlay(ICoreClientAPI capi) : base(capi)
-	{
-		BuildDialog();
-	}
+    public ClosedCaptionsOverlay(ICoreClientAPI capi) : base(capi)
+    {
+        BuildDialog();
+    }
 
-	public void Rebuild()
-	{
-		BuildDialog();
-	}
+    public void Rebuild()
+    {
+        BuildDialog();
+    }
 
-	public override void OnRenderGUI(float deltaTime)
-	{
-		foreach (var captionLabel in _captionLabels)
-		{
-			float? angle = null;
-			float baseOpacity = 1f;
-			float textOpacity = 1f;
-			GetIndicators(captionLabel.Caption, ref baseOpacity, ref textOpacity, ref angle);
-			captionLabel.Update(baseOpacity, textOpacity, angle);
-		}
+    public override void OnRenderGUI(float deltaTime)
+    {
+        foreach (var captionLabel in _captionLabels)
+        {
+            float? angle = null;
+            float baseOpacity = 1f;
+            float textOpacity = 1f;
+            GetIndicators(captionLabel.Caption, ref baseOpacity, ref textOpacity, ref angle);
+            captionLabel.Update(baseOpacity, textOpacity, angle);
+        }
 
-		base.OnRenderGUI(deltaTime);
-	}
+        base.OnRenderGUI(deltaTime);
+    }
 
-	private void InitFont()
-	{
-		_font = new CairoFont()
-			.WithColor([_fontColor.R, _fontColor.G, _fontColor.B, _fontColor.A])
-			.WithFont(GuiStyle.StandardFontName)
-			.WithOrientation(EnumTextOrientation.Center)
-			.WithFontSize(ClosedCaptionsModSystem.UserConfig.FontSize)
-			.WithWeight(FontWeight.Normal)
-			.WithStroke([0, 0, 0, 0.5], 1);
-	}
+    private void InitFont()
+    {
+        _font = new CairoFont()
+            .WithColor([_fontColor.R, _fontColor.G, _fontColor.B, _fontColor.A])
+            .WithFont(GuiStyle.StandardFontName)
+            .WithOrientation(EnumTextOrientation.Center)
+            .WithFontSize(ClosedCaptionsModSystem.UserConfig.FontSize)
+            .WithWeight(FontWeight.Normal)
+            .WithStroke([0, 0, 0, 0.5], 1);
+    }
 
-	private void GetIndicators(Caption caption, ref float baseOpacity, ref float textOpacity, ref float? angle)
-	{
-		var player = capi.World.Player;
-		var relativePosition = caption.Position - player.Entity.Pos.XYZFloat;
-		if (caption.IsRelative)
-			relativePosition = caption.Position;
-		relativePosition.Y = 0f;
-		var relativeDirection = relativePosition.Clone();
-		relativeDirection.Normalize();
-		
-		// Left or right?
-		Vec3f forward = new(MathF.Sin(player.CameraYaw), 0f, MathF.Cos(player.CameraYaw));
-		var dot = relativeDirection.Dot(forward);
-		angle = MathF.Acos(dot) * 180f / MathF.PI;
-		var det = relativeDirection.X * forward.Z - relativeDirection.Z * forward.X;
-		if (det > 0)
-			angle = -angle;
+    private void GetIndicators(Caption caption, ref float baseOpacity, ref float textOpacity, ref float? angle)
+    {
+        var player = capi.World.Player;
+        var relativePosition = caption.Position - player.Entity.Pos.XYZFloat;
+        if (caption.IsRelative)
+            relativePosition = caption.Position;
+        relativePosition.Y = 0f;
+        var relativeDirection = relativePosition.Clone();
+        relativeDirection.Normalize();
 
-		var distance = relativePosition.Length();
-		if (ClosedCaptionsModSystem.UserConfig.DirectionIndicators == CaptionDirectionIndicators.None ||
-			(caption.Flags & CaptionFlags.Directionless) != 0 ||
-			caption.IsRelative ||
-			(!caption.IsRelative &&
-			relativePosition.Length() < ClosedCaptionsModSystem.UserConfig.MinimumDirectionDistance))
-		{
-			angle = null;
-		}
-		
-		baseOpacity = 1f;
+        // Left or right?
+        Vec3f forward = new(MathF.Sin(player.CameraYaw), 0f, MathF.Cos(player.CameraYaw));
+        var dot = relativeDirection.Dot(forward);
+        angle = MathF.Acos(dot) * 180f / MathF.PI;
+        var det = relativeDirection.X * forward.Z - relativeDirection.Z * forward.X;
+        if (det > 0)
+            angle = -angle;
 
-		// Modulate opacity if the caption is fading out.
-		if (caption.FadeOutStartTime > 0 &&
-			capi.ElapsedMilliseconds > caption.FadeOutStartTime)
-		{
-			var percent = 1f - (float)(capi.ElapsedMilliseconds - caption.FadeOutStartTime) / ClosedCaptionsModSystem.UserConfig.FadeOutDuration;
-			percent = MathF.Max(0f, MathF.Min(percent, 1f));
-			baseOpacity *= percent;
-		}
+        var distance = relativePosition.Length();
+        if (ClosedCaptionsModSystem.UserConfig.DirectionIndicators == CaptionDirectionIndicators.None ||
+            (caption.Flags & CaptionFlags.Directionless) != 0 ||
+            caption.IsRelative ||
+            (!caption.IsRelative &&
+            relativePosition.Length() < ClosedCaptionsModSystem.UserConfig.MinimumDirectionDistance))
+        {
+            angle = null;
+        }
 
-		textOpacity = 1f;
+        baseOpacity = 1f;
 
-		// Sounds that have been playing a while may be dimmed.
-		if (capi.ElapsedMilliseconds - caption.StartTime > ClosedCaptionsModSystem.UserConfig.DimTime)
-		{
-			textOpacity *= ClosedCaptionsModSystem.UserConfig.DimPercent;
-		}
+        // Modulate opacity if the caption is fading out.
+        if (caption.FadeOutStartTime > 0 &&
+            capi.ElapsedMilliseconds > caption.FadeOutStartTime)
+        {
+            var percent = 1f - (float)(capi.ElapsedMilliseconds - caption.FadeOutStartTime) / ClosedCaptionsModSystem.UserConfig.FadeOutDuration;
+            percent = MathF.Max(0f, MathF.Min(percent, 1f));
+            baseOpacity *= percent;
+        }
 
-		// Modulate opacity by sound distance.
-		if (distance > caption.AttenuationRange)
-		{
-			var span = caption.Range - caption.AttenuationRange;
-			var percent = (distance - caption.AttenuationRange) / span * (1f - ClosedCaptionsModSystem.UserConfig.MinimumAttenuationOpacity);
-			percent = MathF.Max(0f, MathF.Min(percent, 1f - ClosedCaptionsModSystem.UserConfig.MinimumAttenuationOpacity));
-			textOpacity *= 1f - percent;
-		}
-	}
+        textOpacity = 1f;
 
-	private void BuildDialog()
-	{
-		// TODO: Only re-init font if settings have changed.
-		InitFont();
+        // Sounds that have been playing a while may be dimmed.
+        if (capi.ElapsedMilliseconds - caption.StartTime > ClosedCaptionsModSystem.UserConfig.DimTime)
+        {
+            textOpacity *= ClosedCaptionsModSystem.UserConfig.DimPercent;
+        }
 
-		_captionLabels.Clear();
+        // Modulate opacity by sound distance.
+        if (distance > caption.AttenuationRange)
+        {
+            var span = caption.Range - caption.AttenuationRange;
+            var percent = (distance - caption.AttenuationRange) / span * (1f - ClosedCaptionsModSystem.UserConfig.MinimumAttenuationOpacity);
+            percent = MathF.Max(0f, MathF.Min(percent, 1f - ClosedCaptionsModSystem.UserConfig.MinimumAttenuationOpacity));
+            textOpacity *= 1f - percent;
+        }
+    }
 
-		var captions = CaptionManager.GetDisplayedCaptions();
-		if (!captions.Any())
-		{
-			if (IsOpened())
-				TryClose();
-			return;
-		}
+    private void BuildDialog()
+    {
+        // TODO: Only re-init font if settings have changed.
+        InitFont();
 
-		captions.Sort(Caption.CompareByDistance);
+        _captionLabels.Clear();
 
-		ElementBounds dialogBounds =
-			ElementStdBounds.AutosizedMainDialog
-			.WithAlignment(ClosedCaptionsModSystem.UserConfig.ScreenAnchor.ToEnumDialogArea())
-			.WithFixedAlignmentOffset(ClosedCaptionsModSystem.UserConfig.DisplayOffset.X, ClosedCaptionsModSystem.UserConfig.DisplayOffset.Y);
+        var captions = CaptionManager.GetDisplayedCaptions();
+        if (!captions.Any())
+        {
+            if (IsOpened())
+                TryClose();
+            return;
+        }
 
-		SingleComposer = capi.Gui.CreateCompo("closedCaptions", dialogBounds);
+        captions.Sort(Caption.CompareByDistance);
 
-		double fontHeight = _font!.GetFontExtents().Height * _font!.LineHeightMultiplier;
-		double lineHeight = _font!.GetFontExtents().Height * _font!.LineHeightMultiplier + ClosedCaptionsModSystem.UserConfig.CaptionPaddingV * 2;
-		int lineY = 0;
-		foreach (var caption in captions)
-		{
-			ElementBounds textBounds = ElementBounds.Fixed(0, lineY)
-				.WithAlignment(ClosedCaptionsModSystem.UserConfig.CaptionAnchor.ToEnumDialogArea())
-				.WithFixedSize(600, fontHeight);
-			_font.AutoBoxSize(caption.Text, textBounds);
-			textBounds.fixedWidth += fontHeight * 2 + ClosedCaptionsModSystem.UserConfig.CaptionPaddingH * 2;
-			textBounds.fixedHeight = fontHeight + ClosedCaptionsModSystem.UserConfig.CaptionPaddingV * 2;
-			SingleComposer.AddCaptionLabel(caption, _font, textBounds, $"label{caption.ID}");
-			var label = SingleComposer.GetCaptionLabel($"label{caption.ID}");
-			label.DebugText = $"[id={caption.ID}] asset={caption.AssetLocation}";
-			_captionLabels.Add(label);
-			
-			lineY += (int)lineHeight + ClosedCaptionsModSystem.UserConfig.CaptionSpacing;
-		}
+        ElementBounds dialogBounds =
+            ElementStdBounds.AutosizedMainDialog
+            .WithAlignment(ClosedCaptionsModSystem.UserConfig.ScreenAnchor.ToEnumDialogArea())
+            .WithFixedAlignmentOffset(ClosedCaptionsModSystem.UserConfig.DisplayOffset.X, ClosedCaptionsModSystem.UserConfig.DisplayOffset.Y);
 
-		try
-		{
-			SingleComposer.Compose();
-			TryOpen();
-		}
-		catch (Exception e)
-		{
-			capi.Logger.Error(e);
-		}
-	}
+        SingleComposer = capi.Gui.CreateCompo("closedCaptions", dialogBounds);
+
+        double fontHeight = _font!.GetFontExtents().Height * _font!.LineHeightMultiplier;
+        double lineHeight = _font!.GetFontExtents().Height * _font!.LineHeightMultiplier + ClosedCaptionsModSystem.UserConfig.CaptionPaddingV * 2;
+        int lineY = 0;
+        foreach (var caption in captions)
+        {
+            ElementBounds textBounds = ElementBounds.Fixed(0, lineY)
+                .WithAlignment(ClosedCaptionsModSystem.UserConfig.CaptionAnchor.ToEnumDialogArea())
+                .WithFixedSize(600, fontHeight);
+            _font.AutoBoxSize(caption.Text, textBounds);
+            textBounds.fixedWidth += fontHeight * 2 + ClosedCaptionsModSystem.UserConfig.CaptionPaddingH * 2;
+            textBounds.fixedHeight = fontHeight + ClosedCaptionsModSystem.UserConfig.CaptionPaddingV * 2;
+            SingleComposer.AddCaptionLabel(caption, _font, textBounds, $"label{caption.ID}");
+            var label = SingleComposer.GetCaptionLabel($"label{caption.ID}");
+            label.DebugText = $"[id={caption.ID}] asset={caption.AssetLocation}";
+            _captionLabels.Add(label);
+
+            lineY += (int)lineHeight + ClosedCaptionsModSystem.UserConfig.CaptionSpacing;
+        }
+
+        try
+        {
+            SingleComposer.Compose();
+            TryOpen();
+        }
+        catch (Exception e)
+        {
+            capi.Logger.Error(e);
+        }
+    }
 }

@@ -13,155 +13,155 @@ public class MatchConfig
 {
     public static readonly string Filename = "config/matchconfig.json";
 
-	private static readonly float AttenuationRangePercent = 0.5f;
-	private static readonly float MinimumAttenuationRange = 6.0f;
+    private static readonly float AttenuationRangePercent = 0.5f;
+    private static readonly float MinimumAttenuationRange = 6.0f;
 
-	public class MatchGroup
-	{
-		public string Group = "";
-		public string DefaultKey = "";
+    public class MatchGroup
+    {
+        public string Group = "";
+        public string DefaultKey = "";
         public Mapping[] Mappings = [];
-	}
+    }
 
-	public class Mapping
-	{
-		public string Match = "";
+    public class Mapping
+    {
+        public string Match = "";
         public string CaptionKey = "";
-		[JsonConverter(typeof(FlagsConverter))]
-		public CaptionTags Tags = CaptionTags.None;
-		[JsonConverter(typeof(FlagsConverter))]
-		public CaptionFlags Flags = CaptionFlags.None;
-		public CaptionGroup? Group = null;
-		public CaptionIcon? Icon = null;
-		public float? AttenuationRange = null;
+        [JsonConverter(typeof(FlagsConverter))]
+        public CaptionTags Tags = CaptionTags.None;
+        [JsonConverter(typeof(FlagsConverter))]
+        public CaptionFlags Flags = CaptionFlags.None;
+        public CaptionGroup? Group = null;
+        public CaptionIcon? Icon = null;
+        public float? AttenuationRange = null;
 
-		private class FlagsConverter : JsonConverter
-		{
-			public override bool CanConvert(Type objectType)
-			{
-				return Attribute.GetCustomAttribute(objectType, typeof(FlagsAttribute)) != null;
-			}
+        private class FlagsConverter : JsonConverter
+        {
+            public override bool CanConvert(Type objectType)
+            {
+                return Attribute.GetCustomAttribute(objectType, typeof(FlagsAttribute)) != null;
+            }
 
-			public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
-			{
-				if (string.IsNullOrEmpty((string?)reader.Value))
-					return 0;
+            public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
+            {
+                if (string.IsNullOrEmpty((string?)reader.Value))
+                    return 0;
 
-				try
-				{
-					var ret = Enum.Parse(objectType, (string)reader.Value, true);
-					return ret;
-				}
-				catch
-				{
-					return CaptionTags.None;
-				}
-			}
+                try
+                {
+                    var ret = Enum.Parse(objectType, (string)reader.Value, true);
+                    return ret;
+                }
+                catch
+                {
+                    return CaptionTags.None;
+                }
+            }
 
-			public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
-			{
-			}
-		}
-	}
+            public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+            {
+            }
+        }
+    }
 
-	public string[] Ignore = [];
-	public MatchGroup[] SoundMap = [];
+    public string[] Ignore = [];
+    public MatchGroup[] SoundMap = [];
 
-	public ICoreClientAPI? Api { get; set; }
+    public ICoreClientAPI? Api { get; set; }
 
-	public MatchConfig() { }
-	public MatchConfig(ICoreClientAPI capi)
-	{
-		Api = capi;
-	}
+    public MatchConfig() { }
+    public MatchConfig(ICoreClientAPI capi)
+    {
+        Api = capi;
+    }
 
-	public void BuildCaptionForSound(ILoadedSound sound, out Caption? caption, out bool wasIgnored)
-	{
-		caption = null;
+    public void BuildCaptionForSound(ILoadedSound sound, out Caption? caption, out bool wasIgnored)
+    {
+        caption = null;
 
-		// Check if this is an outright ignored sound.
-		foreach (var ignore in Ignore)
-		{
-			if (WildcardUtil.Match(new AssetLocation(ignore), sound.Params.Location))
-			{
-				wasIgnored = true;
-				return;
-			}
-		}
+        // Check if this is an outright ignored sound.
+        foreach (var ignore in Ignore)
+        {
+            if (WildcardUtil.Match(new AssetLocation(ignore), sound.Params.Location))
+            {
+                wasIgnored = true;
+                return;
+            }
+        }
 
-		wasIgnored = false;
-		MatchGroup? partialMatch = null;
+        wasIgnored = false;
+        MatchGroup? partialMatch = null;
 
-		// Iterate the mappings in reverse, to prioritize more recently-added
-		// entries. This way if new entries are added by a mod, they will always
-		// be prioritized over the base-level categories.
-		for (int i = SoundMap.Length - 1; i >= 0; --i)
-		{
-			var matchGroup = SoundMap[i];
-			if (WildcardUtil.Match(new AssetLocation(matchGroup.Group), sound.Params.Location))
-			{
-				// Sound is in this group! Does it have a better match?
-				for (int j = matchGroup.Mappings.Length - 1; j >= 0; --j)
-				{
-					var mapping = matchGroup.Mappings[j];
-					if (WildcardUtil.Match(new AssetLocation(mapping.Match), sound.Params.Location))
-					{
-						var text = Lang.Get(mapping.CaptionKey);
-						if (text == mapping.CaptionKey)
-							Api?.Logger.Warning($"[ClosedCaptions] Text not found for sound '{sound.Params.Location}' ({mapping.CaptionKey})");
+        // Iterate the mappings in reverse, to prioritize more recently-added
+        // entries. This way if new entries are added by a mod, they will always
+        // be prioritized over the base-level categories.
+        for (int i = SoundMap.Length - 1; i >= 0; --i)
+        {
+            var matchGroup = SoundMap[i];
+            if (WildcardUtil.Match(new AssetLocation(matchGroup.Group), sound.Params.Location))
+            {
+                // Sound is in this group! Does it have a better match?
+                for (int j = matchGroup.Mappings.Length - 1; j >= 0; --j)
+                {
+                    var mapping = matchGroup.Mappings[j];
+                    if (WildcardUtil.Match(new AssetLocation(mapping.Match), sound.Params.Location))
+                    {
+                        var text = Lang.Get(mapping.CaptionKey);
+                        if (text == mapping.CaptionKey)
+                            Api?.Logger.Warning($"[ClosedCaptions] Text not found for sound '{sound.Params.Location}' ({mapping.CaptionKey})");
 
-						Vec3f position = Vec3f.Zero;
-						if (!sound.Params.RelativePosition && sound.Params.Position != null)
-							position = sound.Params.Position;
+                        Vec3f position = Vec3f.Zero;
+                        if (!sound.Params.RelativePosition && sound.Params.Position != null)
+                            position = sound.Params.Position;
 
-						caption = new Caption(
-							sound,
-							text,
-							CaptionManager.Api.ElapsedMilliseconds,
-							sound.Params.Volume,
-							sound.Params.RelativePosition,
-							position,
-							sound.Params.Range,
-							mapping.AttenuationRange != null ?
-								mapping.AttenuationRange.Value :
-								Math.Max(MinimumAttenuationRange, sound.Params.Range * AttenuationRangePercent),
-							mapping.Tags,
-							mapping.Flags,
-							mapping.Group,
-							mapping.Icon);
+                        caption = new Caption(
+                            sound,
+                            text,
+                            CaptionManager.Api.ElapsedMilliseconds,
+                            sound.Params.Volume,
+                            sound.Params.RelativePosition,
+                            position,
+                            sound.Params.Range,
+                            mapping.AttenuationRange != null ?
+                                mapping.AttenuationRange.Value :
+                                Math.Max(MinimumAttenuationRange, sound.Params.Range * AttenuationRangePercent),
+                            mapping.Tags,
+                            mapping.Flags,
+                            mapping.Group,
+                            mapping.Icon);
 
-						return;
-					}
-				}
+                        return;
+                    }
+                }
 
-				// It did not have a better match. Store the group for now
-				// in case for some reason there's another match group that
-				// has a better match.
-				partialMatch ??= matchGroup;
-			}
-		}
+                // It did not have a better match. Store the group for now
+                // in case for some reason there's another match group that
+                // has a better match.
+                partialMatch ??= matchGroup;
+            }
+        }
 
-		// If partialMatch is null, the sound was not matched, in which case it is an unknown sound.
-		if (ClosedCaptionsModSystem.UserConfig.DebugMode)
-		{
-			if (partialMatch == null)
-				Api?.Logger.Warning($"[Closed Captions] Unknown sound: '{sound.Params.Location}'");
-			else
-				Api?.Logger.Warning($"[Closed Captions] Partially matched sound: '{sound.Params.Location}'");
-		}
-		
-		caption = new Caption(
-			sound,
-			partialMatch == null ? Lang.Get("closedcaptions:unknown-sound") : Lang.Get(partialMatch.DefaultKey),
-			CaptionManager.Api.ElapsedMilliseconds,
-			1f,
-			true,
-			Vec3f.Zero,
-			32f,
-			32f * AttenuationRangePercent,
-			CaptionTags.None,
-			CaptionFlags.None,
-			null,
-			null);
-	}
+        // If partialMatch is null, the sound was not matched, in which case it is an unknown sound.
+        if (ClosedCaptionsModSystem.UserConfig.DebugMode)
+        {
+            if (partialMatch == null)
+                Api?.Logger.Warning($"[Closed Captions] Unknown sound: '{sound.Params.Location}'");
+            else
+                Api?.Logger.Warning($"[Closed Captions] Partially matched sound: '{sound.Params.Location}'");
+        }
+
+        caption = new Caption(
+            sound,
+            partialMatch == null ? Lang.Get("closedcaptions:unknown-sound") : Lang.Get(partialMatch.DefaultKey),
+            CaptionManager.Api.ElapsedMilliseconds,
+            1f,
+            true,
+            Vec3f.Zero,
+            32f,
+            32f * AttenuationRangePercent,
+            CaptionTags.None,
+            CaptionFlags.None,
+            null,
+            null);
+    }
 }
