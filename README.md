@@ -6,6 +6,8 @@ A mod for Vintage Story which adds Closed Captions for currently-playing audio.
 
 If you'd like to add CC support to your own mod which has its own sounds or music, it's pretty straightforward!
 
+(Please note that [JSON patching](https://wiki.vintagestory.at/index.php/Modding:JSON_Patching) is not enabled on Theme mods, only Content and Code.)
+
 First, add a `.json` file to `assets/<yourmodid>/compatibility/closedcaptions/patches/` named whatever you like, with contents as follows:
 
 ```json
