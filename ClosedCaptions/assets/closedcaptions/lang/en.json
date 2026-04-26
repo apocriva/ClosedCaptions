@@ -545,6 +545,11 @@
     "closedcaptions:tool-reinforce": "[Metallic clang]",
     "closedcaptions:tool-scythe": "[Slashing woosh]",
     "closedcaptions:tool-sling": "[Twang!]",
+    "closedcaptions:tool-groundcrafting-boneflute": "[Bone scraping]",
+    "closedcaptions:tool-groundcrafting-hidecut": "[Hide slicing]",
+    "closedcaptions:tool-groundcrafting-hidescrape": "[Hide scraping]",
+    "closedcaptions:tool-groundcrafting-saw": "[Sawing]",
+    "closedcaptions:tool-groundcrafting-shears": "[Snipping]",
 
     // Voice
     "closedcaptions:voice": "[Voice murmuring]",

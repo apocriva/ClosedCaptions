@@ -2185,6 +2185,37 @@
             ]
         },
         {
+            "group": "sounds/tool/groundcrafting*",
+            "defaultKey": "closedcaptions:tool",
+            "mappings": [
+                {
+                    "match": "sounds/tool/groundcrafting/boneflute*",
+                    "tags": "interaction,tool",
+                    "captionKey": "closedcaptions:tool-groundcrafting-boneflute"
+                },
+                {
+                    "match": "sounds/tool/groundcrafting/hidecut*",
+                    "tags": "interaction,tool",
+                    "captionKey": "closedcaptions:tool-groundcrafting-hidecut"
+                },
+                {
+                    "match": "sounds/tool/groundcrafting/hidescrape*",
+                    "tags": "interaction,tool",
+                    "captionKey": "closedcaptions:tool-groundcrafting-hidescrape"
+                },
+                {
+                    "match": "sounds/tool/groundcrafting/saw*",
+                    "tags": "interaction,tool",
+                    "captionKey": "closedcaptions:tool-groundcrafting-saw"
+                },
+                {
+                    "match": "sounds/tool/groundcrafting/shears*",
+                    "tags": "interaction,tool",
+                    "captionKey": "closedcaptions:tool-groundcrafting-shears"
+                },
+            ]
+        },
+        {
             "group": "sounds/voice*",
             "defaultKey": "closedcaptions:voice",
             "mappings": [
