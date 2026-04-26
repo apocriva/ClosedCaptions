@@ -98,10 +98,155 @@ public class CaptionManager
     }
 
 #region Harmony patches
-    public static void World_PlaySoundAt()
-    {
+    // public void PlaySound(SoundAttributes sound);
+    // [HarmonyPostfix]
+    // [HarmonyPatch(typeof(ClientMain), nameof(ClientMain.PlaySound), typeof(SoundAttributes))]
+    // public static void World_PlaySound(ClientMain __instance, SoundAttributes sound)
+    // {
+    //     // Api.Logger.Debug($"[ClosedCaptions] World_PlaySound(sound={sound.ToString().Escape()})");
+    // }
 
-    }
+    // public void PlaySound(AssetLocation location, bool randomizePitch = false, float volume = 1);
+    // [HarmonyPostfix]
+    // [HarmonyPatch(typeof(ClientMain), nameof(ClientMain.PlaySound), typeof(AssetLocation), typeof(bool), typeof(float))]
+    // public static void World_PlaySound(ClientMain __instance, AssetLocation location, bool randomizePitch, float volume)
+    // {
+    //     // Api.Logger.Debug($"[ClosedCaptions] World_PlaySound(location={location}, randomizePitch={randomizePitch}, volume={volume})");
+    // }
+
+    // public int PlaySoundAt(SoundAttributes sound, double x, double y, double z, int dimension, IPlayer? dualCallByPlayer = null, float volumeMultiplier = 1);
+    // [HarmonyPostfix]
+    // [HarmonyPatch(typeof(ClientMain), nameof(ClientMain.PlaySoundAt), typeof(SoundAttributes), typeof(double), typeof(double), typeof(double), typeof(int), typeof(IPlayer), typeof(float))]
+    // public static void World_PlaySoundAt(ClientMain __instance, int __result, SoundAttributes sound, double x, double y, double z, int dimension, IPlayer? dualCallByPlayer, float volumeMultiplier)
+    // {
+    //     // Api.Logger.Debug($"[ClosedCaptions] World_PlaySoundAt(sound={sound.ToString().Escape()}, x={x}, y={y}, z={z}, dimension={dimension}, dualCallByPlayer={dualCallByPlayer}, volumeMultiplier={volumeMultiplier}");
+    // }
+
+    // public int PlaySoundAt(SoundAttributes sound, BlockPos pos, double yOffsetFromCenter, IPlayer? dualCallByPlayer = null, float volumeMultiplier = 1);
+    // [HarmonyPostfix]
+    // [HarmonyPatch(typeof(ClientMain), nameof(ClientMain.PlaySoundAt), typeof(SoundAttributes), typeof(BlockPos), typeof(double), typeof(IPlayer), typeof(float))]
+    // public static void World_PlaySoundAt(ClientMain __instance, int __result, SoundAttributes sound, BlockPos pos, double yOffsetFromCenter, IPlayer? dualCallByPlayer, float volumeMultiplier)
+    // {
+    //     // Api.Logger.Debug($"[ClosedCaptions] World_PlaySoundAt(sound={sound.ToString().Escape()}, pos={pos}, yOffsetFromCenter={yOffsetFromCenter}, dualCallByPlayer={dualCallByPlayer}, volumeMultiplier={volumeMultiplier})");
+    // }
+
+    // public int PlaySoundAt(SoundAttributes sound, Entity atEntity, IPlayer? dualCallByPlayer = null, float volumeMultiplier = 1);
+    // [HarmonyPostfix]
+    // [HarmonyPatch(typeof(ClientMain), nameof(ClientMain.PlaySoundAt), typeof(SoundAttributes), typeof(Entity), typeof(IPlayer), typeof(float))]
+    // public static void World_PlaySoundAt(ClientMain __instance, int __result, SoundAttributes sound, Entity atEntity, IPlayer? dualCallByPlayer, float volumeMultiplier)
+    // {
+    //     // Api.Logger.Debug($"[ClosedCaptions] World_PlaySoundAt(sound={sound.ToString().Escape()}, atEntity={atEntity}, dualCallByPlayer={dualCallByPlayer}, volumeMultiplier={volumeMultiplier})");
+    //     if (sound.Location != null && atEntity != null)
+    //         Instance.StoreSoundEntitySource(sound.Location.ToString(), atEntity);
+    // }
+
+    // public int PlaySoundAt(SoundAttributes sound, IPlayer atPlayer, IPlayer? dualCallByPlayer = null, float volumeMultiplier = 1);
+    // [HarmonyPostfix]
+    // [HarmonyPatch(typeof(ClientMain), nameof(ClientMain.PlaySoundAt), typeof(SoundAttributes), typeof(IPlayer), typeof(IPlayer), typeof(float))]
+    // public static void World_PlaySoundAt(ClientMain __instance, int __result, SoundAttributes sound, IPlayer atPlayer, IPlayer? dualCallByPlayer, float volumeMultiplier)
+    // {
+    //     // Api.Logger.Debug($"[ClosedCaptions] World_PlaySoundAt(sound={sound.ToString().Escape()}, atPlayer={atPlayer}, dualCallByPlayer={dualCallByPlayer}, volumeMultiplier={volumeMultiplier})");
+    // }
+
+    // public void PlaySoundAt(AssetLocation? location, Entity atEntity, IPlayer? dualCallByPlayer = null, float pitch = 1, float range = 32, float volume = 1);
+    // [HarmonyPostfix]
+    // [HarmonyPatch(typeof(ClientMain), nameof(ClientMain.PlaySoundAt), typeof(AssetLocation), typeof(Entity), typeof(IPlayer), typeof(float), typeof(float), typeof(float))]
+    // public static void World_PlaySoundAt(ClientMain __instance, AssetLocation? location, Entity atEntity, IPlayer? dualCallByPlayer, float pitch, float range, float volume)
+    // {
+    //     // Api.Logger.Debug($"[ClosedCaptions] World_PlaySoundAt(location={location}, atEntity={atEntity}, dualCallByPlayer={dualCallByPlayer}, pitch={pitch}, range={range}, volume={volume})");
+    //     if (location != null && atEntity != null)
+    //         Instance.StoreSoundEntitySource(location, atEntity);
+    // }
+
+    // public void PlaySoundAt(AssetLocation? location, double posx, double posy, double posz, IPlayer? dualCallByPlayer = null, float pitch = 1, float range = 32, float volume = 1);
+    // [HarmonyPostfix]
+    // [HarmonyPatch(typeof(ClientMain), nameof(ClientMain.PlaySoundAt), typeof(AssetLocation), typeof(double), typeof(double), typeof(double), typeof(IPlayer), typeof(float), typeof(float), typeof(float))]
+    // public static void World_PlaySoundAt(ClientMain __instance, AssetLocation? location, double posx, double posy, double posz, IPlayer? dualCallByPlayer, float pitch, float range, float volume)
+    // {
+    //     // Api.Logger.Debug($"[ClosedCaptions] World_PlaySoundAt(location={location}, posx={posx}, posy={posy}, posz={posz}, dualCallByPlayer={dualCallByPlayer}, pitch={pitch}, range={range}, volume={volume})");
+    // }
+
+    // public void PlaySoundAt(AssetLocation? location, Entity atEntity, IPlayer? ignorePlayerUid = null, bool randomizePitch = true, float range = 32, float volume = 1);
+    // [HarmonyPostfix]
+    // [HarmonyPatch(typeof(ClientMain), nameof(ClientMain.PlaySoundAt), typeof(AssetLocation), typeof(Entity), typeof(IPlayer), typeof(bool), typeof(float), typeof(float))]
+    // public static void World_PlaySoundAt(ClientMain __instance, AssetLocation? location, Entity atEntity, IPlayer? ignorePlayerUid, bool randomizePitch, float range, float volume)
+    // {
+    //     // Api.Logger.Debug($"[ClosedCaptions] World_PlaySoundAt(location={location}, atEntity={atEntity}, dualCallByPlayer={ignorePlayerUid}, randomizePitch={randomizePitch}, range={range}, volume={volume})");
+    //     if (location != null && atEntity != null)
+    //         Instance.StoreSoundEntitySource(location.ToString(), atEntity);
+    // }
+
+    // public void PlaySoundAt(AssetLocation? location, double x, double y, double z, IPlayer? ignorePlayerUid = null, bool randomizePitch = true, float range = 32, float volume = 1);
+    // [HarmonyPostfix]
+    // [HarmonyPatch(typeof(ClientMain), nameof(ClientMain.PlaySoundAt), typeof(AssetLocation), typeof(double), typeof(double), typeof(double), typeof(IPlayer), typeof(bool), typeof(float), typeof(float))]
+    // public static void World_PlaySoundAt(ClientMain __instance, AssetLocation? location, double x, double y, double z, IPlayer? ignorePlayerUid, bool randomizePitch, float range, float volume)
+    // {
+    //     // Api.Logger.Debug($"[ClosedCaptions] World_PlaySoundAt(location={location}, x={x}, y={y}, z={z}, ignorePlayerUid={ignorePlayerUid}, randomizePitch={randomizePitch}, range={range}, volume={volume})");
+    // }
+
+    // public void PlaySoundAt(AssetLocation? location, BlockPos pos, double yOffsetFromCenter, IPlayer? ignorePlayerUid = null, bool randomizePitch = true, float range = 32, float volume = 1);
+    // [HarmonyPostfix]
+    // [HarmonyPatch(typeof(ClientMain), nameof(ClientMain.PlaySoundAt), typeof(AssetLocation), typeof(BlockPos), typeof(double), typeof(IPlayer), typeof(bool), typeof(float), typeof(float))]
+    // public static void World_PlaySoundAt(ClientMain __instance, AssetLocation? location, BlockPos pos, double yOffsetFromCenter, IPlayer? ignorePlayerUid, bool randomizePitch, float range, float volume)
+    // {
+    //     // Api.Logger.Debug($"[ClosedCaptions] World_PlaySoundAt(location={location}, pos={pos}, yOffsetFromCenter={yOffsetFromCenter}, ignorePlayerUid={ignorePlayerUid}, randomizePitch={randomizePitch}, range={range}, volume={volume})");
+    // }
+
+    // public int PlaySoundAt(AssetLocation? location, double x, double y, double z, float volume, bool randomizePitch = true, float range = 32);
+    // [HarmonyPostfix]
+    // [HarmonyPatch(typeof(ClientMain), nameof(ClientMain.PlaySoundAt), typeof(AssetLocation), typeof(double), typeof(double), typeof(double), typeof(float), typeof(bool), typeof(float))]
+    // public static void World_PlaySoundAt(ClientMain __instance, int __result, AssetLocation? location, double x, double y, double z, float volume, bool randomizePitch, float range)
+    // {
+    //     // Api.Logger.Debug($"[ClosedCaptions] World_PlaySoundAt(location={location}, x={x}, y={y}, z={z}, randomizePitch={randomizePitch}, range={range}, volume={volume})");
+    // }
+
+    // public void PlaySoundAt(AssetLocation? location, IPlayer? atPlayer, IPlayer? ignorePlayerUid = null, bool randomizePitch = true, float range = 32, float volume = 1);
+    // [HarmonyPostfix]
+    // [HarmonyPatch(typeof(ClientMain), nameof(ClientMain.PlaySoundAt), typeof(AssetLocation), typeof(IPlayer), typeof(IPlayer), typeof(bool), typeof(float), typeof(float))]
+    // public static void World_PlaySoundAt(ClientMain __instance, AssetLocation? location, IPlayer? atPlayer, IPlayer? ignorePlayerUid, bool randomizePitch, float range, float volume)
+    // {
+    //     // Api.Logger.Debug($"[ClosedCaptions] World_PlaySoundAt(location={location}, atPlayer={atPlayer}, ignorePlayerUid={ignorePlayerUid}, randomizePitch={randomizePitch}, range={range}, volume={volume})");
+    // }
+
+    // public void PlaySoundAt(AssetLocation? location, double posx, double posy, double posz, IPlayer? dualCallByPlayer, EnumSoundType soundType, float pitch = 1, float range = 32, float volume = 1);
+    // [HarmonyPostfix]
+    // [HarmonyPatch(typeof(ClientMain), nameof(ClientMain.PlaySoundAt), typeof(AssetLocation), typeof(double), typeof(double), typeof(double), typeof(IPlayer), typeof(EnumSoundType), typeof(float), typeof(float), typeof(float))]
+    // public static void World_PlaySoundAt(ClientMain __instance, AssetLocation? location, double posx, double posy, double posz, IPlayer? dualCallByPlayer, EnumSoundType soundType, float pitch, float range, float volume)
+    // {
+    //     // Api.Logger.Debug($"[ClosedCaptions] World_PlaySoundAt(location={location}, posx={posx}, posy={posy}, posz={posz}, dualCallByPlayer={dualCallByPlayer}, soundType={soundType}, pitch={pitch}, range={range}, volume={volume})");
+    // }
+
+    // public int PlaySoundAtAndGetDuration(AssetLocation? location, double x, double y, double z, IPlayer? ignorePlayerUid = null, bool randomizePitch = true, float range = 32, float volume = 1);
+    // [HarmonyPostfix]
+    // [HarmonyPatch(typeof(ClientMain), nameof(ClientMain.PlaySoundAtAndGetDuration), typeof(AssetLocation), typeof(double), typeof(double), typeof(double), typeof(IPlayer), typeof(bool), typeof(float), typeof(float))]
+    // public static void World_PlaySoundAtAndGetDuration(ClientMain __instance, int __result, AssetLocation? location, double x, double y, double z, IPlayer? ignorePlayerUid, bool randomizePitch, float range, float volume)
+    // {
+    //     // Api.Logger.Debug($"[ClosedCaptions] World_PlaySoundAtAndGetDuration(location={location}, x={x}, y={y}, z={z}, ignorePlayerUid={ignorePlayerUid}, randomizePitch={randomizePitch}, range={range}, volume={volume})");
+    // }
+
+    // public void PlaySoundFor(AssetLocation? location, IPlayer? atPlayer, float pitch, float range = 32, float volume = 1);
+    // [HarmonyPostfix]
+    // [HarmonyPatch(typeof(ClientMain), nameof(ClientMain.PlaySoundFor), typeof(AssetLocation), typeof(IPlayer), typeof(float), typeof(float), typeof(float))]
+    // public static void World_PlaySoundFor(ClientMain __instance, AssetLocation? location, IPlayer? atPlayer, float pitch, float range, float volume)
+    // {
+    //     // Api.Logger.Debug($"[ClosedCaptions] World_PlaySoundFor(location={location}, atPlayer={atPlayer}, pitch={pitch}, range={range}, volume={volume})");
+    // }
+
+    // public int PlaySoundFor(SoundAttributes sound, IPlayer? forPlayer, float volumeMultiplier = 1);
+    // [HarmonyPostfix]
+    // [HarmonyPatch(typeof(ClientMain), nameof(ClientMain.PlaySoundFor), typeof(SoundAttributes), typeof(IPlayer), typeof(float))]
+    // public static void World_PlaySoundFor(ClientMain __instance, int __result, SoundAttributes sound, IPlayer? forPlayer, float volumeMultiplier)
+    // {
+    //     // Api.Logger.Debug($"[ClosedCaptions] World_PlaySoundFor(sound={sound.ToString().Escape()}, forPlayer={forPlayer}, volumeMultiplier={volumeMultiplier})");
+    // }
+
+    // public void PlaySoundFor(AssetLocation? location, IPlayer? forPlayer, bool randomizePitch = true, float range = 32, float volume = 1);
+    // [HarmonyPostfix]
+    // [HarmonyPatch(typeof(ClientMain), nameof(ClientMain.PlaySoundFor), typeof(AssetLocation), typeof(IPlayer), typeof(bool), typeof(float), typeof(float))]
+    // public static void World_PlaySoundFor(ClientMain __instance, AssetLocation? location, IPlayer? forPlayer, bool randomizePitch, float range, float volume)
+    // {
+    //     // Api.Logger.Debug($"[ClosedCaptions] World_PlaySoundFor(location={location}, atPlayer={forPlayer}, randomizePitch={randomizePitch}, range={range}, volume={volume})");
+    // }
 
     [HarmonyPostfix()]
     [HarmonyPatch(typeof(LoadedSoundNative), "Start")]
