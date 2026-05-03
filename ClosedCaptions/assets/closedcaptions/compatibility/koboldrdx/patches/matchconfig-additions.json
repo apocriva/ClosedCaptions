@@ -1,0 +1,34 @@
+[
+    {
+        "op": "addmerge",
+        "path": "/soundMap",
+        "file": "closedcaptions:config/matchconfig.json",
+        "value": [
+            {
+                "group": "koboldrdx:sounds/voice*",
+                "defaultKey": "closedcaptions:koboldrdx-voice",
+                "mappings": [
+                    {
+                        "match": "koboldrdx:sounds/voice/meep*",
+                        "tags": "voice",
+                        "captionKey": "closedcaptions:koboldrdx-voice-meep"
+                    },
+                    {
+                        "match": "koboldrdx:sounds/voice/none*",
+                        "flags": "ignore"
+                    },
+                    {
+                        "match": "koboldrdx:sounds/voice/tokay*",
+                        "tags": "voice",
+                        "captionKey": "closedcaptions:koboldrdx-voice-tokay"
+                    },
+                    {
+                        "match": "koboldrdx:sounds/voice/treefrog*",
+                        "tags": "voice",
+                        "captionKey": "closedcaptions:koboldrdx-voice-treefrog"
+                    },
+                ]
+            },
+        ]
+    }
+]

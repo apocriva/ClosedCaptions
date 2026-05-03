@@ -38,6 +38,7 @@ public enum CaptionFlags
 {
     None            = 0,
     Directionless   = 1 << 0,
+    Ignore          = 1 << 1,
 }
 
 public static class LoadedSoundExtensions

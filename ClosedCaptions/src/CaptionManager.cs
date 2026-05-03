@@ -1,21 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Collections.ObjectModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using ClosedCaptions.Config;
-using ClosedCaptions.Extensions;
 using ClosedCaptions.GUI;
 using HarmonyLib;
 using OpenTK.Audio.OpenAL;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
-using Vintagestory.API.Config;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Util;
 using Vintagestory.Client;
-using Vintagestory.Common;
 
 namespace ClosedCaptions;
 

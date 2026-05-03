@@ -106,6 +106,13 @@ public class MatchConfig
                     var mapping = matchGroup.Mappings[j];
                     if (WildcardUtil.Match(new AssetLocation(mapping.Match), sound.Params.Location))
                     {
+                        // This might be ignore-flagged too.
+                        if ((mapping.Flags & CaptionFlags.Ignore) != 0)
+                        {
+                            wasIgnored = true;
+                            return;
+                        }
+
                         var text = Lang.Get(mapping.CaptionKey);
                         if (text == mapping.CaptionKey)
                             Api?.Logger.Warning($"[ClosedCaptions] Text not found for sound '{sound.Params.Location}' ({mapping.CaptionKey})");

@@ -631,11 +631,18 @@
     "closedcaptions:moreanimals-turkey-hen-idle": "[Gentle squawking]",
 
     // Mod support: Beasts of Men (https://mods.vintagestory.at/beastsofmen)
-    "closedcaptions:beastsofmen-uwu-ara": "[Arara murmuring]",
-    "closedcaptions:beastsofmen-uwu-bark": "[Uwu barking]",
-    "closedcaptions:beastsofmen-uwu-meow": "[Uwu meowing]",
-    "closedcaptions:beastsofmen-uwu-oooh": "[Uwu moaning]",
-    "closedcaptions:beastsofmen-uwu-uwu": "[Uwu murmuring]",
+    "closedcaptions:beastsofmen-uwu": "[Uwu voice noises]",
+    "closedcaptions:beastsofmen-uwu-ara": "[Arara voice murmuring]",
+    "closedcaptions:beastsofmen-uwu-bark": "[Uwu voice barking]",
+    "closedcaptions:beastsofmen-uwu-meow": "[Uwu voice meowing]",
+    "closedcaptions:beastsofmen-uwu-oooh": "[Uwu voice moaning]",
+    "closedcaptions:beastsofmen-uwu-uwu": "[Uwu voice murmuring]",
     "closedcaptions:beastsofmen-uwu-waa": "[Wawawa]",
     "closedcaptions:beastsofmen-uwu-wah": "[Waaah!]",
+
+    // Mod Support: Kobold Player Model Redux (https://mods.vintagestory.at/koboldrdx)
+    "closedcaptions:koboldrdx-voice": "[Reptilian voice noises]",
+    "closedcaptions:koboldrdx-voice-meep": "[Meeping voice]",
+    "closedcaptions:koboldrdx-voice-tokay": "[Vocal chattering]",
+    "closedcaptions:koboldrdx-voice-treefrog": "[Vocal chittering]",
 }
