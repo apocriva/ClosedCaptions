@@ -106,9 +106,10 @@ There is also one music-specific tag.
 },
 ```
 
-Only one optional flag is currently implemented.
+Optional flags for each sound.
 
 * `directionless`: If set, the caption will always be displayed without direction indicators.
+* `ignore`: If set, the sound will be ignored.
 
 #### `group`
 
