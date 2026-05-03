@@ -1,0 +1,50 @@
+[
+    {
+        "op": "addmerge",
+        "path": "/soundMap",
+        "file": "closedcaptions:config/matchconfig.json",
+        "value": [
+            {
+                "group": "beastsofmen:sounds/uwu*",
+                "defaultKey": "closedcaptions:beastsofmen-uwu",
+                "mappings": [
+                    {
+                        "match": "beastsofmen:sounds/uwu/ara*",
+                        "tags": "voice",
+                        "captionKey": "closedcaptions:beastsofmen-uwu-ara"
+                    },
+                    {
+                        "match": "beastsofmen:sounds/uwu/bark*",
+                        "tags": "voice",
+                        "captionKey": "closedcaptions:beastsofmen-uwu-bark"
+                    },
+                    {
+                        "match": "beastsofmen:sounds/uwu/meow*",
+                        "tags": "voice",
+                        "captionKey": "closedcaptions:beastsofmen-uwu-meow"
+                    },
+                    {
+                        "match": "beastsofmen:sounds/uwu/oooh*",
+                        "tags": "voice",
+                        "captionKey": "closedcaptions:beastsofmen-uwu-oooh"
+                    },
+                    {
+                        "match": "beastsofmen:sounds/uwu/uwu*",
+                        "tags": "voice",
+                        "captionKey": "closedcaptions:beastsofmen-uwu-uwu"
+                    },
+                    {
+                        "match": "beastsofmen:sounds/uwu/waabase*",
+                        "tags": "voice",
+                        "captionKey": "closedcaptions:beastsofmen-uwu-waa"
+                    },
+                    {
+                        "match": "beastsofmen:sounds/uwu/wah*",
+                        "tags": "voice",
+                        "captionKey": "closedcaptions:beastsofmen-uwu-wah"
+                    },
+                ]
+            },
+        ]
+    }
+]

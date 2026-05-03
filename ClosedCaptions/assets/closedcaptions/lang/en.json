@@ -605,7 +605,7 @@
     "closedcaptions:weather-wind-leafless": "[Wind howling]",
     "closedcaptions:weather-wind-leafy": "[Wind rustling through leaves]",
 
-    // Mod support: More Animals
+    // Mod support: More Animals (https://mods.vintagestory.at/moreanimals)
     "closedcaptions:moreanimals-capercaillie": "[Capercaillie noises]",
     "closedcaptions:moreanimals-capercaillie-call": "[Trilling squawks]",
     "closedcaptions:moreanimals-capercaillie-cock": "[Trilling squawk]",
@@ -629,4 +629,13 @@
     "closedcaptions:moreanimals-turkey-hen-alert": "[Squawk!]",
     "closedcaptions:moreanimals-turkey-hen-hurt": "[Pained squawk]",
     "closedcaptions:moreanimals-turkey-hen-idle": "[Gentle squawking]",
+
+    // Mod support: Beasts of Men (https://mods.vintagestory.at/beastsofmen)
+    "closedcaptions:beastsofmen-uwu-ara": "[Arara murmuring]",
+    "closedcaptions:beastsofmen-uwu-bark": "[Uwu barking]",
+    "closedcaptions:beastsofmen-uwu-meow": "[Uwu meowing]",
+    "closedcaptions:beastsofmen-uwu-oooh": "[Uwu moaning]",
+    "closedcaptions:beastsofmen-uwu-uwu": "[Uwu murmuring]",
+    "closedcaptions:beastsofmen-uwu-waa": "[Wawawa]",
+    "closedcaptions:beastsofmen-uwu-wah": "[Waaah!]",
 }
