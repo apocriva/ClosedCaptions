@@ -1684,6 +1684,11 @@
                     "captionKey": "closedcaptions:effect-rockslide"
                 },
                 {
+                    "match": "sounds/effect/roperip.ogg",
+                    "tags":"danger,interaction,tool",
+                    "captionKey": "closedcaptions:effect-roperip"
+                },
+                {
                     "match": "sounds/effect/ropestretch.ogg",
                     "tags":"interaction,tool",
                     "captionKey": "closedcaptions:effect-ropestretch"
