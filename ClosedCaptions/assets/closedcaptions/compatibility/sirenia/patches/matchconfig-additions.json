@@ -1,0 +1,45 @@
+[
+    {
+        "op": "addmerge",
+        "path": "/soundMap",
+        "file": "closedcaptions:config/matchconfig.json",
+        "value": [
+            {
+                "group": "sirenia:sounds/creature/sirenia/*",
+                "defaultKey": "[Sirenia sounds]",
+                "mappings": [
+                    {
+                        "match": "sirenia:sounds/creature/sirenia/cry1.ogg",
+                        "captionKey": "closedcaptions:creature-sirenia-cry",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "sirenia:creature-sirenia-adult-female-manatus" }
+                    },
+                    {
+                        "match": "sirenia:sounds/creature/sirenia/cry2.ogg",
+                        "captionKey": "closedcaptions:creature-sirenia-cry",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "sirenia:creature-sirenia-adult-female-manatus" }
+                    },
+                    {
+                        "match": "sirenia:sounds/creature/sirenia/squeak1.ogg",
+                        "captionKey": "closedcaptions:creature-sirenia-squeak",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "sirenia:creature-sirenia-adult-female-manatus" }
+                    },
+                    {
+                        "match": "sirenia:sounds/creature/sirenia/squeak2.ogg",
+                        "captionKey": "closedcaptions:creature-sirenia-squeak",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "sirenia:creature-sirenia-adult-female-manatus" }
+                    },
+                    {
+                        "match": "sirenia:sounds/creature/sirenia/squeak3.ogg",
+                        "captionKey": "closedcaptions:creature-sirenia-squeak",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "sirenia:creature-sirenia-adult-female-manatus" }
+                    }
+                ]
+            }
+        ]
+    }
+]

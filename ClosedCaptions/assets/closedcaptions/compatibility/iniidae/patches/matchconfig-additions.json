@@ -1,0 +1,31 @@
+[
+    {
+        "op": "addmerge",
+        "path": "/soundMap",
+        "file": "closedcaptions:config/matchconfig.json",
+        "value": [
+            {
+                "group": "iniidae:sounds/creature/cetacea/*",
+                "defaultKey": "[Cetacea sounds]"
+            },
+            {
+                "group": "iniidae:sounds/creature/cetacea/lipotesvexillifer*",
+                "defaultKey": "[Lipotesvexillifer sounds]",
+                "mappings": [
+                    {
+                        "match": "iniidae:sounds/creature/iniidae/whistle1.ogg",
+                        "captionKey": "closedcaptions:creature-iniidae-lipotesvexillifer-whistle",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "iniidae:creature-cetacea-adult-female-lipotesvexillifer" }
+                    },
+                    {
+                        "match": "iniidae:sounds/creature/iniidae/whistle2.ogg",
+                        "captionKey": "closedcaptions:creature-iniidae-lipotesvexillifer-whistle",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "iniidae:creature-cetacea-adult-female-lipotesvexillifer" }
+                    }
+                ]
+            }
+        ]
+    }
+]

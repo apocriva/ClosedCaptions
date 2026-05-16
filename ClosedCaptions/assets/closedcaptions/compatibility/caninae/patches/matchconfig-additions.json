@@ -1,0 +1,447 @@
+[
+    {
+        "op": "addmerge",
+        "path": "/soundMap",
+        "file": "closedcaptions:config/matchconfig.json",
+        "value": [
+            {
+                "group": "caninae:sounds/creature/*",
+                "defaultKey": "[Caninae sounds]",
+                "mappings": [
+                    {
+                        "match": "caninae:sounds/creature/carcass.ogg",
+                        "captionKey": "closedcaptions:creature-caninae-carcass",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:caninae-canina-carcass" }
+                    }
+                ]
+            },
+            {
+                "group": "caninae:sounds/creature/aenocyon/*",
+                "defaultKey": "[Aenocyon sounds]",
+                "mappings": [
+                    {
+                        "match": "caninae:sounds/creature/aenocyon/bark.ogg",
+                        "captionKey": "closedcaptions:creature-aenocyon-bark",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-canina-adult-male-aenocyon-dirus" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/aenocyon/growl.ogg",
+                        "captionKey": "closedcaptions:creature-aenocyon-growl",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-canina-adult-male-aenocyon-dirus" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/aenocyon/howl.ogg",
+                        "captionKey": "closedcaptions:creature-aenocyon-howl",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-canina-adult-male-aenocyon-dirus" }
+                    }
+                ]
+            },
+            {
+                "group": "caninae:sounds/creature/canis/*",
+                "defaultKey": "[Canis sounds]",
+                "mappings": [
+                    {
+                        "match": "caninae:sounds/creature/canis/aureus-bark.ogg",
+                        "captionKey": "closedcaptions:creature-canis-aureus-bark",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-canina-adult-male-canis-aureus" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/canis/aureus-howl.ogg",
+                        "captionKey": "closedcaptions:creature-canis-aureus-howl",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-canina-adult-male-canis-aureus" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/canis/dingo-bark.ogg",
+                        "captionKey": "closedcaptions:creature-canis-dingo-bark",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-canina-adult-male-canis-lupusdingo" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/canis/dingo-howl.ogg",
+                        "captionKey": "closedcaptions:creature-canis-dingo-howl",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-canina-adult-male-canis-lupusdingo" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/canis/dingo-hurt.ogg",
+                        "captionKey": "closedcaptions:creature-canis-dingo-hurt",
+                        "tags": "animal,combat",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-canina-adult-male-canis-lupusdingo" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/canis/dingo-whimper.ogg",
+                        "captionKey": "closedcaptions:creature-canis-dingo-whimper",
+                        "tags": "animal,combat",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-canina-adult-male-canis-lupusdingo" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/canis/latrans-attack.ogg",
+                        "captionKey": "closedcaptions:creature-canis-latrans-attack",
+                        "tags": "animal,combat,danger",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-canina-adult-male-canis-latrans" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/canis/latrans-bark.ogg",
+                        "captionKey": "closedcaptions:creature-canis-latrans-bark",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-canina-adult-male-canis-latrans" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/canis/latrans-growl.ogg",
+                        "captionKey": "closedcaptions:creature-canis-latrans-growl",
+                        "tags": "animal,combat,danger",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-canina-adult-male-canis-latrans" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/canis/latrans-howl.ogg",
+                        "captionKey": "closedcaptions:creature-canis-latrans-howl",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-canina-adult-male-canis-latrans" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/canis/latrans-howl2.ogg",
+                        "captionKey": "closedcaptions:creature-canis-latrans-howl",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-canina-adult-male-canis-latrans" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/canis/lupastor-bark.ogg",
+                        "captionKey": "closedcaptions:creature-canis-lupastor-bark",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-canina-adult-male-canis-lupastor" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/canis/lupastor-howl.ogg",
+                        "captionKey": "closedcaptions:creature-canis-lupastor-howl",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-canina-adult-male-canis-lupastor" }
+                    }
+                ]
+            },
+            {
+                "group": "caninae:sounds/creature/chrysocyon/*",
+                "defaultKey": "[Chrysocyon sounds]",
+                "mappings": [
+                    {
+                        "match": "caninae:sounds/creature/chrysocyon/brachyurus-call.ogg",
+                        "captionKey": "closedcaptions:creature-chrysocyon-brachyurus-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-cerdocyonina-adult-male-chrysocyon-brachyurus" }
+                    }
+                ]
+            },
+            {
+                "group": "caninae:sounds/creature/cuon/*",
+                "defaultKey": "[Cuon sounds]",
+                "mappings": [
+                    {
+                        "match": "caninae:sounds/creature/cuon/call.ogg",
+                        "captionKey": "closedcaptions:creature-cuon-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-canina-adult-male-cuon-alpinus" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/cuon/whistle.ogg",
+                        "captionKey": "closedcaptions:creature-cuon-whistle",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-canina-adult-male-cuon-alpinus" }
+                    }
+                ]
+            },
+            {
+                "group": "caninae:sounds/creature/dusicyon/*",
+                "defaultKey": "[Dusicyon sounds]",
+                "mappings": [
+                    {
+                        "match": "caninae:sounds/creature/dusicyon/australis-call.ogg",
+                        "captionKey": "closedcaptions:creature-dusicyon-australis-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-cerdocyonina-adult-male-dusicyon-australis" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/dusicyon/australis-hurt.ogg",
+                        "captionKey": "closedcaptions:creature-dusicyon-australis-hurt",
+                        "tags": "animal,combat",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-cerdocyonina-adult-male-dusicyon-australis" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/dusicyon/australis-idle.ogg",
+                        "captionKey": "closedcaptions:creature-dusicyon-australis-idle",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-cerdocyonina-adult-male-dusicyon-australis" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/dusicyon/avus-call.ogg",
+                        "captionKey": "closedcaptions:creature-dusicyon-avus-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-cerdocyonina-adult-male-dusicyon-avus" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/dusicyon/growl.ogg",
+                        "captionKey": "closedcaptions:creature-dusicyon-growl",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-cerdocyonina-adult-male-dusicyon-australis" }
+                    }
+                ]
+            },
+            {
+                "group": "caninae:sounds/creature/lupulella/*",
+                "defaultKey": "[Lupulella sounds]",
+                "mappings": [
+                    {
+                        "match": "caninae:sounds/creature/lupulella/alarm.ogg",
+                        "captionKey": "closedcaptions:creature-lupulella-alarm",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-canina-adult-male-lupulella-adusta" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/lupulella/bark.ogg",
+                        "captionKey": "closedcaptions:creature-lupulella-bark",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-canina-adult-male-lupulella-adusta" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/lupulella/howl.ogg",
+                        "captionKey": "closedcaptions:creature-lupulella-howl",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-canina-adult-male-lupulella-adusta" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/lupulella/hurt.ogg",
+                        "captionKey": "closedcaptions:creature-lupulella-hurt",
+                        "tags": "animal,combat",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-canina-adult-male-lupulella-adusta" }
+                    }
+                ]
+            },
+            {
+                "group": "caninae:sounds/creature/lycalopex/*",
+                "defaultKey": "[Lycalopex sounds]",
+                "mappings": [
+                    {
+                        "match": "caninae:sounds/creature/lycalopex/call1.ogg",
+                        "captionKey": "closedcaptions:creature-lycalopex-call1",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-cerdocyonina-adult-male-lycalopex-culpaeus" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/lycalopex/call2.ogg",
+                        "captionKey": "closedcaptions:creature-lycalopex-call2",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-cerdocyonina-adult-male-lycalopex-culpaeus" }
+                    }
+                ]
+            },
+            {
+                "group": "caninae:sounds/creature/lycaon/*",
+                "defaultKey": "[Lycaon sounds]",
+                "mappings": [
+                    {
+                        "match": "caninae:sounds/creature/lycaon/pictus-bark.ogg",
+                        "captionKey": "closedcaptions:creature-lycaon-pictus-bark",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-canina-adult-male-lycaon-pictus" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/lycaon/pictus-howl.ogg",
+                        "captionKey": "closedcaptions:creature-lycaon-pictus-howl",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-canina-adult-male-lycaon-pictus" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/lycaon/pictus-hurt.ogg",
+                        "captionKey": "closedcaptions:creature-lycaon-pictus-hurt",
+                        "tags": "animal,combat",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-canina-adult-male-lycaon-pictus" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/lycaon/pictus-idle.ogg",
+                        "captionKey": "closedcaptions:creature-lycaon-pictus-idle",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-canina-adult-male-lycaon-pictus" }
+                    }
+                ]
+            },
+            {
+                "group": "caninae:sounds/creature/nyctereutes/*",
+                "defaultKey": "[Nyctereutes sounds]",
+                "mappings": [
+                    {
+                        "match": "caninae:sounds/creature/nyctereutes/call.ogg",
+                        "captionKey": "closedcaptions:creature-nyctereutes-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-vulpini-adult-male-nyctereutes-procyonoides" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/nyctereutes/growl.ogg",
+                        "captionKey": "closedcaptions:creature-nyctereutes-growl",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-vulpini-adult-male-nyctereutes-procyonoides" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/nyctereutes/hurt.ogg",
+                        "captionKey": "closedcaptions:creature-nyctereutes-hurt",
+                        "tags": "animal,combat",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-vulpini-adult-male-nyctereutes-procyonoides" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/nyctereutes/sniff.ogg",
+                        "captionKey": "closedcaptions:creature-nyctereutes-sniff",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-vulpini-adult-male-nyctereutes-procyonoides" }
+                    }
+                ]
+            },
+            {
+                "group": "caninae:sounds/creature/otocyon/*",
+                "defaultKey": "[Otocyon sounds]",
+                "mappings": [
+                    {
+                        "match": "caninae:sounds/creature/otocyon/growl.ogg",
+                        "captionKey": "closedcaptions:creature-otocyon-growl",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-vulpini-adult-male-otocyon-megalotis" }
+                    }
+                ]
+            },
+            {
+                "group": "caninae:sounds/creature/speothos/*",
+                "defaultKey": "[Speothos sounds]",
+                "mappings": [
+                    {
+                        "match": "caninae:sounds/creature/speothos/pacivorus-hurt.ogg",
+                        "captionKey": "closedcaptions:creature-speothos-pacivorus-hurt",
+                        "tags": "animal,combat",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-cerdocyonina-adult-male-speothos-pacivorus" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/speothos/pacivorus-idle.ogg",
+                        "captionKey": "closedcaptions:creature-speothos-pacivorus-idle",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-cerdocyonina-adult-male-speothos-pacivorus" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/speothos/venaticus-hurt.ogg",
+                        "captionKey": "closedcaptions:creature-speothos-venaticus-hurt",
+                        "tags": "animal,combat",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-cerdocyonina-adult-male-speothos-venaticus" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/speothos/venaticus-idle.ogg",
+                        "captionKey": "closedcaptions:creature-speothos-venaticus-idle",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-cerdocyonina-adult-male-speothos-venaticus" }
+                    }
+                ]
+            },
+            {
+                "group": "caninae:sounds/creature/urocyon/*",
+                "defaultKey": "[Urocyon sounds]",
+                "mappings": [
+                    {
+                        "match": "caninae:sounds/creature/urocyon/attack.ogg",
+                        "captionKey": "closedcaptions:creature-urocyon-attack",
+                        "tags": "animal,combat,danger",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-urocyonini-adult-male-urocyon-cinereoargenteus" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/urocyon/hurt.ogg",
+                        "captionKey": "closedcaptions:creature-urocyon-hurt",
+                        "tags": "animal,combat",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-urocyonini-adult-male-urocyon-cinereoargenteus" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/urocyon/idle.ogg",
+                        "captionKey": "closedcaptions:creature-urocyon-idle",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-urocyonini-adult-male-urocyon-cinereoargenteus" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/urocyon/yip1.ogg",
+                        "captionKey": "closedcaptions:creature-urocyon-yip",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-urocyonini-adult-male-urocyon-cinereoargenteus" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/urocyon/yip2.ogg",
+                        "captionKey": "closedcaptions:creature-urocyon-yip",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-urocyonini-adult-male-urocyon-cinereoargenteus" }
+                    }
+                ]
+            },
+            {
+                "group": "caninae:sounds/creature/vulpes/*",
+                "defaultKey": "[Vulpes sounds]",
+                "mappings": [
+                    {
+                        "match": "caninae:sounds/creature/vulpes/baby-hurt.ogg",
+                        "captionKey": "closedcaptions:creature-vulpes-baby-hurt",
+                        "tags": "animal,combat",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-vulpini-baby-female-vulpes-vulpes" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/vulpes/bengalensis-call.ogg",
+                        "captionKey": "closedcaptions:creature-vulpes-bengalensis-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-vulpini-adult-male-vulpes-bengalensis" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/vulpes/lagopus-call.ogg",
+                        "captionKey": "closedcaptions:creature-vulpes-lagopus-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-vulpini-adult-male-vulpes-lagopus" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/vulpes/vulpes-call1.ogg",
+                        "captionKey": "closedcaptions:creature-vulpes-vulpes-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-vulpini-adult-male-vulpes-vulpes" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/vulpes/vulpes-call2.ogg",
+                        "captionKey": "closedcaptions:creature-vulpes-vulpes-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-vulpini-adult-male-vulpes-vulpes" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/vulpes/whimper.ogg",
+                        "captionKey": "closedcaptions:creature-vulpes-whimper",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-vulpini-adult-male-vulpes-vulpes" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/vulpes/zerda-attack.ogg",
+                        "captionKey": "closedcaptions:creature-vulpes-zerda-attack",
+                        "tags": "animal,combat,danger",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-vulpini-adult-male-vulpes-zerda" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/vulpes/zerda-bark.ogg",
+                        "captionKey": "closedcaptions:creature-vulpes-zerda-bark",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-vulpini-adult-male-vulpes-zerda" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/vulpes/zerda-call.ogg",
+                        "captionKey": "closedcaptions:creature-vulpes-zerda-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-vulpini-adult-male-vulpes-zerda" }
+                    },
+                    {
+                        "match": "caninae:sounds/creature/vulpes/zerda-chirp.ogg",
+                        "captionKey": "closedcaptions:creature-vulpes-zerda-chirp",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "caninae:creature-caninae-vulpini-adult-male-vulpes-zerda" }
+                    }
+                ]
+            }
+        ]
+    }
+]

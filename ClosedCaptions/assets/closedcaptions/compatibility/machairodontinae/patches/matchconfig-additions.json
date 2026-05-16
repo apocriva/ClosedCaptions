@@ -1,0 +1,87 @@
+[
+    {
+        "op": "addmerge",
+        "path": "/soundMap",
+        "file": "closedcaptions:config/matchconfig.json",
+        "value": [
+            {
+                "group": "machairodontinae:sounds/creature/machairodontinae/*",
+                "defaultKey": "[Machairodontinae sounds]",
+                "mappings": [
+                    {
+                        "match": "machairodontinae:sounds/creature/machairodontinae/carcass.ogg",
+                        "captionKey": "closedcaptions:creature-machairodontinae-carcass",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "machairodontinae:creature-machairodontinae-carcass" }
+                    },
+                    {
+                        "match": "machairodontinae:sounds/creature/machairodontinae/cubdeath.ogg",
+                        "captionKey": "closedcaptions:creature-machairodontinae-cubdeath",
+                        "tags": "animal,combat",
+                        "icon":{ "type": "item", "code": "machairodontinae:creature-machairodontinae-baby-male-smilodon-fatalis" }
+                    },
+                    {
+                        "match": "machairodontinae:sounds/creature/machairodontinae/cubhurt.ogg",
+                        "captionKey": "closedcaptions:creature-machairodontinae-cubhurt",
+                        "tags": "animal,combat",
+                        "icon":{ "type": "item", "code": "machairodontinae:creature-machairodontinae-baby-male-smilodon-fatalis" }
+                    },
+                    {
+                        "match": "machairodontinae:sounds/creature/machairodontinae/cubidle.ogg",
+                        "captionKey": "closedcaptions:creature-machairodontinae-cubidle",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "machairodontinae:creature-machairodontinae-baby-male-smilodon-fatalis" }
+                    },
+                    {
+                        "match": "machairodontinae:sounds/creature/machairodontinae/fatalishurt.ogg",
+                        "captionKey": "closedcaptions:creature-machairodontinae-fatalis-hurt",
+                        "tags": "animal,combat,danger",
+                        "icon":{ "type": "item", "code": "machairodontinae:creature-machairodontinae-adult-female-smilodon-fatalis" }
+                    },
+                    {
+                        "match": "machairodontinae:sounds/creature/machairodontinae/fatalisidle.ogg",
+                        "captionKey": "closedcaptions:creature-machairodontinae-fatalis-idle",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "machairodontinae:creature-machairodontinae-adult-female-smilodon-fatalis" }
+                    },
+                    {
+                        "match": "machairodontinae:sounds/creature/machairodontinae/fatalisroar.ogg",
+                        "captionKey": "closedcaptions:creature-machairodontinae-fatalis-roar",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "machairodontinae:creature-machairodontinae-adult-female-smilodon-fatalis" }
+                    },
+                    {
+                        "match": "machairodontinae:sounds/creature/machairodontinae/lick.ogg",
+                        "captionKey": "closedcaptions:creature-machairodontinae-lick",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "machairodontinae:creature-machairodontinae-adult-female-smilodon-fatalis" }
+                    },
+                    {
+                        "match": "machairodontinae:sounds/creature/machairodontinae/populatorattack.ogg",
+                        "captionKey": "closedcaptions:creature-machairodontinae-populator-attack",
+                        "tags": "animal,combat,danger",
+                        "icon":{ "type": "item", "code": "machairodontinae:creature-machairodontinae-adult-female-smilodon-populator" }
+                    },
+                    {
+                        "match": "machairodontinae:sounds/creature/machairodontinae/populatoridle.ogg",
+                        "captionKey": "closedcaptions:creature-machairodontinae-populator-idle",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "machairodontinae:creature-machairodontinae-adult-female-smilodon-populator" }
+                    },
+                    {
+                        "match": "machairodontinae:sounds/creature/machairodontinae/serumidle.ogg",
+                        "captionKey": "closedcaptions:creature-machairodontinae-homotherium-serum-idle",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "machairodontinae:creature-machairodontinae-adult-male-homotherium-serum" }
+                    },
+                    {
+                        "match": "machairodontinae:sounds/creature/machairodontinae/serumroar.ogg",
+                        "captionKey": "closedcaptions:creature-machairodontinae-homotherium-serum-roar",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "machairodontinae:creature-machairodontinae-adult-male-homotherium-serum" }
+                    }
+                ]
+            }
+        ]
+    }
+]

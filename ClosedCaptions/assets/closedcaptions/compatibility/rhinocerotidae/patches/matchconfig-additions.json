@@ -1,0 +1,69 @@
+[
+    {
+        "op": "addmerge",
+        "path": "/soundMap",
+        "file": "closedcaptions:config/matchconfig.json",
+        "value": [
+            {
+                "group": "rhinocerotidae:sounds/creature/rhinocerotidae/*",
+                "defaultKey": "[Rhinocerotidae sounds]",
+                "mappings": [
+                    {
+                        "match": "rhinocerotidae:sounds/creature/rhinocerotidae/carcass.ogg",
+                        "captionKey": "closedcaptions:creature-rhinocerotidae-carcass",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "rhinocerotidae:creature-rhinocerotidae-carcass" }
+                    },
+                    {
+                        "match": "rhinocerotidae:sounds/creature/rhinocerotidae/chirp1.ogg",
+                        "captionKey": "closedcaptions:creature-rhinocerotidae-chirp",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "rhinocerotidae:creature-rhinocerotidae-baby-male-ceratotheriumsimum" }
+                    },
+                    {
+                        "match": "rhinocerotidae:sounds/creature/rhinocerotidae/idlemoo1.ogg",
+                        "captionKey": "closedcaptions:creature-rhinocerotidae-idlemoo",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "rhinocerotidae:creature-rhinocerotidae-adult-male-ceratotheriumsimum" }
+                    },
+                    {
+                        "match": "rhinocerotidae:sounds/creature/rhinocerotidae/idlemoo2.ogg",
+                        "captionKey": "closedcaptions:creature-rhinocerotidae-idlemoo",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "rhinocerotidae:creature-rhinocerotidae-adult-male-ceratotheriumsimum" }
+                    },
+                    {
+                        "match": "rhinocerotidae:sounds/creature/rhinocerotidae/idlesnort1.ogg",
+                        "captionKey": "closedcaptions:creature-rhinocerotidae-idlesnort",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "rhinocerotidae:creature-rhinocerotidae-adult-male-ceratotheriumsimum" }
+                    },
+                    {
+                        "match": "rhinocerotidae:sounds/creature/rhinocerotidae/idlesqueak1.ogg",
+                        "captionKey": "closedcaptions:creature-rhinocerotidae-idlesqueak",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "rhinocerotidae:creature-rhinocerotidae-adult-male-ceratotheriumsimum" }
+                    },
+                    {
+                        "match": "rhinocerotidae:sounds/creature/rhinocerotidae/idlesqueak2.ogg",
+                        "captionKey": "closedcaptions:creature-rhinocerotidae-idlesqueak",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "rhinocerotidae:creature-rhinocerotidae-adult-male-ceratotheriumsimum" }
+                    },
+                    {
+                        "match": "rhinocerotidae:sounds/creature/rhinocerotidae/roar1.ogg",
+                        "captionKey": "closedcaptions:creature-rhinocerotidae-idleroar",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "rhinocerotidae:creature-rhinocerotidae-adult-male-ceratotheriumsimum" }
+                    },
+                    {
+                        "match": "rhinocerotidae:sounds/creature/rhinocerotidae/roar2.ogg",
+                        "captionKey": "closedcaptions:creature-rhinocerotidae-idleroar",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "rhinocerotidae:creature-rhinocerotidae-adult-male-ceratotheriumsimum" }
+                    }
+                ]
+            }
+        ]
+    }
+]

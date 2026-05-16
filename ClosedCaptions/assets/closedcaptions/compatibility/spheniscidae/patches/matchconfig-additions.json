@@ -1,0 +1,153 @@
+[
+    {
+        "op": "addmerge",
+        "path": "/soundMap",
+        "file": "closedcaptions:config/matchconfig.json",
+        "value": [
+            {
+                "group": "spheniscidae:sounds/creature/spheniscidae/*",
+                "defaultKey": "[Spheniscidae sounds]",
+                "mappings": [
+                    {
+                        "match": "spheniscidae:sounds/creature/spheniscidae/adeliecall1.ogg",
+                        "captionKey": "closedcaptions:creature-spheniscidae-adeliecall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "spheniscidae:creature-spheniscidae-adult-male-pygoscelisadeliae" }
+                    },
+                    {
+                        "match": "spheniscidae:sounds/creature/spheniscidae/adeliecall2.ogg",
+                        "captionKey": "closedcaptions:creature-spheniscidae-adeliecall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "spheniscidae:creature-spheniscidae-adult-male-pygoscelisadeliae" }
+                    },
+                    {
+                        "match": "spheniscidae:sounds/creature/spheniscidae/africancall1.ogg",
+                        "captionKey": "closedcaptions:creature-spheniscidae-africancall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "spheniscidae:creature-spheniscidae-adult-male-spheniscusdemersus" }
+                    },
+                    {
+                        "match": "spheniscidae:sounds/creature/spheniscidae/africancall2.ogg",
+                        "captionKey": "closedcaptions:creature-spheniscidae-africancall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "spheniscidae:creature-spheniscidae-adult-male-spheniscusdemersus" }
+                    },
+                    {
+                        "match": "spheniscidae:sounds/creature/spheniscidae/babyking1.ogg",
+                        "captionKey": "closedcaptions:creature-spheniscidae-babyking",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "spheniscidae:creature-spheniscidae-baby-female-aptenodytespatagonicus" }
+                    },
+                    {
+                        "match": "spheniscidae:sounds/creature/spheniscidae/beakclick.ogg",
+                        "captionKey": "closedcaptions:creature-spheniscidae-beakclick",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "spheniscidae:creature-spheniscidae-adult-male-aptenodytesforsteri" }
+                    },
+                    {
+                        "match": "spheniscidae:sounds/creature/spheniscidae/chinstrapcall1.ogg",
+                        "captionKey": "closedcaptions:creature-spheniscidae-chinstrapcall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "spheniscidae:creature-spheniscidae-adult-male-pygoscelisantarcticus" }
+                    },
+                    {
+                        "match": "spheniscidae:sounds/creature/spheniscidae/chinstrapcall2.ogg",
+                        "captionKey": "closedcaptions:creature-spheniscidae-chinstrapcall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "spheniscidae:creature-spheniscidae-adult-male-pygoscelisantarcticus" }
+                    },
+                    {
+                        "match": "spheniscidae:sounds/creature/spheniscidae/emperorcall1.ogg",
+                        "captionKey": "closedcaptions:creature-spheniscidae-emperorcall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "spheniscidae:creature-spheniscidae-adult-male-aptenodytesforsteri" }
+                    },
+                    {
+                        "match": "spheniscidae:sounds/creature/spheniscidae/emperorcall2.ogg",
+                        "captionKey": "closedcaptions:creature-spheniscidae-emperorcall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "spheniscidae:creature-spheniscidae-adult-male-aptenodytesforsteri" }
+                    },
+                    {
+                        "match": "spheniscidae:sounds/creature/spheniscidae/emperorhurt.ogg",
+                        "captionKey": "closedcaptions:creature-spheniscidae-emperorhurt",
+                        "tags": "animal,combat",
+                        "icon":{ "type": "item", "code": "spheniscidae:creature-spheniscidae-adult-male-aptenodytesforsteri" }
+                    },
+                    {
+                        "match": "spheniscidae:sounds/creature/spheniscidae/fairycall1.ogg",
+                        "captionKey": "closedcaptions:creature-spheniscidae-fairycall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "spheniscidae:creature-spheniscidae-adult-male-eudyptulaminor" }
+                    },
+                    {
+                        "match": "spheniscidae:sounds/creature/spheniscidae/fairycall2.ogg",
+                        "captionKey": "closedcaptions:creature-spheniscidae-fairycall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "spheniscidae:creature-spheniscidae-adult-male-eudyptulaminor" }
+                    },
+                    {
+                        "match": "spheniscidae:sounds/creature/spheniscidae/gentoocall1.ogg",
+                        "captionKey": "closedcaptions:creature-spheniscidae-gentoocall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "spheniscidae:creature-spheniscidae-adult-male-pygoscelispapua" }
+                    },
+                    {
+                        "match": "spheniscidae:sounds/creature/spheniscidae/gentoocall2.ogg",
+                        "captionKey": "closedcaptions:creature-spheniscidae-gentoocall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "spheniscidae:creature-spheniscidae-adult-male-pygoscelispapua" }
+                    },
+                    {
+                        "match": "spheniscidae:sounds/creature/spheniscidae/kingcall1.ogg",
+                        "captionKey": "closedcaptions:creature-spheniscidae-kingcall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "spheniscidae:creature-spheniscidae-adult-male-aptenodytespatagonicus" }
+                    },
+                    {
+                        "match": "spheniscidae:sounds/creature/spheniscidae/kingcall2.ogg",
+                        "captionKey": "closedcaptions:creature-spheniscidae-kingcall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "spheniscidae:creature-spheniscidae-adult-male-aptenodytespatagonicus" }
+                    },
+                    {
+                        "match": "spheniscidae:sounds/creature/spheniscidae/rockhoppercall1.ogg",
+                        "captionKey": "closedcaptions:creature-spheniscidae-rockhoppercall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "spheniscidae:creature-spheniscidae-adult-male-eudypteschrysocome" }
+                    },
+                    {
+                        "match": "spheniscidae:sounds/creature/spheniscidae/rockhoppercall2.ogg",
+                        "captionKey": "closedcaptions:creature-spheniscidae-rockhoppercall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "spheniscidae:creature-spheniscidae-adult-male-eudypteschrysocome" }
+                    },
+                    {
+                        "match": "spheniscidae:sounds/creature/spheniscidae/rockhoppercall3.ogg",
+                        "captionKey": "closedcaptions:creature-spheniscidae-rockhoppercall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "spheniscidae:creature-spheniscidae-adult-male-eudypteschrysocome" }
+                    },
+                    {
+                        "match": "spheniscidae:sounds/creature/spheniscidae/rockhoppercall4.ogg",
+                        "captionKey": "closedcaptions:creature-spheniscidae-rockhoppercall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "spheniscidae:creature-spheniscidae-adult-male-eudypteschrysocome" }
+                    },
+                    {
+                        "match": "spheniscidae:sounds/creature/spheniscidae/yelloweyecall1.ogg",
+                        "captionKey": "closedcaptions:creature-spheniscidae-yelloweyecall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "spheniscidae:creature-spheniscidae-adult-male-megadyptesantipodes" }
+                    },
+                    {
+                        "match": "spheniscidae:sounds/creature/spheniscidae/yelloweyecall2.ogg",
+                        "captionKey": "closedcaptions:creature-spheniscidae-yelloweyecall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "spheniscidae:creature-spheniscidae-adult-male-megadyptesantipodes" }
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -1,0 +1,99 @@
+[
+    {
+        "op": "addmerge",
+        "path": "/soundMap",
+        "file": "closedcaptions:config/matchconfig.json",
+        "value": [
+            {
+                "group": "elephantidae:sounds/creature/elephantidae/*",
+                "defaultKey": "[Elephantidae sounds]",
+                "mappings": [
+                    {
+                        "match": "elephantidae:sounds/creature/elephantidae/babycall01.ogg",
+                        "captionKey": "closedcaptions:creature-elephantidae-babycall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "elephantidae:creature-elephantidae-baby-male-loxodontaafricana" }
+                    },
+                    {
+                        "match": "elephantidae:sounds/creature/elephantidae/babycall02.ogg",
+                        "captionKey": "closedcaptions:creature-elephantidae-babycall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "elephantidae:creature-elephantidae-baby-male-loxodontaafricana" }
+                    },
+                    {
+                        "match": "elephantidae:sounds/creature/elephantidae/babycall03.ogg",
+                        "captionKey": "closedcaptions:creature-elephantidae-babycall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "elephantidae:creature-elephantidae-baby-male-loxodontaafricana" }
+                    },
+                    {
+                        "match": "elephantidae:sounds/creature/elephantidae/babycall04.ogg",
+                        "captionKey": "closedcaptions:creature-elephantidae-babycall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "elephantidae:creature-elephantidae-baby-male-loxodontaafricana" }
+                    },
+                    {
+                        "match": "elephantidae:sounds/creature/elephantidae/carcass.ogg",
+                        "captionKey": "closedcaptions:creature-elephantidae-carcass",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "elephantidae:creature-elephantidae-carcass" }
+                    },
+                    {
+                        "match": "elephantidae:sounds/creature/elephantidae/growl01.ogg",
+                        "captionKey": "closedcaptions:creature-elephantidae-growl",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "elephantidae:creature-elephantidae-adult-male-loxodontaafricana" }
+                    },
+                    {
+                        "match": "elephantidae:sounds/creature/elephantidae/growl02.ogg",
+                        "captionKey": "closedcaptions:creature-elephantidae-growl",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "elephantidae:creature-elephantidae-adult-male-loxodontaafricana" }
+                    },
+                    {
+                        "match": "elephantidae:sounds/creature/elephantidae/roar01.ogg",
+                        "captionKey": "closedcaptions:creature-elephantidae-roar",
+                        "tags": "animal,combat,danger",
+                        "icon":{ "type": "item", "code": "elephantidae:creature-elephantidae-adult-male-loxodontaafricana" }
+                    },
+                    {
+                        "match": "elephantidae:sounds/creature/elephantidae/roar02.ogg",
+                        "captionKey": "closedcaptions:creature-elephantidae-roar",
+                        "tags": "animal,combat,danger",
+                        "icon":{ "type": "item", "code": "elephantidae:creature-elephantidae-adult-male-loxodontaafricana" }
+                    },
+                    {
+                        "match": "elephantidae:sounds/creature/elephantidae/roar03.ogg",
+                        "captionKey": "closedcaptions:creature-elephantidae-roar",
+                        "tags": "animal,combat,danger",
+                        "icon":{ "type": "item", "code": "elephantidae:creature-elephantidae-adult-male-loxodontaafricana" }
+                    },
+                    {
+                        "match": "elephantidae:sounds/creature/elephantidae/squeak01.ogg",
+                        "captionKey": "closedcaptions:creature-elephantidae-squeak",
+                        "tags": "animal,combat",
+                        "icon":{ "type": "item", "code": "elephantidae:creature-elephantidae-baby-male-loxodontaafricana" }
+                    },
+                    {
+                        "match": "elephantidae:sounds/creature/elephantidae/trumpet01.ogg",
+                        "captionKey": "closedcaptions:creature-elephantidae-trumpet",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "elephantidae:creature-elephantidae-adult-male-loxodontaafricana" }
+                    },
+                    {
+                        "match": "elephantidae:sounds/creature/elephantidae/trumpet02.ogg",
+                        "captionKey": "closedcaptions:creature-elephantidae-trumpet",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "elephantidae:creature-elephantidae-adult-male-loxodontaafricana" }
+                    },
+                    {
+                        "match": "elephantidae:sounds/creature/elephantidae/trumpet03.ogg",
+                        "captionKey": "closedcaptions:creature-elephantidae-trumpet",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "elephantidae:creature-elephantidae-adult-male-loxodontaafricana" }
+                    }
+                ]
+            }
+        ]
+    }
+]

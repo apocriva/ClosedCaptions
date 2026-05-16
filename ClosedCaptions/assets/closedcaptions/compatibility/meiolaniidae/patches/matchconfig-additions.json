@@ -1,0 +1,27 @@
+[
+    {
+        "op": "addmerge",
+        "path": "/soundMap",
+        "file": "closedcaptions:config/matchconfig.json",
+        "value": [
+            {
+                "group": "meiolaniidae:sounds/creature/meiolaniidae/*",
+                "defaultKey": "[Meiolaniidae sounds]",
+                "mappings": [
+                    {
+                        "match": "meiolaniidae:sounds/creature/meiolaniidae/hiss1.ogg",
+                        "captionKey": "closedcaptions:creature-meiolaniidae-hiss",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "meiolaniidae:creature-meiolaniidae-adult-male-ninjemysoweni" }
+                    },
+                    {
+                        "match": "meiolaniidae:sounds/creature/meiolaniidae/idle1.ogg",
+                        "captionKey": "closedcaptions:creature-meiolaniidae-idle",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "meiolaniidae:creature-meiolaniidae-adult-male-ninjemysoweni" }
+                    }
+                ]
+            }
+        ]
+    }
+]

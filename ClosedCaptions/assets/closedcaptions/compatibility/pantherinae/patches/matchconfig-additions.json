@@ -1,0 +1,177 @@
+[
+    {
+        "op": "addmerge",
+        "path": "/soundMap",
+        "file": "closedcaptions:config/matchconfig.json",
+        "value": [
+            {
+                "group": "pantherinae:sounds/creature/pantherinae/*",
+                "defaultKey": "[Pantherinae sounds]",
+                "mappings": [
+                    {
+                        "match": "pantherinae:sounds/creature/pantherinae/atroxattack.ogg",
+                        "captionKey": "closedcaptions:creature-pantherinae-atrox-attack",
+                        "tags": "animal,combat,danger",
+                        "icon":{ "type": "item", "code": "pantherinae:creature-pantherinae-panthera-adult-male-atrox-normal" }
+                    },
+                    {
+                        "match": "pantherinae:sounds/creature/pantherinae/atroxroar.ogg",
+                        "captionKey": "closedcaptions:creature-pantherinae-atrox-roar",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "pantherinae:creature-pantherinae-panthera-adult-male-atrox-normal" }
+                    },
+                    {
+                        "match": "pantherinae:sounds/creature/pantherinae/carcass.ogg",
+                        "captionKey": "closedcaptions:creature-pantherinae-carcass",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "pantherinae:creature-pantherinae-panthera-carcass" }
+                    },
+                    {
+                        "match": "pantherinae:sounds/creature/pantherinae/cubdeath.ogg",
+                        "captionKey": "closedcaptions:creature-pantherinae-cub-death",
+                        "tags": "animal,combat",
+                        "icon":{ "type": "item", "code": "pantherinae:creature-pantherinae-panthera-baby-male-atrox-normal" }
+                    },
+                    {
+                        "match": "pantherinae:sounds/creature/pantherinae/cubhurt.ogg",
+                        "captionKey": "closedcaptions:creature-pantherinae-cub-hurt",
+                        "tags": "animal,combat",
+                        "icon":{ "type": "item", "code": "pantherinae:creature-pantherinae-panthera-baby-male-atrox-normal" }
+                    },
+                    {
+                        "match": "pantherinae:sounds/creature/pantherinae/cubidle.ogg",
+                        "captionKey": "closedcaptions:creature-pantherinae-cub-idle",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "pantherinae:creature-pantherinae-panthera-baby-male-atrox-normal" }
+                    },
+                    {
+                        "match": "pantherinae:sounds/creature/pantherinae/leoattack.ogg",
+                        "captionKey": "closedcaptions:creature-pantherinae-leo-attack",
+                        "tags": "animal,combat,danger",
+                        "icon":{ "type": "item", "code": "pantherinae:creature-pantherinae-panthera-adult-male-leo-normal" }
+                    },
+                    {
+                        "match": "pantherinae:sounds/creature/pantherinae/leoroar.ogg",
+                        "captionKey": "closedcaptions:creature-pantherinae-leo-roar",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "pantherinae:creature-pantherinae-panthera-adult-male-leo-normal" }
+                    },
+                    {
+                        "match": "pantherinae:sounds/creature/pantherinae/lick.ogg",
+                        "captionKey": "closedcaptions:creature-pantherinae-lick",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "pantherinae:creature-pantherinae-panthera-adult-male-leo-normal" }
+                    },
+                    {
+                        "match": "pantherinae:sounds/creature/pantherinae/neofelisattack.ogg",
+                        "captionKey": "closedcaptions:creature-pantherinae-neofelis-attack",
+                        "tags": "animal,combat,danger",
+                        "icon":{ "type": "item", "code": "pantherinae:creature-pantherinae-neofelis-adult-male-nebulosa-normal" }
+                    },
+                    {
+                        "match": "pantherinae:sounds/creature/pantherinae/neofelisdeath.ogg",
+                        "captionKey": "closedcaptions:creature-pantherinae-neofelis-death",
+                        "tags": "animal,combat,danger",
+                        "icon":{ "type": "item", "code": "pantherinae:creature-pantherinae-neofelis-adult-male-nebulosa-normal" }
+                    },
+                    {
+                        "match": "pantherinae:sounds/creature/pantherinae/neofelishurt.ogg",
+                        "captionKey": "closedcaptions:creature-pantherinae-neofelis-hurt",
+                        "tags": "animal,combat,danger",
+                        "icon":{ "type": "item", "code": "pantherinae:creature-pantherinae-neofelis-adult-male-nebulosa-normal" }
+                    },
+                    {
+                        "match": "pantherinae:sounds/creature/pantherinae/neofelisroar.ogg",
+                        "captionKey": "closedcaptions:creature-pantherinae-neofelis-roar",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "pantherinae:creature-pantherinae-neofelis-adult-male-nebulosa-normal" }
+                    },
+                    {
+                        "match": "pantherinae:sounds/creature/pantherinae/oncaattack.ogg",
+                        "captionKey": "closedcaptions:creature-pantherinae-onca-attack",
+                        "tags": "animal,combat,danger",
+                        "icon":{ "type": "item", "code": "pantherinae:creature-pantherinae-panthera-adult-male-onca-normal" }
+                    },
+                    {
+                        "match": "pantherinae:sounds/creature/pantherinae/oncaroar.ogg",
+                        "captionKey": "closedcaptions:creature-pantherinae-onca-roar",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "pantherinae:creature-pantherinae-panthera-adult-male-onca-normal" }
+                    },
+                    {
+                        "match": "pantherinae:sounds/creature/pantherinae/pantheracharge.ogg",
+                        "captionKey": "closedcaptions:creature-pantherinae-panthera-charge",
+                        "tags": "animal,combat,danger",
+                        "icon":{ "type": "item", "code": "pantherinae:creature-pantherinae-panthera-adult-female-atrox-normal" }
+                    },
+                    {
+                        "match": "pantherinae:sounds/creature/pantherinae/pantheradeath.ogg",
+                        "captionKey": "closedcaptions:creature-pantherinae-panthera-death",
+                        "tags": "animal,combat,danger",
+                        "icon":{ "type": "item", "code": "pantherinae:creature-pantherinae-panthera-adult-female-atrox-normal" }
+                    },
+                    {
+                        "match": "pantherinae:sounds/creature/pantherinae/pantherahurt.ogg",
+                        "captionKey": "closedcaptions:creature-pantherinae-panthera-hurt",
+                        "tags": "animal,combat,danger",
+                        "icon":{ "type": "item", "code": "pantherinae:creature-pantherinae-panthera-adult-female-atrox-normal" }
+                    },
+                    {
+                        "match": "pantherinae:sounds/creature/pantherinae/pantherinaeidle.ogg",
+                        "captionKey": "closedcaptions:creature-pantherinae-panthera-idle",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "pantherinae:creature-pantherinae-panthera-adult-female-atrox-normal" }
+                    },
+                    {
+                        "match": "pantherinae:sounds/creature/pantherinae/pardusattack.ogg",
+                        "captionKey": "closedcaptions:creature-pantherinae-pardus-attack",
+                        "tags": "animal,combat,danger",
+                        "icon":{ "type": "item", "code": "pantherinae:creature-pantherinae-panthera-adult-male-pardus-normal" }
+                    },
+                    {
+                        "match": "pantherinae:sounds/creature/pantherinae/pardusroar.ogg",
+                        "captionKey": "closedcaptions:creature-pantherinae-pardus-roar",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "pantherinae:creature-pantherinae-panthera-adult-male-pardus-normal" }
+                    },
+                    {
+                        "match": "pantherinae:sounds/creature/pantherinae/spelaeaattack.ogg",
+                        "captionKey": "closedcaptions:creature-pantherinae-spelaea-attack",
+                        "tags": "animal,combat,danger",
+                        "icon":{ "type": "item", "code": "pantherinae:creature-pantherinae-panthera-adult-male-spelaea-normal" }
+                    },
+                    {
+                        "match": "pantherinae:sounds/creature/pantherinae/spelaearoar.ogg",
+                        "captionKey": "closedcaptions:creature-pantherinae-spelaea-roar",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "pantherinae:creature-pantherinae-panthera-adult-male-spelaea-normal" }
+                    },
+                    {
+                        "match": "pantherinae:sounds/creature/pantherinae/tigrisattack.ogg",
+                        "captionKey": "closedcaptions:creature-pantherinae-tigris-attack",
+                        "tags": "animal,combat,danger",
+                        "icon":{ "type": "item", "code": "pantherinae:creature-pantherinae-panthera-adult-male-tigris-normal" }
+                    },
+                    {
+                        "match": "pantherinae:sounds/creature/pantherinae/tigrisroar.ogg",
+                        "captionKey": "closedcaptions:creature-pantherinae-tigris-roar",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "pantherinae:creature-pantherinae-panthera-adult-male-tigris-normal" }
+                    },
+                    {
+                        "match": "pantherinae:sounds/creature/pantherinae/unciaattack.ogg",
+                        "captionKey": "closedcaptions:creature-pantherinae-uncia-attack",
+                        "tags": "animal,combat,danger",
+                        "icon":{ "type": "item", "code": "pantherinae:creature-pantherinae-panthera-adult-male-uncia-normal" }
+                    },
+                    {
+                        "match": "pantherinae:sounds/creature/pantherinae/unciaroar.ogg",
+                        "captionKey": "closedcaptions:creature-pantherinae-uncia-roar",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "pantherinae:creature-pantherinae-panthera-adult-male-uncia-normal" }
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -1,0 +1,63 @@
+[
+    {
+        "op": "addmerge",
+        "path": "/soundMap",
+        "file": "closedcaptions:config/matchconfig.json",
+        "value": [
+            {
+                "group": "viverridae:sounds/creature/nandiniidae/*",
+                "defaultKey": "[Nandiniidae sounds]",
+                "mappings": [
+                    {
+                        "match": "viverridae:sounds/creature/nandiniidae/babycall1.ogg",
+                        "captionKey": "closedcaptions:creature-nandiniidae-babycall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "viverridae:creature-nandiniidae-baby-female-nandiniabinotata" }
+                    },
+                    {
+                        "match": "viverridae:sounds/creature/nandiniidae/babycall2.ogg",
+                        "captionKey": "closedcaptions:creature-nandiniidae-babycall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "viverridae:creature-nandiniidae-baby-female-nandiniabinotata" }
+                    },
+                    {
+                        "match": "viverridae:sounds/creature/nandiniidae/call1.ogg",
+                        "captionKey": "closedcaptions:creature-nandiniidae-babycall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "viverridae:creature-nandiniidae-adult-female-nandiniabinotata" }
+                    }
+                ]
+            },
+            {
+                "group": "viverridae:sounds/creature/viverridae/*",
+                "defaultKey": "[Viverridae sounds]",
+                "mappings": [
+                    {
+                        "match": "viverridae:sounds/creature/viverridae/idle1.ogg",
+                        "captionKey": "closedcaptions:creature-viverridae-idle",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "viverridae:creature-viverridae-adult-female-viverrazibetha" }
+                    },
+                    {
+                        "match": "viverridae:sounds/creature/viverridae/idle2.ogg",
+                        "captionKey": "closedcaptions:creature-viverridae-idle",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "viverridae:creature-viverridae-adult-female-viverrazibetha" }
+                    },
+                    {
+                        "match": "viverridae:sounds/creature/viverridae/idle3.ogg",
+                        "captionKey": "closedcaptions:creature-viverridae-idle",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "viverridae:creature-viverridae-adult-female-viverrazibetha" }
+                    },
+                    {
+                        "match": "viverridae:sounds/creature/viverridae/idle4.ogg",
+                        "captionKey": "closedcaptions:creature-viverridae-idle",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "viverridae:creature-viverridae-adult-female-viverrazibetha" }
+                    }
+                ]
+            }
+        ]
+    }
+]

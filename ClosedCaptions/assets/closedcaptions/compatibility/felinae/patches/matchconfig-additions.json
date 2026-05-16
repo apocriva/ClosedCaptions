@@ -1,0 +1,99 @@
+[
+    {
+        "op": "addmerge",
+        "path": "/soundMap",
+        "file": "closedcaptions:config/matchconfig.json",
+        "value": [
+            {
+                "group": "felinae:sounds/creature/felinae/*",
+                "defaultKey": "[Felinae sounds]",
+                "mappings": [
+                    {
+                        "match": "felinae:sounds/creature/felinae/caracalbabycall1.ogg",
+                        "captionKey": "closedcaptions:creature-felinae-caracal-babycall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "felinae:creature-felinae-baby-female-caracalcaracal" }
+                    },
+                    {
+                        "match": "felinae:sounds/creature/felinae/caracalbabychirp1.ogg",
+                        "captionKey": "closedcaptions:creature-felinae-caracal-babychirp",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "felinae:creature-felinae-baby-female-caracalcaracal" }
+                    },
+                    {
+                        "match": "felinae:sounds/creature/felinae/caracalbabychirp2.ogg",
+                        "captionKey": "closedcaptions:creature-felinae-caracal-babychirp",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "felinae:creature-felinae-baby-female-caracalcaracal" }
+                    },
+                    {
+                        "match": "felinae:sounds/creature/felinae/caracalcall1.ogg",
+                        "captionKey": "closedcaptions:creature-felinae-caracal-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "felinae:creature-felinae-adult-female-caracalcaracal" }
+                    },
+                    {
+                        "match": "felinae:sounds/creature/felinae/caracalcall2.ogg",
+                        "captionKey": "closedcaptions:creature-felinae-caracal-callchirp",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "felinae:creature-felinae-adult-female-caracalcaracal" }
+                    },
+                    {
+                        "match": "felinae:sounds/creature/felinae/caracalcall3.ogg",
+                        "captionKey": "closedcaptions:creature-felinae-caracal-callyowl",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "felinae:creature-felinae-adult-female-caracalcaracal" }
+                    },
+                    {
+                        "match": "felinae:sounds/creature/felinae/caracalcall4.ogg",
+                        "captionKey": "closedcaptions:creature-felinae-caracal-callchirp",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "felinae:creature-felinae-adult-female-caracalcaracal" }
+                    },
+                    {
+                        "match": "felinae:sounds/creature/felinae/caracalhiss1.ogg",
+                        "captionKey": "closedcaptions:creature-felinae-caracal-hiss",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "felinae:creature-felinae-adult-female-caracalcaracal" }
+                    },
+                    {
+                        "match": "felinae:sounds/creature/felinae/lynxbabycall1.ogg",
+                        "captionKey": "closedcaptions:creature-felinae-lynx-babycall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "felinae:creature-felinae-baby-female-lynxlynx" }
+                    },
+                    {
+                        "match": "felinae:sounds/creature/felinae/lynxbabycall2.ogg",
+                        "captionKey": "closedcaptions:creature-felinae-lynx-babycall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "felinae:creature-felinae-baby-female-lynxlynx" }
+                    },
+                    {
+                        "match": "felinae:sounds/creature/felinae/lynxcall1.ogg",
+                        "captionKey": "closedcaptions:creature-felinae-lynx-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "felinae:creature-felinae-adult-female-lynxlynx" }
+                    },
+                    {
+                        "match": "felinae:sounds/creature/felinae/lynxcall2.ogg",
+                        "captionKey": "closedcaptions:creature-felinae-lynx-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "felinae:creature-felinae-adult-female-lynxlynx" }
+                    },
+                    {
+                        "match": "felinae:sounds/creature/felinae/lynxgrowl1.ogg",
+                        "captionKey": "closedcaptions:creature-felinae-lynx-growl",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "felinae:creature-felinae-adult-female-lynxlynx" }
+                    },
+                    {
+                        "match": "felinae:sounds/creature/felinae/lynxgrowl2.ogg",
+                        "captionKey": "closedcaptions:creature-felinae-lynx-growl",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "felinae:creature-felinae-adult-female-lynxlynx" }
+                    }
+                ]
+            }
+        ]
+    }
+]

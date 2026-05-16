@@ -1,0 +1,267 @@
+[
+    {
+        "op": "addmerge",
+        "path": "/soundMap",
+        "file": "closedcaptions:config/matchconfig.json",
+        "value": [
+            {
+                "group": "bovinae:sounds/creature/*",
+                "defaultKey": "[Bovinae sounds]",
+                "mappings": [
+                    {
+                        "match": "bovinae:sounds/creature/carcass.ogg",
+                        "captionKey": "closedcaptions:creature-bovinae-carcass",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "bovinae:creature-bovinae-carcass" }
+                    }
+                ]
+            },
+            {
+                "group": "bovinae:sounds/creature/bos/*",
+                "defaultKey": "[Bos sounds]",
+                "mappings": [
+                    {
+                        "match": "bovinae:sounds/creature/bos/hurt1.ogg",
+                        "captionKey": "closedcaptions:creature-bos-hurt",
+                        "tags": "animal,combat",
+                        "icon":{ "type": "item", "code": "bovinae:creature-bovinae-adult-male-bosprimigeniusprimigenius" }
+                    },
+                    {
+                        "match": "bovinae:sounds/creature/bos/moo1.ogg",
+                        "captionKey": "closedcaptions:creature-bos-moo",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "bovinae:creature-bovinae-adult-male-bosprimigeniusprimigenius" }
+                    },
+                    {
+                        "match": "bovinae:sounds/creature/bos/moo2.ogg",
+                        "captionKey": "closedcaptions:creature-bos-moo",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "bovinae:creature-bovinae-adult-male-bosprimigeniusprimigenius" }
+                    },
+                    {
+                        "match": "bovinae:sounds/creature/bos/moo3.ogg",
+                        "captionKey": "closedcaptions:creature-bos-moo",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "bovinae:creature-bovinae-adult-male-bosprimigeniusprimigenius" }
+                    },
+                    {
+                        "match": "bovinae:sounds/creature/bos/moo4.ogg",
+                        "captionKey": "closedcaptions:creature-bos-moo",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "bovinae:creature-bovinae-adult-male-bosprimigeniusprimigenius" }
+                    },
+                    {
+                        "match": "bovinae:sounds/creature/bos/moo5.ogg",
+                        "captionKey": "closedcaptions:creature-bos-moo",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "bovinae:creature-bovinae-adult-male-bosprimigeniusprimigenius" }
+                    },
+                    {
+                        "match": "bovinae:sounds/creature/bos/moo6.ogg",
+                        "captionKey": "closedcaptions:creature-bos-moo",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "bovinae:creature-bovinae-adult-male-bosprimigeniusprimigenius" }
+                    },
+                    {
+                        "match": "bovinae:sounds/creature/bos/roar1.ogg",
+                        "captionKey": "closedcaptions:creature-bos-roar",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "bovinae:creature-bovinae-adult-male-bosprimigeniusprimigenius" }
+                    },
+                    {
+                        "match": "bovinae:sounds/creature/bos/roar2.ogg",
+                        "captionKey": "closedcaptions:creature-bos-roar",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "bovinae:creature-bovinae-adult-male-bosprimigeniusprimigenius" }
+                    },
+                    {
+                        "match": "bovinae:sounds/creature/bos/roar3.ogg",
+                        "captionKey": "closedcaptions:creature-bos-roar",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "bovinae:creature-bovinae-adult-male-bosprimigeniusprimigenius" }
+                    },
+                    {
+                        "match": "bovinae:sounds/creature/bos/roar4.ogg",
+                        "captionKey": "closedcaptions:creature-bos-roar",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "bovinae:creature-bovinae-adult-male-bosprimigeniusprimigenius" }
+                    },
+                    {
+                        "match": "bovinae:sounds/creature/bos/roar5.ogg",
+                        "captionKey": "closedcaptions:creature-bos-roar",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "bovinae:creature-bovinae-adult-male-bosprimigeniusprimigenius" }
+                    }
+                ]
+            },
+            {
+                "group": "bovinae:sounds/creature/boselaphus/*",
+                "defaultKey": "[Boselaphus sounds]",
+                "mappings": [
+                    {
+                        "match": "bovinae:sounds/creature/boselaphus/nilgai-call1.ogg",
+                        "captionKey": "closedcaptions:creature-boselaphus-nilgai-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "bovinae:creature-bovinae-adult-male-boselaphustragocamelus" }
+                    }
+                ]
+            },
+            {
+                "group": "bovinae:sounds/creature/bubalus/*",
+                "defaultKey": "[Bubalus sounds]",
+                "mappings": [
+                    {
+                        "match": "bovinae:sounds/creature/bubalus/anoa-call1.ogg",
+                        "captionKey": "closedcaptions:creature-bubalus-anoa-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "bovinae:creature-bovinae-adult-male-bubalusdepressicornis" }
+                    },
+                    {
+                        "match": "bovinae:sounds/creature/bubalus/anoa-call2.ogg",
+                        "captionKey": "closedcaptions:creature-bubalus-anoa-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "bovinae:creature-bovinae-adult-male-bubalusdepressicornis" }
+                    },
+                    {
+                        "match": "bovinae:sounds/creature/bubalus/anoa-call3.ogg",
+                        "captionKey": "closedcaptions:creature-bubalus-anoa-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "bovinae:creature-bovinae-adult-male-bubalusdepressicornis" }
+                    },
+                    {
+                        "match": "bovinae:sounds/creature/bubalus/anoa-call4.ogg",
+                        "captionKey": "closedcaptions:creature-bubalus-anoa-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "bovinae:creature-bovinae-adult-male-bubalusdepressicornis" }
+                    },
+                    {
+                        "match": "bovinae:sounds/creature/bubalus/buffalo-idle1.ogg",
+                        "captionKey": "closedcaptions:creature-bubalus-idle",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "bovinae:creature-bovinae-adult-male-bubalusbubalis-tamed" }
+                    },
+                    {
+                        "match": "bovinae:sounds/creature/bubalus/buffalo-idle2.ogg",
+                        "captionKey": "closedcaptions:creature-bubalus-idle",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "bovinae:creature-bovinae-adult-male-bubalusbubalis-tamed" }
+                    },
+                    {
+                        "match": "bovinae:sounds/creature/bubalus/buffalo-moo1.ogg",
+                        "captionKey": "closedcaptions:creature-bubalus-moo",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "bovinae:creature-bovinae-adult-male-bubalusbubalis-tamed" }
+                    },
+                    {
+                        "match": "bovinae:sounds/creature/bubalus/buffalo-moo2.ogg",
+                        "captionKey": "closedcaptions:creature-bubalus-moo",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "bovinae:creature-bovinae-adult-male-bubalusbubalis-tamed" }
+                    },
+                    {
+                        "match": "bovinae:sounds/creature/bubalus/buffalo-moo3.ogg",
+                        "captionKey": "closedcaptions:creature-bubalus-moo",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "bovinae:creature-bovinae-adult-male-bubalusbubalis-tamed" }
+                    },
+                    {
+                        "match": "bovinae:sounds/creature/bubalus/buffalo-moo4.ogg",
+                        "captionKey": "closedcaptions:creature-bubalus-moo",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "bovinae:creature-bovinae-adult-male-bubalusbubalis-tamed" }
+                    }
+                ]
+            },
+            {
+                "group": "bovinae:sounds/creature/pseudoryx/*",
+                "defaultKey": "[Pseudoryx sounds]",
+                "mappings": [
+                    {
+                        "match": "bovinae:sounds/creature/pseudoryx/bleat1.ogg",
+                        "captionKey": "closedcaptions:creature-pseudoryx-bleat",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "bovinae:creature-bovinae-adult-male-pseudoryxnghetinhensis" }
+                    }
+                ]
+            },
+            {
+                "group": "bovinae:sounds/creature/syncerus/*",
+                "defaultKey": "[Syncerus sounds]",
+                "mappings": [
+                    {
+                        "match": "bovinae:sounds/creature/syncerus/growl1.ogg",
+                        "captionKey": "closedcaptions:creature-syncerus-growl",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "bovinae:creature-bovinae-adult-male-syncerusantiquus" }
+                    },
+                    {
+                        "match": "bovinae:sounds/creature/syncerus/growl2.ogg",
+                        "captionKey": "closedcaptions:creature-syncerus-growl",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "bovinae:creature-bovinae-adult-male-syncerusantiquus" }
+                    },
+                    {
+                        "match": "bovinae:sounds/creature/syncerus/growl3.ogg",
+                        "captionKey": "closedcaptions:creature-syncerus-growl",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "bovinae:creature-bovinae-adult-male-syncerusantiquus" }
+                    }
+                ]
+            },
+            {
+                "group": "bovinae:sounds/creature/tetracerus/*",
+                "defaultKey": "[Tetracerus sounds]",
+                "mappings": [
+                    {
+                        "match": "bovinae:sounds/creature/tetracerus/bark1.ogg",
+                        "captionKey": "closedcaptions:creature-tetracerus-bark",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "bovinae:creature-bovinae-adult-male-tetracerusquadricornis" }
+                    },
+                    {
+                        "match": "bovinae:sounds/creature/tetracerus/bark2.ogg",
+                        "captionKey": "closedcaptions:creature-tetracerus-bark",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "bovinae:creature-bovinae-adult-male-tetracerusquadricornis" }
+                    }
+                ]
+            },
+            {
+                "group": "bovinae:sounds/creature/tragelaphus/*",
+                "defaultKey": "[Tragelaphus sounds]",
+                "mappings": [
+                    {
+                        "match": "bovinae:sounds/creature/tragelaphus/strepsiceros-bark1.ogg",
+                        "captionKey": "closedcaptions:creature-tragelaphus-strepsiceros-bark",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "bovinae:creature-bovinae-adult-male-tragelaphusstrepsiceros" }
+                    },
+                    {
+                        "match": "bovinae:sounds/creature/tragelaphus/strepsiceros-bark2.ogg",
+                        "captionKey": "closedcaptions:creature-tragelaphus-strepsiceros-bark",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "bovinae:creature-bovinae-adult-male-tragelaphusstrepsiceros" }
+                    },
+                    {
+                        "match": "bovinae:sounds/creature/tragelaphus/strepsiceros-bark3.ogg",
+                        "captionKey": "closedcaptions:creature-tragelaphus-strepsiceros-bark",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "bovinae:creature-bovinae-adult-male-tragelaphusstrepsiceros" }
+                    },
+                    {
+                        "match": "bovinae:sounds/creature/tragelaphus/sylvaticus-bark1.ogg",
+                        "captionKey": "closedcaptions:creature-tragelaphus-sylvaticus-bark",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "bovinae:creature-bovinae-adult-male-tragelaphussylvaticus" }
+                    },
+                    {
+                        "match": "bovinae:sounds/creature/tragelaphus/sylvaticus-bark2.ogg",
+                        "captionKey": "closedcaptions:creature-tragelaphus-sylvaticus-bark",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "bovinae:creature-bovinae-adult-male-tragelaphussylvaticus" }
+                    }
+                ]
+            }
+        ]
+    }
+]

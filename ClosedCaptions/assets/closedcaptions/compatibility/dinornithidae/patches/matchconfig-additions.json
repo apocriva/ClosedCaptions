@@ -1,0 +1,523 @@
+[
+    {
+        "op": "addmerge",
+        "path": "/soundMap",
+        "file": "closedcaptions:config/matchconfig.json",
+        "value": [
+            {
+                "group": "dinornithidae:sounds/creature/*",
+                "defaultKey": "[Dinornithidae sounds]"
+            },
+            {
+                "group": "dinornithidae:sounds/creature/acanthisittidae/*",
+                "defaultKey": "[Acanthisittidae sounds]",
+                "mappings": [
+                    {
+                        "match": "dinornithidae:sounds/creature/acanthisittidae/acanthisittachloris-call.ogg",
+                        "captionKey": "closedcaptions:creature-acanthisittidae-chloris-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-acanthisittidae-adult-male-acanthisittachloris" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/acanthisittidae/baby.ogg",
+                        "captionKey": "closedcaptions:creature-acanthisittidae-baby-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-acanthisittidae-baby-female-acanthisittachloris" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/acanthisittidae/dendroscansordecurvirostris-call.ogg",
+                        "captionKey": "closedcaptions:creature-acanthisittidae-dendroscansordecurvirostris-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-acanthisittidae-adult-male-dendroscansordecurvirostris" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/acanthisittidae/idle1.ogg",
+                        "captionKey": "closedcaptions:creature-acanthisittidae-idle",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-acanthisittidae-adult-male-acanthisittachloris" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/acanthisittidae/idle2.ogg",
+                        "captionKey": "closedcaptions:creature-acanthisittidae-idle",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-acanthisittidae-adult-male-acanthisittachloris" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/acanthisittidae/pachyplichasjagmi-call.ogg",
+                        "captionKey": "closedcaptions:creature-acanthisittidae-pachyplichasjagmi-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-acanthisittidae-adult-male-pachyplichasjagmi" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/acanthisittidae/pachyplichasyaldwyni-call.ogg",
+                        "captionKey": "closedcaptions:creature-acanthisittidae-pachyplichasyaldwyni-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-acanthisittidae-adult-male-pachyplichasyaldwyni" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/acanthisittidae/traversialyalli-call.ogg",
+                        "captionKey": "closedcaptions:creature-acanthisittidae-traversialyalli-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-acanthisittidae-adult-male-traversialyalli" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/acanthisittidae/xenicusgilviventris-call.ogg",
+                        "captionKey": "closedcaptions:creature-acanthisittidae-xenicusgilviventris-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-acanthisittidae-adult-male-xenicusgilviventris" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/acanthisittidae/xenicuslongipes-call.ogg",
+                        "captionKey": "closedcaptions:creature-acanthisittidae-xenicuslongipes-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-acanthisittidae-adult-male-xenicuslongipes" }
+                    }
+                ]
+            },
+            {
+                "group": "dinornithidae:sounds/creature/aegothelidae/*",
+                "defaultKey": "[Aegothelidae sounds]",
+                "mappings": [
+                    {
+                        "match": "dinornithidae:sounds/creature/aegothelidae/call1.ogg",
+                        "captionKey": "closedcaptions:creature-aegothelidae-call1",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-aegothelidae-adult-male-aegothelesnovaezealandiae" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/aegothelidae/call2.ogg",
+                        "captionKey": "closedcaptions:creature-aegothelidae-call2",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-aegothelidae-adult-male-aegothelesnovaezealandiae" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/aegothelidae/call3.ogg",
+                        "captionKey": "closedcaptions:creature-aegothelidae-call3",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-aegothelidae-adult-male-aegothelesnovaezealandiae" }
+                    }
+                ]
+            },
+            {
+                "group": "dinornithidae:sounds/creature/anatidae/*",
+                "defaultKey": "[Anatidae sounds]",
+                "mappings": [
+                    {
+                        "match": "dinornithidae:sounds/creature/anatidae/duck-call1.ogg",
+                        "captionKey": "closedcaptions:creature-anatidae-duck-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-anatidae-adult-male-chenonettafinschi" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/anatidae/duck-idle1.ogg",
+                        "captionKey": "closedcaptions:creature-anatidae-duck-idle",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-anatidae-adult-male-chenonettafinschi" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/anatidae/goose-call1.ogg",
+                        "captionKey": "closedcaptions:creature-anatidae-goose-grunt",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-anatidae-adult-male-cnemiornisgracilis" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/anatidae/goose-call2.ogg",
+                        "captionKey": "closedcaptions:creature-anatidae-goose-grunt",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-anatidae-adult-male-cnemiornisgracilis" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/anatidae/goose-call3.ogg",
+                        "captionKey": "closedcaptions:creature-anatidae-goose-squawk",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-anatidae-adult-male-cnemiornisgracilis" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/anatidae/goose-call4.ogg",
+                        "captionKey": "closedcaptions:creature-anatidae-goose-grunt",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-anatidae-adult-male-cnemiornisgracilis" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/anatidae/goose-call5.ogg",
+                        "captionKey": "closedcaptions:creature-anatidae-goose-squawk",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-anatidae-adult-male-cnemiornisgracilis" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/anatidae/teal-idle1.ogg",
+                        "captionKey": "closedcaptions:creature-teal-idle",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-anatidae-adult-male-anasaucklandica" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/anatidae/teal-idle2.ogg",
+                        "captionKey": "closedcaptions:creature-teal-idle",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-anatidae-adult-male-anasaucklandica" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/anatidae/teal-idle3.ogg",
+                        "captionKey": "closedcaptions:creature-teal-idle",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-anatidae-adult-male-anasaucklandica" }
+                    }
+                ]
+            },
+            {
+                "group": "dinornithidae:sounds/creature/apterygidae/*",
+                "defaultKey": "[Apterygidae sounds]",
+                "mappings": [
+                    {
+                        "match": "dinornithidae:sounds/creature/apterygidae/baby.ogg",
+                        "captionKey": "closedcaptions:creature-apterygidae-baby",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-apterygidae-baby-male-apteryxaustralis" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/apterygidae/female-call.ogg",
+                        "captionKey": "closedcaptions:creature-apterygidae-female-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-apterygidae-adult-female-apteryxaustralis" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/apterygidae/male-apteryxaustralis-call.ogg",
+                        "captionKey": "closedcaptions:creature-apterygidae-male-apteryxaustralis-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-apterygidae-adult-male-apteryxaustralis" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/apterygidae/male-apteryxhaastii-call.ogg",
+                        "captionKey": "closedcaptions:creature-apterygidae-male-apteryxhaastii-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-apterygidae-adult-male-apteryxhaastii" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/apterygidae/male-apteryxowenii-call.ogg",
+                        "captionKey": "closedcaptions:creature-apterygidae-male-apteryxowenii-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-apterygidae-adult-male-apteryxowenii" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/apterygidae/thrill.ogg",
+                        "captionKey": "closedcaptions:creature-apterygidae-thrill",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-apterygidae-adult-male-apteryxaustralis" }
+                    }
+                ]
+            },
+            {
+                "group": "dinornithidae:sounds/creature/aptornithidae/*",
+                "defaultKey": "[Aptornithidae sounds]",
+                "mappings": [
+                    {
+                        "match": "dinornithidae:sounds/creature/aptornithidae/call1.ogg",
+                        "captionKey": "closedcaptions:creature-aptornithidae-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-aptornithidae-adult-male-aptornisdefossor" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/aptornithidae/call2.ogg",
+                        "captionKey": "closedcaptions:creature-aptornithidae-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-aptornithidae-adult-male-aptornisdefossor" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/aptornithidae/hurt.ogg",
+                        "captionKey": "closedcaptions:creature-aptornithidae-hurt",
+                        "tags": "animal,combat",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-aptornithidae-adult-male-aptornisdefossor" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/aptornithidae/idle.ogg",
+                        "captionKey": "closedcaptions:creature-aptornithidae-idle",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-aptornithidae-adult-male-aptornisdefossor" }
+                    }
+                ]
+            },
+            {
+                "group": "dinornithidae:sounds/creature/dinornithidae/*",
+                "defaultKey": "[Dinornithidae sounds]",
+                "mappings": [
+                    {
+                        "match": "dinornithidae:sounds/creature/dinornithidae/carcass.ogg",
+                        "captionKey": "closedcaptions:creature-dinornithidae-carcass",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-dinornithidae-carcass" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/dinornithidae/hiss.ogg",
+                        "captionKey": "closedcaptions:creature-dinornithidae-hiss",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-dinornithidae-adult-female-dinornisnovaezealandiae" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/dinornithidae/hurt.ogg",
+                        "captionKey": "closedcaptions:creature-dinornithidae-hurt",
+                        "tags": "animal,combat,danger",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-dinornithidae-adult-female-dinornisnovaezealandiae" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/dinornithidae/northcall1.ogg",
+                        "captionKey": "closedcaptions:creature-dinornithidae-northcall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-dinornithidae-adult-male-dinornisnovaezealandiae" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/dinornithidae/northcall2.ogg",
+                        "captionKey": "closedcaptions:creature-dinornithidae-northcall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-dinornithidae-adult-male-dinornisnovaezealandiae" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/dinornithidae/southcall1.ogg",
+                        "captionKey": "closedcaptions:creature-dinornithidae-southcall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-dinornithidae-adult-male-dinornisrobustus" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/dinornithidae/southcall2.ogg",
+                        "captionKey": "closedcaptions:creature-dinornithidae-southcall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-dinornithidae-adult-male-dinornisrobustus" }
+                    }
+                ]
+            },
+            {
+                "group": "dinornithidae:sounds/creature/emeidae/*",
+                "defaultKey": "[Emeidae sounds]",
+                "mappings": [
+                    {
+                        "match": "dinornithidae:sounds/creature/emeidae/bushcall1.ogg",
+                        "captionKey": "closedcaptions:creature-emeidae-bushcall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-emeidae-adult-male-anomalopteryxdidiformis" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/emeidae/bushcall2.ogg",
+                        "captionKey": "closedcaptions:creature-emeidae-bushcall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-emeidae-adult-male-anomalopteryxdidiformis" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/emeidae/coastalcall1.ogg",
+                        "captionKey": "closedcaptions:creature-emeidae-coastalcall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-emeidae-adult-male-euryapteryxcurtus" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/emeidae/coastalcall2.ogg",
+                        "captionKey": "closedcaptions:creature-emeidae-coastalcall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-emeidae-adult-male-euryapteryxcurtus" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/emeidae/crestedcall1.ogg",
+                        "captionKey": "closedcaptions:creature-emeidae-crestedcall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-emeidae-adult-male-pachyornisaustralis" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/emeidae/crestedcall2.ogg",
+                        "captionKey": "closedcaptions:creature-emeidae-crestedcall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-emeidae-adult-male-pachyornisaustralis" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/emeidae/die.ogg",
+                        "captionKey": "closedcaptions:creature-emeidae-die",
+                        "tags": "animal,combat",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-emeidae-adult-male-anomalopteryxdidiformis" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/emeidae/easterncall1.ogg",
+                        "captionKey": "closedcaptions:creature-emeidae-easterncall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-emeidae-adult-male-emeuscrassus" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/emeidae/easterncall2.ogg",
+                        "captionKey": "closedcaptions:creature-emeidae-easterncall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-emeidae-adult-male-emeuscrassus" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/emeidae/heavyfootedcall1.ogg",
+                        "captionKey": "closedcaptions:creature-emeidae-heavyfootedcall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-emeidae-adult-male-pachyorniselephantopus" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/emeidae/heavyfootedcall2.ogg",
+                        "captionKey": "closedcaptions:creature-emeidae-heavyfootedcall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-emeidae-adult-male-pachyorniselephantopus" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/emeidae/hurt.ogg",
+                        "captionKey": "closedcaptions:creature-emeidae-hurt",
+                        "tags": "animal,combat",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-emeidae-adult-male-anomalopteryxdidiformis" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/emeidae/mantellcall1.ogg",
+                        "captionKey": "closedcaptions:creature-emeidae-mantellcall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-emeidae-adult-male-pachyornisgeranoides" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/emeidae/mantellcall2.ogg",
+                        "captionKey": "closedcaptions:creature-emeidae-mantellcall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-emeidae-adult-male-pachyornisgeranoides" }
+                    }
+                ]
+            },
+            {
+                "group": "dinornithidae:sounds/creature/megalapterygidae/*",
+                "defaultKey": "[Megalapterygidae sounds]",
+                "mappings": [
+                    {
+                        "match": "dinornithidae:sounds/creature/megalapterygidae/uplandcall1.ogg",
+                        "captionKey": "closedcaptions:creature-megalapterygidae-uplandcall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-megalapterygidae-adult-male-megalapteryxdidinus" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/megalapterygidae/uplandcal21.ogg",
+                        "captionKey": "closedcaptions:creature-megalapterygidae-uplandcall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-megalapterygidae-adult-male-megalapteryxdidinus" }
+                    }
+                ]
+            },
+            {
+                "group": "dinornithidae:sounds/creature/rallidae/*",
+                "defaultKey": "[Rallidae sounds]",
+                "mappings": [
+                    {
+                        "match": "dinornithidae:sounds/creature/rallidae/railcall1.ogg",
+                        "captionKey": "closedcaptions:creature-rallidae-railcall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-rallidae-adult-female-cabalusmodestus" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/rallidae/railcall2.ogg",
+                        "captionKey": "closedcaptions:creature-rallidae-railcall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-rallidae-adult-female-cabalusmodestus" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/rallidae/railcall3.ogg",
+                        "captionKey": "closedcaptions:creature-rallidae-railcall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-rallidae-adult-female-cabalusmodestus" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/rallidae/takahecall1.ogg",
+                        "captionKey": "closedcaptions:creature-rallidae-takahecall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-rallidae-adult-male-porphyriohochstetteri" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/rallidae/takahecall2.ogg",
+                        "captionKey": "closedcaptions:creature-rallidae-takahecall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-rallidae-adult-male-porphyriohochstetteri" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/rallidae/takahecall3.ogg",
+                        "captionKey": "closedcaptions:creature-rallidae-takahecall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-rallidae-adult-male-porphyriohochstetteri" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/rallidae/waterhencall1.ogg",
+                        "captionKey": "closedcaptions:creature-rallidae-waterhencall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-rallidae-adult-male-tribonyxhodgenorum" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/rallidae/wekacall1.ogg",
+                        "captionKey": "closedcaptions:creature-rallidae-wekacall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-rallidae-adult-male-gallirallusaustralis" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/rallidae/woodhencall1.ogg",
+                        "captionKey": "closedcaptions:creature-rallidae-woodhencall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-rallidae-adult-male-hypotaenidiasylvestris" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/rallidae/woodhencall2.ogg",
+                        "captionKey": "closedcaptions:creature-rallidae-woodhencall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-rallidae-adult-male-hypotaenidiasylvestris" }
+                    }
+                ]
+            },
+            {
+                "group": "dinornithidae:sounds/creature/strigopidae/*",
+                "defaultKey": "[Strigopidae sounds]",
+                "mappings": [
+                    {
+                        "match": "dinornithidae:sounds/creature/strigopidae/boom1.ogg",
+                        "captionKey": "closedcaptions:creature-strigopidae-boom",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-strigopidae-adult-male-strigopshabroptila" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/strigopidae/boom2.ogg",
+                        "captionKey": "closedcaptions:creature-strigopidae-boom",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-strigopidae-adult-male-strigopshabroptila" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/strigopidae/boom3.ogg",
+                        "captionKey": "closedcaptions:creature-strigopidae-boom",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-strigopidae-adult-male-strigopshabroptila" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/strigopidae/carcass.ogg",
+                        "captionKey": "closedcaptions:creature-strigopidae-carcass",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-dinornithidae-carcass" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/strigopidae/hurt1.ogg",
+                        "captionKey": "closedcaptions:creature-strigopidae-hurt",
+                        "tags": "animal,combat",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-strigopidae-adult-male-strigopshabroptila" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/strigopidae/idle1.ogg",
+                        "captionKey": "closedcaptions:creature-strigopidae-idle",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-strigopidae-adult-male-strigopshabroptila" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/strigopidae/idle2.ogg",
+                        "captionKey": "closedcaptions:creature-strigopidae-idle",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-strigopidae-adult-male-strigopshabroptila" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/strigopidae/idle3.ogg",
+                        "captionKey": "closedcaptions:creature-strigopidae-idle",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-strigopidae-adult-male-strigopshabroptila" }
+                    },
+                    {
+                        "match": "dinornithidae:sounds/creature/strigopidae/idle4.ogg",
+                        "captionKey": "closedcaptions:creature-strigopidae-purr",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "dinornithidae:creature-strigopidae-adult-male-strigopshabroptila" }
+                    }
+                ]
+            }
+        ]
+    }
+]
