@@ -1,0 +1,231 @@
+[
+    {
+        "op": "addmerge",
+        "path": "/soundMap",
+        "file": "closedcaptions:config/matchconfig.json",
+        "value": [
+            {
+                "group": "capreolinae:sounds/creature/*",
+                "defaultKey": "[Capreolinae sounds]",
+                "mappings": [
+                    {
+                        "match": "capreolinae:sounds/creature/carcass.ogg",
+                        "captionKey": "closedcaptions:creature-cervidae-carcass",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "capreolinae:creature-cervidae-alceini-carcass" }
+                    }
+                ]
+            },
+            {
+                "group": "capreolinae:sounds/creature/alces/*",
+                "defaultKey": "[Alces sounds]",
+                "mappings": [
+                    {
+                        "match": "capreolinae:sounds/creature/alces/alcescall1.ogg",
+                        "captionKey": "closedcaptions:creature-alces-alces-call",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "capreolinae:creature-cervidae-alceini-adult-male-alcesalces" }
+                    },
+                    {
+                        "match": "capreolinae:sounds/creature/alces/alcesroar1.ogg",
+                        "captionKey": "closedcaptions:creature-alces-alces-roar",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "capreolinae:creature-cervidae-alceini-adult-male-alcesalces" }
+                    },
+                    {
+                        "match": "capreolinae:sounds/creature/alces/babycall.ogg",
+                        "captionKey": "closedcaptions:creature-alces-baby-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "capreolinae:creature-cervidae-alceini-baby-female-alcesalces" }
+                    },
+                    {
+                        "match": "capreolinae:sounds/creature/alces/babyhurt.ogg",
+                        "captionKey": "closedcaptions:creature-alces-baby-hurt",
+                        "tags": "animal,combat",
+                        "icon":{ "type": "item", "code": "capreolinae:creature-cervidae-alceini-baby-female-alcesalces" }
+                    },
+                    {
+                        "match": "capreolinae:sounds/creature/alces/babyscared.ogg",
+                        "captionKey": "closedcaptions:creature-alces-baby-scared",
+                        "tags": "animal,danger,combat",
+                        "icon":{ "type": "item", "code": "capreolinae:creature-cervidae-alceini-baby-female-alcesalces" }
+                    },
+                    {
+                        "match": "capreolinae:sounds/creature/alces/cervalcescall1.ogg",
+                        "captionKey": "closedcaptions:creature-alces-cervalces-call",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "capreolinae:creature-cervidae-alceini-adult-male-cervalcesscotti" }
+                    },
+                    {
+                        "match": "capreolinae:sounds/creature/alces/cervalcescall2.ogg",
+                        "captionKey": "closedcaptions:creature-alces-cervalces-call",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "capreolinae:creature-cervidae-alceini-adult-male-cervalcesscotti" }
+                    },
+                    {
+                        "match": "capreolinae:sounds/creature/alces/cervalcesroar1.ogg",
+                        "captionKey": "closedcaptions:creature-alces-cervalces-roar",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "capreolinae:creature-cervidae-alceini-adult-male-cervalcesscotti" }
+                    },
+                    {
+                        "match": "capreolinae:sounds/creature/alces/femalethreat1.ogg",
+                        "captionKey": "closedcaptions:creature-alces-female-threat",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "capreolinae:creature-cervidae-alceini-adult-female-alcesalces" }
+                    },
+                    {
+                        "match": "capreolinae:sounds/creature/alces/hurt.ogg",
+                        "captionKey": "closedcaptions:creature-alces-hurt",
+                        "tags": "animal,danger,combat",
+                        "icon":{ "type": "item", "code": "capreolinae:creature-cervidae-alceini-adult-male-alcesalces" }
+                    }
+                ]
+            },
+            {
+                "group": "capreolinae:sounds/creature/bretzia/*",
+                "defaultKey": "[Bretzia sounds]",
+                "mappings": [
+                    {
+                        "match": "capreolinae:sounds/creature/bretzia/call1.ogg",
+                        "captionKey": "closedcaptions:creature-bretzia-call1",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "capreolinae:creature-cervidae-odocoileini-adult-male-bretzianebrascensis" }
+                    },
+                    {
+                        "match": "capreolinae:sounds/creature/bretzia/call2.ogg",
+                        "captionKey": "closedcaptions:creature-bretzia-call2",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "capreolinae:creature-cervidae-odocoileini-adult-male-bretzianebrascensis" }
+                    },
+                    {
+                        "match": "capreolinae:sounds/creature/bretzia/idle1.ogg",
+                        "captionKey": "closedcaptions:creature-bretzia-idle",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "capreolinae:creature-cervidae-odocoileini-adult-male-bretzianebrascensis" }
+                    }
+                ]
+            },
+            {
+                "group": "capreolinae:sounds/creature/capreolus/*",
+                "defaultKey": "[Capreolus sounds]",
+                "mappings": [
+                    {
+                        "match": "capreolinae:sounds/creature/capreolus/babycall.ogg",
+                        "captionKey": "closedcaptions:creature-capreolus-baby-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "capreolinae:creature-cervidae-capreolini-baby-female-capreoluscapreolus" }
+                    },
+                    {
+                        "match": "capreolinae:sounds/creature/capreolus/call1.ogg",
+                        "captionKey": "closedcaptions:creature-capreolus-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "capreolinae:creature-cervidae-capreolini-adult-male-capreoluscapreolus" }
+                    },
+                    {
+                        "match": "capreolinae:sounds/creature/capreolus/call2.ogg",
+                        "captionKey": "closedcaptions:creature-capreolus-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "capreolinae:creature-cervidae-capreolini-adult-male-capreoluscapreolus" }
+                    },
+                    {
+                        "match": "capreolinae:sounds/creature/capreolus/scared.ogg",
+                        "captionKey": "closedcaptions:creature-capreolus-scared",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "capreolinae:creature-cervidae-capreolini-adult-male-capreoluscapreolus" }
+                    }
+                ]
+            },
+            {
+                "group": "capreolinae:sounds/creature/hydropotes/*",
+                "defaultKey": "[Hydropotes sounds]",
+                "mappings": [
+                    {
+                        "match": "capreolinae:sounds/creature/hydropotes/call1.ogg",
+                        "captionKey": "closedcaptions:creature-hydropotes-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "capreolinae:creature-cervidae-capreolini-adult-male-hydropotesinermis" }
+                    }
+                ]
+            },
+            {
+                "group": "capreolinae:sounds/creature/odocoileus/*",
+                "defaultKey": "[Odocoileus sounds]",
+                "mappings": [
+                    {
+                        "match": "capreolinae:sounds/creature/odocoileus/grunt.ogg",
+                        "captionKey": "closedcaptions:creature-odocoileus-grunt",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "capreolinae:creature-cervidae-odocoileini-adult-male-odocoileushemionus" }
+                    },
+                    {
+                        "match": "capreolinae:sounds/creature/odocoileus/muledeercall.ogg",
+                        "captionKey": "closedcaptions:creature-odocoileus-hemionus-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "capreolinae:creature-cervidae-odocoileini-adult-male-odocoileushemionus" }
+                    },
+                    {
+                        "match": "capreolinae:sounds/creature/odocoileus/warning.ogg",
+                        "captionKey": "closedcaptions:creature-odocoileus-warning",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "capreolinae:creature-cervidae-odocoileini-adult-male-odocoileushemionus" }
+                    }
+                ]
+            },
+            {
+                "group": "capreolinae:sounds/creature/rangifer/*",
+                "defaultKey": "[Rangifer sounds]",
+                "mappings": [
+                    {
+                        "match": "capreolinae:sounds/creature/rangifer/bleat.ogg",
+                        "captionKey": "closedcaptions:creature-rangifer-bleat",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "capreolinae:creature-cervidae-odocoileini-adult-male-rangiferarcticus" }
+                    },
+                    {
+                        "match": "capreolinae:sounds/creature/rangifer/call.ogg",
+                        "captionKey": "closedcaptions:creature-rangifer-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "capreolinae:creature-cervidae-odocoileini-adult-male-rangiferarcticus" }
+                    },
+                    {
+                        "match": "capreolinae:sounds/creature/rangifer/call2.ogg",
+                        "captionKey": "closedcaptions:creature-rangifer-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "capreolinae:creature-cervidae-odocoileini-adult-male-rangiferarcticus" }
+                    },
+                    {
+                        "match": "capreolinae:sounds/creature/rangifer/grunt1.ogg",
+                        "captionKey": "closedcaptions:creature-rangifer-grunt",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "capreolinae:creature-cervidae-odocoileini-adult-male-rangiferarcticus" }
+                    },
+                    {
+                        "match": "capreolinae:sounds/creature/rangifer/grunt2.ogg",
+                        "captionKey": "closedcaptions:creature-rangifer-grunt",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "capreolinae:creature-cervidae-odocoileini-adult-male-rangiferarcticus" }
+                    }
+                ]
+            },
+            {
+                "group": "capreolinae:sounds/creature/rangifer/footsteps/click*",
+                "defaultKey": "[Clicking hooves]",
+                "mappings": [
+                    {
+                        "match": "capreolinae:sounds/creature/rangifer/footstep-caribou-click1.ogg",
+                        "captionKey": "closedcaptions:creature-rangifer-hoof-click",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "capreolinae:creature-cervidae-odocoileini-adult-male-rangifertarandusdomesticus-tamed" }
+                    },
+                    {
+                        "match": "capreolinae:sounds/creature/rangifer/footstep-caribou-click2.ogg",
+                        "captionKey": "closedcaptions:creature-rangifer-hoof-click",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "capreolinae:creature-cervidae-odocoileini-adult-male-rangifertarandusdomesticus-tamed" }
+                    }
+                ]
+            }
+        ]
+    }
+]
