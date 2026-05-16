@@ -1,0 +1,44 @@
+[
+    {
+        "op": "addmerge",
+        "path": "/soundMap",
+        "file": "closedcaptions:config/matchconfig.json",
+        "value": [
+            {
+                "group": "cervinae:sounds/creature/*",
+                "defaultKey": "[Cervinae sounds]",
+                "mappings": [
+                    {
+                        "match": "cervinae:sounds/creature/carcass.ogg",
+                        "captionKey": "closedcaptions:creature-cervinae-carcass",
+                        "tags": "animal"
+                    }
+                ]
+            },
+            {
+                "group": "cervinae:sounds/creature/megalocerosgiganteus/*",
+                "defaultKey": "[Megalocerosgiganteus sounds]",
+                "mappings": [
+                    {
+                        "match": "cervinae:sounds/creature/megalocerosgiganteus/grunt1.ogg",
+                        "captionKey": "closedcaptions:creature-megalocerosgiganteus-grunt",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "cervinae:creature-cervidae-cervini-adult-male-megalocerosgiganteus" }
+                    },
+                    {
+                        "match": "cervinae:sounds/creature/megalocerosgiganteus/grunt2.ogg",
+                        "captionKey": "closedcaptions:creature-megalocerosgiganteus-grunt",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "cervinae:creature-cervidae-cervini-adult-male-megalocerosgiganteus" }
+                    },
+                    {
+                        "match": "cervinae:sounds/creature/megalocerosgiganteus/grunt3.ogg",
+                        "captionKey": "closedcaptions:creature-megalocerosgiganteus-grunt",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "cervinae:creature-cervidae-cervini-adult-male-megalocerosgiganteus" }
+                    }
+                ]
+            }
+        ]
+    }
+]
