@@ -1,0 +1,121 @@
+[
+    {
+        "op": "addmerge",
+        "path": "/soundMap",
+        "file": "closedcaptions:config/matchconfig.json",
+        "value": [
+            {
+                "group": "vombatidae:sounds/creature/*",
+                "defaultKey": "[Vombatidae sounds]"
+            },
+            {
+                "group": "vombatidae:sounds/creature/diprotodontidae/*",
+                "defaultKey": "[Diprotodontidae sounds]",
+                "mappings": [
+                    {
+                        "match": "vombatidae:sounds/creature/diprotodontidae/babycall1.ogg",
+                        "captionKey": "closedcaptions:creature-diprotodontidae-babycall",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "vombatidae:creature-diprotodontidae-baby-female-zygomaturustrilobus" }
+                    },
+                    {
+                        "match": "vombatidae:sounds/creature/diprotodontidae/bellow1.ogg",
+                        "captionKey": "closedcaptions:creature-diprotodontidae-bellow",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "vombatidae:creature-diprotodontidae-adult-female-zygomaturustrilobus" }
+                    },
+                    {
+                        "match": "vombatidae:sounds/creature/diprotodontidae/bellow2.ogg",
+                        "captionKey": "closedcaptions:creature-diprotodontidae-bellow",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "vombatidae:creature-diprotodontidae-adult-female-zygomaturustrilobus" }
+                    },
+                    {
+                        "match": "vombatidae:sounds/creature/diprotodontidae/idle1.ogg",
+                        "captionKey": "closedcaptions:creature-diprotodontidae-idle",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "vombatidae:creature-diprotodontidae-adult-female-zygomaturustrilobus" }
+                    },
+                    {
+                        "match": "vombatidae:sounds/creature/diprotodontidae/idle2.ogg",
+                        "captionKey": "closedcaptions:creature-diprotodontidae-idlegroan",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "vombatidae:creature-diprotodontidae-adult-female-zygomaturustrilobus" }
+                    },
+                    {
+                        "match": "vombatidae:sounds/creature/diprotodontidae/idle3.ogg",
+                        "captionKey": "closedcaptions:creature-diprotodontidae-idle",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "vombatidae:creature-diprotodontidae-adult-female-zygomaturustrilobus" }
+                    },
+                    {
+                        "match": "vombatidae:sounds/creature/diprotodontidae/snort1.ogg",
+                        "captionKey": "closedcaptions:creature-diprotodontidae-snort",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "vombatidae:creature-diprotodontidae-adult-female-zygomaturustrilobus" }
+                    }
+                ]
+            },
+            {
+                "group": "vombatidae:sounds/creature/thylacoleonidae/*",
+                "defaultKey": "[Thylacoleonidae sounds]",
+                "mappings": [
+                    {
+                        "match": "vombatidae:sounds/creature/thylacoleonidae/bellow1.ogg",
+                        "captionKey": "closedcaptions:creature-thylacoleonidae-bellow",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "vombatidae:creature-thylacoleonidae-adult-female-thylacoleocarnifex" }
+                    },
+                    {
+                        "match": "vombatidae:sounds/creature/thylacoleonidae/bellow2.ogg",
+                        "captionKey": "closedcaptions:creature-thylacoleonidae-bellowscream",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "vombatidae:creature-thylacoleonidae-adult-female-thylacoleocarnifex" }
+                    },
+                    {
+                        "match": "vombatidae:sounds/creature/thylacoleonidae/cry1.ogg",
+                        "captionKey": "closedcaptions:creature-thylacoleonidae-cry",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "vombatidae:creature-thylacoleonidae-baby-female-thylacoleocarnifex" }
+                    },
+                    {
+                        "match": "vombatidae:sounds/creature/thylacoleonidae/growl1.ogg",
+                        "captionKey": "closedcaptions:creature-thylacoleonidae-growl",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "vombatidae:creature-thylacoleonidae-adult-female-thylacoleocarnifex" }
+                    },
+                    {
+                        "match": "vombatidae:sounds/creature/thylacoleonidae/hiss1.ogg",
+                        "captionKey": "closedcaptions:creature-thylacoleonidae-hiss",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "vombatidae:creature-thylacoleonidae-adult-female-thylacoleocarnifex" }
+                    }
+                ]
+            },
+            {
+                "group": "vombatidae:sounds/creature/vombatidae/*",
+                "defaultKey": "[Vombatidae sounds]",
+                "mappings": [
+                    {
+                        "match": "vombatidae:sounds/creature/vombatidae/commonscream01.ogg",
+                        "captionKey": "closedcaptions:creature-vombatidae-commonscream",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "vombatidae:creature-vombatidae-adult-female-vombatusursinus" }
+                    },
+                    {
+                        "match": "vombatidae:sounds/creature/vombatidae/commonscream02.ogg",
+                        "captionKey": "closedcaptions:creature-vombatidae-commonscream",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "vombatidae:creature-vombatidae-adult-female-vombatusursinus" }
+                    },
+                    {
+                        "match": "vombatidae:sounds/creature/vombatidae/commonscream03.ogg",
+                        "captionKey": "closedcaptions:creature-vombatidae-commonscream",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "vombatidae:creature-vombatidae-adult-female-vombatusursinus" }
+                    }
+                ]
+            }
+        ]
+    }
+]
