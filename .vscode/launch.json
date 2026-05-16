@@ -20,8 +20,8 @@
                 // "--playStyle" , "preset-surviveandbuild",
                 // "--openWorld" , "modding test world",
                 //"--tracelog",
-				"--dataPath",
-				"${env:VINTAGE_STORY_DATA}",
+                "--dataPath",
+                "${env:VINTAGE_STORY_DATA}",
                 "--addModPath",
                 "${workspaceFolder}/ClosedCaptions/bin/Debug/Mods",
                 "--addOrigin",
@@ -29,6 +29,15 @@
             ],
             "console": "internalConsole",
             "stopAtEntry": false
+        },
+        {
+            "name": "Attach",
+            "type": "coreclr",
+            "request": "attach",
+            "linux": {
+                "program": "/home/apocriva/.config/VSLGameVersions/1.22.2/Vintagestory.dll"
+            },
+            "console": "internalConsole"
         },
         {
             "name": "Launch Server",
