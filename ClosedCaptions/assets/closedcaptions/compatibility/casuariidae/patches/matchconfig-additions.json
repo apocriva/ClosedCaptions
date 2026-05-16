@@ -1,0 +1,163 @@
+[
+    {
+        "op": "addmerge",
+        "path": "/soundMap",
+        "file": "closedcaptions:config/matchconfig.json",
+        "value": [
+            {
+                "group": "casuariidae:sounds/creature/*",
+                "defaultKey": "[Casuariiformes sounds]"
+            },
+            {
+                "group": "casuariidae:sounds/creature/anatidae/*",
+                "defaultKey": "[Anatidae sounds]",
+                "mappings": [
+                    {
+                        "match": "casuariidae:sounds/creature/anatidae/goose-call1.ogg",
+                        "captionKey": "closedcaptions:creature-anatidae-grunt",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "casuariidae:creature-anatidae-adult-male-cereopsisnovaehollandiae" }
+                    },
+                    {
+                        "match": "casuariidae:sounds/creature/anatidae/goose-call2.ogg",
+                        "captionKey": "closedcaptions:creature-anatidae-grunt",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "casuariidae:creature-anatidae-adult-male-cereopsisnovaehollandiae" }
+                    },
+                    {
+                        "match": "casuariidae:sounds/creature/anatidae/goose-call3.ogg",
+                        "captionKey": "closedcaptions:creature-anatidae-honk",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "casuariidae:creature-anatidae-adult-male-cereopsisnovaehollandiae" }
+                    },
+                    {
+                        "match": "casuariidae:sounds/creature/anatidae/goose-call4.ogg",
+                        "captionKey": "closedcaptions:creature-anatidae-honk",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "casuariidae:creature-anatidae-adult-male-cereopsisnovaehollandiae" }
+                    },
+                    {
+                        "match": "casuariidae:sounds/creature/anatidae/goose-call5.ogg",
+                        "captionKey": "closedcaptions:creature-anatidae-honk",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "casuariidae:creature-anatidae-adult-male-cereopsisnovaehollandiae" }
+                    }
+                ]
+            },
+            {
+                "group": "casuariidae:sounds/creature/casuariidae/*",
+                "defaultKey": "[Casuariidae sounds]",
+                "mappings": [
+                    {
+                        "match": "casuariidae:sounds/creature/casuariidae/carcass.ogg",
+                        "captionKey": "closedcaptions:creature-casuariidae-carcass",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "casuariidae:creature-casuariidae-carcass" }
+                    },
+                    {
+                        "match": "casuariidae:sounds/creature/casuariidae/casscall1.ogg",
+                        "captionKey": "closedcaptions:creature-casuariidae-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "casuariidae:creature-casuariidae-adult-male-casuarius" }
+                    },
+                    {
+                        "match": "casuariidae:sounds/creature/casuariidae/cassgrunt1.ogg",
+                        "captionKey": "closedcaptions:creature-casuariidae-grunt",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "casuariidae:creature-casuariidae-adult-male-casuarius" }
+                    },
+                    {
+                        "match": "casuariidae:sounds/creature/casuariidae/cassgrunt2.ogg",
+                        "captionKey": "closedcaptions:creature-casuariidae-grunt",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "casuariidae:creature-casuariidae-adult-male-casuarius" }
+                    },
+                    {
+                        "match": "casuariidae:sounds/creature/casuariidae/emudrum1.ogg",
+                        "captionKey": "closedcaptions:creature-casuariidae-drum",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "casuariidae:creature-casuariidae-adult-male-novaehollandiae" }
+                    },
+                    {
+                        "match": "casuariidae:sounds/creature/casuariidae/emudrum2.ogg",
+                        "captionKey": "closedcaptions:creature-casuariidae-drum",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "casuariidae:creature-casuariidae-adult-male-novaehollandiae" }
+                    },
+                    {
+                        "match": "casuariidae:sounds/creature/casuariidae/emudrum3.ogg",
+                        "captionKey": "closedcaptions:creature-casuariidae-drum",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "casuariidae:creature-casuariidae-adult-male-novaehollandiae" }
+                    },
+                    {
+                        "match": "casuariidae:sounds/creature/casuariidae/hiss.ogg",
+                        "captionKey": "closedcaptions:creature-casuariidae-hiss",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "casuariidae:creature-casuariidae-adult-male-novaehollandiae" }
+                    }
+                ]
+            },
+            {
+                "group": "casuariidae:sounds/creature/dromornithidae/*",
+                "defaultKey": "[Dromornithidae sounds]",
+                "mappings": [
+                    {
+                        "match": "casuariidae:sounds/creature/dromornithidae/call1.ogg",
+                        "captionKey": "closedcaptions:creature-dromornithidae-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "casuariidae:creature-dromornithidae-adult-male-genyornisnewtoni" }
+                    },
+                    {
+                        "match": "casuariidae:sounds/creature/dromornithidae/call2.ogg",
+                        "captionKey": "closedcaptions:creature-dromornithidae-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "casuariidae:creature-dromornithidae-adult-male-genyornisnewtoni" }
+                    },
+                    {
+                        "match": "casuariidae:sounds/creature/dromornithidae/call3.ogg",
+                        "captionKey": "closedcaptions:creature-dromornithidae-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "casuariidae:creature-dromornithidae-adult-male-genyornisnewtoni" }
+                    }
+                ]
+            },
+            {
+                "group": "casuariidae:sounds/creature/rallidae/*",
+                "defaultKey": "[Rallidae sounds]",
+                "mappings": [
+                    {
+                        "match": "casuariidae:sounds/creature/rallidae/railcall1.ogg",
+                        "captionKey": "closedcaptions:creature-rallidae-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "casuariidae:creature-rallidae-adult-male-tribonyxmortierii" }
+                    },
+                    {
+                        "match": "casuariidae:sounds/creature/rallidae/railcall2.ogg",
+                        "captionKey": "closedcaptions:creature-rallidae-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "casuariidae:creature-rallidae-adult-male-tribonyxmortierii" }
+                    },
+                    {
+                        "match": "casuariidae:sounds/creature/rallidae/railcall3.ogg",
+                        "captionKey": "closedcaptions:creature-rallidae-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "casuariidae:creature-rallidae-adult-male-tribonyxmortierii" }
+                    },
+                    {
+                        "match": "casuariidae:sounds/creature/rallidae/waterhencall1.ogg",
+                        "captionKey": "closedcaptions:creature-rallidae-territorialcall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "casuariidae:creature-rallidae-adult-male-tribonyxmortierii" }
+                    },
+                    {
+                        "match": "casuariidae:sounds/creature/rallidae/waterhencall2.ogg",
+                        "captionKey": "closedcaptions:creature-rallidae-babycall",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "casuariidae:creature-rallidae-baby-male-tribonyxmortierii" }
+                    }
+                ]
+            }
+        ]
+    }
+]
