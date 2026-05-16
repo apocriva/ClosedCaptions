@@ -1,0 +1,73 @@
+[
+    {
+        "op": "addmerge",
+        "path": "/soundMap",
+        "file": "closedcaptions:config/matchconfig.json",
+        "value": [
+            {
+                "group": "thylacinidae:sounds/creature/thylacinidae/*",
+                "defaultKey": "[Thylacinidae sounds]"
+            },
+            {
+                "group": "thylacinidae:sounds/creature/dasyuridae/*",
+                "defaultKey": "[Dasyuridae sounds]",
+                "mappings": [
+                    {
+                        "match": "thylacinidae:sounds/creature/dasyuridae/sarcophilusharrisii/babygrowl1.ogg",
+                        "captionKey": "closedcaptions:creature-dasyuridae-sarcophilusharrisii-babygrowl",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "thylacinidae:creature-dasyuridae-baby-female-sarcophilusharrisii" }
+                    },
+                    {
+                        "match": "thylacinidae:sounds/creature/dasyuridae/sarcophilusharrisii/call1.ogg",
+                        "captionKey": "closedcaptions:creature-dasyuridae-sarcophilusharrisii-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "thylacinidae:creature-dasyuridae-adult-female-sarcophilusharrisii" }
+                    },
+                    {
+                        "match": "thylacinidae:sounds/creature/dasyuridae/sarcophilusharrisii/call2.ogg",
+                        "captionKey": "closedcaptions:creature-dasyuridae-sarcophilusharrisii-call",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "thylacinidae:creature-dasyuridae-adult-female-sarcophilusharrisii" }
+                    },
+                    {
+                        "match": "thylacinidae:sounds/creature/dasyuridae/sarcophilusharrisii/growl1.ogg",
+                        "captionKey": "closedcaptions:creature-dasyuridae-sarcophilusharrisii-growl",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "thylacinidae:creature-dasyuridae-adult-female-sarcophilusharrisii" }
+                    },
+                    {
+                        "match": "thylacinidae:sounds/creature/dasyuridae/sarcophilusharrisii/growl2.ogg",
+                        "captionKey": "closedcaptions:creature-dasyuridae-sarcophilusharrisii-growl",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "thylacinidae:creature-dasyuridae-adult-female-sarcophilusharrisii" }
+                    },
+                    {
+                        "match": "thylacinidae:sounds/creature/dasyuridae/sarcophilusharrisii/growl3.ogg",
+                        "captionKey": "closedcaptions:creature-dasyuridae-sarcophilusharrisii-growl",
+                        "tags": "animal,danger",
+                        "icon":{ "type": "item", "code": "thylacinidae:creature-dasyuridae-adult-female-sarcophilusharrisii" }
+                    },
+                    {
+                        "match": "thylacinidae:sounds/creature/dasyuridae/sarcophilusharrisii/idle1.ogg",
+                        "captionKey": "closedcaptions:creature-dasyuridae-sarcophilusharrisii-idlesniff",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "thylacinidae:creature-dasyuridae-adult-female-sarcophilusharrisii" }
+                    },
+                    {
+                        "match": "thylacinidae:sounds/creature/dasyuridae/sarcophilusharrisii/idle2.ogg",
+                        "captionKey": "closedcaptions:creature-dasyuridae-sarcophilusharrisii-idle",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "thylacinidae:creature-dasyuridae-adult-female-sarcophilusharrisii" }
+                    },
+                    {
+                        "match": "thylacinidae:sounds/creature/dasyuridae/sarcophilusharrisii/idle3.ogg",
+                        "captionKey": "closedcaptions:creature-dasyuridae-sarcophilusharrisii-idlesniff",
+                        "tags": "animal",
+                        "icon":{ "type": "item", "code": "thylacinidae:creature-dasyuridae-adult-female-sarcophilusharrisii" }
+                    }
+                ]
+            }
+        ]
+    }
+]
